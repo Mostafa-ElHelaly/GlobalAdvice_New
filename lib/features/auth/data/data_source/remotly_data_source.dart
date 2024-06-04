@@ -1,17 +1,7 @@
 // import 'package:dartz/dartz.dart';
-// import 'package:dinder/core/error/exception.dart';
-// import 'package:dinder/core/models/my_data_model.dart';
-// import 'package:dinder/core/utils/api_helper.dart';
-// import 'package:dinder/core/utils/constant_api.dart';
-// import 'package:dinder/core/utils/methods.dart';
-// import 'package:dinder/features/auth/data/model/auth_with_google_model.dart';
-// import 'package:dinder/features/auth/data/model/cities_model.dart';
-// import 'package:dinder/features/auth/data/model/countries_model.dart';
-// import 'package:dinder/features/auth/data/model/login_model.dart';
-// import 'package:dinder/features/auth/domain/use_case/login_uc.dart';
-// import 'package:dinder/features/auth/domain/use_case/signup_uc.dart';
-// import 'package:dinder/features/auth/domain/use_case/get_Cities_uc.dart';
+//
 // import 'package:dio/dio.dart';
+// import 'package:globaladvice_new/features/auth/data/model/login_model.dart';
 // import 'package:google_sign_in/google_sign_in.dart';
 //
 // abstract class BaseRemotelyDataSource {

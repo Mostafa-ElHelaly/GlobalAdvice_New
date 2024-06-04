@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:globaladvice_new/core/resource_manger/asset_path.dart';
 import 'package:globaladvice_new/core/resource_manger/color_manager.dart';
+import 'package:globaladvice_new/features/home/presentation/home_screen.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 class MainScreen extends StatefulWidget {
@@ -22,78 +23,62 @@ class _MainScreenState extends State<MainScreen> {
 
   List<Widget> _buildScreens() {
     return [
-      // const ServiceType(),
-      // const HomeScreen(),
-      // const AllChatsScreen(),
-      // const NotificationScreen(),
-      // const ProfileScreen(),
+      const HomeScreen(),
+      const HomeScreen(),
+      const HomeScreen(),
+      const HomeScreen(),
+      const HomeScreen(),
     ];
   }
 
   List<PersistentBottomNavBarItem> _navBarsItems() {
     return [
       PersistentBottomNavBarItem(
-        icon: Image.asset(
-          AssetsPath.app1,
+        icon: const Icon(
+          Icons.home_outlined,
           color: ColorManager.kPrimaryBlueDark,
-          scale: 1.6,
         ),
-        inactiveIcon: Image.asset(
-          AssetsPath.app1,
-          scale: 1.6,
+        inactiveIcon: const Icon(
+          Icons.home_outlined,
         ),
         activeColorPrimary: ColorManager.kPrimaryBlueDark,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
       PersistentBottomNavBarItem(
-        icon: Image.asset(
-          AssetsPath.app1,
+        icon: const Icon(
+          Icons.medical_services_outlined,
           color: ColorManager.kPrimaryBlueDark,
-          scale: 1.6,
         ),
-        inactiveIcon: Image.asset(
-          AssetsPath.app1,
-          scale: 1.6,
+        inactiveIcon: const Icon(
+          Icons.medical_services_outlined,
         ),
         activeColorPrimary: ColorManager.kPrimaryBlueDark,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
       PersistentBottomNavBarItem(
-        icon: Image.asset(
-          AssetsPath.app1,
+        icon: const Icon(
+          Icons.car_crash_outlined,
           color: ColorManager.kPrimaryBlueDark,
-          scale: 1.6,
         ),
-        inactiveIcon: Image.asset(
-          AssetsPath.app1,
-          scale: 1.6,
-        ),
+        inactiveIcon: const Icon(Icons.car_crash_outlined),
         activeColorPrimary: ColorManager.kPrimaryBlueDark,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
       PersistentBottomNavBarItem(
-        icon: Image.asset(
-          AssetsPath.app1,
+        icon: const Icon(
+          Icons.house_outlined,
           color: ColorManager.kPrimaryBlueDark,
-          scale: 1.6,
         ),
-        inactiveIcon: Image.asset(
-          AssetsPath.app1,
-          scale: 1.6,
-        ),
+        inactiveIcon: const Icon(Icons.house_outlined),
         activeColorPrimary: ColorManager.kPrimaryBlueDark,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
       PersistentBottomNavBarItem(
-        icon: Image.asset(
-          AssetsPath.app1,
+        icon: const Icon(
+          Icons.monitor_heart_outlined,
           color: ColorManager.kPrimaryBlueDark,
-          scale: 1.6,
         ),
-        inactiveIcon: Image.asset(
-          AssetsPath.app1,
-          scale: 1.6,
-        ),
+        inactiveIcon: const Icon(Icons.monitor_heart_outlined),
         activeColorPrimary: ColorManager.kPrimaryBlueDark,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
@@ -102,7 +87,9 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return PersistentTabView(
+    return
+
+    PersistentTabView(
       context,
       controller: _controller,
       screens: _buildScreens(),
