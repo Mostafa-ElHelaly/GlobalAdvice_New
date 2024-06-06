@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:csc_picker/csc_picker.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -7,51 +10,26 @@ import 'package:globaladvice_new/core/resource_manger/locale_keys.g.dart';
 import 'package:globaladvice_new/core/utils/config_size.dart';
 import 'package:globaladvice_new/core/widgets/custom_text_field.dart';
 import 'package:globaladvice_new/core/widgets/main_button.dart';
+import 'package:globaladvice_new/features/auth/presentation/component/forget_password/change_password_screen.dart';
+import 'package:globaladvice_new/features/auth/presentation/component/forget_password/forget_password_screen.dart';
 import 'package:globaladvice_new/main_screen.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
-class CreateAccount extends StatefulWidget {
-  const CreateAccount({super.key});
+class EditMyProfileScreen extends StatefulWidget {
+  const EditMyProfileScreen({super.key});
 
   @override
-  State<CreateAccount> createState() => _CreateAccountState();
+  State<EditMyProfileScreen> createState() => _EditMyProfileScreenState();
 }
 
-class _CreateAccountState extends State<CreateAccount> {
+class _EditMyProfileScreenState extends State<EditMyProfileScreen> {
   TextEditingController firstNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController confirmPasswordController = TextEditingController();
 
-  @override
-  void initState() {
-    firstNameController = TextEditingController();
-    lastNameController = TextEditingController();
-    emailController = TextEditingController();
-    phoneController = TextEditingController();
-    passwordController = TextEditingController();
-    confirmPasswordController = TextEditingController();
-    super.initState();
-  }
 
-  @override
-  void dispose() {
-    firstNameController.dispose();
-    lastNameController.dispose();
-    emailController.dispose();
-    phoneController.dispose();
-
-    passwordController.dispose();
-    confirmPasswordController.dispose();
-    image = null;
-    super.dispose();
-  }
-
-  final ImagePicker picker = ImagePicker();
-  XFile? image;
 
   String? selectedValue;
   bool isVisible = true;
@@ -61,7 +39,6 @@ class _CreateAccountState extends State<CreateAccount> {
     'Female',
 
   ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,9 +56,8 @@ class _CreateAccountState extends State<CreateAccount> {
             color: ColorManager.mainColor,
           ),
         ),
-        centerTitle: true,
         title: Text(
-          StringManager.signUpWithUs.tr(),
+          StringManager.editMyProfile.tr(),
           style: TextStyle(
             fontWeight: FontWeight.w600,
             fontSize: ConfigSize.defaultSize! * 2,
@@ -94,21 +70,6 @@ class _CreateAccountState extends State<CreateAccount> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
-                height: ConfigSize.defaultSize! * 2,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    AssetsPath.logo,
-                    scale: 5,
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: ConfigSize.defaultSize! * 5,
-              ),
               Row(
                 children: [
                   Expanded(
@@ -152,8 +113,28 @@ class _CreateAccountState extends State<CreateAccount> {
                   ),
                 ],
               ),
-
               SizedBox(height: ConfigSize.defaultSize! * 2),
+              Text(
+                StringManager.phone.tr(),
+                style: TextStyle(
+                  fontSize: ConfigSize.defaultSize! * 1.6,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              SizedBox(
+                height: ConfigSize.defaultSize! - 5,
+              ),
+              CustomTextField(
+                controller: phoneController,
+                inputType: TextInputType.number,
+              ),
+              SizedBox(height: ConfigSize.defaultSize! * 2),
+
+
+
+
+
+
 
               Text(
                 StringManager.gander.tr(),
@@ -243,140 +224,46 @@ class _CreateAccountState extends State<CreateAccount> {
                 inputType: TextInputType.phone,
               ),
               SizedBox(height: ConfigSize.defaultSize! * 2),
-              Text(
-                StringManager.password.tr(),
-                style: TextStyle(
-                  fontSize: ConfigSize.defaultSize! * 1.6,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              SizedBox(
-                height: ConfigSize.defaultSize! - 5,
-              ),
-              CustomTextField(
-                controller: passwordController,
-                inputType: TextInputType.text,
-                obscureText: isVisible1,
-                suffix: InkWell(
-                    onTap: () {
-                      {
-                        isVisible1 = !isVisible1;
-                      }
-                      setState(() {});
-                    },
-                    child: Icon(isVisible1
-                        ? Icons.visibility_off_outlined
-                        : Icons.remove_red_eye_outlined)),
-              ),
-              SizedBox(height: ConfigSize.defaultSize! * 2),
-              Text(
-                StringManager.confirmPassword.tr(),
-                style: TextStyle(
-                  fontSize: ConfigSize.defaultSize! * 1.6,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              SizedBox(
-                height: ConfigSize.defaultSize! - 5,
-              ),
-              CustomTextField(
-                controller: confirmPasswordController,
-                inputType: TextInputType.text,
-                obscureText: isVisible,
-                suffix: InkWell(
-                  onTap: () {
-                    {
-                      isVisible = !isVisible;
-                    }
-                    setState(() {});
-                  },
-                  child: Icon(isVisible
-                      ? Icons.visibility_off_outlined
-                      : Icons.remove_red_eye_outlined),
-                ),
-              ),
+
+
+
+
+
+
               Padding(
-                padding:
-                    EdgeInsets.symmetric(vertical: ConfigSize.defaultSize! * 3),
+                padding: EdgeInsets.symmetric(
+                  vertical: ConfigSize.defaultSize! * 3,
+                ),
                 child: MainButton(
                   onTap: () {
                     PersistentNavBarNavigator.pushNewScreen(
                       context,
-                      screen: const MainScreen(),
+                      screen: const ForgetPasswordScreen(),
                       withNavBar: false,
                       pageTransitionAnimation: PageTransitionAnimation.fade,
                     );
+
+
                   },
-                  title: StringManager.next.tr(),
+                  title: StringManager.changePassword.tr(),
+                  color: ColorManager.gray,
+                  textColor: ColorManager.kPrimaryBlueDark,
                 ),
               ),
-              SizedBox(
-                height: ConfigSize.defaultSize! * 3,
+              MainButton(
+                onTap: () {PersistentNavBarNavigator.pushNewScreen(
+                  context,
+                  screen: const MainScreen(),
+                  withNavBar: false,
+                  pageTransitionAnimation: PageTransitionAnimation.fade,
+                );
+                },
+                title: StringManager.done.tr(),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    StringManager.alreadyHaveAnAccount.tr(),
-                    style:  TextStyle(
-                      color: ColorManager.kPrimaryBlueDark,
-                      fontWeight: FontWeight.bold,
-                      fontSize: ConfigSize.defaultSize! * 2,
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      PersistentNavBarNavigator.pushNewScreen(
-                        context,
-                        screen: const CreateAccount(),
-                        withNavBar: false,
-                        pageTransitionAnimation: PageTransitionAnimation.fade,
-                      );
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: ColorManager.gray,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(
-                          vertical: ConfigSize.defaultSize! * 1.5,
-                          horizontal: ConfigSize.defaultSize! * 3,
-                        ),
-                        child: Text(
-                          StringManager.login.tr(),
-                          style: TextStyle(
-                            color: ColorManager.kPrimaryBlueDark,
-                            fontWeight: FontWeight.bold,
-                            fontSize: ConfigSize.defaultSize! * 2,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-
             ],
           ),
         ),
       ),
     );
-  }
-
-  bool validation() {
-    if (firstNameController.text == '') {
-      return false;
-    } else if (lastNameController.text == '') {
-      return false;
-    } else if (emailController.text == '') {
-      return false;
-    } else if (passwordController.text == '') {
-      return false;
-    } else if (confirmPasswordController.text == '') {
-      return false;
-    } else {
-      return true;
-    }
   }
 }

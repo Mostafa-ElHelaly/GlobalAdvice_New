@@ -1,10 +1,16 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:globaladvice_new/core/resource_manger/asset_path.dart';
 import 'package:globaladvice_new/core/resource_manger/color_manager.dart';
 import 'package:globaladvice_new/core/resource_manger/locale_keys.g.dart';
 import 'package:globaladvice_new/core/utils/config_size.dart';
+import 'package:globaladvice_new/features/profile/presentation/profile_screen.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+
+import 'component/car_form/car_form_main_person_data .dart';
+import 'component/life_form/life_form_main_person_data .dart';
+import 'component/medical_form/medical_form_main_person_data .dart';
+import 'component/property_form/property_form_main_person_data .dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -14,87 +20,658 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // current height of the expandable body
-  double _currentHeight = 0;
 
-// expanded height of the expandable body
-  final double _expandedHeight = 250;
-
-// height on change when clicked on the header
-  void _expandOnChanged() {
-    var isExpanded = _currentHeight == _expandedHeight;
-    setState(() {
-      _currentHeight = isExpanded ? 0 : _expandedHeight;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Image.asset(
           AssetsPath.logo,
           scale: 10,
         ),
       ),
-      endDrawer: Drawer(
-        child: ListView(
-          padding: const EdgeInsets.all(0.0),
-          children: <Widget>[
-            UserAccountsDrawerHeader(
-              decoration:
-                  const BoxDecoration(color: ColorManager.kPrimaryBlueDark),
-              accountName: Text(
-                "Global Advice",
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: ConfigSize.defaultSize! * 2),
-              ),
-              accountEmail: const Text("Global Advice@gmail.com"),
-              currentAccountPicture: CircleAvatar(
-                backgroundColor: Colors.white,
-                child: Icon(
-                  Icons.person,
-                  size: ConfigSize.defaultSize! * 5,
-                  color: ColorManager.kPrimaryBlueDark,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.symmetric(
+                    horizontal: ConfigSize.defaultSize! * 2,
+                    vertical: ConfigSize.defaultSize! * 4),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            PersistentNavBarNavigator.pushNewScreen(
+                              context,
+                              screen: const MedicalFormMainPersonData(),
+                              withNavBar: true,
+                              pageTransitionAnimation:
+                                  PageTransitionAnimation.fade,
+                            );
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                                color: ColorManager.kPrimaryBlueDark,
+                                borderRadius:
+                                    BorderRadiusDirectional.circular(12)),
+                            width: ConfigSize.defaultSize! * 18,
+                            height: ConfigSize.defaultSize! * 20,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Icon(
+                                  Icons.medical_services_outlined,
+                                  color: ColorManager.whiteColor,
+                                  size: 50,
+                                ),
+                                SizedBox(
+                                  height: ConfigSize.defaultSize! * 1,
+                                ),
+                                Text(
+                                  StringManager.medicalInsurance.tr(),
+                                  style: const TextStyle(
+                                      color: ColorManager.whiteColor,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w800),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            PersistentNavBarNavigator.pushNewScreen(
+                              context,
+                              screen: const CarFormMainPersonData(),
+                              withNavBar: true,
+                              pageTransitionAnimation:
+                                  PageTransitionAnimation.fade,
+                            );
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                                color: ColorManager.kPrimaryBlueDark,
+                                borderRadius:
+                                    BorderRadiusDirectional.circular(12)),
+                            width: ConfigSize.defaultSize! * 18,
+                            height: ConfigSize.defaultSize! * 20,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Icon(
+                                  Icons.car_crash_outlined,
+                                  color: ColorManager.whiteColor,
+                                  size: 50,
+                                ),
+                                SizedBox(
+                                  height: ConfigSize.defaultSize! * 1,
+                                ),
+                                Text(
+                                  StringManager.carInsurance.tr(),
+                                  style: const TextStyle(
+                                      color: ColorManager.whiteColor,
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.w800),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: ConfigSize.defaultSize! * 2,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            PersistentNavBarNavigator.pushNewScreen(
+                              context,
+                              screen: const PropertyFormMainPersonData(),
+                              withNavBar: true,
+                              pageTransitionAnimation:
+                                  PageTransitionAnimation.fade,
+                            );
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                                color: ColorManager.kPrimaryBlueDark,
+                                borderRadius:
+                                    BorderRadiusDirectional.circular(12)),
+                            width: ConfigSize.defaultSize! * 18,
+                            height: ConfigSize.defaultSize! * 20,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Icon(
+                                  Icons.house_outlined,
+                                  color: ColorManager.whiteColor,
+                                  size: 50,
+                                ),
+                                SizedBox(
+                                  height: ConfigSize.defaultSize! * 1,
+                                ),
+                                Text(
+                                  StringManager.propertyInsurance.tr(),
+                                  style: const TextStyle(
+                                      color: ColorManager.whiteColor,
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.w800),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            PersistentNavBarNavigator.pushNewScreen(
+                              context,
+                              screen: const LifeFormMainPersonData(),
+                              withNavBar: true,
+                              pageTransitionAnimation:
+                                  PageTransitionAnimation.fade,
+                            );
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                                color: ColorManager.kPrimaryBlueDark,
+                                borderRadius:
+                                    BorderRadiusDirectional.circular(12)),
+                            width: ConfigSize.defaultSize! * 18,
+                            height: ConfigSize.defaultSize! * 20,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Icon(
+                                  Icons.monitor_heart_outlined,
+                                  color: ColorManager.whiteColor,
+                                  size: 50,
+                                ),
+                                SizedBox(
+                                  height: ConfigSize.defaultSize! * 1,
+                                ),
+                                Text(
+                                  StringManager.lifeInsurance.tr(),
+                                  style: const TextStyle(
+                                      color: ColorManager.whiteColor,
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.w800),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+
+
+
+
+                    SizedBox(
+                      height: ConfigSize.defaultSize! * 2,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            PersistentNavBarNavigator.pushNewScreen(
+                              context,
+                              screen: const HomeScreen(),
+                              withNavBar: true,
+                              pageTransitionAnimation:
+                              PageTransitionAnimation.fade,
+                            );
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                                color: ColorManager.kPrimaryBlueDark,
+                                borderRadius:
+                                BorderRadiusDirectional.circular(12)),
+                            width: ConfigSize.defaultSize! * 18,
+                            height: ConfigSize.defaultSize! * 20,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Icon(
+                                  Icons.person_2_outlined,
+                                  color: ColorManager.whiteColor,
+                                  size: 50,
+                                ),
+                                SizedBox(
+                                  height: ConfigSize.defaultSize! * 1,
+                                ),
+                                Text(
+                                  StringManager.pensionInsurance.tr(),
+                                  style: const TextStyle(
+                                      color: ColorManager.whiteColor,
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.w800),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            PersistentNavBarNavigator.pushNewScreen(
+                              context,
+                              screen: const HomeScreen(),
+                              withNavBar: true,
+                              pageTransitionAnimation:
+                              PageTransitionAnimation.fade,
+                            );
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                                color: ColorManager.kPrimaryBlueDark,
+                                borderRadius:
+                                BorderRadiusDirectional.circular(12)),
+                            width: ConfigSize.defaultSize! * 18,
+                            height: ConfigSize.defaultSize! * 20,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Icon(
+                                  Icons.directions_boat_filled_outlined,
+                                  color: ColorManager.whiteColor,
+                                  size: 50,
+                                ),
+                                SizedBox(
+                                  height: ConfigSize.defaultSize! * 1,
+                                ),
+                                Text(
+                                  StringManager.marineInsurance.tr(),
+                                  style: const TextStyle(
+                                      color: ColorManager.whiteColor,
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.w800),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+
+
+
+
+                    SizedBox(
+                      height: ConfigSize.defaultSize! * 2,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            PersistentNavBarNavigator.pushNewScreen(
+                              context,
+                              screen: const HomeScreen(),
+                              withNavBar: true,
+                              pageTransitionAnimation:
+                              PageTransitionAnimation.fade,
+                            );
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                                color: ColorManager.kPrimaryBlueDark,
+                                borderRadius:
+                                BorderRadiusDirectional.circular(12)),
+                            width: ConfigSize.defaultSize! * 18,
+                            height: ConfigSize.defaultSize! * 20,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Icon(
+                                  Icons.airplanemode_active_outlined,
+                                  color: ColorManager.whiteColor,
+                                  size: 50,
+                                ),
+                                SizedBox(
+                                  height: ConfigSize.defaultSize! * 1,
+                                ),
+                                Text(
+                                  StringManager.travelInsurance.tr(),
+                                  style: const TextStyle(
+                                      color: ColorManager.whiteColor,
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.w800),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            PersistentNavBarNavigator.pushNewScreen(
+                              context,
+                              screen: const HomeScreen(),
+                              withNavBar: true,
+                              pageTransitionAnimation:
+                              PageTransitionAnimation.fade,
+                            );
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                                color: ColorManager.kPrimaryBlueDark,
+                                borderRadius:
+                                BorderRadiusDirectional.circular(12)),
+                            width: ConfigSize.defaultSize! * 18,
+                            height: ConfigSize.defaultSize! * 20,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Icon(
+                                  Icons.laptop_chromebook_outlined,
+                                  color: ColorManager.whiteColor,
+                                  size: 50,
+                                ),
+                                SizedBox(
+                                  height: ConfigSize.defaultSize! * 1,
+                                ),
+                                Text(
+                                  StringManager.cyberInsurance.tr(),
+                                  style: const TextStyle(
+                                      color: ColorManager.whiteColor,
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.w800),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+
+
+
+
+
+                    SizedBox(
+                      height: ConfigSize.defaultSize! * 2,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            PersistentNavBarNavigator.pushNewScreen(
+                              context,
+                              screen: const HomeScreen(),
+                              withNavBar: true,
+                              pageTransitionAnimation:
+                              PageTransitionAnimation.fade,
+                            );
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                                color: ColorManager.kPrimaryBlueDark,
+                                borderRadius:
+                                BorderRadiusDirectional.circular(12)),
+                            width: ConfigSize.defaultSize! * 18,
+                            height: ConfigSize.defaultSize! * 20,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Icon(
+                                  Icons.person_off_outlined,
+                                  color: ColorManager.whiteColor,
+                                  size: 50,
+                                ),
+                                SizedBox(
+                                  height: ConfigSize.defaultSize! * 1,
+                                ),
+                                Text(
+                                  StringManager.burglaryInsurance.tr(),
+                                  style: const TextStyle(
+                                      color: ColorManager.whiteColor,
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.w800),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            PersistentNavBarNavigator.pushNewScreen(
+                              context,
+                              screen: const HomeScreen(),
+                              withNavBar: true,
+                              pageTransitionAnimation:
+                              PageTransitionAnimation.fade,
+                            );
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                                color: ColorManager.kPrimaryBlueDark,
+                                borderRadius:
+                                BorderRadiusDirectional.circular(12)),
+                            width: ConfigSize.defaultSize! * 18,
+                            height: ConfigSize.defaultSize! * 20,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Icon(
+                                  Icons.health_and_safety_outlined,
+                                  color: ColorManager.whiteColor,
+                                  size: 50,
+                                ),
+                                SizedBox(
+                                  height: ConfigSize.defaultSize! * 1,
+                                ),
+                                Text(
+                                  StringManager.contractorsRiskInsurance.tr(),
+                                  style: const TextStyle(
+                                      color: ColorManager.whiteColor,
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.w800),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+
+
+
+
+
+                    SizedBox(
+                      height: ConfigSize.defaultSize! * 2,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            PersistentNavBarNavigator.pushNewScreen(
+                              context,
+                              screen: const HomeScreen(),
+                              withNavBar: true,
+                              pageTransitionAnimation:
+                              PageTransitionAnimation.fade,
+                            );
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                                color: ColorManager.kPrimaryBlueDark,
+                                borderRadius:
+                                BorderRadiusDirectional.circular(12)),
+                            width: ConfigSize.defaultSize! * 18,
+                            height: ConfigSize.defaultSize! * 20,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Icon(
+                                  Icons.minor_crash_outlined,
+                                  color: ColorManager.whiteColor,
+                                  size: 50,
+                                ),
+                                SizedBox(
+                                  height: ConfigSize.defaultSize! * 1,
+                                ),
+                                Text(
+                                  StringManager.personalAccidentsInsurance.tr(),
+                                  style: const TextStyle(
+                                      color: ColorManager.whiteColor,
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.w800),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            PersistentNavBarNavigator.pushNewScreen(
+                              context,
+                              screen: const HomeScreen(),
+                              withNavBar: true,
+                              pageTransitionAnimation:
+                              PageTransitionAnimation.fade,
+                            );
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                                color: ColorManager.kPrimaryBlueDark,
+                                borderRadius:
+                                BorderRadiusDirectional.circular(12)),
+                            width: ConfigSize.defaultSize! * 18,
+                            height: ConfigSize.defaultSize! * 20,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Icon(
+                                  Icons.person_pin_outlined,
+                                  color: ColorManager.whiteColor,
+                                  size: 50,
+                                ),
+                                SizedBox(
+                                  height: ConfigSize.defaultSize! * 1,
+                                ),
+                                Text(
+                                  StringManager.generalAccidentsInsurance.tr(),
+                                  style: const TextStyle(
+                                      color: ColorManager.whiteColor,
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.w800),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+
+
+
+
+
+// help & howto
+                    SizedBox(
+                      height: ConfigSize.defaultSize! * 2,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            PersistentNavBarNavigator.pushNewScreen(
+                              context,
+                              screen: const HomeScreen(),
+                              withNavBar: true,
+                              pageTransitionAnimation:
+                              PageTransitionAnimation.fade,
+                            );
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                                color: ColorManager.kPrimaryBlueDark,
+                                borderRadius:
+                                BorderRadiusDirectional.circular(12)),
+                            width: ConfigSize.defaultSize! * 18,
+                            height: ConfigSize.defaultSize! * 20,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Icon(
+                                  Icons.how_to_vote_outlined,
+                                  color: ColorManager.whiteColor,
+                                  size: 50,
+                                ),
+                                SizedBox(
+                                  height: ConfigSize.defaultSize! * 1,
+                                ),
+                                Text(
+                                  StringManager.howto.tr(),
+                                  style: const TextStyle(
+                                      color: ColorManager.whiteColor,
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.w800),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            PersistentNavBarNavigator.pushNewScreen(
+                              context,
+                              screen: const HomeScreen(),
+                              withNavBar: true,
+                              pageTransitionAnimation:
+                              PageTransitionAnimation.fade,
+                            );
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                                color: ColorManager.kPrimaryBlueDark,
+                                borderRadius:
+                                BorderRadiusDirectional.circular(12)),
+                            width: ConfigSize.defaultSize! * 18,
+                            height: ConfigSize.defaultSize! * 20,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Icon(
+                                  Icons.help_outline,
+                                  color: ColorManager.whiteColor,
+                                  size: 50,
+                                ),
+                                SizedBox(
+                                  height: ConfigSize.defaultSize! * 1,
+                                ),
+                                Text(
+                                  StringManager.help.tr(),
+                                  style: const TextStyle(
+                                      color: ColorManager.whiteColor,
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+
+                  ],
                 ),
               ),
-              otherAccountsPictures: const <Widget>[],
-            ),
-            ListTile(
-              title: const Text("Medical Insurance"),
-              trailing: const Icon(Icons.medical_services_outlined),
-              onTap: () => {},
-            ),
-            const Divider(),
-            ListTile(
-              title: const Text("Car insurance"),
-              trailing: const Icon(Icons.car_crash_outlined),
-              onTap: () => {},
-            ),
-            const Divider(),
-            ListTile(
-              title: const Text("Property Insurance"),
-              trailing: const Icon(Icons.house_outlined),
-              onTap: () => {},
-            ),
-            const Divider(),
-            ListTile(
-              title: const Text("life insurance"),
-              trailing: const Icon(Icons.monitor_heart_outlined),
-              onTap: () => Navigator.of(context).pop(),
-            ),
-            const Divider(),
-            ListTile(
-              title: const Text("Home"),
-              trailing: const Icon(Icons.close),
-              onTap: () => Navigator.of(context).pop(),
-            ),
-          ],
+            ],
+          ),
         ),
-      ),
-      body: const Center(
-        child: Text("Home Screen"),
       ),
     );
   }

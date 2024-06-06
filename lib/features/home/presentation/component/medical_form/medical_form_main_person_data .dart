@@ -6,52 +6,43 @@ import 'package:globaladvice_new/core/resource_manger/color_manager.dart';
 import 'package:globaladvice_new/core/resource_manger/locale_keys.g.dart';
 import 'package:globaladvice_new/core/utils/config_size.dart';
 import 'package:globaladvice_new/core/widgets/custom_text_field.dart';
-import 'package:globaladvice_new/core/widgets/main_button.dart';
-import 'package:globaladvice_new/main_screen.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:globaladvice_new/features/home/presentation/component/medical_form/done.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
-class CreateAccount extends StatefulWidget {
-  const CreateAccount({super.key});
+import '../../../../../core/widgets/main_button.dart';
+import '../../../../../main_screen.dart';
+
+class MedicalFormMainPersonData extends StatefulWidget {
+  const MedicalFormMainPersonData({super.key});
 
   @override
-  State<CreateAccount> createState() => _CreateAccountState();
+  State<MedicalFormMainPersonData> createState() =>
+      _MedicalFormMainPersonDataState();
 }
 
-class _CreateAccountState extends State<CreateAccount> {
-  TextEditingController firstNameController = TextEditingController();
+class _MedicalFormMainPersonDataState extends State<MedicalFormMainPersonData> {
+  TextEditingController fullNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController confirmPasswordController = TextEditingController();
 
   @override
   void initState() {
-    firstNameController = TextEditingController();
+    fullNameController = TextEditingController();
     lastNameController = TextEditingController();
     emailController = TextEditingController();
     phoneController = TextEditingController();
-    passwordController = TextEditingController();
-    confirmPasswordController = TextEditingController();
     super.initState();
   }
 
   @override
   void dispose() {
-    firstNameController.dispose();
+    fullNameController.dispose();
     lastNameController.dispose();
     emailController.dispose();
     phoneController.dispose();
-
-    passwordController.dispose();
-    confirmPasswordController.dispose();
-    image = null;
     super.dispose();
   }
-
-  final ImagePicker picker = ImagePicker();
-  XFile? image;
 
   String? selectedValue;
   bool isVisible = true;
@@ -59,7 +50,12 @@ class _CreateAccountState extends State<CreateAccount> {
   final List<String> items = [
     'Male',
     'Female',
-
+  ];
+  final List<String> annual = [
+    '250,000 EGP',
+    '350,000 EGP',
+    '450,000 EGP',
+    '550,000 EGP',
   ];
 
   @override
@@ -81,7 +77,7 @@ class _CreateAccountState extends State<CreateAccount> {
         ),
         centerTitle: true,
         title: Text(
-          StringManager.signUpWithUs.tr(),
+          StringManager.medicalInsuranceForm.tr(),
           style: TextStyle(
             fontWeight: FontWeight.w600,
             fontSize: ConfigSize.defaultSize! * 2,
@@ -116,35 +112,14 @@ class _CreateAccountState extends State<CreateAccount> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          StringManager.firstName.tr(),
+                          StringManager.fullName.tr(),
                           style: TextStyle(
                             fontSize: ConfigSize.defaultSize! * 1.6,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
                         CustomTextField(
-                          controller: firstNameController,
-                          inputType: TextInputType.name,
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    width: ConfigSize.defaultSize! * 2,
-                  ),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          StringManager.lastName.tr(),
-                          style: TextStyle(
-                            fontSize: ConfigSize.defaultSize! * 1.6,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        CustomTextField(
-                          controller: lastNameController,
+                          controller: fullNameController,
                           inputType: TextInputType.name,
                         ),
                       ],
@@ -152,9 +127,22 @@ class _CreateAccountState extends State<CreateAccount> {
                   ),
                 ],
               ),
-
               SizedBox(height: ConfigSize.defaultSize! * 2),
-
+              Text(
+                StringManager.phone.tr(),
+                style: TextStyle(
+                  fontSize: ConfigSize.defaultSize! * 1.6,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              SizedBox(
+                height: ConfigSize.defaultSize! - 5,
+              ),
+              CustomTextField(
+                controller: phoneController,
+                inputType: TextInputType.phone,
+              ),
+              SizedBox(height: ConfigSize.defaultSize! * 2),
               Text(
                 StringManager.gander.tr(),
                 style: TextStyle(
@@ -178,14 +166,14 @@ class _CreateAccountState extends State<CreateAccount> {
                     ),
                     items: items
                         .map((String item) => DropdownMenuItem<String>(
-                      value: item,
-                      child: Text(
-                        item,
-                        style: const TextStyle(
-                          fontSize: 14,
-                        ),
-                      ),
-                    ))
+                              value: item,
+                              child: Text(
+                                item,
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ))
                         .toList(),
                     value: selectedValue,
                     onChanged: (String? value) {
@@ -196,10 +184,10 @@ class _CreateAccountState extends State<CreateAccount> {
                     buttonStyleData: ButtonStyleData(
                       decoration: BoxDecoration(
                         borderRadius:
-                        const BorderRadius.all(Radius.circular(12)),
+                            const BorderRadius.all(Radius.circular(12)),
                         color: Colors.white,
                         border:
-                        Border.all(color: Colors.grey.shade300, width: 1),
+                            Border.all(color: Colors.grey.shade300, width: 1),
                       ),
                       padding: EdgeInsets.symmetric(
                           horizontal: ConfigSize.defaultSize! * 1.6),
@@ -229,7 +217,7 @@ class _CreateAccountState extends State<CreateAccount> {
               ),
               SizedBox(height: ConfigSize.defaultSize! * 2),
               Text(
-                StringManager.phone.tr(),
+                StringManager.annualLimit.tr(),
                 style: TextStyle(
                   fontSize: ConfigSize.defaultSize! * 1.6,
                   fontWeight: FontWeight.w600,
@@ -238,63 +226,68 @@ class _CreateAccountState extends State<CreateAccount> {
               SizedBox(
                 height: ConfigSize.defaultSize! - 5,
               ),
-              CustomTextField(
-                controller: phoneController,
-                inputType: TextInputType.phone,
-              ),
-              SizedBox(height: ConfigSize.defaultSize! * 2),
-              Text(
-                StringManager.password.tr(),
-                style: TextStyle(
-                  fontSize: ConfigSize.defaultSize! * 1.6,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              SizedBox(
-                height: ConfigSize.defaultSize! - 5,
-              ),
-              CustomTextField(
-                controller: passwordController,
-                inputType: TextInputType.text,
-                obscureText: isVisible1,
-                suffix: InkWell(
-                    onTap: () {
-                      {
-                        isVisible1 = !isVisible1;
-                      }
-                      setState(() {});
+              Center(
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButton2<String>(
+                    isExpanded: true,
+                    hint: Text(
+                      'Annual limit',
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Theme.of(context).hintColor,
+                      ),
+                    ),
+                    items: annual
+                        .map((String annual) => DropdownMenuItem<String>(
+                              value: annual,
+                              child: Text(
+                                annual,
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ))
+                        .toList(),
+                    value: selectedValue,
+                    onChanged: (String? value) {
+                      setState(() {
+                        selectedValue = value;
+                      });
                     },
-                    child: Icon(isVisible1
-                        ? Icons.visibility_off_outlined
-                        : Icons.remove_red_eye_outlined)),
+                    buttonStyleData: ButtonStyleData(
+                      decoration: BoxDecoration(
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(12)),
+                        color: Colors.white,
+                        border:
+                            Border.all(color: Colors.grey.shade300, width: 1),
+                      ),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: ConfigSize.defaultSize! * 1.6),
+                      height: ConfigSize.defaultSize! * 5.5,
+                      width: ConfigSize.screenWidth,
+                    ),
+                    menuItemStyleData: const MenuItemStyleData(
+                      height: 40,
+                    ),
+                  ),
+                ),
               ),
               SizedBox(height: ConfigSize.defaultSize! * 2),
-              Text(
-                StringManager.confirmPassword.tr(),
-                style: TextStyle(
-                  fontSize: ConfigSize.defaultSize! * 1.6,
-                  fontWeight: FontWeight.w600,
-                ),
+
+              MainButton(
+                onTap: () {
+                  PersistentNavBarNavigator.pushNewScreen(
+                    context,
+                    screen: const MainScreen(),
+                    withNavBar: false,
+                    pageTransitionAnimation: PageTransitionAnimation.fade,
+                  );
+                },
+                title: StringManager.addYourFamily.tr(),
               ),
-              SizedBox(
-                height: ConfigSize.defaultSize! - 5,
-              ),
-              CustomTextField(
-                controller: confirmPasswordController,
-                inputType: TextInputType.text,
-                obscureText: isVisible,
-                suffix: InkWell(
-                  onTap: () {
-                    {
-                      isVisible = !isVisible;
-                    }
-                    setState(() {});
-                  },
-                  child: Icon(isVisible
-                      ? Icons.visibility_off_outlined
-                      : Icons.remove_red_eye_outlined),
-                ),
-              ),
+
+
               Padding(
                 padding:
                     EdgeInsets.symmetric(vertical: ConfigSize.defaultSize! * 3),
@@ -302,7 +295,7 @@ class _CreateAccountState extends State<CreateAccount> {
                   onTap: () {
                     PersistentNavBarNavigator.pushNewScreen(
                       context,
-                      screen: const MainScreen(),
+                      screen: const DoneScreen(),
                       withNavBar: false,
                       pageTransitionAnimation: PageTransitionAnimation.fade,
                     );
@@ -310,53 +303,6 @@ class _CreateAccountState extends State<CreateAccount> {
                   title: StringManager.next.tr(),
                 ),
               ),
-              SizedBox(
-                height: ConfigSize.defaultSize! * 3,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    StringManager.alreadyHaveAnAccount.tr(),
-                    style:  TextStyle(
-                      color: ColorManager.kPrimaryBlueDark,
-                      fontWeight: FontWeight.bold,
-                      fontSize: ConfigSize.defaultSize! * 2,
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      PersistentNavBarNavigator.pushNewScreen(
-                        context,
-                        screen: const CreateAccount(),
-                        withNavBar: false,
-                        pageTransitionAnimation: PageTransitionAnimation.fade,
-                      );
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: ColorManager.gray,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(
-                          vertical: ConfigSize.defaultSize! * 1.5,
-                          horizontal: ConfigSize.defaultSize! * 3,
-                        ),
-                        child: Text(
-                          StringManager.login.tr(),
-                          style: TextStyle(
-                            color: ColorManager.kPrimaryBlueDark,
-                            fontWeight: FontWeight.bold,
-                            fontSize: ConfigSize.defaultSize! * 2,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-
             ],
           ),
         ),
@@ -365,15 +311,13 @@ class _CreateAccountState extends State<CreateAccount> {
   }
 
   bool validation() {
-    if (firstNameController.text == '') {
+    if (fullNameController.text == '') {
       return false;
     } else if (lastNameController.text == '') {
       return false;
     } else if (emailController.text == '') {
       return false;
-    } else if (passwordController.text == '') {
-      return false;
-    } else if (confirmPasswordController.text == '') {
+    } else if (phoneController.text == '') {
       return false;
     } else {
       return true;

@@ -17,6 +17,8 @@ class AssetsPath {
   static const String stepper2 = "$pathImage/stepper-02.png";
   static const String stepper3 = "$pathImage/stepper-03.png";
   static const String stepper4 = "$pathImage/stepper-04.png";
+  static const String person = "$pathImage/image@2x.png";
+
 
 //icons
   static const String app1 = "$pathIcon/app-01.png";
@@ -28,10 +30,12 @@ class AssetsPath {
   static const String drawerPref = "$pathIcon/drawer_pref.png";
   static const String drawerProfile = "$pathIcon/drawer_profile.png";
   static const String drawerProfilePic = "$pathIcon/drawer_profile_pic.png";
-  static const String drawerSignout = "$pathIcon/drawer_signout.png";
+  static const String drawerSignOut = "$pathIcon/drawer_signout.png";
   static const String profile = "$pathIcon/profile.png";
   static const String translation = "$pathIcon/translation.png";
   static const String facebook = "$pathIcon/facebook@2x.png";
   static const String google = "$pathIcon/google@2x.png";
   static const String apple = "$pathIcon/apple@2x.png";
+  static const String howto = "$pathIcon/how to@2x.png";
+  static const String help = "$pathIcon/help@2x.png";
 }
