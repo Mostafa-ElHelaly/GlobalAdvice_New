@@ -104,6 +104,10 @@ abstract class StringManager {
   static const String lifeInsuranceForm = "Life Insurance";
   static const String propertyInsuranceForm = "property Insurance";
   static const String occupation = "Occupation";
+  static const String service = "Service";
+  static const String insuranceType = "Insurance Type";
+  static const String viewAll = "View All";
+  static const String viewPlans = "View Plans";
 
   /////////////////////////////////////////////////////////////////
   static const String userDataKey = "User Data";

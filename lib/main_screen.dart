@@ -1,13 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:globaladvice_new/core/resource_manger/asset_path.dart';
 import 'package:globaladvice_new/core/resource_manger/color_manager.dart';
-import 'package:globaladvice_new/features/chat/presentation/all_chats_screen.dart';
 import 'package:globaladvice_new/features/home/presentation/home_screen.dart';
+import 'package:globaladvice_new/features/my_policies/presentation/my_polcies_screen.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 import 'features/notification/presentation/notification_screen.dart';
-import 'features/profile/presentation/component/edit_my_profile/edit_my_profile_screen.dart';
 import 'features/profile/presentation/profile_screen.dart';
 
 class MainScreen extends StatefulWidget {
@@ -29,7 +27,7 @@ class _MainScreenState extends State<MainScreen> {
   List<Widget> _buildScreens() {
     return [
       const HomeScreen(),
-      const AllChatsScreen(),
+      const MyPolicies(),
       const NotificationScreen(),
       const ProfileScreen(),
 
@@ -53,12 +51,12 @@ class _MainScreenState extends State<MainScreen> {
       ),
       PersistentBottomNavBarItem(
         icon: const Icon(
-          Icons.chat_outlined,
+          Icons.policy_outlined,
           color: ColorManager.kPrimaryBlueDark,
           size: 40,
         ),
         inactiveIcon: const Icon(
-          Icons.chat_outlined,
+          Icons.policy_outlined,
           size: 20,
         ),
         activeColorPrimary: ColorManager.kPrimaryBlueDark,
