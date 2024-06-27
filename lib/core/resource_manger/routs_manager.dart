@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:globaladvice_new/features/auth/presentation/login_screen.dart';
+import 'package:globaladvice_new/main_screen.dart';
 
 class Routes {
   static const String login = "/LoginScreen";
@@ -27,11 +28,11 @@ class RouteGenerator {
         return MaterialPageRoute(
             settings: settings, builder: (_) => const LoginScreen());
 
-      // case Routes.createAccount:
-      //   currentContext = Routes.createAccount;
-      //   return MaterialPageRoute(
-      //       settings: settings, builder: (_) => const CreateAccount()
-      //   );
+      case Routes.mainScreen:
+        currentContext = Routes.mainScreen;
+        return MaterialPageRoute(
+            settings: settings, builder: (_) => const MainScreen()
+        );
 
     }
     return unDefinedRoute();

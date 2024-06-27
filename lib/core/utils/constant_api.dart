@@ -1,7 +1,7 @@
 class ConstantApi {
-  // static const String baseUrl = 'http://128.140.69.196/Dogs/api/';
-  //
-  // static const String login = "${baseUrl}Auth/Login";
-  // static const String register = "${baseUrl}Auth/register";
+  static const String baseUrl = 'https://dev.exabytellc.com/APIs/GAIB/';
 
+  static const String register = "${baseUrl}client/access/register";
+  static const String login =
+      "${baseUrl}client/access/login?email=mahmoudelshall292@gmail.com&password=123456";
 }
