@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import '../../data/model/register_model.dart';
+import '../../../data/model/login_model.dart';
 
 
 abstract class RegisterState extends Equatable {
@@ -23,7 +23,7 @@ final class RegisterErrorState extends RegisterState {
 }
 
 final class RegisterSuccessState extends RegisterState {
-  final RegisterModel authModelResponse;
+  final LoginModel authModelResponse;
 
   const RegisterSuccessState({required this.authModelResponse});
 }

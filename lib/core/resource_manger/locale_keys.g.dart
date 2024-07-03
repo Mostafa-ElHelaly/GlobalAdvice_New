@@ -9,6 +9,7 @@ abstract class StringManager {
   static const login = 'Login';
   static const createAccount = 'Create Account';
   static const dontHaveAccount = 'Don\'t have an account?';
+  static const dateOfBirthday = 'Date Of Birthday';
   static const alreadyHaveAnAccount = 'Already Have An Account';
   static const forgetPassword = 'Forget Your Password ?';
   static const signUpWithUs = 'Sign Up With US';

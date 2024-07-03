@@ -8,11 +8,12 @@ import 'package:globaladvice_new/core/service/service_locator.dart';
 import 'package:globaladvice_new/core/translations/codegen_loader.g.dart';
 import 'package:globaladvice_new/core/utils/config_size.dart';
 import 'package:globaladvice_new/features/auth/presentation/login_screen.dart';
+import 'package:globaladvice_new/features/home/presentation/home_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'core/service/bloc_observer.dart';
-import 'features/auth/presentation/manager/login_bloc.dart';
-import 'features/auth/presentation/manager/register_bloc.dart';
+import 'features/auth/presentation/manager/login_bloc/login_bloc.dart';
+import 'features/auth/presentation/manager/register_bloc/register_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -63,7 +64,7 @@ class MyApp extends StatelessWidget {
         ),
         navigatorKey: getIt<NavigationService>().navigatorKey,
         onGenerateRoute: RouteGenerator.getRoute,
-        home: const LoginScreen(),
+        home: const HomeScreen(),
       ),
     );
   }

@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 
-import '../../data/model/login_model.dart';
+import '../../../data/model/login_model.dart';
+
 
 
 abstract class LoginState extends Equatable {
@@ -23,7 +24,7 @@ final class LoginErrorState extends LoginState {
 }
 
 final class LoginSuccessState extends LoginState {
-  final LoginModel loginauthModelResponse;
+  final LoginModel loginAuthModelResponse;
 
-  const LoginSuccessState({required this.loginauthModelResponse});
+  const LoginSuccessState({required this.loginAuthModelResponse});
 }

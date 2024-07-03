@@ -5,8 +5,8 @@ import '../../features/auth/data/repo_imp/repo_imp.dart';
 import '../../features/auth/domain/repo/base_repo.dart';
 import '../../features/auth/domain/use_case/login_uc.dart';
 import '../../features/auth/domain/use_case/register_uc.dart';
-import '../../features/auth/presentation/manager/login_bloc.dart';
-import '../../features/auth/presentation/manager/register_bloc.dart';
+import '../../features/auth/presentation/manager/login_bloc/login_bloc.dart';
+import '../../features/auth/presentation/manager/register_bloc/register_bloc.dart';
 
 final getIt = GetIt.instance;
 

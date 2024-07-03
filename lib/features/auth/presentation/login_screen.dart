@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:globaladvice_new/core/resource_manger/asset_path.dart';
 import 'package:globaladvice_new/core/resource_manger/color_manager.dart';
 import 'package:globaladvice_new/core/resource_manger/locale_keys.g.dart';
@@ -13,9 +14,9 @@ import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 import '../../../core/resource_manger/routs_manager.dart';
 import '../../../core/widgets/snack_bar.dart';
-import 'manager/login_bloc.dart';
-import 'manager/login_event.dart';
-import 'manager/login_state.dart';
+import 'manager/login_bloc/login_bloc.dart';
+import 'manager/login_bloc/login_event.dart';
+import 'manager/login_bloc/login_state.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -31,12 +32,31 @@ class _LoginScreenState extends State<LoginScreen> {
   bool isVisible = true;
 
   @override
+  void initState() {
+    emailController = TextEditingController();
+    passwordController = TextEditingController();
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocListener<LoginBloc, LoginState>(
       listener: (context, state) {
         if (state is LoginSuccessState) {
-          Navigator.pushNamedAndRemoveUntil(
-              context, Routes.mainScreen, (route) => false);
+          state.loginAuthModelResponse.isCompleted!
+              ? Navigator.pushNamedAndRemoveUntil(
+                  context, Routes.mainScreen, (route) => false)
+              : Navigator.pushNamedAndRemoveUntil(
+                  context, Routes.mainScreen, (route) => false);
         } else if (state is LoginErrorState) {
           errorSnackBar(context, state.errorMessage);
         } else if (state is LoginLoadingState) {}
@@ -137,12 +157,14 @@ class _LoginScreenState extends State<LoginScreen> {
                       textColor: ColorManager.whiteColor,
                       onTap: () {
                         if (validation()) {
-                          BlocProvider.of<LoginBloc>(context).add(LoginEvent(
-                              email: emailController.text,
-                              password: 'Nn@\$${passwordController.text}'));
+                          errorSnackBar(context, StringManager.login.tr());
                         } else {
-                          errorSnackBar(
-                              context, StringManager.pleaseCompleteYourData);
+                          BlocProvider.of<LoginBloc>(context).add(
+                            LoginEvent(
+                              email: emailController.text,
+                              password: 'Nn@\$${ passwordController.text}',
+                            ),
+                          );
                         }
                       },
                       title: StringManager.login.tr(),

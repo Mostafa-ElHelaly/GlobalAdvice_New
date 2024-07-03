@@ -2,6 +2,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:globaladvice_new/core/resource_manger/asset_path.dart';
 import 'package:globaladvice_new/core/resource_manger/color_manager.dart';
 import 'package:globaladvice_new/core/resource_manger/locale_keys.g.dart';
@@ -9,12 +10,11 @@ import 'package:globaladvice_new/core/utils/config_size.dart';
 import 'package:globaladvice_new/core/widgets/custom_text_field.dart';
 import 'package:globaladvice_new/core/widgets/main_button.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
-
 import '../../../../../core/resource_manger/routs_manager.dart';
 import '../../../../../core/widgets/snack_bar.dart';
-import '../../manager/register_bloc.dart';
-import '../../manager/register_event.dart';
-import '../../manager/register_state.dart';
+import '../../manager/register_bloc/register_bloc.dart';
+import '../../manager/register_bloc/register_event.dart';
+import '../../manager/register_bloc/register_state.dart';
 
 class CreateAccount extends StatefulWidget {
   const CreateAccount({super.key});
@@ -28,7 +28,7 @@ class _CreateAccountState extends State<CreateAccount> {
   TextEditingController lastNameController = TextEditingController();
   TextEditingController ganderController = TextEditingController();
   TextEditingController emailController = TextEditingController();
-  TextEditingController phoneController = TextEditingController();
+  TextEditingController dateOfBirthdayController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
 
@@ -38,8 +38,8 @@ class _CreateAccountState extends State<CreateAccount> {
     lastNameController = TextEditingController();
     ganderController = TextEditingController();
     emailController = TextEditingController();
-    phoneController = TextEditingController();
     passwordController = TextEditingController();
+    dateOfBirthdayController = TextEditingController();
     confirmPasswordController = TextEditingController();
     super.initState();
   }
@@ -50,8 +50,8 @@ class _CreateAccountState extends State<CreateAccount> {
     lastNameController.dispose();
     ganderController.dispose();
     emailController.dispose();
-    phoneController.dispose();
     passwordController.dispose();
+    dateOfBirthdayController.dispose();
     confirmPasswordController.dispose();
     super.dispose();
   }
@@ -69,11 +69,18 @@ class _CreateAccountState extends State<CreateAccount> {
     return BlocListener<RegisterBloc, RegisterState>(
       listener: (context, state) {
         if (state is RegisterSuccessState) {
+          EasyLoading.dismiss();
           Navigator.pushNamedAndRemoveUntil(
-              context, Routes.mainScreen, (route) => false);
+            context,
+            Routes.login,
+            (route) => false,
+          );
         } else if (state is RegisterErrorState) {
-          errorSnackBar(context, state.errorMessage);
-        } else if (state is RegisterLoadingState) {}
+          EasyLoading.dismiss();
+          EasyLoading.showError(state.errorMessage);
+        } else if (state is RegisterLoadingState) {
+          EasyLoading.show(status: 'loading...');
+        }
       },
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -238,7 +245,7 @@ class _CreateAccountState extends State<CreateAccount> {
                 ),
                 SizedBox(height: ConfigSize.defaultSize! * 2),
                 Text(
-                  StringManager.phone.tr(),
+                  StringManager.dateOfBirthday.tr(),
                   style: TextStyle(
                     fontSize: ConfigSize.defaultSize! * 1.6,
                     fontWeight: FontWeight.w600,
@@ -248,8 +255,8 @@ class _CreateAccountState extends State<CreateAccount> {
                   height: ConfigSize.defaultSize! - 5,
                 ),
                 CustomTextField(
-                  controller: phoneController,
-                  inputType: TextInputType.phone,
+                  controller: dateOfBirthdayController,
+                  inputType: TextInputType.datetime,
                 ),
                 SizedBox(height: ConfigSize.defaultSize! * 2),
                 Text(
@@ -308,29 +315,38 @@ class _CreateAccountState extends State<CreateAccount> {
                   padding: EdgeInsets.symmetric(
                       vertical: ConfigSize.defaultSize! * 3),
                   child: MainButton(
+                    // onTap: () {
+                    //   if (validation()) {
+                    //     errorSnackBar(context, StringManager.login.tr());
+                    //   } else {
+                    //     BlocProvider.of<RegisterBloc>(context)
+                    //         .add(RegisterEvent(
+                    //       email: emailController.text,
+                    //       password: 'Nn@\$${passwordController.text}',
+                    //     ));
+                    //   }
+                    // },
+
                     onTap: () {
                       if (validation()) {
                         BlocProvider.of<RegisterBloc>(context).add(
                           RegisterEvent(
                             email: emailController.text,
                             password: 'Nn@\$${passwordController.text}',
-                            firstName: firstNameController.text,
-                            lastName: lastNameController.text,
-                            phone: phoneController.text,
-                            confirmPassword: 'Nn@\$${confirmPasswordController.text}',
                           ),
                         );
                       } else {
                         errorSnackBar(context, StringManager.errorFillFields);
                       }
-
-                      // PersistentNavBarNavigator.pushNewScreen(
-                      //   context,
-                      //   screen: const MainScreen(),
-                      //   withNavBar: false,
-                      //   pageTransitionAnimation: PageTransitionAnimation.fade,
-                      // );
                     },
+
+                    // PersistentNavBarNavigator.pushNewScreen(
+                    //   context,
+                    //   screen: const MainScreen(),
+                    //   withNavBar: false,
+                    //   pageTransitionAnimation: PageTransitionAnimation.fade,
+                    // );
+
                     title: StringManager.next.tr(),
                   ),
                 ),
@@ -389,15 +405,9 @@ class _CreateAccountState extends State<CreateAccount> {
   }
 
   bool validation() {
-    if (firstNameController.text == '') {
-      return false;
-    } else if (lastNameController.text == '') {
-      return false;
-    } else if (emailController.text == '') {
+    if (emailController.text == '') {
       return false;
     } else if (passwordController.text == '') {
-      return false;
-    } else if (confirmPasswordController.text == '') {
       return false;
     } else {
       return true;

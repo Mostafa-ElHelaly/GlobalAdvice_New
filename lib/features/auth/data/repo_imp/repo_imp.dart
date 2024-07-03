@@ -7,7 +7,6 @@ import '../../domain/use_case/login_uc.dart';
 import '../../domain/use_case/register_uc.dart';
 import '../data_source/remotly_data_source.dart';
 import '../model/login_model.dart';
-import '../model/register_model.dart';
 
 
 
@@ -27,8 +26,12 @@ class RepositoryImp extends BaseRepository {
     }
   }
 
+
+
+
+
   @override
-  Future<Either<RegisterModel, Failure>> RegisterWithEmailAndPassword(RegisterAuthModel registerAuthModel) async {
+  Future<Either<LoginModel, Failure>> RegisterWithEmailAndPassword(RegisterAuthModel registerAuthModel) async {
     try {
       final result = await baseRemotelyDataSource.registerWithEmailAndPassword(registerAuthModel);
       return Left(result);
@@ -36,6 +39,7 @@ class RepositoryImp extends BaseRepository {
       return right(DioHelper.buildFailure(e));
     }
   }
+
 
 
 

@@ -58,6 +58,10 @@ dependencies:
   givestarreviews: ^1.0.2
   modal_bottom_sheet: ^3.0.0
   carousel_slider: ^4.2.1
+  loading_animation_widget: ^1.2.0+4
+  flutter_easyloading: ^3.0.5
+
+
 
 dev_dependencies:
   flutter_test:
