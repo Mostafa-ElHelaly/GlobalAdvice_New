@@ -14,6 +14,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'core/service/bloc_observer.dart';
 import 'features/auth/presentation/manager/login_bloc/login_bloc.dart';
 import 'features/auth/presentation/manager/register_bloc/register_bloc.dart';
+import 'main_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -64,7 +65,7 @@ class MyApp extends StatelessWidget {
         ),
         navigatorKey: getIt<NavigationService>().navigatorKey,
         onGenerateRoute: RouteGenerator.getRoute,
-        home: const HomeScreen(),
+        home: const LoginScreen(),
       ),
     );
   }

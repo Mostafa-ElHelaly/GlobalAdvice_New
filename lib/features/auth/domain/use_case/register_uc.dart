@@ -12,7 +12,7 @@ class RegisterUseCase extends BaseUseCase<LoginModel, RegisterAuthModel> {
 
   @override
   Future<Either<LoginModel, Failure>> call(RegisterAuthModel parameter) async {
-    final result = await baseRepository.RegisterWithEmailAndPassword(parameter);
+    final result = await baseRepository.registerWithEmailAndPassword(parameter);
 
     return result;
   }
