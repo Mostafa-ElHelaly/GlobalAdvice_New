@@ -6,7 +6,7 @@ import 'package:globaladvice_new/core/resource_manger/color_manager.dart';
 import 'package:globaladvice_new/core/resource_manger/locale_keys.g.dart';
 import 'package:globaladvice_new/core/utils/config_size.dart';
 import 'package:globaladvice_new/core/widgets/custom_text_field.dart';
-import 'package:globaladvice_new/features/home/presentation/component/medical_form/done.dart';
+import 'package:globaladvice_new/features/home/presentation/component/medical_form/Widgets/done.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 import '../../../../../core/widgets/main_button.dart';
@@ -69,7 +69,8 @@ class _LifeFormMainPersonDataState extends State<LifeFormMainPersonData> {
     '10%',
     '25%',
     'No Deductible',
-  ];  final List<String> manufactureYear = [
+  ];
+  final List<String> manufactureYear = [
     '2015',
     '2016',
     '2017',
@@ -80,7 +81,6 @@ class _LifeFormMainPersonDataState extends State<LifeFormMainPersonData> {
     '2022',
     '2023',
     '2024',
-
   ];
 
   @override
@@ -227,7 +227,6 @@ class _LifeFormMainPersonDataState extends State<LifeFormMainPersonData> {
                 ),
               ),
               SizedBox(height: ConfigSize.defaultSize! * 2),
-
               Text(
                 StringManager.address.tr(),
                 style: TextStyle(
@@ -242,7 +241,6 @@ class _LifeFormMainPersonDataState extends State<LifeFormMainPersonData> {
                 controller: marketValueController,
                 inputType: TextInputType.text,
               ),
-
               SizedBox(height: ConfigSize.defaultSize! * 2),
               Padding(
                 padding:

@@ -7,6 +7,7 @@ abstract class StringManager {
   static const password = 'Password';
   static const confirmPassword = 'Confirm Password';
   static const login = 'Login';
+  static const birthday = 'Birthday';
   static const createAccount = 'Create Account';
   static const dontHaveAccount = 'Don\'t have an account?';
   static const dateOfBirthday = 'Date Of Birthday';
@@ -23,10 +24,14 @@ abstract class StringManager {
   static const motorDeductibles = 'Motor Deductibles';
   static const manufactureYear = 'Manufacture Year';
   static const selectCountry = 'Select Country';
+  static const carprices = 'List of motor insurance prices';
+  static const medicalprices = 'List of health insurance prices';
   static const city = 'City';
   static const uploadProfileImage = 'Upload Profile Image';
   static const changeProfileImage = 'Change Profile Image';
   static const selectCity = 'Select City';
+  static const buildingprice = 'Building Price';
+  static const contentprice = 'Content Price';
   static const next = 'Next';
   static const addYourFamily = 'Add Your Family To Your Health Insurance';
   static const marketValue = 'Market Value';

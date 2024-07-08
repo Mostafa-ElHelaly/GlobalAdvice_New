@@ -47,8 +47,6 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) => getIt<RegisterBloc>(),
-
-
         ),
         BlocProvider(
           create: (context) => getIt<LoginBloc>(),
@@ -65,9 +63,8 @@ class MyApp extends StatelessWidget {
         ),
         navigatorKey: getIt<NavigationService>().navigatorKey,
         onGenerateRoute: RouteGenerator.getRoute,
-        home: const LoginScreen(),
+        home: const MainScreen(),
       ),
     );
   }
 }
-

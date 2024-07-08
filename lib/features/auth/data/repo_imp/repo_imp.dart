@@ -39,15 +39,15 @@ class RepositoryImp extends BaseRepository {
     }
   }
 
-  @override
-  Future<Either<ResetPasswordModel, Failure>> resetPassword(
-      ResetModel resetPasswordModel) async {
-    try {
-      final result = await baseRemotelyDataSource
-          .resetPasswordWithEmail(resetPasswordModel);
-      return Left(result);
-    } on Exception catch (e) {
-      return right(DioHelper.buildFailure(e));
-    }
-  }
+  // @override
+  // Future<Either<ResetPasswordModel, Failure>> resetPassword(
+  //     ResetModel resetPasswordModel) async {
+  //   try {
+  //     final result = await baseRemotelyDataSource
+  //         .resetPasswordWithEmail(resetPasswordModel);
+  //     return Left(result);
+  //   } on Exception catch (e) {
+  //     return right(DioHelper.buildFailure(e));
+  //   }
+  // }
 }

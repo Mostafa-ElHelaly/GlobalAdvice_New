@@ -6,27 +6,24 @@ import 'package:globaladvice_new/core/resource_manger/asset_path.dart';
 import 'package:globaladvice_new/core/resource_manger/color_manager.dart';
 import 'package:globaladvice_new/core/resource_manger/locale_keys.g.dart';
 import 'package:globaladvice_new/core/utils/config_size.dart';
-import 'package:globaladvice_new/features/home/presentation/component/car_form/car_form_main_person_data%20.dart';
+import 'package:globaladvice_new/features/home/presentation/component/car_form/pages/car_form_1.dart';
 import 'package:globaladvice_new/features/home/presentation/component/life_form/life_form_main_person_data%20.dart';
-import 'package:globaladvice_new/features/home/presentation/component/property_form/property_form_main_person_data%20.dart';
+import 'package:globaladvice_new/features/home/presentation/component/property_form/pages/property_form_1%20.dart';
 import 'package:globaladvice_new/features/my_policies/presentation/my_polcies_screen.dart';
 import 'package:globaladvice_new/features/profile/presentation/profile_screen.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:pinput/pinput.dart';
 
-import '../medical_form/medical_form_main_person_data .dart';
-
+import '../medical_form/Pages/medical_form_1.dart';
 
 class CardScreen extends StatefulWidget {
   const CardScreen({super.key});
 
   @override
-
   State<CardScreen> createState() => _CardScreenState();
 }
 
 class _CardScreenState extends State<CardScreen> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,8 +44,6 @@ class _CardScreenState extends State<CardScreen> {
                     vertical: ConfigSize.defaultSize! * 4),
                 child: Column(
                   children: [
-
-
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -59,14 +54,14 @@ class _CardScreenState extends State<CardScreen> {
                               screen: const MedicalFormMainPersonData(),
                               withNavBar: true,
                               pageTransitionAnimation:
-                              PageTransitionAnimation.fade,
+                                  PageTransitionAnimation.fade,
                             );
                           },
                           child: Container(
                             decoration: BoxDecoration(
                                 color: ColorManager.kPrimaryBlueDark,
                                 borderRadius:
-                                BorderRadiusDirectional.circular(12)),
+                                    BorderRadiusDirectional.circular(12)),
                             width: ConfigSize.defaultSize! * 18,
                             height: ConfigSize.defaultSize! * 20,
                             child: Column(
@@ -98,14 +93,14 @@ class _CardScreenState extends State<CardScreen> {
                               screen: const CarFormMainPersonData(),
                               withNavBar: true,
                               pageTransitionAnimation:
-                              PageTransitionAnimation.fade,
+                                  PageTransitionAnimation.fade,
                             );
                           },
                           child: Container(
                             decoration: BoxDecoration(
                                 color: ColorManager.kPrimaryBlueDark,
                                 borderRadius:
-                                BorderRadiusDirectional.circular(12)),
+                                    BorderRadiusDirectional.circular(12)),
                             width: ConfigSize.defaultSize! * 18,
                             height: ConfigSize.defaultSize! * 20,
                             child: Column(
@@ -145,14 +140,14 @@ class _CardScreenState extends State<CardScreen> {
                               screen: const PropertyFormMainPersonData(),
                               withNavBar: true,
                               pageTransitionAnimation:
-                              PageTransitionAnimation.fade,
+                                  PageTransitionAnimation.fade,
                             );
                           },
                           child: Container(
                             decoration: BoxDecoration(
                                 color: ColorManager.kPrimaryBlueDark,
                                 borderRadius:
-                                BorderRadiusDirectional.circular(12)),
+                                    BorderRadiusDirectional.circular(12)),
                             width: ConfigSize.defaultSize! * 18,
                             height: ConfigSize.defaultSize! * 20,
                             child: Column(
@@ -184,14 +179,14 @@ class _CardScreenState extends State<CardScreen> {
                               screen: const LifeFormMainPersonData(),
                               withNavBar: true,
                               pageTransitionAnimation:
-                              PageTransitionAnimation.fade,
+                                  PageTransitionAnimation.fade,
                             );
                           },
                           child: Container(
                             decoration: BoxDecoration(
                                 color: ColorManager.kPrimaryBlueDark,
                                 borderRadius:
-                                BorderRadiusDirectional.circular(12)),
+                                    BorderRadiusDirectional.circular(12)),
                             width: ConfigSize.defaultSize! * 18,
                             height: ConfigSize.defaultSize! * 20,
                             child: Column(
@@ -231,14 +226,14 @@ class _CardScreenState extends State<CardScreen> {
                               screen: const CardScreen(),
                               withNavBar: true,
                               pageTransitionAnimation:
-                              PageTransitionAnimation.fade,
+                                  PageTransitionAnimation.fade,
                             );
                           },
                           child: Container(
                             decoration: BoxDecoration(
                                 color: ColorManager.kPrimaryBlueDark,
                                 borderRadius:
-                                BorderRadiusDirectional.circular(12)),
+                                    BorderRadiusDirectional.circular(12)),
                             width: ConfigSize.defaultSize! * 18,
                             height: ConfigSize.defaultSize! * 20,
                             child: Column(
@@ -270,14 +265,14 @@ class _CardScreenState extends State<CardScreen> {
                               screen: const CardScreen(),
                               withNavBar: true,
                               pageTransitionAnimation:
-                              PageTransitionAnimation.fade,
+                                  PageTransitionAnimation.fade,
                             );
                           },
                           child: Container(
                             decoration: BoxDecoration(
                                 color: ColorManager.kPrimaryBlueDark,
                                 borderRadius:
-                                BorderRadiusDirectional.circular(12)),
+                                    BorderRadiusDirectional.circular(12)),
                             width: ConfigSize.defaultSize! * 18,
                             height: ConfigSize.defaultSize! * 20,
                             child: Column(
@@ -317,14 +312,14 @@ class _CardScreenState extends State<CardScreen> {
                               screen: const CardScreen(),
                               withNavBar: true,
                               pageTransitionAnimation:
-                              PageTransitionAnimation.fade,
+                                  PageTransitionAnimation.fade,
                             );
                           },
                           child: Container(
                             decoration: BoxDecoration(
                                 color: ColorManager.kPrimaryBlueDark,
                                 borderRadius:
-                                BorderRadiusDirectional.circular(12)),
+                                    BorderRadiusDirectional.circular(12)),
                             width: ConfigSize.defaultSize! * 18,
                             height: ConfigSize.defaultSize! * 20,
                             child: Column(
@@ -356,14 +351,14 @@ class _CardScreenState extends State<CardScreen> {
                               screen: const CardScreen(),
                               withNavBar: true,
                               pageTransitionAnimation:
-                              PageTransitionAnimation.fade,
+                                  PageTransitionAnimation.fade,
                             );
                           },
                           child: Container(
                             decoration: BoxDecoration(
                                 color: ColorManager.kPrimaryBlueDark,
                                 borderRadius:
-                                BorderRadiusDirectional.circular(12)),
+                                    BorderRadiusDirectional.circular(12)),
                             width: ConfigSize.defaultSize! * 18,
                             height: ConfigSize.defaultSize! * 20,
                             child: Column(
@@ -403,14 +398,14 @@ class _CardScreenState extends State<CardScreen> {
                               screen: const CardScreen(),
                               withNavBar: true,
                               pageTransitionAnimation:
-                              PageTransitionAnimation.fade,
+                                  PageTransitionAnimation.fade,
                             );
                           },
                           child: Container(
                             decoration: BoxDecoration(
                                 color: ColorManager.kPrimaryBlueDark,
                                 borderRadius:
-                                BorderRadiusDirectional.circular(12)),
+                                    BorderRadiusDirectional.circular(12)),
                             width: ConfigSize.defaultSize! * 18,
                             height: ConfigSize.defaultSize! * 20,
                             child: Column(
@@ -442,14 +437,14 @@ class _CardScreenState extends State<CardScreen> {
                               screen: const CardScreen(),
                               withNavBar: true,
                               pageTransitionAnimation:
-                              PageTransitionAnimation.fade,
+                                  PageTransitionAnimation.fade,
                             );
                           },
                           child: Container(
                             decoration: BoxDecoration(
                                 color: ColorManager.kPrimaryBlueDark,
                                 borderRadius:
-                                BorderRadiusDirectional.circular(12)),
+                                    BorderRadiusDirectional.circular(12)),
                             width: ConfigSize.defaultSize! * 18,
                             height: ConfigSize.defaultSize! * 20,
                             child: Column(
@@ -489,14 +484,14 @@ class _CardScreenState extends State<CardScreen> {
                               screen: const CardScreen(),
                               withNavBar: true,
                               pageTransitionAnimation:
-                              PageTransitionAnimation.fade,
+                                  PageTransitionAnimation.fade,
                             );
                           },
                           child: Container(
                             decoration: BoxDecoration(
                                 color: ColorManager.kPrimaryBlueDark,
                                 borderRadius:
-                                BorderRadiusDirectional.circular(12)),
+                                    BorderRadiusDirectional.circular(12)),
                             width: ConfigSize.defaultSize! * 18,
                             height: ConfigSize.defaultSize! * 20,
                             child: Column(
@@ -528,14 +523,14 @@ class _CardScreenState extends State<CardScreen> {
                               screen: const CardScreen(),
                               withNavBar: true,
                               pageTransitionAnimation:
-                              PageTransitionAnimation.fade,
+                                  PageTransitionAnimation.fade,
                             );
                           },
                           child: Container(
                             decoration: BoxDecoration(
                                 color: ColorManager.kPrimaryBlueDark,
                                 borderRadius:
-                                BorderRadiusDirectional.circular(12)),
+                                    BorderRadiusDirectional.circular(12)),
                             width: ConfigSize.defaultSize! * 18,
                             height: ConfigSize.defaultSize! * 20,
                             child: Column(
@@ -576,14 +571,14 @@ class _CardScreenState extends State<CardScreen> {
                               screen: const CardScreen(),
                               withNavBar: true,
                               pageTransitionAnimation:
-                              PageTransitionAnimation.fade,
+                                  PageTransitionAnimation.fade,
                             );
                           },
                           child: Container(
                             decoration: BoxDecoration(
                                 color: ColorManager.kPrimaryBlueDark,
                                 borderRadius:
-                                BorderRadiusDirectional.circular(12)),
+                                    BorderRadiusDirectional.circular(12)),
                             width: ConfigSize.defaultSize! * 18,
                             height: ConfigSize.defaultSize! * 20,
                             child: Column(
@@ -615,14 +610,14 @@ class _CardScreenState extends State<CardScreen> {
                               screen: const CardScreen(),
                               withNavBar: true,
                               pageTransitionAnimation:
-                              PageTransitionAnimation.fade,
+                                  PageTransitionAnimation.fade,
                             );
                           },
                           child: Container(
                             decoration: BoxDecoration(
                                 color: ColorManager.kPrimaryBlueDark,
                                 borderRadius:
-                                BorderRadiusDirectional.circular(12)),
+                                    BorderRadiusDirectional.circular(12)),
                             width: ConfigSize.defaultSize! * 18,
                             height: ConfigSize.defaultSize! * 20,
                             child: Column(

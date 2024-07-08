@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:globaladvice_new/core/resource_manger/locale_keys.g.dart';
 import 'package:globaladvice_new/core/service/service_locator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -6,9 +7,9 @@ class Methods {
 //singleton class
   Methods._internal();
 
-  static final   instance =   Methods._internal() ;
+  static final instance = Methods._internal();
 
-  factory  Methods() => instance ;
+  factory Methods() => instance;
 
   Future<void> clearAuth() async {
     SharedPreferences preference = getIt();
@@ -25,6 +26,7 @@ class Methods {
       preferences.setString(StringManager.userTokenKey, authToken ?? "noToken");
     }
   }
+
   Future<String> returnUserToken() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     String tokenPref =
@@ -32,4 +34,11 @@ class Methods {
     return tokenPref;
   }
 
+  bool validation(TextEditingController controller) {
+    if (controller.text == '') {
+      return false;
+    } else {
+      return true;
+    }
+  }
 }

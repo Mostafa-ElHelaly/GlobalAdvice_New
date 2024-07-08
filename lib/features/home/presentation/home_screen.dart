@@ -14,10 +14,10 @@ import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:pinput/pinput.dart';
 import 'package:readmore/readmore.dart';
 
-import 'component/car_form/car_form_main_person_data .dart';
+import 'component/car_form/pages/car_form_1.dart';
 import 'component/life_form/life_form_main_person_data .dart';
-import 'component/medical_form/medical_form_main_person_data .dart';
-import 'component/property_form/property_form_main_person_data .dart';
+import 'component/medical_form/Pages/medical_form_1.dart';
+import 'component/property_form/pages/property_form_1 .dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -465,7 +465,6 @@ class _HomeScreenState extends State<HomeScreen> {
                           );
                         }).toList(),
                     ),
-
                     Center(
                       child: DotsIndicator(
                         dotsCount: items.length,
@@ -478,14 +477,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),
-
-
-
               SizedBox(
                 height: ConfigSize.defaultSize! * 1,
               ),
-
-
             ],
           ),
         ),

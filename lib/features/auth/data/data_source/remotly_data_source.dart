@@ -15,7 +15,7 @@ abstract class BaseRemotelyDataSource {
   Future<LoginModel> registerWithEmailAndPassword(
       RegisterAuthModel registerAuthModel);
 
-  Future<ResetPasswordModel> resetPasswordWithEmail(ResetModel resetModel);
+  // Future<ResetPasswordModel> resetPasswordWithEmail(ResetModel resetModel);
 }
 
 class AuthRemotelyDateSource extends BaseRemotelyDataSource {
@@ -65,27 +65,27 @@ class AuthRemotelyDateSource extends BaseRemotelyDataSource {
     }
   }
 
-  @override
-  Future<ResetPasswordModel> resetPasswordWithEmail(ResetModel resetModel) async {
-    final body = {
-      "email": resetModel.email,
-    };
+  // @override
+  // Future<ResetPasswordModel> resetPasswordWithEmail(ResetModel resetModel) async {
+  //   final body = {
+  //     "email": resetModel.email,
+  //   };
 
-    try {
-      final response = await Dio().post(
-        ConstantApi.resetPassword,
-        data: body,
-      );
-      Map<String, dynamic> jsonData = response.data;
+  //   try {
+  //     final response = await Dio().post(
+  //       ConstantApi.resetPassword,
+  //       data: body,
+  //     );
+  //     Map<String, dynamic> jsonData = response.data;
 
-      ResetPasswordModel authModelResponse =
-          ResetPasswordModel.fromJson(jsonData);
+  //     ResetPasswordModel authModelResponse =
+  //         ResetPasswordModel.fromJson(jsonData);
 
-      Methods.instance.saveUserToken(authToken: authModelResponse.token);
-      return authModelResponse;
-    } on DioException catch (e) {
-      throw DioHelper.handleDioError(
-          dioError: e, endpointName: "Reset Password");
-    }
-  }
+  //     Methods.instance.saveUserToken(authToken: authModelResponse.token);
+  //     return authModelResponse;
+  //   } on DioException catch (e) {
+  //     throw DioHelper.handleDioError(
+  //         dioError: e, endpointName: "Reset Password");
+  //   }
+  // }
 }
