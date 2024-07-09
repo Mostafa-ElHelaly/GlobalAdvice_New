@@ -1,11 +1,16 @@
 // DO NOT EDIT. This is code generated via package:easy_localization/generate.dart
 
 abstract class StringManager {
+  static const submit = 'Submit';
+  static const finish = 'Finish';
+  static const back = 'Back';
   static const annualLimit = 'Annual limit';
   static const email = 'Email';
   static const phone = 'Phone Number';
   static const password = 'Password';
   static const confirmPassword = 'Confirm Password';
+  static const lifeinsurancerequest =
+      'Request successful, You\'ll be contacted by our team soon!';
   static const login = 'Login';
   static const birthday = 'Birthday';
   static const createAccount = 'Create Account';
@@ -26,6 +31,7 @@ abstract class StringManager {
   static const selectCountry = 'Select Country';
   static const carprices = 'List of motor insurance prices';
   static const medicalprices = 'List of health insurance prices';
+  static const propertyprices = 'List of home insurance prices';
   static const city = 'City';
   static const uploadProfileImage = 'Upload Profile Image';
   static const changeProfileImage = 'Change Profile Image';

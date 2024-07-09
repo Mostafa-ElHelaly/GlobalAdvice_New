@@ -15,7 +15,7 @@ import 'package:pinput/pinput.dart';
 import 'package:readmore/readmore.dart';
 
 import 'component/car_form/pages/car_form_1.dart';
-import 'component/life_form/life_form_main_person_data .dart';
+import 'component/life_form/pages/life_form_main_person_data .dart';
 import 'component/medical_form/Pages/medical_form_1.dart';
 import 'component/property_form/pages/property_form_1 .dart';
 

@@ -5,6 +5,8 @@ import 'package:flutter/widgets.dart';
 import 'package:globaladvice_new/features/home/presentation/component/car_form/pages/car_form_3.dart';
 import 'package:globaladvice_new/features/home/presentation/component/car_form/widgets/Motor_Dropdown_Widget.dart';
 import 'package:globaladvice_new/features/home/presentation/component/car_form/widgets/car_insurance_appbar.dart';
+import 'package:globaladvice_new/features/home/presentation/component/property_form/pages/property_form_3%20.dart';
+import 'package:globaladvice_new/features/home/presentation/component/property_form/widgets/Prop_insurance_appbar.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 import '../../../../../../core/resource_manger/asset_path.dart';
@@ -50,13 +52,11 @@ class _PropertyForm2State extends State<PropertyForm2> {
     'Owner',
     'Tenant',
   ];
-  bool isvisible = false;
-  bool istenant = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: CarAppbar(context),
+      appBar: PropertyAppbar(context),
       body: Padding(
         padding: EdgeInsets.all(ConfigSize.defaultSize! * 1.5),
         child: SingleChildScrollView(
@@ -93,23 +93,17 @@ class _PropertyForm2State extends State<PropertyForm2> {
                 list: type,
                 onChanged: (String? value) {
                   setState(() {
-                    if (selectedValue == 'Tenant') {
-                      isvisible = true;
-                      istenant = false;
-                    } else {
-                      isvisible = true;
-
-                      istenant = true;
-                    }
                     selectedValue = value;
                   });
                 },
               ),
-              SizedBox(
-                height: ConfigSize.defaultSize! * 2,
-              ),
+              selectedValue == 'Owner'
+                  ? SizedBox(
+                      height: ConfigSize.defaultSize! * 2,
+                    )
+                  : SizedBox.shrink(),
               Visibility(
-                visible: isvisible == true && istenant == false,
+                visible: selectedValue == 'Owner' ? true : false,
                 child: CustomTextField(
                   labeltext: StringManager.buildingprice.tr(),
                   prefixicon: const Icon(Icons.house_rounded),
@@ -117,11 +111,13 @@ class _PropertyForm2State extends State<PropertyForm2> {
                   inputType: TextInputType.text,
                 ),
               ),
-              SizedBox(
-                height: ConfigSize.defaultSize! * 2,
-              ),
+              selectedValue == 'Owner' || selectedValue == 'Tenant'
+                  ? SizedBox(
+                      height: ConfigSize.defaultSize! * 2,
+                    )
+                  : SizedBox.shrink(),
               Visibility(
-                visible: isvisible,
+                visible: selectedValue == 'Owner' || selectedValue == 'Tenant',
                 child: CustomTextField(
                   labeltext: StringManager.contentprice.tr(),
                   prefixicon: const Icon(Icons.price_change),
@@ -148,7 +144,7 @@ class _PropertyForm2State extends State<PropertyForm2> {
                   onTap: () {
                     PersistentNavBarNavigator.pushNewScreen(
                       context,
-                      screen: CarForm3(),
+                      screen: PropertyForm3(),
                       withNavBar: false,
                       pageTransitionAnimation: PageTransitionAnimation.fade,
                     );
