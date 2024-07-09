@@ -134,7 +134,7 @@ class _MedicalForm3State extends State<MedicalForm3> {
                       );
                     });
                   },
-                  title: StringManager.next.tr(),
+                  title: StringManager.submit.tr(),
                 ),
               ),
             ],

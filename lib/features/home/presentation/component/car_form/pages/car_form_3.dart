@@ -143,7 +143,7 @@ class _CarForm3State extends State<CarForm3> {
                       );
                     });
                   },
-                  title: StringManager.next.tr(),
+                  title: StringManager.submit.tr(),
                 ),
               ),
             ],

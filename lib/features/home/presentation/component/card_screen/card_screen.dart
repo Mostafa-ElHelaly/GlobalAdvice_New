@@ -7,7 +7,7 @@ import 'package:globaladvice_new/core/resource_manger/color_manager.dart';
 import 'package:globaladvice_new/core/resource_manger/locale_keys.g.dart';
 import 'package:globaladvice_new/core/utils/config_size.dart';
 import 'package:globaladvice_new/features/home/presentation/component/car_form/pages/car_form_1.dart';
-import 'package:globaladvice_new/features/home/presentation/component/life_form/life_form_main_person_data%20.dart';
+import 'package:globaladvice_new/features/home/presentation/component/life_form/pages/life_form_main_person_data%20.dart';
 import 'package:globaladvice_new/features/home/presentation/component/property_form/pages/property_form_1%20.dart';
 import 'package:globaladvice_new/features/my_policies/presentation/my_polcies_screen.dart';
 import 'package:globaladvice_new/features/profile/presentation/profile_screen.dart';
