@@ -10,17 +10,17 @@ import '../../domain/use_case/reset_password_us.dart';
 import '../model/reset_password_model.dart';
 
 abstract class BaseRemotelyDataSource {
-  Future<LoginModel> loginWithEmailAndPassword(AuthModel authModel);
+  Future<LoginModel> loginWithEmailAndPassword(LoginModel authModel);
 
   Future<LoginModel> registerWithEmailAndPassword(
-      RegisterAuthModel registerAuthModel);
+  LoginModel registerAuthModel);
 
   // Future<ResetPasswordModel> resetPasswordWithEmail(ResetModel resetModel);
 }
 
 class AuthRemotelyDateSource extends BaseRemotelyDataSource {
   @override
-  Future<LoginModel> loginWithEmailAndPassword(AuthModel authModel) async {
+  Future<LoginModel> loginWithEmailAndPassword(LoginModel authModel) async {
     final body = {"email": authModel.email, "password": authModel.password};
 
     try {
@@ -42,10 +42,13 @@ class AuthRemotelyDateSource extends BaseRemotelyDataSource {
 
   @override
   Future<LoginModel> registerWithEmailAndPassword(
-      RegisterAuthModel registerAuthModel) async {
+      LoginModel registerAuthModel) async {
     final body = {
       "email": registerAuthModel.email,
       "password": registerAuthModel.password,
+      "birthdate": registerAuthModel.birthdate,
+      "gender": registerAuthModel.gender,
+      "confirmPassword": registerAuthModel.confirmPassword,
     };
 
     try {

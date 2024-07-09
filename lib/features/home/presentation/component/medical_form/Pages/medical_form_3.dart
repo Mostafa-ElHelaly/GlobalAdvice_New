@@ -125,10 +125,10 @@ class _MedicalForm3State extends State<MedicalForm3> {
                         return const DoneScreen();
                       },
                     );
-                    Future.delayed(Duration(seconds: 3), () {
+                    Future.delayed(const Duration(seconds: 3), () {
                       PersistentNavBarNavigator.pushNewScreen(
                         context,
-                        screen: MedicalPrices(),
+                        screen: const MainScreen(),
                         withNavBar: false,
                         pageTransitionAnimation: PageTransitionAnimation.fade,
                       );

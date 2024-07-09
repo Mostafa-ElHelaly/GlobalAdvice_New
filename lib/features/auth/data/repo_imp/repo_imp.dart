@@ -17,10 +17,10 @@ class RepositoryImp extends BaseRepository {
 
   @override
   Future<Either<LoginModel, Failure>> loginWithEmailAndPassword(
-      AuthModel authModel) async {
+      LoginModel authModel) async {
     try {
       final result =
-          await baseRemotelyDataSource.loginWithEmailAndPassword(authModel);
+          await baseRemotelyDataSource.loginWithEmailAndPassword(LoginModel());
       return Left(result);
     } on Exception catch (e) {
       return right(DioHelper.buildFailure(e));
@@ -29,25 +29,25 @@ class RepositoryImp extends BaseRepository {
 
   @override
   Future<Either<LoginModel, Failure>> registerWithEmailAndPassword(
-      RegisterAuthModel registerAuthModel) async {
+      LoginModel registerAuthModel) async {
     try {
       final result = await baseRemotelyDataSource
-          .registerWithEmailAndPassword(registerAuthModel);
+          .registerWithEmailAndPassword(LoginModel());
       return Left(result);
     } on Exception catch (e) {
       return right(DioHelper.buildFailure(e));
     }
   }
 
-  // @override
-  // Future<Either<ResetPasswordModel, Failure>> resetPassword(
-  //     ResetModel resetPasswordModel) async {
-  //   try {
-  //     final result = await baseRemotelyDataSource
-  //         .resetPasswordWithEmail(resetPasswordModel);
-  //     return Left(result);
-  //   } on Exception catch (e) {
-  //     return right(DioHelper.buildFailure(e));
-  //   }
-  // }
+// @override
+// Future<Either<ResetPasswordModel, Failure>> resetPassword(
+//     ResetModel resetPasswordModel) async {
+//   try {
+//     final result = await baseRemotelyDataSource
+//         .resetPasswordWithEmail(resetPasswordModel);
+//     return Left(result);
+//   } on Exception catch (e) {
+//     return right(DioHelper.buildFailure(e));
+//   }
+// }
 }
