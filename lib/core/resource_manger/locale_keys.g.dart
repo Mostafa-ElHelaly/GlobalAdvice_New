@@ -8,6 +8,10 @@ abstract class StringManager {
   static const email = 'Email';
   static const phone = 'Phone Number';
   static const password = 'Password';
+  static const terms = 'Terms';
+  static const disabilities = 'Disabilities';
+  static const premiumAmount = 'Premium Amount';
+  static const insuredAmount = 'Insured Amount';
   static const confirmPassword = 'Confirm Password';
   static const lifeinsurancerequest =
       'Request successful, You\'ll be contacted by our team soon!';
