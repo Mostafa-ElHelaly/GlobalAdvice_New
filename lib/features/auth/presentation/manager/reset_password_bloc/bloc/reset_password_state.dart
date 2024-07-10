@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:globaladvice_new/features/auth/data/model/login_model.dart';
 import 'package:globaladvice_new/features/auth/data/model/reset_password_model.dart';
@@ -16,9 +17,9 @@ final class Loadingchangingpasswordstate extends ResetPasswordState {
 }
 
 final class Resetpasswordsuccess extends ResetPasswordState {
-  final ResetPasswordModel model;
+  final Unit resetPasswordModel;
 
-  Resetpasswordsuccess({required this.model});
+  const Resetpasswordsuccess({required this.resetPasswordModel});
 }
 
 class Changingfailedstate extends ResetPasswordState {

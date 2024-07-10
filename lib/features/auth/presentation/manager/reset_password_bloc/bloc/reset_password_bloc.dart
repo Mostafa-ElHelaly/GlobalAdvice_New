@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:globaladvice_new/features/auth/data/model/login_model.dart';
 import 'package:globaladvice_new/features/auth/data/model/reset_password_model.dart';
@@ -13,10 +14,9 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
       : super(ResetPasswordInitial()) {
     on<ResetPasswordEvent>((event, emit) async {
       emit(const Loadingchangingpasswordstate());
-      final result = await passwordUseCase
-          .call(ResetPasswordModel(data: ResetEmail(email: event.email)));
+      final result = await passwordUseCase.call(event.email);
       result.fold(
-          (l) => emit(Resetpasswordsuccess(model: l)),
+          (l) => emit(Resetpasswordsuccess(resetPasswordModel: l)),
           (r) => emit(Changingfailedstate(
                 errorMessage: DioHelper().getTypeOfFailure(r),
               )));

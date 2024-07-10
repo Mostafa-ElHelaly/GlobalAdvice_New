@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:globaladvice_new/core/utils/api_helper.dart';
 import 'package:globaladvice_new/core/utils/constant_api.dart';
@@ -16,8 +17,7 @@ abstract class BaseRemotelyDataSource {
 
   Future<LoginModel> registerWithEmailAndPassword(LoginModel registerAuthModel);
 
-  Future<ResetPasswordModel> resetPasswordWithEmail(
-      ResetPasswordModel resetPasswordModel);
+  Future<Unit> resetPasswordWithEmail(String email);
 }
 
 class AuthRemotelyDateSource extends BaseRemotelyDataSource {
@@ -71,24 +71,23 @@ class AuthRemotelyDateSource extends BaseRemotelyDataSource {
   }
 
   @override
-  Future<ResetPasswordModel> resetPasswordWithEmail(
-      ResetPasswordModel resetPasswordModel) async {
+  Future<Unit> resetPasswordWithEmail(String email) async {
     final body = {
-      "email": resetPasswordModel.data!.email,
+      "email": email,
     };
     try {
       final response = await Dio().post(
+        options: Options(
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+        ),
         ConstantApi.resetPassword,
         data: body,
       );
       if (response.statusCode == 200) {
-        Map<String, dynamic> jsonData = response.data;
-
-        ResetPasswordModel resetresponse =
-            ResetPasswordModel.fromJson(jsonData);
-
-        print('resetPasswordWithEmail is success');
-        return resetresponse;
+        print('reset password success');
+        return Future.value(unit);
       } else {
         throw Exception(Strings.resetPasswordFailed);
       }

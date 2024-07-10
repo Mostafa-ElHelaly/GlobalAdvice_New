@@ -5,17 +5,14 @@ import '../../../../core/error/failure.dart';
 import '../../data/model/reset_password_model.dart';
 import '../repo/base_repo.dart';
 
-class ResetPasswordUseCase
-    extends BaseUseCase<ResetPasswordModel, ResetPasswordModel> {
+class ResetPasswordUseCase extends BaseUseCase<Unit, String> {
   BaseRepository baseRepository;
 
   ResetPasswordUseCase({required this.baseRepository});
 
   @override
-  Future<Either<ResetPasswordModel, Failure>> call(
-      ResetPasswordModel resetPasswordModel) async {
-    final result = await baseRepository.resetPassword(resetPasswordModel);
-
+  Future<Either<Unit, Failure>> call(String email) async {
+    final result = await baseRepository.resetPassword(email);
     return result;
   }
 }

@@ -13,6 +13,8 @@ abstract class StringManager {
   static const premiumAmount = 'Premium Amount';
   static const insuredAmount = 'Insured Amount';
   static const confirmPassword = 'Confirm Password';
+  static const checkyouremailinbox = 'Check Your Email Inbox';
+  static const resetsuccess = 'Your Password Has Been Reset Successfully';
   static const lifeinsurancerequest =
       'Request successful, You\'ll be contacted by our team soon!';
   static const login = 'Login';

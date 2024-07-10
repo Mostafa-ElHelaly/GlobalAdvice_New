@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:globaladvice_new/core/resource_manger/color_manager.dart';
 import 'package:globaladvice_new/core/resource_manger/locale_keys.g.dart';
 import 'package:globaladvice_new/core/utils/config_size.dart';
+import 'package:globaladvice_new/main_screen.dart';
 
 class CustomBackButton extends StatelessWidget {
   const CustomBackButton({super.key});
@@ -10,7 +11,15 @@ class CustomBackButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: Navigator.of(context).pop,
+        onTap: () {
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const MainScreen(),
+            ),
+            (route) => false,
+          );
+        },
         child: ClipRRect(
           borderRadius: BorderRadius.circular(ConfigSize.defaultSize! * 0.5),
           child: Container(

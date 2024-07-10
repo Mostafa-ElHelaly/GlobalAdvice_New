@@ -1,5 +1,7 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:globaladvice_new/core/resource_manger/color_manager.dart';
@@ -8,6 +10,7 @@ import 'package:globaladvice_new/core/utils/config_size.dart';
 import 'package:globaladvice_new/core/widgets/custom_text_field.dart';
 import 'package:globaladvice_new/core/widgets/main_button.dart';
 import 'package:globaladvice_new/features/auth/presentation/component/forget_password/otp_screen.dart';
+import 'package:globaladvice_new/features/auth/presentation/login_screen.dart';
 import 'package:globaladvice_new/features/auth/presentation/manager/reset_password_bloc/bloc/reset_password_bloc.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
@@ -25,16 +28,47 @@ class ForgetPasswordScreen extends StatefulWidget {
 
 class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
   TextEditingController emailController = TextEditingController();
-
+  TextStyle awesomedialougetextstyle = TextStyle(
+    fontSize: ConfigSize.defaultSize! * 1.5,
+    fontWeight: FontWeight.w600,
+  );
   @override
   Widget build(BuildContext context) {
     return BlocListener<ResetPasswordBloc, ResetPasswordState>(
         listener: (context, state) {
           if (state is Resetpasswordsuccess) {
             EasyLoading.dismiss();
-            Navigator.pushNamed(
-              context,
-              Routes.otpScreen,
+            AwesomeDialog(
+              context: context,
+              dialogType: DialogType.success,
+              animType: AnimType.rightSlide,
+              body: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    StringManager.resetsuccess.tr(),
+                    textAlign: TextAlign.center,
+                    style: awesomedialougetextstyle,
+                  ),
+                  SizedBox(height: ConfigSize.defaultSize! * 2),
+                  Text(
+                    StringManager.checkyouremailinbox.tr(),
+                    style: awesomedialougetextstyle,
+                  ),
+                ],
+              ),
+            )..show();
+            Future.delayed(
+              Duration(seconds: 5),
+              () {
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const LoginScreen(),
+                  ),
+                  (route) => false,
+                );
+              },
             );
           } else if (state is Changingfailedstate) {
             EasyLoading.dismiss();
