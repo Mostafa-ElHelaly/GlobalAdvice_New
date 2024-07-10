@@ -5,8 +5,10 @@ import '../../features/auth/data/repo_imp/repo_imp.dart';
 import '../../features/auth/domain/repo/base_repo.dart';
 import '../../features/auth/domain/use_case/login_uc.dart';
 import '../../features/auth/domain/use_case/register_uc.dart';
+import '../../features/auth/domain/use_case/reset_password_us.dart';
 import '../../features/auth/presentation/manager/login_bloc/login_bloc.dart';
 import '../../features/auth/presentation/manager/register_bloc/register_bloc.dart';
+import '../../features/auth/presentation/manager/reset_password_bloc/bloc/reset_password_bloc.dart';
 
 final getIt = GetIt.instance;
 
@@ -17,20 +19,25 @@ class ServerLocator {
           registerUseCase: getIt(),
         ));
     getIt.registerLazySingleton(() => LoginBloc(
-      loginUseCase: getIt(),
+          loginUseCase: getIt(),
+        ));
+    getIt.registerLazySingleton(() => ResetPasswordBloc(
+          passwordUseCase: getIt(),
         ));
 
     //use_case
     getIt.registerLazySingleton(() => RegisterUseCase(baseRepository: getIt()));
     getIt.registerLazySingleton(() => LoginUseCase(baseRepository: getIt()));
+    getIt.registerLazySingleton(
+        () => ResetPasswordUseCase(baseRepository: getIt()));
 
     //Remote Date
     getIt.registerLazySingleton<BaseRemotelyDataSource>(
-            () => AuthRemotelyDateSource());
+        () => AuthRemotelyDateSource());
 
     //Repository Implementation
     getIt.registerLazySingleton<BaseRepository>(
-            () => RepositoryImp(baseRemotelyDataSource: getIt()));
+        () => RepositoryImp(baseRemotelyDataSource: getIt()));
 
     // navigation service
     getIt.registerLazySingleton(() => NavigationService());

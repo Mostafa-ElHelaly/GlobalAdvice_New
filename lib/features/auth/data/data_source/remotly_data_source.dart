@@ -12,10 +12,9 @@ import '../model/reset_password_model.dart';
 abstract class BaseRemotelyDataSource {
   Future<LoginModel> loginWithEmailAndPassword(LoginModel authModel);
 
-  Future<LoginModel> registerWithEmailAndPassword(
-  LoginModel registerAuthModel);
+  Future<LoginModel> registerWithEmailAndPassword(LoginModel registerAuthModel);
 
-  // Future<ResetPasswordModel> resetPasswordWithEmail(ResetModel resetModel);
+  Future<LoginModel> resetPasswordWithEmail(LoginModel resetModel);
 }
 
 class AuthRemotelyDateSource extends BaseRemotelyDataSource {
@@ -68,27 +67,26 @@ class AuthRemotelyDateSource extends BaseRemotelyDataSource {
     }
   }
 
-  // @override
-  // Future<ResetPasswordModel> resetPasswordWithEmail(ResetModel resetModel) async {
-  //   final body = {
-  //     "email": resetModel.email,
-  //   };
+  @override
+  Future<LoginModel> resetPasswordWithEmail(LoginModel resetModel) async {
+    final body = {
+      "email": resetModel.email,
+    };
 
-  //   try {
-  //     final response = await Dio().post(
-  //       ConstantApi.resetPassword,
-  //       data: body,
-  //     );
-  //     Map<String, dynamic> jsonData = response.data;
+    try {
+      final response = await Dio().post(
+        ConstantApi.resetPassword,
+        data: body,
+      );
+      Map<String, dynamic> jsonData = response.data;
 
-  //     ResetPasswordModel authModelResponse =
-  //         ResetPasswordModel.fromJson(jsonData);
+      LoginModel authModelResponse = LoginModel.fromJson(jsonData);
 
-  //     Methods.instance.saveUserToken(authToken: authModelResponse.token);
-  //     return authModelResponse;
-  //   } on DioException catch (e) {
-  //     throw DioHelper.handleDioError(
-  //         dioError: e, endpointName: "Reset Password");
-  //   }
-  // }
+      Methods.instance.saveUserToken(authToken: authModelResponse.token);
+      return authModelResponse;
+    } on DioException catch (e) {
+      throw DioHelper.handleDioError(
+          dioError: e, endpointName: "Reset Password");
+    }
+  }
 }
