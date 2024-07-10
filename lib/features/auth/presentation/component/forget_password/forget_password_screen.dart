@@ -103,9 +103,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                     onTap: () {
                       if (validation()) {
                         BlocProvider.of<ResetPasswordBloc>(context).add(
-                          ResetPasswordEvent(
-                            email: emailController.text,
-                          ),
+                          ResetPasswordEvent(email: emailController.text),
                         );
                       } else {
                         errorSnackBar(context, StringManager.errorFillFields);

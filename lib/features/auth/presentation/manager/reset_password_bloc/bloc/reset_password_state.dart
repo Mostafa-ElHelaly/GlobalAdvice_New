@@ -16,7 +16,7 @@ final class Loadingchangingpasswordstate extends ResetPasswordState {
 }
 
 final class Resetpasswordsuccess extends ResetPasswordState {
-  final LoginModel model;
+  final ResetPasswordModel model;
 
   Resetpasswordsuccess({required this.model});
 }

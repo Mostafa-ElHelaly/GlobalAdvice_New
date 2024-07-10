@@ -14,21 +14,22 @@ class LoginModel {
   String? addstamp;
   String? updatestamp;
 
-  LoginModel(
-      {this.id,
-        this.name,
-        this.password,
-        this.confirmPassword,
-        this.isCompleted,
-        this.token,
-        this.birthdate,
-        this.gender,
-        this.email,
-        this.telephone,
-        this.banned,
-        this.deleted,
-        this.addstamp,
-        this.updatestamp});
+  LoginModel({
+    this.id,
+    this.name,
+    this.password,
+    this.confirmPassword,
+    this.isCompleted,
+    this.token,
+    this.birthdate,
+    this.gender,
+    this.email,
+    this.telephone,
+    this.banned,
+    this.deleted,
+    this.addstamp,
+    this.updatestamp,
+  });
 
   LoginModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];

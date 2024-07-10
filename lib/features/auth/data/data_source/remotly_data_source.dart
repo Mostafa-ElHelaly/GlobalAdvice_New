@@ -3,7 +3,9 @@ import 'package:globaladvice_new/core/utils/api_helper.dart';
 import 'package:globaladvice_new/core/utils/constant_api.dart';
 import 'package:globaladvice_new/core/utils/methods.dart';
 import 'package:globaladvice_new/features/auth/data/model/login_model.dart';
+import 'package:globaladvice_new/features/auth/presentation/manager/reset_password_bloc/bloc/reset_password_state.dart';
 
+import '../../../../core/error/failures_strings.dart';
 import '../../domain/use_case/login_uc.dart';
 import '../../domain/use_case/register_uc.dart';
 import '../../domain/use_case/reset_password_us.dart';
@@ -14,7 +16,8 @@ abstract class BaseRemotelyDataSource {
 
   Future<LoginModel> registerWithEmailAndPassword(LoginModel registerAuthModel);
 
-  Future<LoginModel> resetPasswordWithEmail(LoginModel resetModel);
+  Future<ResetPasswordModel> resetPasswordWithEmail(
+      ResetPasswordModel resetPasswordModel);
 }
 
 class AuthRemotelyDateSource extends BaseRemotelyDataSource {
@@ -68,22 +71,27 @@ class AuthRemotelyDateSource extends BaseRemotelyDataSource {
   }
 
   @override
-  Future<LoginModel> resetPasswordWithEmail(LoginModel resetModel) async {
+  Future<ResetPasswordModel> resetPasswordWithEmail(
+      ResetPasswordModel resetPasswordModel) async {
     final body = {
-      "email": resetModel.email,
+      "email": resetPasswordModel.data!.email,
     };
-
     try {
       final response = await Dio().post(
         ConstantApi.resetPassword,
         data: body,
       );
-      Map<String, dynamic> jsonData = response.data;
+      if (response.statusCode == 200) {
+        Map<String, dynamic> jsonData = response.data;
 
-      LoginModel authModelResponse = LoginModel.fromJson(jsonData);
+        ResetPasswordModel resetresponse =
+            ResetPasswordModel.fromJson(jsonData);
 
-      Methods.instance.saveUserToken(authToken: authModelResponse.token);
-      return authModelResponse;
+        print('resetPasswordWithEmail is success');
+        return resetresponse;
+      } else {
+        throw Exception(Strings.resetPasswordFailed);
+      }
     } on DioException catch (e) {
       throw DioHelper.handleDioError(
           dioError: e, endpointName: "Reset Password");

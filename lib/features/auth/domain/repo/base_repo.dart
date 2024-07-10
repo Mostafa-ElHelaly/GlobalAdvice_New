@@ -9,6 +9,6 @@ abstract class BaseRepository {
       LoginModel authModel);
   Future<Either<LoginModel, Failure>> registerWithEmailAndPassword(
       LoginModel registerAuthModel);
-  Future<Either<LoginModel, Failure>> resetPassword(
-      LoginModel resetPasswordModel);
+  Future<Either<ResetPasswordModel, Failure>> resetPassword(
+      ResetPasswordModel resetPasswordModel);
 }

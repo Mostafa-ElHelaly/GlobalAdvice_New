@@ -40,8 +40,8 @@ class RepositoryImp extends BaseRepository {
   }
 
   @override
-  Future<Either<LoginModel, Failure>> resetPassword(
-      LoginModel resetPasswordModel) async {
+  Future<Either<ResetPasswordModel, Failure>> resetPassword(
+      ResetPasswordModel resetPasswordModel) async {
     try {
       final result = await baseRemotelyDataSource
           .resetPasswordWithEmail(resetPasswordModel);

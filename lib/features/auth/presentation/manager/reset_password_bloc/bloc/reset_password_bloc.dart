@@ -4,7 +4,6 @@ import 'package:globaladvice_new/features/auth/data/model/reset_password_model.d
 import 'package:globaladvice_new/features/auth/domain/use_case/reset_password_us.dart';
 import 'package:globaladvice_new/features/auth/presentation/manager/reset_password_bloc/bloc/reset_password_event.dart';
 import 'package:globaladvice_new/features/auth/presentation/manager/reset_password_bloc/bloc/reset_password_state.dart';
-
 import '../../../../../../core/utils/api_helper.dart';
 
 class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
@@ -14,7 +13,8 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
       : super(ResetPasswordInitial()) {
     on<ResetPasswordEvent>((event, emit) async {
       emit(const Loadingchangingpasswordstate());
-      final result = await passwordUseCase.call(LoginModel(email: event.email));
+      final result = await passwordUseCase
+          .call(ResetPasswordModel(data: ResetEmail(email: event.email)));
       result.fold(
           (l) => emit(Resetpasswordsuccess(model: l)),
           (r) => emit(Changingfailedstate(
