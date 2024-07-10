@@ -8,7 +8,9 @@ import 'package:globaladvice_new/core/resource_manger/locale_keys.g.dart';
 import 'package:globaladvice_new/core/utils/config_size.dart';
 import 'package:globaladvice_new/core/widgets/custom_text_field.dart';
 import 'package:globaladvice_new/features/home/presentation/component/life_form/widgets/Back_Button.dart';
+import 'package:globaladvice_new/features/home/presentation/component/medical_form/Widgets/Birthday_Widget.dart';
 import 'package:globaladvice_new/features/home/presentation/component/medical_form/Widgets/done.dart';
+import 'package:globaladvice_new/features/home/presentation/component/property_form/widgets/Property_Dropdown_Widget.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 import '../../../../../../core/widgets/main_button.dart';
@@ -24,18 +26,28 @@ class LifeFormMainPersonData extends StatefulWidget {
 
 class _LifeFormMainPersonDataState extends State<LifeFormMainPersonData> {
   TextEditingController fullNameController = TextEditingController();
-  TextEditingController lastNameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
-  TextEditingController marketValueController = TextEditingController();
+  TextEditingController termsController = TextEditingController();
+  TextEditingController disabilitesController = TextEditingController();
+  TextEditingController premiumamountController = TextEditingController();
+  TextEditingController insuredamountController = TextEditingController();
+  TextEditingController occupationController = TextEditingController();
+  TextEditingController birthdayController = TextEditingController();
+
+  List<String> genders = ['Male', 'Female'];
 
   @override
   void initState() {
     fullNameController = TextEditingController();
-    lastNameController = TextEditingController();
     emailController = TextEditingController();
     phoneController = TextEditingController();
-    marketValueController = TextEditingController();
+    termsController = TextEditingController();
+    disabilitesController = TextEditingController();
+    premiumamountController = TextEditingController();
+    insuredamountController = TextEditingController();
+    occupationController = TextEditingController();
+    birthdayController = TextEditingController();
 
     super.initState();
   }
@@ -43,10 +55,14 @@ class _LifeFormMainPersonDataState extends State<LifeFormMainPersonData> {
   @override
   void dispose() {
     fullNameController.dispose();
-    lastNameController.dispose();
     emailController.dispose();
     phoneController.dispose();
-    marketValueController.dispose();
+    termsController.dispose();
+    disabilitesController.dispose();
+    premiumamountController.dispose();
+    insuredamountController.dispose();
+    occupationController.dispose();
+    birthdayController.dispose();
     super.dispose();
   }
 
@@ -99,6 +115,74 @@ class _LifeFormMainPersonDataState extends State<LifeFormMainPersonData> {
                 controller: phoneController,
                 inputType: TextInputType.phone,
               ),
+              SizedBox(
+                height: ConfigSize.defaultSize! * 2,
+              ),
+              CustomTextField(
+                labeltext: StringManager.birthday.tr(),
+                prefixicon: const Icon(Icons.cake),
+                controller: birthdayController,
+                inputType: TextInputType.datetime,
+                suffix: BirthdayWidget(),
+              ),
+              SizedBox(
+                height: ConfigSize.defaultSize! * 2,
+              ),
+              PropertyDropdown(
+                selectedValue: selectedValue,
+                label: StringManager.gender.tr(),
+                list: genders,
+                onChanged: (value) {
+                  setState(() {
+                    selectedValue = value;
+                  });
+                },
+              ),
+              SizedBox(
+                height: ConfigSize.defaultSize! * 2,
+              ),
+              CustomTextField(
+                labeltext: StringManager.occupation.tr(),
+                prefixicon: const Icon(Icons.work_outline),
+                controller: occupationController,
+                inputType: TextInputType.text,
+              ),
+              SizedBox(
+                height: ConfigSize.defaultSize! * 2,
+              ),
+              CustomTextField(
+                labeltext: StringManager.insuredAmount.tr(),
+                prefixicon: const Icon(Icons.money),
+                controller: insuredamountController,
+                inputType: TextInputType.number,
+              ),
+              SizedBox(
+                height: ConfigSize.defaultSize! * 2,
+              ),
+              CustomTextField(
+                labeltext: StringManager.premiumAmount.tr(),
+                prefixicon: const Icon(Icons.workspace_premium),
+                controller: premiumamountController,
+                inputType: TextInputType.number,
+              ),
+              SizedBox(
+                height: ConfigSize.defaultSize! * 2,
+              ),
+              CustomTextField(
+                labeltext: StringManager.disabilities.tr(),
+                prefixicon: const Icon(Icons.elderly_woman_sharp),
+                controller: disabilitesController,
+                inputType: TextInputType.text,
+              ),
+              SizedBox(
+                height: ConfigSize.defaultSize! * 2,
+              ),
+              CustomTextField(
+                labeltext: StringManager.terms.tr(),
+                prefixicon: const Icon(Icons.library_books),
+                controller: termsController,
+                inputType: TextInputType.text,
+              ),
               Padding(
                 padding:
                     EdgeInsets.symmetric(vertical: ConfigSize.defaultSize! * 3),
@@ -131,17 +215,18 @@ class _LifeFormMainPersonDataState extends State<LifeFormMainPersonData> {
     );
   }
 
-  bool validation() {
-    if (marketValueController.text == '') {
-      return false;
-    } else if (lastNameController.text == '') {
-      return false;
-    } else if (emailController.text == '') {
-      return false;
-    } else if (phoneController.text == '') {
-      return false;
-    } else {
-      return true;
-    }
-  }
+//   bool validation() {
+//     if (marketValueController.text == '') {
+//       return false;
+//     } else if (lastNameController.text == '') {
+//       return false;
+//     } else if (emailController.text == '') {
+//       return false;
+//     } else if (phoneController.text == '') {
+//       return false;
+//     } else {
+//       return true;
+//     }
+//   }
+// }
 }

@@ -50,17 +50,14 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocListener<LoginBloc, LoginState>(
-
-
       listener: (context, state) {
         if (state is LoginSuccessState) {
           EasyLoading.dismiss();
           Navigator.pushNamedAndRemoveUntil(
             context,
             Routes.mainScreen,
-                (route) => false,
+            (route) => false,
           );
-
         } else if (state is LoginErrorState) {
           EasyLoading.dismiss();
           EasyLoading.showError(state.errorMessage);
@@ -68,7 +65,6 @@ class _LoginScreenState extends State<LoginScreen> {
           EasyLoading.show(status: 'loading...');
         }
       },
-
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         body: Column(
