@@ -14,6 +14,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'core/service/bloc_observer.dart';
 import 'features/auth/presentation/manager/login_bloc/login_bloc.dart';
 import 'features/auth/presentation/manager/register_bloc/register_bloc.dart';
+import 'features/auth/presentation/manager/reset_password_bloc/bloc/reset_password_bloc.dart';
 import 'main_screen.dart';
 
 void main() async {
@@ -50,6 +51,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => getIt<LoginBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<ResetPasswordBloc>(),
         ),
       ],
       child: MaterialApp(
