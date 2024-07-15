@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:globaladvice_new/features/auth/presentation/component/forget_password/otp_screen.dart';
 import 'package:globaladvice_new/features/auth/presentation/login_screen.dart';
 import 'package:globaladvice_new/main_screen.dart';
 
@@ -32,11 +31,6 @@ class RouteGenerator {
         currentContext = Routes.mainScreen;
         return MaterialPageRoute(
             settings: settings, builder: (_) => const MainScreen());
-
-      case Routes.otpScreen:
-        currentContext = Routes.otpScreen;
-        return MaterialPageRoute(
-            settings: settings, builder: (_) => const OtpScreen());
     }
     return unDefinedRoute();
   }
