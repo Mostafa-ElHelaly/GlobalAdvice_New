@@ -11,9 +11,7 @@ import 'package:globaladvice_new/core/widgets/custom_text_field.dart';
 import 'package:globaladvice_new/core/widgets/main_button.dart';
 import 'package:globaladvice_new/features/auth/presentation/login_screen.dart';
 import 'package:globaladvice_new/features/auth/presentation/manager/reset_password_bloc/bloc/reset_password_bloc.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
-import '../../../../../core/resource_manger/routs_manager.dart';
 import '../../../../../core/widgets/snack_bar.dart';
 import '../../manager/reset_password_bloc/bloc/reset_password_event.dart';
 import '../../manager/reset_password_bloc/bloc/reset_password_state.dart';

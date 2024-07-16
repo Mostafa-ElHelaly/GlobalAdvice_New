@@ -3,4 +3,5 @@ class ConstantApi {
   static const String register = "${baseUrl}client/access/register";
   static const String login = "${baseUrl}client/access/login";
   static const String resetPassword = "${baseUrl}client/access/reset-password";
+  static const String healthinsurance = "${baseUrl}client/health/request";
 }
