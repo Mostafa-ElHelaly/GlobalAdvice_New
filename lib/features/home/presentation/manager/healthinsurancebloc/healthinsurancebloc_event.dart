@@ -1,8 +1,22 @@
-part of 'healthinsurancebloc_bloc.dart';
+abstract class ResetEvent {}
 
-sealed class HealthinsuranceblocEvent extends Equatable {
-  const HealthinsuranceblocEvent();
-
-  @override
-  List<Object> get props => [];
+class HealthinsuranceblocEvent extends ResetEvent {
+  final String uid;
+  final String organizationId;
+  final String planId;
+  final String name;
+  final String age;
+  final String relation;
+  final String price;
+  final String gender;
+  HealthinsuranceblocEvent({
+    required this.uid,
+    required this.organizationId,
+    required this.planId,
+    required this.name,
+    required this.age,
+    required this.relation,
+    required this.price,
+    required this.gender,
+  });
 }
