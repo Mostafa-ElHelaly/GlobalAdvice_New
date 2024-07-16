@@ -49,22 +49,22 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<LoginBloc, LoginState>(
-      listener: (context, state) {
-        if (state is LoginSuccessState) {
-          EasyLoading.dismiss();
-          Navigator.pushNamedAndRemoveUntil(
-            context,
-            Routes.mainScreen,
-            (route) => false,
-          );
-        } else if (state is LoginErrorState) {
-          EasyLoading.dismiss();
-          EasyLoading.showError(state.errorMessage);
-        } else if (state is LoginLoadingState) {
-          EasyLoading.show(status: 'loading...');
-        }
-      },
+    return
+
+
+
+    BlocListener<LoginBloc, LoginState>(
+    listener: (context, state) {
+    if (state is LoginSuccessState) {
+    state.loginAuthModelResponse.isCompleted!
+    ? Navigator.pushNamedAndRemoveUntil(
+    context, Routes.mainScreen, (route) => false)
+        : Navigator.pushNamedAndRemoveUntil(
+    context, Routes.mainScreen, (route) => false);
+    } else if (state is LoginErrorState) {
+    errorSnackBar(context, state.errorMessage);
+    } else if (state is LoginLoadingState) {}
+    },
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         body: Column(

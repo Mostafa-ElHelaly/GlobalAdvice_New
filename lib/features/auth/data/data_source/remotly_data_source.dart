@@ -13,25 +13,16 @@ import '../../domain/use_case/reset_password_us.dart';
 import '../model/reset_password_model.dart';
 
 abstract class BaseRemotelyDataSource {
-  Future<LoginModel> loginWithEmailAndPassword(LoginModel authModel);
+  Future<LoginModel> loginWithEmailAndPassword(AuthModel authModel);
 
-  Future<LoginModel> registerWithEmailAndPassword(LoginModel registerAuthModel);
+  Future<LoginModel> registerWithEmailAndPassword(RegisterAuthModel registerAuthModel);
 
   Future<Unit> resetPasswordWithEmail(String email);
-  Future<Unit> sendhealthinsurancerequest(
-      String uid,
-      String organizationId,
-      String planId,
-      String name,
-      String age,
-      String relation,
-      String price,
-      String gender);
 }
 
 class AuthRemotelyDateSource extends BaseRemotelyDataSource {
   @override
-  Future<LoginModel> loginWithEmailAndPassword(LoginModel authModel) async {
+  Future<LoginModel> loginWithEmailAndPassword(AuthModel authModel) async {
     final body = {"email": authModel.email, "password": authModel.password};
 
     try {
@@ -53,17 +44,19 @@ class AuthRemotelyDateSource extends BaseRemotelyDataSource {
 
   @override
   Future<LoginModel> registerWithEmailAndPassword(
-      LoginModel registerAuthModel) async {
+      RegisterAuthModel registerAuthModel) async {
     final body = {
       "email": registerAuthModel.email,
       "password": registerAuthModel.password,
-      "birthdate": registerAuthModel.birthdate,
-      "gender": registerAuthModel.gender,
-      "confirmPassword": registerAuthModel.confirmPassword,
     };
 
     try {
       final response = await Dio().post(
+        options: Options(
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+        ),
         ConstantApi.register,
         data: body,
       );
@@ -83,48 +76,6 @@ class AuthRemotelyDateSource extends BaseRemotelyDataSource {
   Future<Unit> resetPasswordWithEmail(String email) async {
     final body = {
       "email": email,
-    };
-    try {
-      final response = await Dio().post(
-        options: Options(
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-          },
-        ),
-        ConstantApi.resetPassword,
-        data: body,
-      );
-      if (response.statusCode == 200) {
-        print('reset password success');
-        return Future.value(unit);
-      } else {
-        throw Exception(Strings.resetPasswordFailed);
-      }
-    } on DioException catch (e) {
-      throw DioHelper.handleDioError(
-          dioError: e, endpointName: "Reset Password");
-    }
-  }
-
-  @override
-  Future<Unit> sendhealthinsurancerequest(
-      String uid,
-      String organizationId,
-      String planId,
-      String name,
-      String age,
-      String relation,
-      String price,
-      String gender) async {
-    final body = {
-      "UID": uid,
-      "organization_id": organizationId,
-      "plan_id": planId,
-      "name[]": name,
-      "age[]": age,
-      "relation[]": relation,
-      "price[]": price,
-      "gender[]": gender,
     };
     try {
       final response = await Dio().post(
