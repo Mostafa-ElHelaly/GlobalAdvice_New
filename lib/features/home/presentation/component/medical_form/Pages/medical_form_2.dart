@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:globaladvice_new/features/home/presentation/component/medical_form/Widgets/Birthday_Widget.dart';
+import 'package:globaladvice_new/core/resource_manger/color_manager.dart';
 import 'package:globaladvice_new/features/home/presentation/component/medical_form/Widgets/Gender_Drop_Down_Widget.dart';
 import 'package:globaladvice_new/features/home/presentation/component/medical_form/Widgets/medical_appbar.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
@@ -28,6 +28,7 @@ class _MedicalForm2State extends State<MedicalForm2> {
   TextEditingController birthdayController = TextEditingController();
 
   String? selectedValue;
+  DateTime selectedDate = DateTime.now();
   @override
   void initState() {
     emailController = TextEditingController();
@@ -40,6 +41,32 @@ class _MedicalForm2State extends State<MedicalForm2> {
     emailController.dispose();
     birthdayController.dispose();
     super.dispose();
+  }
+
+  Future<Null> _selectDate(BuildContext context) async {
+    DateTime currentdate = DateTime.now();
+    final DateTime? picked = await showDatePicker(
+        builder: (context, child) {
+          return Theme(
+              data: ThemeData.light().copyWith(
+                hintColor: ColorManager.gray,
+                colorScheme: ColorScheme.light(primary: ColorManager.mainColor),
+              ),
+              child: child!);
+        },
+        context: context,
+        initialDate: selectedDate,
+        firstDate: DateTime(1940, 1),
+        lastDate:
+            DateTime.utc(currentdate.year, currentdate.month, currentdate.day));
+    if (picked != null && picked != selectedDate)
+      setState(() {
+        selectedDate = picked;
+        String convertedDateTime =
+            "${picked.year.toString()}-${picked.month.toString().padLeft(2, '0')}-${picked.day.toString().padLeft(2, '0')}";
+        birthdayController.value = TextEditingValue(text: convertedDateTime);
+        ;
+      });
   }
 
   @override
@@ -78,15 +105,15 @@ class _MedicalForm2State extends State<MedicalForm2> {
                 height: ConfigSize.defaultSize! * 2,
               ),
               CustomTextField(
-                labeltext: StringManager.birthday.tr(),
-                prefixicon: const Icon(Icons.cake),
-                controller: birthdayController,
-                inputType: TextInputType.none,
-                suffix: BirthdayWidget(
-                    selectedday: birthdayController.text.isEmpty
-                        ? 'DD-MM-YYYY'
-                        : birthdayController.text),
-              ),
+                  labeltext: StringManager.birthday.tr(),
+                  prefixicon: const Icon(Icons.cake),
+                  controller: birthdayController,
+                  inputType: TextInputType.none,
+                  suffix: IconButton(
+                      onPressed: () async {
+                        await _selectDate(context);
+                      },
+                      icon: Icon(Icons.calendar_today))),
               SizedBox(
                 height: ConfigSize.defaultSize! * 2,
               ),

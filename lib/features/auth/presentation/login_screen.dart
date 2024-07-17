@@ -66,6 +66,7 @@ class _LoginScreenState extends State<LoginScreen> {
     } else if (state is LoginLoadingState) {}
     },
       child: Scaffold(
+        backgroundColor: ColorManager.whiteColor,
         resizeToAvoidBottomInset: false,
         body: Column(
           children: [
@@ -164,7 +165,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           BlocProvider.of<LoginBloc>(context).add(
                             LoginEvent(
                               email: emailController.text,
-                              password: 'Nn@\$${passwordController.text}',
+                              password: passwordController.text,
                             ),
                           );
                         } else {

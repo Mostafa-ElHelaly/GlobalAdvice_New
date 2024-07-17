@@ -13,12 +13,13 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       emit(const LoginLoadingState());
       final result = await loginUseCase
           .call(AuthModel(email: event.email, password: event.password));
+      print(result);
       result.fold(
           (l) => emit(LoginSuccessState(
-            loginAuthModelResponse: l,
-              )),
-          (r) => emit(
-              LoginErrorState(errorMessage: DioHelper().getTypeOfFailure(r))));
+                loginAuthModelResponse: l,
+              )), (r) {
+        emit(LoginErrorState(errorMessage: DioHelper().getTypeOfFailure(r)));
+      });
     });
   }
 }

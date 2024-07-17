@@ -14,7 +14,6 @@ import '../../../../../../core/resource_manger/locale_keys.g.dart';
 import '../../../../../../core/utils/config_size.dart';
 import '../../../../../../core/widgets/custom_text_field.dart';
 import '../../../../../../core/widgets/main_button.dart';
-import '../../medical_form/Widgets/Birthday_Widget.dart';
 
 class PropertyForm2 extends StatefulWidget {
   const PropertyForm2({super.key});

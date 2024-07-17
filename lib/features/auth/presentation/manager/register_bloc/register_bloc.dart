@@ -14,6 +14,8 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       final result = await registerUseCase.call(RegisterAuthModel(
         email: event.email,
         password: event.password,
+        name: event.name,
+        phone: event.phone,
       ));
       result.fold(
           (l) => emit(RegisterSuccessState(

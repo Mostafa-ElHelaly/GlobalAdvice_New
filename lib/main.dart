@@ -67,6 +67,9 @@ class MyApp extends StatelessWidget {
         localizationsDelegates: context.localizationDelegates,
         locale: context.locale,
         theme: ThemeData(
+          canvasColor:
+              Colors.white, // Change this to adjust dropdown background color
+
           textTheme: GoogleFonts.poppinsTextTheme(),
         ),
         navigatorKey: getIt<NavigationService>().navigatorKey,

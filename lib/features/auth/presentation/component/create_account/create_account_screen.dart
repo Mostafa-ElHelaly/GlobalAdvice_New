@@ -24,18 +24,19 @@ class CreateAccount extends StatefulWidget {
 }
 
 class _CreateAccountState extends State<CreateAccount> {
-  TextEditingController firstNameController = TextEditingController();
-  TextEditingController lastNameController = TextEditingController();
+  TextEditingController fullNameController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
   TextEditingController ganderController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController dateOfBirthdayController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
+  String phoneNumber = '';
 
   @override
   void initState() {
-    firstNameController = TextEditingController();
-    lastNameController = TextEditingController();
+    fullNameController = TextEditingController();
+    phoneController = TextEditingController();
     ganderController = TextEditingController();
     emailController = TextEditingController();
     passwordController = TextEditingController();
@@ -46,8 +47,8 @@ class _CreateAccountState extends State<CreateAccount> {
 
   @override
   void dispose() {
-    firstNameController.dispose();
-    lastNameController.dispose();
+    fullNameController.dispose();
+    phoneController.dispose();
     ganderController.dispose();
     emailController.dispose();
     passwordController.dispose();
@@ -120,48 +121,16 @@ class _CreateAccountState extends State<CreateAccount> {
                 SizedBox(
                   height: ConfigSize.defaultSize! * 5,
                 ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            StringManager.firstName.tr(),
-                            style: TextStyle(
-                              fontSize: ConfigSize.defaultSize! * 1.6,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          CustomTextField(
-                            controller: firstNameController,
-                            inputType: TextInputType.name,
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      width: ConfigSize.defaultSize! * 2,
-                    ),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            StringManager.lastName.tr(),
-                            style: TextStyle(
-                              fontSize: ConfigSize.defaultSize! * 1.6,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          CustomTextField(
-                            controller: lastNameController,
-                            inputType: TextInputType.name,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
+                Text(
+                  StringManager.fullName.tr(),
+                  style: TextStyle(
+                    fontSize: ConfigSize.defaultSize! * 1.6,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                CustomTextField(
+                  controller: fullNameController,
+                  inputType: TextInputType.name,
                 ),
                 SizedBox(height: ConfigSize.defaultSize! * 2),
                 Text(
@@ -235,6 +204,22 @@ class _CreateAccountState extends State<CreateAccount> {
                 CustomTextField(
                   controller: emailController,
                   inputType: TextInputType.emailAddress,
+                ),
+                SizedBox(height: ConfigSize.defaultSize! * 2),
+                Text(
+                  StringManager.phone.tr(),
+                  style: TextStyle(
+                    fontSize: ConfigSize.defaultSize! * 1.6,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                SizedBox(
+                  height: ConfigSize.defaultSize! - 5,
+                ),
+                CustomTextField(
+                  controller: phoneController,
+                  inputType: TextInputType.number,
+
                 ),
                 SizedBox(height: ConfigSize.defaultSize! * 2),
                 Text(
@@ -326,6 +311,8 @@ class _CreateAccountState extends State<CreateAccount> {
                           RegisterEvent(
                             email: emailController.text,
                             password: 'Nn@\$${passwordController.text}',
+                            name: fullNameController.text,
+                            phone:int.tryParse( phoneController.text)!,
                           ),
                         );
                       } else {
@@ -401,6 +388,10 @@ class _CreateAccountState extends State<CreateAccount> {
     if (emailController.text == '') {
       return false;
     } else if (passwordController.text == '') {
+      return false;
+    } else if (fullNameController.text == '') {
+      return false;
+    } else if (phoneController.text == '') {
       return false;
     } else {
       return true;

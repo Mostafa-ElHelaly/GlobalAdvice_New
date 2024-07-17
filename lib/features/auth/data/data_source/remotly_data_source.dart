@@ -28,15 +28,21 @@ class AuthRemotelyDateSource extends BaseRemotelyDataSource {
     try {
       final response = await Dio().post(
         ConstantApi.login,
-        data: body,
+        data: FormData.fromMap(body),
       );
       Map<String, dynamic> jsonData = response.data;
 
-      LoginModel authModelResponse = LoginModel.fromJson(jsonData);
+      if(jsonData['status'] != 200){
+        print(jsonData);
+        throw new Exception(jsonData['error']);
+      }
 
+      LoginModel authModelResponse = LoginModel.fromJson(jsonData);
       Methods.instance.saveUserToken(authToken: authModelResponse.token);
       return authModelResponse;
     } on DioException catch (e) {
+
+
       throw DioHelper.handleDioError(
           dioError: e, endpointName: "loginWithEmailAndPassword");
     }
@@ -48,6 +54,9 @@ class AuthRemotelyDateSource extends BaseRemotelyDataSource {
     final body = {
       "email": registerAuthModel.email,
       "password": registerAuthModel.password,
+      "phone": registerAuthModel.phone,
+      "name": registerAuthModel.name,
+
     };
 
     try {
@@ -58,9 +67,14 @@ class AuthRemotelyDateSource extends BaseRemotelyDataSource {
           },
         ),
         ConstantApi.register,
-        data: body,
+        data:FormData.fromMap(body),
       );
       Map<String, dynamic> jsonData = response.data;
+
+      if(jsonData['status'] != 200){
+        print(jsonData);
+        throw new Exception(jsonData['error']);
+      }
 
       LoginModel authModelResponse = LoginModel.fromJson(jsonData);
 

@@ -6,11 +6,11 @@ import 'package:globaladvice_new/features/home/presentation/component/car_form/w
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 import '../../../../../../core/resource_manger/asset_path.dart';
+import '../../../../../../core/resource_manger/color_manager.dart';
 import '../../../../../../core/resource_manger/locale_keys.g.dart';
 import '../../../../../../core/utils/config_size.dart';
 import '../../../../../../core/widgets/custom_text_field.dart';
 import '../../../../../../core/widgets/main_button.dart';
-import '../../medical_form/Widgets/Birthday_Widget.dart';
 
 class CarForm2 extends StatefulWidget {
   const CarForm2({super.key});
@@ -47,6 +47,33 @@ class _CarForm2State extends State<CarForm2> {
     'Licensed',
     'Unlicensed',
   ];
+  DateTime selectedDate = DateTime.now();
+
+  Future<Null> _selectDate(BuildContext context) async {
+    DateTime currentdate = DateTime.now();
+    final DateTime? picked = await showDatePicker(
+        builder: (context, child) {
+          return Theme(
+              data: ThemeData.light().copyWith(
+                hintColor: ColorManager.gray,
+                colorScheme: ColorScheme.light(primary: ColorManager.mainColor),
+              ),
+              child: child!);
+        },
+        context: context,
+        initialDate: selectedDate,
+        firstDate: DateTime(1940, 1),
+        lastDate:
+            DateTime.utc(currentdate.year, currentdate.month, currentdate.day));
+    if (picked != null && picked != selectedDate)
+      setState(() {
+        selectedDate = picked;
+        String convertedDateTime =
+            "${picked.year.toString()}-${picked.month.toString().padLeft(2, '0')}-${picked.day.toString().padLeft(2, '0')}";
+        birthdayController.value = TextEditingValue(text: convertedDateTime);
+        ;
+      });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -88,10 +115,11 @@ class _CarForm2State extends State<CarForm2> {
                 prefixicon: const Icon(Icons.cake),
                 controller: birthdayController,
                 inputType: TextInputType.none,
-                suffix: BirthdayWidget(
-                    selectedday: birthdayController.text.isEmpty
-                        ? 'DD-MM-YYYY'
-                        : birthdayController.text),
+                suffix: IconButton(
+                    onPressed: () async {
+                      await _selectDate(context);
+                    },
+                    icon: Icon(Icons.calendar_today)),
               ),
               SizedBox(
                 height: ConfigSize.defaultSize! * 2,
