@@ -40,6 +40,16 @@ class LoginModel {
     this.updatestamp,
   });
 
+
+
+
+
+
+
+
+
+
+
   factory LoginModel.fromJson(Map<String, dynamic> json) => LoginModel(
         id: json["id"] ?? "",
         isCompleted: json["iscomplated"] ?? false,
