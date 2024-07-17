@@ -8,7 +8,6 @@ import 'package:globaladvice_new/core/resource_manger/locale_keys.g.dart';
 import 'package:globaladvice_new/core/utils/config_size.dart';
 import 'package:globaladvice_new/core/widgets/custom_text_field.dart';
 import 'package:globaladvice_new/features/home/presentation/component/life_form/widgets/Back_Button.dart';
-import 'package:globaladvice_new/features/home/presentation/component/medical_form/Widgets/Birthday_Widget.dart';
 import 'package:globaladvice_new/features/home/presentation/component/medical_form/Widgets/done.dart';
 import 'package:globaladvice_new/features/home/presentation/component/property_form/widgets/Property_Dropdown_Widget.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
@@ -35,7 +34,33 @@ class _LifeFormMainPersonDataState extends State<LifeFormMainPersonData> {
   TextEditingController occupationController = TextEditingController();
   TextEditingController birthdayController = TextEditingController();
 
+  DateTime selectedDate = DateTime.now();
   List<String> genders = ['Male', 'Female'];
+  Future<Null> _selectDate(BuildContext context) async {
+    DateTime currentdate = DateTime.now();
+    final DateTime? picked = await showDatePicker(
+        builder: (context, child) {
+          return Theme(
+              data: ThemeData.light().copyWith(
+                hintColor: ColorManager.gray,
+                colorScheme: ColorScheme.light(primary: ColorManager.mainColor),
+              ),
+              child: child!);
+        },
+        context: context,
+        initialDate: selectedDate,
+        firstDate: DateTime(1940, 1),
+        lastDate:
+            DateTime.utc(currentdate.year, currentdate.month, currentdate.day));
+    if (picked != null && picked != selectedDate)
+      setState(() {
+        selectedDate = picked;
+        String convertedDateTime =
+            "${picked.year.toString()}-${picked.month.toString().padLeft(2, '0')}-${picked.day.toString().padLeft(2, '0')}";
+        birthdayController.value = TextEditingValue(text: convertedDateTime);
+        ;
+      });
+  }
 
   @override
   void initState() {
@@ -123,7 +148,11 @@ class _LifeFormMainPersonDataState extends State<LifeFormMainPersonData> {
                 prefixicon: const Icon(Icons.cake),
                 controller: birthdayController,
                 inputType: TextInputType.datetime,
-                suffix: BirthdayWidget(),
+                suffix: IconButton(
+                    onPressed: () async {
+                      await _selectDate(context);
+                    },
+                    icon: Icon(Icons.calendar_today)),
               ),
               SizedBox(
                 height: ConfigSize.defaultSize! * 2,

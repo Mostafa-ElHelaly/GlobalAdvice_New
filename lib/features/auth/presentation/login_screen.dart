@@ -66,6 +66,7 @@ class _LoginScreenState extends State<LoginScreen> {
         }
       },
       child: Scaffold(
+        backgroundColor: ColorManager.whiteColor,
         resizeToAvoidBottomInset: false,
         body: Column(
           children: [
