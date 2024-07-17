@@ -63,6 +63,34 @@ class _CreateAccountState extends State<CreateAccount> {
     'Male',
     'Female',
   ];
+  DateTime selectedDate = DateTime.now();
+
+  Future<Null> _selectDate(BuildContext context) async {
+    DateTime currentdate = DateTime.now();
+    final DateTime? picked = await showDatePicker(
+        builder: (context, child) {
+          return Theme(
+              data: ThemeData.light().copyWith(
+                hintColor: ColorManager.gray,
+                colorScheme: ColorScheme.light(primary: ColorManager.mainColor),
+              ),
+              child: child!);
+        },
+        context: context,
+        initialDate: selectedDate,
+        firstDate: DateTime(1940, 1),
+        lastDate:
+            DateTime.utc(currentdate.year, currentdate.month, currentdate.day));
+    if (picked != null && picked != selectedDate)
+      setState(() {
+        selectedDate = picked;
+        String convertedDateTime =
+            "${picked.year.toString()}-${picked.month.toString().padLeft(2, '0')}-${picked.day.toString().padLeft(2, '0')}";
+        dateOfBirthdayController.value =
+            TextEditingValue(text: convertedDateTime);
+        ;
+      });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -250,6 +278,11 @@ class _CreateAccountState extends State<CreateAccount> {
                 CustomTextField(
                   controller: dateOfBirthdayController,
                   inputType: TextInputType.datetime,
+                  suffix: IconButton(
+                      onPressed: () async {
+                        await _selectDate(context);
+                      },
+                      icon: Icon(Icons.calendar_today)),
                 ),
                 SizedBox(height: ConfigSize.defaultSize! * 2),
                 Text(
