@@ -17,10 +17,10 @@ class RepositoryImp extends BaseRepository {
 
   @override
   Future<Either<LoginModel, Failure>> loginWithEmailAndPassword(
-      LoginModel authModel) async {
+      AuthModel authModel) async {
     try {
       final result =
-          await baseRemotelyDataSource.loginWithEmailAndPassword(LoginModel());
+          await baseRemotelyDataSource.loginWithEmailAndPassword(authModel);
       return Left(result);
     } on Exception catch (e) {
       return right(DioHelper.buildFailure(e));
@@ -29,10 +29,10 @@ class RepositoryImp extends BaseRepository {
 
   @override
   Future<Either<LoginModel, Failure>> registerWithEmailAndPassword(
-      LoginModel registerAuthModel) async {
+      RegisterAuthModel registerAuthModel) async {
     try {
       final result = await baseRemotelyDataSource
-          .registerWithEmailAndPassword(LoginModel());
+          .registerWithEmailAndPassword(registerAuthModel);
       return Left(result);
     } on Exception catch (e) {
       return right(DioHelper.buildFailure(e));

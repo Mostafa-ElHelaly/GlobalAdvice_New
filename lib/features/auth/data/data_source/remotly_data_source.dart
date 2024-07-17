@@ -13,16 +13,16 @@ import '../../domain/use_case/reset_password_us.dart';
 import '../model/reset_password_model.dart';
 
 abstract class BaseRemotelyDataSource {
-  Future<LoginModel> loginWithEmailAndPassword(LoginModel authModel);
+  Future<LoginModel> loginWithEmailAndPassword(AuthModel authModel);
 
-  Future<LoginModel> registerWithEmailAndPassword(LoginModel registerAuthModel);
+  Future<LoginModel> registerWithEmailAndPassword(RegisterAuthModel registerAuthModel);
 
   Future<Unit> resetPasswordWithEmail(String email);
 }
 
 class AuthRemotelyDateSource extends BaseRemotelyDataSource {
   @override
-  Future<LoginModel> loginWithEmailAndPassword(LoginModel authModel) async {
+  Future<LoginModel> loginWithEmailAndPassword(AuthModel authModel) async {
     final body = {"email": authModel.email, "password": authModel.password};
 
     try {
@@ -44,17 +44,19 @@ class AuthRemotelyDateSource extends BaseRemotelyDataSource {
 
   @override
   Future<LoginModel> registerWithEmailAndPassword(
-      LoginModel registerAuthModel) async {
+      RegisterAuthModel registerAuthModel) async {
     final body = {
       "email": registerAuthModel.email,
       "password": registerAuthModel.password,
-      "birthdate": registerAuthModel.birthdate,
-      "gender": registerAuthModel.gender,
-      "confirmPassword": registerAuthModel.confirmPassword,
     };
 
     try {
       final response = await Dio().post(
+        options: Options(
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+        ),
         ConstantApi.register,
         data: body,
       );

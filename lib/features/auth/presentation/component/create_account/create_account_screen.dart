@@ -69,18 +69,11 @@ class _CreateAccountState extends State<CreateAccount> {
     return BlocListener<RegisterBloc, RegisterState>(
       listener: (context, state) {
         if (state is RegisterSuccessState) {
-          EasyLoading.dismiss();
           Navigator.pushNamedAndRemoveUntil(
-            context,
-            Routes.login,
-            (route) => false,
-          );
+              context, Routes.login, (route) => false);
         } else if (state is RegisterErrorState) {
-          EasyLoading.dismiss();
-          EasyLoading.showError(state.errorMessage);
-        } else if (state is RegisterLoadingState) {
-          EasyLoading.show(status: 'loading...');
-        }
+          errorSnackBar(context, state.errorMessage);
+        } else if (state is RegisterLoadingState) {}
       },
       child: Scaffold(
         backgroundColor: Colors.white,
