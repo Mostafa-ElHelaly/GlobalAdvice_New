@@ -61,11 +61,11 @@ class AuthRemotelyDateSource extends BaseRemotelyDataSource {
 
     try {
       final response = await Dio().post(
-        options: Options(
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-          },
-        ),
+        // options: Options(
+        //   headers: {
+        //     'Content-Type': 'application/x-www-form-urlencoded',
+        //   },
+        // ),
         ConstantApi.register,
         data:FormData.fromMap(body),
       );
