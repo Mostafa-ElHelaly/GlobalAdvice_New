@@ -56,11 +56,8 @@ class _LoginScreenState extends State<LoginScreen> {
     BlocListener<LoginBloc, LoginState>(
     listener: (context, state) {
     if (state is LoginSuccessState) {
-    state.loginAuthModelResponse.isCompleted!
-    ? Navigator.pushNamedAndRemoveUntil(
-    context, Routes.mainScreen, (route) => false)
-        : Navigator.pushNamedAndRemoveUntil(
-    context, Routes.mainScreen, (route) => false);
+      Navigator.pushNamedAndRemoveUntil(
+          context, Routes.mainScreen, (route) => false);
     } else if (state is LoginErrorState) {
     errorSnackBar(context, state.errorMessage);
     } else if (state is LoginLoadingState) {}
