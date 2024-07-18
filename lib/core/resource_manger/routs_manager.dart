@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:globaladvice_new/features/auth/presentation/login_screen.dart';
+import 'package:globaladvice_new/features/home/presentation/component/card_screen/card_screen.dart';
+import 'package:globaladvice_new/features/profile/presentation/component/edit_my_profile/edit_my_profile_screen.dart';
+import 'package:globaladvice_new/features/profile/presentation/profile_screen.dart';
 import 'package:globaladvice_new/main_screen.dart';
 
 class Routes {
@@ -15,6 +18,10 @@ class Routes {
   static const String matchingRequestScreen = "/MatchingRequestScreen";
   static const String editMyProfileScreen = "/EditMyProfileScreen";
   static const String editDogProfileScreen = "/EditDogProfileScreen";
+
+  static const String profile = "/Profile";
+  static const String editProfile = "/EditProfile";
+  static const String plans = "/Plans";
 }
 
 class RouteGenerator {
@@ -31,6 +38,19 @@ class RouteGenerator {
         currentContext = Routes.mainScreen;
         return MaterialPageRoute(
             settings: settings, builder: (_) => const MainScreen());
+
+      case Routes.profile:
+        currentContext = Routes.profile;
+        return MaterialPageRoute(
+            settings: settings, builder: (_) => const ProfileScreen());
+      case Routes.editProfile:
+        currentContext = Routes.editProfile;
+        return MaterialPageRoute(
+            settings: settings, builder: (_) => const EditMyProfileScreen());
+      case Routes.plans:
+        currentContext = Routes.plans;
+        return MaterialPageRoute(
+            settings: settings, builder: (_) => const CardScreen());
     }
     return unDefinedRoute();
   }

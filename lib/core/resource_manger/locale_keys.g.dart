@@ -1,7 +1,12 @@
 // DO NOT EDIT. This is code generated via package:easy_localization/generate.dart
 
 abstract class StringManager {
+  static const homepage = 'Home Page';
+  static const home = 'Home';
+  static const plans = 'Plans';
   static const submit = 'Submit';
+  static const editprofile = 'Edit Profile';
+  static const share = 'Share The App';
   static const finish = 'Finish';
   static const back = 'Back';
   static const annualLimit = 'Annual limit';

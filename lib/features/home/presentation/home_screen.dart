@@ -6,6 +6,7 @@ import 'package:globaladvice_new/core/resource_manger/asset_path.dart';
 import 'package:globaladvice_new/core/resource_manger/color_manager.dart';
 import 'package:globaladvice_new/core/resource_manger/locale_keys.g.dart';
 import 'package:globaladvice_new/core/utils/config_size.dart';
+import 'package:globaladvice_new/core/widgets/Custom_Drawer.dart';
 import 'package:globaladvice_new/features/home/presentation/component/card_screen/card_screen.dart';
 import 'package:globaladvice_new/features/home/presentation/component/card_screen/card_slider.dart';
 import 'package:globaladvice_new/features/my_policies/presentation/my_polcies_screen.dart';
@@ -14,6 +15,7 @@ import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:pinput/pinput.dart';
 import 'package:readmore/readmore.dart';
 
+import '../../../core/resource_manger/routs_manager.dart';
 import 'component/car_form/pages/car_form_1.dart';
 import 'component/life_form/pages/life_form_main_person_data .dart';
 import 'component/medical_form/Pages/medical_form_1.dart';
@@ -60,11 +62,21 @@ class _HomeScreenState extends State<HomeScreen> {
     ),
   ];
   int currentIndexPage = 0;
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
+      drawer: CustomDrawer(),
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.menu),
+          iconSize: 32, // Adjust the size as needed
+          onPressed: () {
+            _scaffoldKey.currentState!.openDrawer();
+          },
+        ),
         centerTitle: true,
         title: Image.asset(
           AssetsPath.logo,
@@ -390,96 +402,96 @@ class _HomeScreenState extends State<HomeScreen> {
                     SizedBox(
                       height: ConfigSize.defaultSize! * 4,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          StringManager.insuranceType.tr(),
-                          style: const TextStyle(
-                              color: ColorManager.kPrimaryBlueDark,
-                              fontSize: 25,
-                              fontWeight: FontWeight.w800),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            PersistentNavBarNavigator.pushNewScreen(
-                              context,
-                              screen: const CardScreen(),
-                              withNavBar: true,
-                              pageTransitionAnimation:
-                                  PageTransitionAnimation.fade,
-                            );
-                          },
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: ConfigSize.defaultSize! * 1),
-                            child: Text(
-                              StringManager.viewAll.tr(),
-                              style: const TextStyle(
-                                  color: Colors.black,
-                                  decoration: TextDecoration.underline,
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.w800),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: ConfigSize.defaultSize! * 1,
-                    ),
-                    CarouselSlider(
-                      options: CarouselOptions(
-                        onPageChanged: (index, reason) {
-                          setState(() {
-                            currentIndexPage = index;
-                          });
-                        },
-                        height: ConfigSize.defaultSize! * 50,
-                        viewportFraction: 1,
-                        initialPage: 0,
-                        enableInfiniteScroll: true,
-                        reverse: false,
-                        autoPlay: true,
-                        autoPlayInterval: const Duration(seconds: 5),
-                        autoPlayAnimationDuration:
-                            const Duration(milliseconds: 800),
-                        autoPlayCurve: Curves.fastOutSlowIn,
-                        enlargeFactor: 0.3,
-                      ),
-                      items: card
-                        ..map((i) {
-                          return Builder(
-                            builder: (BuildContext context) {
-                              return Container(
-                                  width: MediaQuery.of(context).size.width,
-                                  margin: const EdgeInsets.symmetric(
-                                      horizontal: 5.0),
-                                  decoration:
-                                      const BoxDecoration(color: Colors.amber),
-                                  child: Text(
-                                    'text $i',
-                                    style: const TextStyle(fontSize: 16.0),
-                                  ));
-                            },
-                          );
-                        }).toList(),
-                    ),
-                    Center(
-                      child: DotsIndicator(
-                        dotsCount: items.length,
-                        position: currentIndexPage,
-                        decorator: const DotsDecorator(
-                            activeColor: ColorManager.kPrimaryBlueDark),
-                        onTap: (index) {},
-                      ),
-                    ),
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //   children: [
+                    //     Text(
+                    //       StringManager.insuranceType.tr(),
+                    //       style: const TextStyle(
+                    //           color: ColorManager.kPrimaryBlueDark,
+                    //           fontSize: 25,
+                    //           fontWeight: FontWeight.w800),
+                    //     ),
+                    //     InkWell(
+                    //       onTap: () {
+                    //         PersistentNavBarNavigator.pushNewScreen(
+                    //           context,
+                    //           screen: const CardScreen(),
+                    //           withNavBar: true,
+                    //           pageTransitionAnimation:
+                    //               PageTransitionAnimation.fade,
+                    //         );
+                    //       },
+                    //       child: Padding(
+                    //         padding: EdgeInsets.symmetric(
+                    //             horizontal: ConfigSize.defaultSize! * 1),
+                    //         child: Text(
+                    //           StringManager.viewAll.tr(),
+                    //           style: const TextStyle(
+                    //               color: Colors.black,
+                    //               decoration: TextDecoration.underline,
+                    //               fontSize: 13,
+                    //               fontWeight: FontWeight.w800),
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
+                    // SizedBox(
+                    //   height: ConfigSize.defaultSize! * 1,
+                    // ),
+                    // CarouselSlider(
+                    //   options: CarouselOptions(
+                    //     onPageChanged: (index, reason) {
+                    //       setState(() {
+                    //         currentIndexPage = index;
+                    //       });
+                    //     },
+                    //     height: ConfigSize.defaultSize! * 50,
+                    //     viewportFraction: 1,
+                    //     initialPage: 0,
+                    //     enableInfiniteScroll: true,
+                    //     reverse: false,
+                    //     autoPlay: true,
+                    //     autoPlayInterval: const Duration(seconds: 5),
+                    //     autoPlayAnimationDuration:
+                    //         const Duration(milliseconds: 800),
+                    //     autoPlayCurve: Curves.fastOutSlowIn,
+                    //     enlargeFactor: 0.3,
+                    //   ),
+                    //   items: card
+                    //     ..map((i) {
+                    //       return Builder(
+                    //         builder: (BuildContext context) {
+                    //           return Container(
+                    //               width: MediaQuery.of(context).size.width,
+                    //               margin: const EdgeInsets.symmetric(
+                    //                   horizontal: 5.0),
+                    //               decoration:
+                    //                   const BoxDecoration(color: Colors.amber),
+                    //               child: Text(
+                    //                 'text $i',
+                    //                 style: const TextStyle(fontSize: 16.0),
+                    //               ));
+                    //         },
+                    //       );
+                    //     }).toList(),
+                    // ),
+                    // Center(
+                    //   child: DotsIndicator(
+                    //     dotsCount: items.length,
+                    //     position: currentIndexPage,
+                    //     decorator: const DotsDecorator(
+                    //         activeColor: ColorManager.kPrimaryBlueDark),
+                    //     onTap: (index) {},
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
-              SizedBox(
-                height: ConfigSize.defaultSize! * 1,
-              ),
+              // SizedBox(
+              //   height: ConfigSize.defaultSize! * 1,
+              // ),
             ],
           ),
         ),
