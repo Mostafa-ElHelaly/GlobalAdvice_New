@@ -74,7 +74,7 @@ class MyApp extends StatelessWidget {
         ),
         navigatorKey: getIt<NavigationService>().navigatorKey,
         onGenerateRoute: RouteGenerator.getRoute,
-        home: const LoginScreen(),
+        home: const HomeScreen(),
       ),
     );
   }
