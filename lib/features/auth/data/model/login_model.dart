@@ -69,7 +69,6 @@ class LoginModel {
   String? addstamp;
   String? updatestamp;
 
-  bool? isCompleted;
   bool? isAuthenticated;
   String? token;
   DateTime? expiresOn;
@@ -86,7 +85,6 @@ class LoginModel {
     this.deleted,
     this.addstamp,
     this.updatestamp,
-    this.isCompleted,
     this.isAuthenticated,
     this.token,
     this.expiresOn,
@@ -104,7 +102,6 @@ class LoginModel {
     deleted = json['deleted'];
     addstamp = json['addstamp'];
     updatestamp = json['updatestamp'];
-    isCompleted = json['isCompleted'];
     isAuthenticated = json['isAuthenticated'];
     token = json['token'];
     expiresOn = json['expiresOn'];
@@ -123,7 +120,6 @@ class LoginModel {
     data['deleted'] = this.deleted;
     data['addstamp'] = this.addstamp;
     data['updatestamp'] = this.updatestamp;
-    data['isCompleted'] = this.isCompleted;
     data['isAuthenticated'] = this.isAuthenticated;
     data['token'] = this.token;
     data['expiresOn'] = this.expiresOn;
