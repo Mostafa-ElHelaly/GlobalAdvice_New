@@ -9,13 +9,7 @@ import 'package:globaladvice_new/core/utils/config_size.dart';
 import 'package:globaladvice_new/core/widgets/Custom_Drawer.dart';
 import 'package:globaladvice_new/features/home/presentation/component/card_screen/card_screen.dart';
 import 'package:globaladvice_new/features/home/presentation/component/card_screen/card_slider.dart';
-import 'package:globaladvice_new/features/my_policies/presentation/my_polcies_screen.dart';
-import 'package:globaladvice_new/features/profile/presentation/profile_screen.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
-import 'package:pinput/pinput.dart';
-import 'package:readmore/readmore.dart';
-
-import '../../../core/resource_manger/routs_manager.dart';
 import 'component/car_form/pages/car_form_1.dart';
 import 'component/life_form/pages/life_form_main_person_data .dart';
 import 'component/medical_form/Pages/medical_form_1.dart';
@@ -30,48 +24,49 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final items = [
-    "assets/images/test1.jpg",
-    "assets/images/test2.jpg",
-    "assets/images/test3.jpg",
-    "assets/images/test4.jpg"
+    "assets/images/home_img.png",
+    "assets/images/home_img.png",
+    "assets/images/home_img.png",
+    "assets/images/home_img.png"
   ];
   final card = [
     const CardSliderScreen(
       text1: 'Motor Plus',
       text2:
           'As a car owner, it is almost impossible imagining your life without your car. Not only do you depend on it for the most essential things such as getting to work and taking your children to school, but even for the most fun such as meeting friends and traveling.That’s why you need to be prepared when the unexpected occurs.',
-      image: "assets/images/test1.jpg",
+      image: "assets/images/home_img.png",
     ),
     const CardSliderScreen(
       text1: 'Motor Plus',
       text2:
           'As a car owner, it is almost impossible imagining your life without your car. Not only do you depend on it for the most essential things such as getting to work and taking your children to school, but even for the most fun such as meeting friends and traveling.That’s why you need to be prepared when the unexpected occurs.',
-      image: "assets/images/test2.jpg",
+      image: "assets/images/home_img.png",
     ),
     const CardSliderScreen(
       text1: 'Motor Plus',
       text2:
           'As a car owner, it is almost impossible imagining your life without your car. Not only do you depend on it for the most essential things such as getting to work and taking your children to school, but even for the most fun such as meeting friends and traveling.That’s why you need to be prepared when the unexpected occurs.',
-      image: "assets/images/test3.jpg",
+      image: "assets/images/home_img.png",
     ),
     const CardSliderScreen(
       text1: 'Motor Plus',
       text2:
           'As a car owner, it is almost impossible imagining your life without your car. Not only do you depend on it for the most essential things such as getting to work and taking your children to school, but even for the most fun such as meeting friends and traveling.That’s why you need to be prepared when the unexpected occurs.',
-      image: "assets/images/test4.jpg",
+      image: "assets/images/home_img.png",
     ),
   ];
   int currentIndexPage = 0;
-  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
+    ConfigSize().init(context);
     return Scaffold(
       key: _scaffoldKey,
-      drawer: CustomDrawer(),
+      drawer: const CustomDrawer(),
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.menu),
+          icon: const Icon(Icons.menu),
           iconSize: 32, // Adjust the size as needed
           onPressed: () {
             _scaffoldKey.currentState!.openDrawer();
@@ -140,7 +135,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             onTap: () {
                               PersistentNavBarNavigator.pushNewScreen(
                                 context,
-                                screen: const MyPolicies(),
+                                screen: const CardScreen(),
                                 withNavBar: false,
                                 pageTransitionAnimation:
                                     PageTransitionAnimation.fade,
@@ -489,9 +484,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),
-              // SizedBox(
-              //   height: ConfigSize.defaultSize! * 1,
-              // ),
+
             ],
           ),
         ),

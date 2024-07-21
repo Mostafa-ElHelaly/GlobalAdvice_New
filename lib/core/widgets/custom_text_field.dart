@@ -30,7 +30,7 @@ class CustomTextField extends StatelessWidget {
       keyboardType: inputType,
       obscureText: obscureText ?? false,
       decoration: InputDecoration(
-        floatingLabelStyle: TextStyle(color: ColorManager.mainColor),
+        floatingLabelStyle: const TextStyle(color: ColorManager.mainColor),
         labelText: labeltext,
         hintText: hint,
         suffixIcon: suffix,

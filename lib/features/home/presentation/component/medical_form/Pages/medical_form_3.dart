@@ -9,7 +9,6 @@ import 'package:globaladvice_new/features/home/presentation/component/medical_fo
 import 'package:globaladvice_new/features/home/presentation/manager/healthinsurancebloc/healthinsurancebloc_bloc.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/healthinsurancebloc/healthinsurancebloc_event.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/healthinsurancebloc/healthinsurancebloc_state.dart';
-import 'package:globaladvice_new/main_screen.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 import '../../../../../../core/resource_manger/asset_path.dart';
@@ -17,6 +16,7 @@ import '../../../../../../core/resource_manger/locale_keys.g.dart';
 import '../../../../../../core/utils/config_size.dart';
 import '../../../../../../core/widgets/custom_text_field.dart';
 import '../../../../../../core/widgets/main_button.dart';
+import '../../../home_screen.dart';
 
 class MedicalForm3 extends StatefulWidget {
   const MedicalForm3({super.key});
@@ -49,7 +49,7 @@ class _MedicalForm3State extends State<MedicalForm3> {
             Future.delayed(const Duration(seconds: 3), () {
               PersistentNavBarNavigator.pushNewScreen(
                 context,
-                screen: const MainScreen(),
+                screen: const HomeScreen(),
                 withNavBar: false,
                 pageTransitionAnimation: PageTransitionAnimation.fade,
               );
@@ -151,9 +151,7 @@ class _MedicalForm3State extends State<MedicalForm3> {
                         vertical: ConfigSize.defaultSize! * 1),
                     child: MainButton(
                       onTap: () {
-                        // BlocProvider.of<HealthinsuranceBloc>(context).add(
-                        //       HealthinsuranceblocEvent(uid: uid, organizationId: organizationId, planId: planId, name: name, age: age, relation: relation, price: price, gender: gender)
-                        //     );
+
                       },
                       title: StringManager.submit.tr(),
                     ),

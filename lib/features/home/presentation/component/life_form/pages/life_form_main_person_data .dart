@@ -13,7 +13,7 @@ import 'package:globaladvice_new/features/home/presentation/component/property_f
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 import '../../../../../../core/widgets/main_button.dart';
-import '../../../../../../main_screen.dart';
+import '../../../home_screen.dart';
 import '../widgets/Life_Insu_Appbar.dart';
 
 class LifeFormMainPersonData extends StatefulWidget {
@@ -43,7 +43,7 @@ class _LifeFormMainPersonDataState extends State<LifeFormMainPersonData> {
           return Theme(
               data: ThemeData.light().copyWith(
                 hintColor: ColorManager.gray,
-                colorScheme: ColorScheme.light(primary: ColorManager.mainColor),
+                colorScheme: const ColorScheme.light(primary: ColorManager.mainColor),
               ),
               child: child!);
         },
@@ -152,7 +152,7 @@ class _LifeFormMainPersonDataState extends State<LifeFormMainPersonData> {
                     onPressed: () async {
                       await _selectDate(context);
                     },
-                    icon: Icon(Icons.calendar_today)),
+                    icon: const Icon(Icons.calendar_today)),
               ),
               SizedBox(
                 height: ConfigSize.defaultSize! * 2,
@@ -223,12 +223,12 @@ class _LifeFormMainPersonDataState extends State<LifeFormMainPersonData> {
                         animType: AnimType.rightSlide,
                         desc: StringManager.lifeinsurancerequest.tr(),
                         btnOkOnPress: () {},
-                        btnOk: CustomBackButton())
-                      ..show();
-                    Future.delayed(Duration(seconds: 5), () {
+                        btnOk: const CustomBackButton())
+                      .show();
+                    Future.delayed(const Duration(seconds: 5), () {
                       PersistentNavBarNavigator.pushNewScreen(
                         context,
-                        screen: const MainScreen(),
+                        screen: const HomeScreen(),
                         withNavBar: false,
                         pageTransitionAnimation: PageTransitionAnimation.fade,
                       );
@@ -244,18 +244,4 @@ class _LifeFormMainPersonDataState extends State<LifeFormMainPersonData> {
     );
   }
 
-//   bool validation() {
-//     if (marketValueController.text == '') {
-//       return false;
-//     } else if (lastNameController.text == '') {
-//       return false;
-//     } else if (emailController.text == '') {
-//       return false;
-//     } else if (phoneController.text == '') {
-//       return false;
-//     } else {
-//       return true;
-//     }
-//   }
-// }
 }

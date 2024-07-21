@@ -1,7 +1,6 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:globaladvice_new/core/resource_manger/color_manager.dart';
@@ -54,9 +53,9 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                   ),
                 ],
               ),
-            )..show();
+            ).show();
             Future.delayed(
-              Duration(seconds: 5),
+              const Duration(seconds: 5),
               () {
                 Navigator.pushAndRemoveUntil(
                   context,

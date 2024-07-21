@@ -82,7 +82,7 @@ class _CreateAccountState extends State<CreateAccount> {
         firstDate: DateTime(1940, 1),
         lastDate:
             DateTime.utc(currentdate.year, currentdate.month, currentdate.day));
-    if (picked != null && picked != selectedDate)
+    if (picked != null && picked != selectedDate) {
       setState(() {
         selectedDate = picked;
         String convertedDateTime =
@@ -91,6 +91,7 @@ class _CreateAccountState extends State<CreateAccount> {
             TextEditingValue(text: convertedDateTime);
         ;
       });
+    }
   }
 
   @override
@@ -267,7 +268,7 @@ class _CreateAccountState extends State<CreateAccount> {
                       onPressed: () async {
                         await _selectDate(context);
                       },
-                      icon: Icon(Icons.calendar_today)),
+                      icon: const Icon(Icons.calendar_today)),
                 ),
                 SizedBox(height: ConfigSize.defaultSize! * 2),
                 Text(
@@ -326,17 +327,6 @@ class _CreateAccountState extends State<CreateAccount> {
                   padding: EdgeInsets.symmetric(
                       vertical: ConfigSize.defaultSize! * 3),
                   child: MainButton(
-                    // onTap: () {
-                    //   if (validation()) {
-                    //     errorSnackBar(context, StringManager.login.tr());
-                    //   } else {
-                    //     BlocProvider.of<RegisterBloc>(context)
-                    //         .add(RegisterEvent(
-                    //       email: emailController.text,
-                    //       password: 'Nn@\$${passwordController.text}',
-                    //     ));
-                    //   }
-                    // },
 
                     onTap: () {
                       if (validation()) {

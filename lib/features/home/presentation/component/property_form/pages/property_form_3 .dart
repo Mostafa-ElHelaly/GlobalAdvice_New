@@ -1,24 +1,17 @@
 import 'dart:math';
 
-import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:globaladvice_new/core/resource_manger/color_manager.dart';
-import 'package:globaladvice_new/features/home/presentation/component/car_form/pages/Prices_Page.dart';
-import 'package:globaladvice_new/features/home/presentation/component/car_form/widgets/car_insurance_appbar.dart';
 import 'package:globaladvice_new/features/home/presentation/component/medical_form/Widgets/done.dart';
-import 'package:globaladvice_new/features/home/presentation/component/medical_form/Widgets/medical_appbar.dart';
 import 'package:globaladvice_new/features/home/presentation/component/property_form/widgets/Prop_insurance_appbar.dart';
 import 'package:globaladvice_new/features/home/presentation/component/property_form/widgets/Property_Checkbox.dart';
-import 'package:globaladvice_new/main_screen.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 import '../../../../../../core/resource_manger/asset_path.dart';
 import '../../../../../../core/resource_manger/locale_keys.g.dart';
 import '../../../../../../core/utils/config_size.dart';
-import '../../../../../../core/widgets/custom_text_field.dart';
 import '../../../../../../core/widgets/main_button.dart';
-import '../widgets/Property_Dropdown_Widget.dart';
 import 'Prop_Prices_Page.dart';
 
 class PropertyForm3 extends StatefulWidget {

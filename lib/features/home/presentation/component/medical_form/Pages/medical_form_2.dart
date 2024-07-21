@@ -11,9 +11,8 @@ import '../../../../../../core/resource_manger/locale_keys.g.dart';
 import '../../../../../../core/utils/config_size.dart';
 import '../../../../../../core/widgets/custom_text_field.dart';
 import '../../../../../../core/widgets/main_button.dart';
-import '../../../../../../main_screen.dart';
-import 'package:table_calendar/table_calendar.dart';
 
+import '../../../home_screen.dart';
 import 'medical_form_3.dart';
 
 class MedicalForm2 extends StatefulWidget {
@@ -131,7 +130,7 @@ class _MedicalForm2State extends State<MedicalForm2> {
                 onTap: () {
                   PersistentNavBarNavigator.pushNewScreen(
                     context,
-                    screen: const MainScreen(),
+                    screen: const HomeScreen(),
                     withNavBar: false,
                     pageTransitionAnimation: PageTransitionAnimation.fade,
                   );

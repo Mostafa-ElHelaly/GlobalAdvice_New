@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:globaladvice_new/core/resource_manger/color_manager.dart';
 import 'package:globaladvice_new/core/resource_manger/locale_keys.g.dart';
 import 'package:globaladvice_new/core/resource_manger/routs_manager.dart';
@@ -22,7 +21,7 @@ class CustomDrawer extends StatelessWidget {
             child: Center(
               child: Container(
                 height: ConfigSize.defaultSize! * 8,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage(AssetsPath.logo),
                     fit: BoxFit.contain,
@@ -37,10 +36,10 @@ class CustomDrawer extends StatelessWidget {
             icon: Icons.home,
             onTap: () {
               Navigator.of(context)
-                  .pushNamedAndRemoveUntil(Routes.mainScreen, (route) => false);
+                  .pushNamedAndRemoveUntil(Routes.homeScreen, (route) => false);
             },
           ),
-          MyDivider(),
+          const MyDivider(),
           DrawerTile(
             title: StringManager.plans,
             icon: Icons.home_repair_service_rounded,
@@ -48,7 +47,7 @@ class CustomDrawer extends StatelessWidget {
               Navigator.of(context).pushNamed(Routes.plans);
             },
           ),
-          MyDivider(),
+          const MyDivider(),
           DrawerTile(
             title: StringManager.myProfile,
             icon: Icons.person,
@@ -56,7 +55,7 @@ class CustomDrawer extends StatelessWidget {
               Navigator.of(context).pushNamed(Routes.profile);
             },
           ),
-          MyDivider(),
+          const MyDivider(),
           DrawerTile(
             title: StringManager.editprofile,
             icon: Icons.edit,
@@ -64,7 +63,7 @@ class CustomDrawer extends StatelessWidget {
               Navigator.of(context).pushNamed(Routes.editProfile);
             },
           ),
-          MyDivider(),
+          const MyDivider(),
           DrawerTile(
             title: StringManager.share,
             icon: Icons.share,
@@ -73,7 +72,7 @@ class CustomDrawer extends StatelessWidget {
                   'Check out this awesome app! https://globaladvice.org/');
             },
           ),
-          MyDivider(),
+          const MyDivider(),
           DrawerTile(
             title: StringManager.logOut,
             icon: Icons.exit_to_app,
@@ -89,7 +88,7 @@ class CustomDrawer extends StatelessWidget {
 }
 
 class DrawerTile extends StatelessWidget {
-  DrawerTile({super.key, required this.title, required this.icon, this.onTap});
+  const DrawerTile({super.key, required this.title, required this.icon, this.onTap});
   final String title;
   final IconData icon;
   final void Function()? onTap;

@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:globaladvice_new/core/resource_manger/color_manager.dart';
 import 'package:globaladvice_new/core/resource_manger/locale_keys.g.dart';
 import 'package:globaladvice_new/core/utils/config_size.dart';
-import 'package:globaladvice_new/features/my_policies/presentation/my_polcies_screen.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+
+import 'card_screen.dart';
 
 class CardSliderScreen extends StatelessWidget {
   final String text1;
@@ -68,7 +69,7 @@ class CardSliderScreen extends StatelessWidget {
                     onTap: () {
                       PersistentNavBarNavigator.pushNewScreen(
                         context,
-                        screen: const MyPolicies(),
+                        screen: const CardScreen(),
                         withNavBar: false,
                         pageTransitionAnimation: PageTransitionAnimation.fade,
                       );

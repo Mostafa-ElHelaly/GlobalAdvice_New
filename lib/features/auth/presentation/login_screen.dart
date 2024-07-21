@@ -49,19 +49,17 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return
+    ConfigSize().init(context);
 
-
-
-    BlocListener<LoginBloc, LoginState>(
-    listener: (context, state) {
-    if (state is LoginSuccessState) {
-      Navigator.pushNamedAndRemoveUntil(
-          context, Routes.mainScreen, (route) => false);
-    } else if (state is LoginErrorState) {
-    errorSnackBar(context, state.errorMessage);
-    } else if (state is LoginLoadingState) {}
-    },
+    return BlocListener<LoginBloc, LoginState>(
+      listener: (context, state) {
+        if (state is LoginSuccessState) {
+          Navigator.pushNamedAndRemoveUntil(
+              context, Routes.homeScreen, (route) => false);
+        } else if (state is LoginErrorState) {
+          errorSnackBar(context, state.errorMessage);
+        } else if (state is LoginLoadingState) {}
+      },
       child: Scaffold(
         backgroundColor: ColorManager.whiteColor,
         resizeToAvoidBottomInset: false,
@@ -175,7 +173,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 ],
               ),
             ),
-            const Spacer(),
+            SizedBox(
+              height: ConfigSize.defaultSize! * 21,
+            ),
+            // const Spacer(),
             Padding(
               padding: EdgeInsets.all(ConfigSize.defaultSize! * 1.5),
               child: Row(

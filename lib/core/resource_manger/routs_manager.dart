@@ -3,7 +3,8 @@ import 'package:globaladvice_new/features/auth/presentation/login_screen.dart';
 import 'package:globaladvice_new/features/home/presentation/component/card_screen/card_screen.dart';
 import 'package:globaladvice_new/features/profile/presentation/component/edit_my_profile/edit_my_profile_screen.dart';
 import 'package:globaladvice_new/features/profile/presentation/profile_screen.dart';
-import 'package:globaladvice_new/main_screen.dart';
+
+import '../../features/home/presentation/home_screen.dart';
 
 class Routes {
   static const String login = "/LoginScreen";
@@ -13,7 +14,7 @@ class Routes {
   static const String forgetPasswordScreen = "/ForgetPasswordScreen";
   static const String otpScreen = "/OtpScreen";
   static const String changePasswordScreen = "/ChangePasswordScreen";
-  static const String mainScreen = "/MainScreen";
+  static const String homeScreen = "/HomeScreen";
   static const String serviceType = "/ServiceType";
   static const String matchingRequestScreen = "/MatchingRequestScreen";
   static const String editMyProfileScreen = "/EditMyProfileScreen";
@@ -34,10 +35,10 @@ class RouteGenerator {
         return MaterialPageRoute(
             settings: settings, builder: (_) => const LoginScreen());
 
-      case Routes.mainScreen:
-        currentContext = Routes.mainScreen;
+      case Routes.homeScreen:
+        currentContext = Routes.homeScreen;
         return MaterialPageRoute(
-            settings: settings, builder: (_) => const MainScreen());
+            settings: settings, builder: (_) => const HomeScreen());
 
       case Routes.profile:
         currentContext = Routes.profile;

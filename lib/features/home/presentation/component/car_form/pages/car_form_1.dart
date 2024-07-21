@@ -12,7 +12,6 @@ import 'package:globaladvice_new/features/home/presentation/component/medical_fo
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 import '../../../../../../core/widgets/main_button.dart';
-import '../../../../../../main_screen.dart';
 
 class CarFormMainPersonData extends StatefulWidget {
   const CarFormMainPersonData({super.key});

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:globaladvice_new/core/resource_manger/color_manager.dart';
 import 'package:globaladvice_new/core/resource_manger/locale_keys.g.dart';
 import 'package:globaladvice_new/core/utils/config_size.dart';
-import 'package:globaladvice_new/main_screen.dart';
+import 'package:globaladvice_new/features/home/presentation/home_screen.dart';
 
 class CustomBackButton extends StatelessWidget {
   const CustomBackButton({super.key});
@@ -15,7 +15,7 @@ class CustomBackButton extends StatelessWidget {
           Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
-              builder: (context) => const MainScreen(),
+              builder: (context) => const HomeScreen(),
             ),
             (route) => false,
           );

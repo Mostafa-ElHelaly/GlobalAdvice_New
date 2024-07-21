@@ -5,7 +5,6 @@ import 'package:globaladvice_new/features/home/presentation/component/car_form/p
 import 'package:globaladvice_new/features/home/presentation/component/car_form/widgets/car_insurance_appbar.dart';
 import 'package:globaladvice_new/features/home/presentation/component/medical_form/Widgets/done.dart';
 import 'package:globaladvice_new/features/home/presentation/component/medical_form/Widgets/medical_appbar.dart';
-import 'package:globaladvice_new/main_screen.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 import '../../../../../../core/resource_manger/asset_path.dart';
