@@ -326,17 +326,6 @@ class _CreateAccountState extends State<CreateAccount> {
                   padding: EdgeInsets.symmetric(
                       vertical: ConfigSize.defaultSize! * 3),
                   child: MainButton(
-                    // onTap: () {
-                    //   if (validation()) {
-                    //     errorSnackBar(context, StringManager.login.tr());
-                    //   } else {
-                    //     BlocProvider.of<RegisterBloc>(context)
-                    //         .add(RegisterEvent(
-                    //       email: emailController.text,
-                    //       password: 'Nn@\$${passwordController.text}',
-                    //     ));
-                    //   }
-                    // },
 
                     onTap: () {
                       if (validation()) {

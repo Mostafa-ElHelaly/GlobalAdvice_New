@@ -244,18 +244,4 @@ class _LifeFormMainPersonDataState extends State<LifeFormMainPersonData> {
     );
   }
 
-//   bool validation() {
-//     if (marketValueController.text == '') {
-//       return false;
-//     } else if (lastNameController.text == '') {
-//       return false;
-//     } else if (emailController.text == '') {
-//       return false;
-//     } else if (phoneController.text == '') {
-//       return false;
-//     } else {
-//       return true;
-//     }
-//   }
-// }
 }

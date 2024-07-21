@@ -151,9 +151,7 @@ class _MedicalForm3State extends State<MedicalForm3> {
                         vertical: ConfigSize.defaultSize! * 1),
                     child: MainButton(
                       onTap: () {
-                        // BlocProvider.of<HealthinsuranceBloc>(context).add(
-                        //       HealthinsuranceblocEvent(uid: uid, organizationId: organizationId, planId: planId, name: name, age: age, relation: relation, price: price, gender: gender)
-                        //     );
+
                       },
                       title: StringManager.submit.tr(),
                     ),

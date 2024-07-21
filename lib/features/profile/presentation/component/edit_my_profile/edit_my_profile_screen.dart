@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:csc_picker/csc_picker.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +12,6 @@ import 'package:globaladvice_new/core/widgets/main_button.dart';
 import 'package:globaladvice_new/features/auth/presentation/component/forget_password/change_password_screen.dart';
 import 'package:globaladvice_new/features/auth/presentation/component/forget_password/forget_password_screen.dart';
 import 'package:globaladvice_new/main_screen.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 class EditMyProfileScreen extends StatefulWidget {
