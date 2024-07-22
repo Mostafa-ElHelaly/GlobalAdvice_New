@@ -173,10 +173,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ],
               ),
             ),
-            SizedBox(
-              height: ConfigSize.defaultSize! * 21,
-            ),
-            // const Spacer(),
+            const Spacer(),
             Padding(
               padding: EdgeInsets.all(ConfigSize.defaultSize! * 1.5),
               child: Row(

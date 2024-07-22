@@ -8,7 +8,6 @@ import 'package:globaladvice_new/core/resource_manger/locale_keys.g.dart';
 import 'package:globaladvice_new/core/utils/config_size.dart';
 import 'package:globaladvice_new/core/widgets/Custom_Drawer.dart';
 import 'package:globaladvice_new/features/home/presentation/component/card_screen/card_screen.dart';
-import 'package:globaladvice_new/features/home/presentation/component/card_screen/card_slider.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'component/car_form/pages/car_form_1.dart';
 import 'component/life_form/pages/life_form_main_person_data .dart';
@@ -28,32 +27,6 @@ class _HomeScreenState extends State<HomeScreen> {
     "assets/images/home_img.png",
     "assets/images/home_img.png",
     "assets/images/home_img.png"
-  ];
-  final card = [
-    const CardSliderScreen(
-      text1: 'Motor Plus',
-      text2:
-          'As a car owner, it is almost impossible imagining your life without your car. Not only do you depend on it for the most essential things such as getting to work and taking your children to school, but even for the most fun such as meeting friends and traveling.That’s why you need to be prepared when the unexpected occurs.',
-      image: "assets/images/home_img.png",
-    ),
-    const CardSliderScreen(
-      text1: 'Motor Plus',
-      text2:
-          'As a car owner, it is almost impossible imagining your life without your car. Not only do you depend on it for the most essential things such as getting to work and taking your children to school, but even for the most fun such as meeting friends and traveling.That’s why you need to be prepared when the unexpected occurs.',
-      image: "assets/images/home_img.png",
-    ),
-    const CardSliderScreen(
-      text1: 'Motor Plus',
-      text2:
-          'As a car owner, it is almost impossible imagining your life without your car. Not only do you depend on it for the most essential things such as getting to work and taking your children to school, but even for the most fun such as meeting friends and traveling.That’s why you need to be prepared when the unexpected occurs.',
-      image: "assets/images/home_img.png",
-    ),
-    const CardSliderScreen(
-      text1: 'Motor Plus',
-      text2:
-          'As a car owner, it is almost impossible imagining your life without your car. Not only do you depend on it for the most essential things such as getting to work and taking your children to school, but even for the most fun such as meeting friends and traveling.That’s why you need to be prepared when the unexpected occurs.',
-      image: "assets/images/home_img.png",
-    ),
   ];
   int currentIndexPage = 0;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -484,7 +457,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),
-
             ],
           ),
         ),
