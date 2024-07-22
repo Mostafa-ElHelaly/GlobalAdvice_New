@@ -17,6 +17,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
         name: event.name,
         phone: event.phone,
       ));
+
       result.fold(
           (l) => emit(RegisterSuccessState(
                 authModelResponse: l,
