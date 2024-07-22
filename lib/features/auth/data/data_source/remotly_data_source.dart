@@ -13,36 +13,34 @@ import '../../domain/use_case/reset_password_us.dart';
 import '../model/reset_password_model.dart';
 
 abstract class BaseRemotelyDataSource {
-  Future<LoginModel> loginWithEmailAndPassword(AuthModel authModel);
+  Future<Unit> loginWithEmailAndPassword(LoginModel authModel);
 
-  Future<LoginModel> registerWithEmailAndPassword(RegisterAuthModel registerAuthModel);
+  Future<LoginModel> registerWithEmailAndPassword(
+      RegisterAuthModel registerAuthModel);
 
   Future<Unit> resetPasswordWithEmail(String email);
 }
 
 class AuthRemotelyDateSource extends BaseRemotelyDataSource {
   @override
-  Future<LoginModel> loginWithEmailAndPassword(AuthModel authModel) async {
-    final body = {"email": authModel.email, "password": authModel.password};
+  Future<Unit> loginWithEmailAndPassword(LoginModel authModel) async {
+    final body = {
+      "email": authModel.email,
+      "password": authModel.password,
+    };
 
     try {
       final response = await Dio().post(
         ConstantApi.login,
         data: FormData.fromMap(body),
       );
-      Map<String, dynamic> jsonData = response.data;
-
-      if(jsonData['status'] != 200){
-        print(jsonData);
-        throw new Exception(jsonData['error']);
+      if (response.statusCode == 200) {
+        print('reset password success');
+        return Future.value(unit);
+      } else {
+        throw Exception(Strings.resetPasswordFailed);
       }
-
-      LoginModel authModelResponse = LoginModel.fromJson(jsonData);
-      Methods.instance.saveUserToken(authToken: authModelResponse.token);
-      return authModelResponse;
     } on DioException catch (e) {
-
-
       throw DioHelper.handleDioError(
           dioError: e, endpointName: "loginWithEmailAndPassword");
     }
@@ -56,18 +54,21 @@ class AuthRemotelyDateSource extends BaseRemotelyDataSource {
       "password": registerAuthModel.password,
       "phone": registerAuthModel.phone,
       "name": registerAuthModel.name,
-
     };
 
     try {
       final response = await Dio().post(
-
         ConstantApi.register,
-        data:FormData.fromMap(body),
+        data: FormData.fromMap(body),
+        options: Options(
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+        ),
       );
       Map<String, dynamic> jsonData = response.data;
 
-      if(jsonData['status'] != 200){
+      if (jsonData['status'] != 200) {
         print(jsonData);
         throw new Exception(jsonData['error']);
       }

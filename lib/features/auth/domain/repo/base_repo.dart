@@ -6,8 +6,7 @@ import '../use_case/login_uc.dart';
 import '../use_case/register_uc.dart';
 
 abstract class BaseRepository {
-  Future<Either<LoginModel, Failure>> loginWithEmailAndPassword(
-      AuthModel authModel);
+  Future<Either<Unit, Failure>> loginWithEmailAndPassword(LoginModel authModel);
   Future<Either<LoginModel, Failure>> registerWithEmailAndPassword(
       RegisterAuthModel registerAuthModel);
   Future<Either<Unit, Failure>> resetPassword(String email);

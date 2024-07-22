@@ -9,7 +9,7 @@ class LoginModel {
   int? deleted;
   String? addstamp;
   String? updatestamp;
-
+  String? password;
   bool? isAuthenticated;
   String? token;
   DateTime? expiresOn;
@@ -17,6 +17,7 @@ class LoginModel {
 
   LoginModel({
     this.id,
+    this.password,
     this.name,
     this.birthdate,
     this.gender,
@@ -34,6 +35,7 @@ class LoginModel {
 
   LoginModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
+    password = json['password'];
     name = json['name'];
     birthdate = json['birthdate'];
     gender = json['gender'];
@@ -52,6 +54,7 @@ class LoginModel {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
+    data['password'] = this.password;
     data['name'] = this.name;
     data['birthdate'] = this.birthdate;
     data['gender'] = this.gender;
