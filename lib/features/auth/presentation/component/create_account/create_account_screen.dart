@@ -248,7 +248,6 @@ class _CreateAccountState extends State<CreateAccount> {
                 CustomTextField(
                   controller: phoneController,
                   inputType: TextInputType.number,
-
                 ),
                 SizedBox(height: ConfigSize.defaultSize! * 2),
                 Text(
@@ -263,7 +262,7 @@ class _CreateAccountState extends State<CreateAccount> {
                 ),
                 CustomTextField(
                   controller: dateOfBirthdayController,
-                  inputType: TextInputType.datetime,
+                  inputType: TextInputType.none,
                   suffix: IconButton(
                       onPressed: () async {
                         await _selectDate(context);
@@ -327,7 +326,6 @@ class _CreateAccountState extends State<CreateAccount> {
                   padding: EdgeInsets.symmetric(
                       vertical: ConfigSize.defaultSize! * 3),
                   child: MainButton(
-
                     onTap: () {
                       if (validation()) {
                         BlocProvider.of<RegisterBloc>(context).add(
@@ -335,7 +333,7 @@ class _CreateAccountState extends State<CreateAccount> {
                             email: emailController.text,
                             password: 'Nn@\$${passwordController.text}',
                             name: fullNameController.text,
-                            phone:int.tryParse( phoneController.text)!,
+                            phone: int.tryParse(phoneController.text)!,
                           ),
                         );
                       } else {

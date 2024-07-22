@@ -43,7 +43,8 @@ class _LifeFormMainPersonDataState extends State<LifeFormMainPersonData> {
           return Theme(
               data: ThemeData.light().copyWith(
                 hintColor: ColorManager.gray,
-                colorScheme: const ColorScheme.light(primary: ColorManager.mainColor),
+                colorScheme:
+                    const ColorScheme.light(primary: ColorManager.mainColor),
               ),
               child: child!);
         },
@@ -147,7 +148,7 @@ class _LifeFormMainPersonDataState extends State<LifeFormMainPersonData> {
                 labeltext: StringManager.birthday.tr(),
                 prefixicon: const Icon(Icons.cake),
                 controller: birthdayController,
-                inputType: TextInputType.datetime,
+                inputType: TextInputType.none,
                 suffix: IconButton(
                     onPressed: () async {
                       await _selectDate(context);
@@ -218,13 +219,13 @@ class _LifeFormMainPersonDataState extends State<LifeFormMainPersonData> {
                 child: MainButton(
                   onTap: () {
                     AwesomeDialog(
-                        context: context,
-                        dialogType: DialogType.success,
-                        animType: AnimType.rightSlide,
-                        desc: StringManager.lifeinsurancerequest.tr(),
-                        btnOkOnPress: () {},
-                        btnOk: const CustomBackButton())
-                      .show();
+                            context: context,
+                            dialogType: DialogType.success,
+                            animType: AnimType.rightSlide,
+                            desc: StringManager.lifeinsurancerequest.tr(),
+                            btnOkOnPress: () {},
+                            btnOk: const CustomBackButton())
+                        .show();
                     Future.delayed(const Duration(seconds: 5), () {
                       PersistentNavBarNavigator.pushNewScreen(
                         context,
@@ -243,5 +244,4 @@ class _LifeFormMainPersonDataState extends State<LifeFormMainPersonData> {
       ),
     );
   }
-
 }
