@@ -1,15 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:globaladvice_new/core/resource_manger/color_manager.dart';
 import 'package:globaladvice_new/core/resource_manger/locale_keys.g.dart';
 import 'package:globaladvice_new/core/resource_manger/routs_manager.dart';
 import 'package:globaladvice_new/core/utils/config_size.dart';
+import 'package:globaladvice_new/core/utils/methods.dart';
+import 'package:globaladvice_new/core/utils/translation_provider.dart';
+import 'package:globaladvice_new/main.dart';
+import 'package:provider/provider.dart';
 import 'package:share/share.dart';
 
 import '../resource_manger/asset_path.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class CustomDrawer extends StatelessWidget {
+class CustomDrawer extends StatefulWidget {
   const CustomDrawer({super.key});
 
+  @override
+  State<CustomDrawer> createState() => _CustomDrawerState();
+}
+
+class _CustomDrawerState extends State<CustomDrawer> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -73,6 +84,18 @@ class CustomDrawer extends StatelessWidget {
             },
           ),
           const MyDivider(),
+          Consumer<TranslationProvider>(
+            builder: (context, translate, child) {
+              return DrawerTile(
+                title: AppLocalizations.of(context)!.translation,
+                icon: Icons.translate,
+                onTap: () {
+                  translate.change_language();
+                },
+              );
+            },
+          ),
+          const MyDivider(),
           DrawerTile(
             title: StringManager.logOut,
             icon: Icons.exit_to_app,
@@ -88,7 +111,8 @@ class CustomDrawer extends StatelessWidget {
 }
 
 class DrawerTile extends StatelessWidget {
-  const DrawerTile({super.key, required this.title, required this.icon, this.onTap});
+  const DrawerTile(
+      {super.key, required this.title, required this.icon, this.onTap});
   final String title;
   final IconData icon;
   final void Function()? onTap;

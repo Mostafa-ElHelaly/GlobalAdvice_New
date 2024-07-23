@@ -14,6 +14,7 @@ import '../../features/auth/presentation/manager/login_bloc/login_bloc.dart';
 import '../../features/auth/presentation/manager/register_bloc/register_bloc.dart';
 import '../../features/auth/presentation/manager/reset_password_bloc/bloc/reset_password_bloc.dart';
 import '../../features/home/data/repo_imp/repo_impl.dart';
+import '../../features/home/domain/use_case/translation_use_case.dart';
 
 final getIt = GetIt.instance;
 

@@ -13,6 +13,7 @@ import 'component/car_form/pages/car_form_1.dart';
 import 'component/life_form/pages/life_form_main_person_data .dart';
 import 'component/medical_form/Pages/medical_form_1.dart';
 import 'component/property_form/pages/property_form_1 .dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -133,7 +134,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   horizontal: ConfigSize.defaultSize! * 3,
                                 ),
                                 child: Text(
-                                  StringManager.viewPlans.tr(),
+                                  AppLocalizations.of(context)!.viewPlans,
                                   style: TextStyle(
                                     color: ColorManager.kPrimaryBlueDark,
                                     fontWeight: FontWeight.bold,

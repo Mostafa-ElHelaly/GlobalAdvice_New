@@ -41,4 +41,6 @@ class Methods {
       return true;
     }
   }
+
+  static Locale defaultLocale = Locale('en');
 }

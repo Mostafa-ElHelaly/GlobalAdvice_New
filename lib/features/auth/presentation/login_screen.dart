@@ -17,6 +17,7 @@ import '../../../core/widgets/snack_bar.dart';
 import 'manager/login_bloc/login_bloc.dart';
 import 'manager/login_bloc/login_event.dart';
 import 'manager/login_bloc/login_state.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -167,7 +168,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           errorSnackBar(context, StringManager.errorFillFields);
                         }
                       },
-                      title: StringManager.login.tr(),
+                      title: AppLocalizations.of(context)!.signingIn,
                     ),
                   ),
                 ],
