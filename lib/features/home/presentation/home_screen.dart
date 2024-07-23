@@ -23,10 +23,9 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final items = [
-    "assets/images/home_img.png",
-    "assets/images/home_img.png",
-    "assets/images/home_img.png",
-    "assets/images/home_img.png"
+    "assets/images/1.png",
+    "assets/images/2.png",
+    "assets/images/6.png",
   ];
   int currentIndexPage = 0;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();

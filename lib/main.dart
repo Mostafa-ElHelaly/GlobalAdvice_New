@@ -7,6 +7,7 @@ import 'package:globaladvice_new/core/service/service_locator.dart';
 import 'package:globaladvice_new/core/translations/codegen_loader.g.dart';
 import 'package:globaladvice_new/core/utils/config_size.dart';
 import 'package:globaladvice_new/features/auth/presentation/login_screen.dart';
+import 'package:globaladvice_new/features/home/presentation/home_screen.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/healthinsurancebloc/healthinsurancebloc_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -72,7 +73,7 @@ class MyApp extends StatelessWidget {
         ),
         navigatorKey: getIt<NavigationService>().navigatorKey,
         onGenerateRoute: RouteGenerator.getRoute,
-        home: const LoginScreen(),
+        home: const HomeScreen(),
       ),
     );
   }
