@@ -12,6 +12,8 @@ import 'package:globaladvice_new/features/home/presentation/component/property_f
 import 'package:globaladvice_new/features/profile/presentation/profile_screen.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:pinput/pinput.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../medical_form/Pages/medical_form_1.dart';
 
@@ -75,7 +77,9 @@ class _CardScreenState extends State<CardScreen> {
                                   height: ConfigSize.defaultSize! * 1,
                                 ),
                                 Text(
-                                  StringManager.medicalInsurance.tr(),
+                                  AppLocalizations.of(context)!
+                                      .medicalinsurance,
+                                  textAlign: TextAlign.center,
                                   style: const TextStyle(
                                       color: ColorManager.whiteColor,
                                       fontSize: 20,
@@ -114,7 +118,8 @@ class _CardScreenState extends State<CardScreen> {
                                   height: ConfigSize.defaultSize! * 1,
                                 ),
                                 Text(
-                                  StringManager.carInsurance.tr(),
+                                  AppLocalizations.of(context)!.carisurance,
+                                  textAlign: TextAlign.center,
                                   style: const TextStyle(
                                       color: ColorManager.whiteColor,
                                       fontSize: 25,
@@ -161,7 +166,9 @@ class _CardScreenState extends State<CardScreen> {
                                   height: ConfigSize.defaultSize! * 1,
                                 ),
                                 Text(
-                                  StringManager.propertyInsurance.tr(),
+                                  AppLocalizations.of(context)!
+                                      .propertyinsurance,
+                                  textAlign: TextAlign.center,
                                   style: const TextStyle(
                                       color: ColorManager.whiteColor,
                                       fontSize: 25,
@@ -200,7 +207,8 @@ class _CardScreenState extends State<CardScreen> {
                                   height: ConfigSize.defaultSize! * 1,
                                 ),
                                 Text(
-                                  StringManager.lifeInsurance.tr(),
+                                  AppLocalizations.of(context)!.lifeinsurance,
+                                  textAlign: TextAlign.center,
                                   style: const TextStyle(
                                       color: ColorManager.whiteColor,
                                       fontSize: 25,
@@ -247,7 +255,9 @@ class _CardScreenState extends State<CardScreen> {
                                   height: ConfigSize.defaultSize! * 1,
                                 ),
                                 Text(
-                                  StringManager.pensionInsurance.tr(),
+                                  AppLocalizations.of(context)!
+                                      .pensioninsurance,
+                                  textAlign: TextAlign.center,
                                   style: const TextStyle(
                                       color: ColorManager.whiteColor,
                                       fontSize: 25,
@@ -286,7 +296,8 @@ class _CardScreenState extends State<CardScreen> {
                                   height: ConfigSize.defaultSize! * 1,
                                 ),
                                 Text(
-                                  StringManager.marineInsurance.tr(),
+                                  AppLocalizations.of(context)!.marineinsurance,
+                                  textAlign: TextAlign.center,
                                   style: const TextStyle(
                                       color: ColorManager.whiteColor,
                                       fontSize: 25,
@@ -333,7 +344,8 @@ class _CardScreenState extends State<CardScreen> {
                                   height: ConfigSize.defaultSize! * 1,
                                 ),
                                 Text(
-                                  StringManager.travelInsurance.tr(),
+                                  AppLocalizations.of(context)!.travelinsurance,
+                                  textAlign: TextAlign.center,
                                   style: const TextStyle(
                                       color: ColorManager.whiteColor,
                                       fontSize: 25,
@@ -372,7 +384,8 @@ class _CardScreenState extends State<CardScreen> {
                                   height: ConfigSize.defaultSize! * 1,
                                 ),
                                 Text(
-                                  StringManager.cyberInsurance.tr(),
+                                  AppLocalizations.of(context)!.cyberinsurance,
+                                  textAlign: TextAlign.center,
                                   style: const TextStyle(
                                       color: ColorManager.whiteColor,
                                       fontSize: 25,
@@ -419,7 +432,9 @@ class _CardScreenState extends State<CardScreen> {
                                   height: ConfigSize.defaultSize! * 1,
                                 ),
                                 Text(
-                                  StringManager.burglaryInsurance.tr(),
+                                  AppLocalizations.of(context)!
+                                      .burglaryinsurance,
+                                  textAlign: TextAlign.center,
                                   style: const TextStyle(
                                       color: ColorManager.whiteColor,
                                       fontSize: 25,
@@ -458,7 +473,8 @@ class _CardScreenState extends State<CardScreen> {
                                   height: ConfigSize.defaultSize! * 1,
                                 ),
                                 Text(
-                                  StringManager.contractorsRiskInsurance.tr(),
+                                  AppLocalizations.of(context)!.contractorsrisk,
+                                  textAlign: TextAlign.center,
                                   style: const TextStyle(
                                       color: ColorManager.whiteColor,
                                       fontSize: 25,
@@ -505,7 +521,9 @@ class _CardScreenState extends State<CardScreen> {
                                   height: ConfigSize.defaultSize! * 1,
                                 ),
                                 Text(
-                                  StringManager.personalAccidentsInsurance.tr(),
+                                  AppLocalizations.of(context)!
+                                      .personalaccidents,
+                                  textAlign: TextAlign.center,
                                   style: const TextStyle(
                                       color: ColorManager.whiteColor,
                                       fontSize: 25,
@@ -544,7 +562,9 @@ class _CardScreenState extends State<CardScreen> {
                                   height: ConfigSize.defaultSize! * 1,
                                 ),
                                 Text(
-                                  StringManager.generalAccidentsInsurance.tr(),
+                                  AppLocalizations.of(context)!
+                                      .generalaccidents,
+                                  textAlign: TextAlign.center,
                                   style: const TextStyle(
                                       color: ColorManager.whiteColor,
                                       fontSize: 25,
@@ -592,7 +612,8 @@ class _CardScreenState extends State<CardScreen> {
                                   height: ConfigSize.defaultSize! * 1,
                                 ),
                                 Text(
-                                  StringManager.howto.tr(),
+                                  AppLocalizations.of(context)!.howto,
+                                  textAlign: TextAlign.center,
                                   style: const TextStyle(
                                       color: ColorManager.whiteColor,
                                       fontSize: 25,
@@ -631,7 +652,8 @@ class _CardScreenState extends State<CardScreen> {
                                   height: ConfigSize.defaultSize! * 1,
                                 ),
                                 Text(
-                                  StringManager.help.tr(),
+                                  AppLocalizations.of(context)!.help,
+                                  textAlign: TextAlign.center,
                                   style: const TextStyle(
                                       color: ColorManager.whiteColor,
                                       fontSize: 25,

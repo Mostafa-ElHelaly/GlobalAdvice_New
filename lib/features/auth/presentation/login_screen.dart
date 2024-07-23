@@ -18,6 +18,7 @@ import 'manager/login_bloc/login_bloc.dart';
 import 'manager/login_bloc/login_event.dart';
 import 'manager/login_bloc/login_state.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -82,7 +83,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    StringManager.email.tr(),
+                    AppLocalizations.of(context)!.email,
                     style: TextStyle(
                       fontSize: ConfigSize.defaultSize! * 1.6,
                       fontWeight: FontWeight.w600,
@@ -99,7 +100,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: ConfigSize.defaultSize! * 2,
                   ),
                   Text(
-                    StringManager.password.tr(),
+                    AppLocalizations.of(context)!.password,
                     style: TextStyle(
                       fontSize: ConfigSize.defaultSize! * 1.6,
                       fontWeight: FontWeight.w600,
@@ -140,7 +141,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           );
                         },
                         child: Text(
-                          StringManager.forgetPassword.tr(),
+                          AppLocalizations.of(context)!.forgetPassword,
                           style: TextStyle(
                             fontSize: ConfigSize.defaultSize! * 1.6,
                             fontWeight: FontWeight.w600,
@@ -181,19 +182,15 @@ class _LoginScreenState extends State<LoginScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    StringManager.dontHaveAccount.tr(),
+                    AppLocalizations.of(context)!.donthaveaccount,
                     style: const TextStyle(
                       color: ColorManager.gray,
                     ),
                   ),
                   InkWell(
                     onTap: () {
-                      PersistentNavBarNavigator.pushNewScreen(
-                        context,
-                        screen: const CreateAccount(),
-                        withNavBar: false,
-                        pageTransitionAnimation: PageTransitionAnimation.fade,
-                      );
+                      Navigator.pushNamedAndRemoveUntil(
+                          context, Routes.createAccount, (route) => false);
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -206,7 +203,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           horizontal: ConfigSize.defaultSize! * 3,
                         ),
                         child: Text(
-                          StringManager.createAccount.tr(),
+                          AppLocalizations.of(context)!.createAccount,
                           style: TextStyle(
                             color: ColorManager.kPrimaryBlueDark,
                             fontWeight: FontWeight.bold,

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../../../../../../core/resource_manger/color_manager.dart';
 import '../../../../../../core/resource_manger/locale_keys.g.dart';
 import '../../../../../../core/utils/config_size.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CarAppbar extends AppBar {
   CarAppbar(BuildContext context)
@@ -23,7 +24,7 @@ class CarAppbar extends AppBar {
           centerTitle: true,
           title: Text(
             textAlign: TextAlign.start,
-            StringManager.carInsuranceForm.tr(),
+            AppLocalizations.of(context)!.carisurance,
             style: TextStyle(
               fontWeight: FontWeight.w600,
               fontSize: ConfigSize.defaultSize! * 2,

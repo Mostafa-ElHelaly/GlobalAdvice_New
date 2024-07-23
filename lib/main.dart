@@ -12,6 +12,7 @@ import 'package:globaladvice_new/features/home/presentation/home_screen.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/healthinsurancebloc/healthinsurancebloc_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'core/service/bloc_observer.dart';
 import 'core/utils/translation_provider.dart';
@@ -26,16 +27,19 @@ void main() async {
   await EasyLocalization.ensureInitialized();
   await ServerLocator().init();
   Bloc.observer = MyBlocObserver();
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  final isArabic = prefs.getBool("is_arabic") ?? false;
 
   runApp(
-    const MyApp(),
+    MyApp(
+      isArabic: isArabic,
+    ),
   );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
+  MyApp({super.key, required this.isArabic});
+  final bool isArabic;
   @override
   Widget build(BuildContext context) {
     ConfigSize().init(context);
@@ -54,7 +58,7 @@ class MyApp extends StatelessWidget {
           BlocProvider(
             create: (context) => getIt<HealthinsuranceBloc>(),
           ),
-          ChangeNotifierProvider(create: (_) => TranslationProvider()),
+          ChangeNotifierProvider(create: (_) => TranslationProvider(isArabic)),
         ],
         child: Consumer<TranslationProvider>(
           builder: (context, translate, child) {
@@ -88,7 +92,7 @@ class MyApp extends StatelessWidget {
                 }
                 return supportedLocales.first;
               },
-              home: const HomeScreen(),
+              home: const LoginScreen(),
             );
           },
         ));

@@ -10,6 +10,7 @@ import 'package:globaladvice_new/features/home/presentation/manager/healthinsura
 import 'package:globaladvice_new/features/home/presentation/manager/healthinsurancebloc/healthinsurancebloc_event.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/healthinsurancebloc/healthinsurancebloc_state.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../../../core/resource_manger/asset_path.dart';
 import '../../../../../../core/resource_manger/locale_keys.g.dart';
@@ -96,7 +97,7 @@ class _MedicalForm3State extends State<MedicalForm3> {
                                 child: DropdownButton2<String>(
                                   isExpanded: true,
                                   hint: Text(
-                                    'Annual limit',
+                                    AppLocalizations.of(context)!.annuallimit,
                                     style: TextStyle(
                                       fontSize: 14,
                                       color: Theme.of(context).hintColor,
@@ -150,10 +151,8 @@ class _MedicalForm3State extends State<MedicalForm3> {
                     padding: EdgeInsets.symmetric(
                         vertical: ConfigSize.defaultSize! * 1),
                     child: MainButton(
-                      onTap: () {
-
-                      },
-                      title: StringManager.submit.tr(),
+                      onTap: () {},
+                      title: AppLocalizations.of(context)!.submit,
                     ),
                   ),
                 ],

@@ -11,6 +11,7 @@ import 'package:globaladvice_new/features/home/presentation/component/life_form/
 import 'package:globaladvice_new/features/home/presentation/component/medical_form/Widgets/done.dart';
 import 'package:globaladvice_new/features/home/presentation/component/property_form/widgets/Property_Dropdown_Widget.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../../../core/widgets/main_button.dart';
 import '../../../home_screen.dart';

@@ -7,6 +7,7 @@ import 'package:globaladvice_new/features/home/presentation/component/medical_fo
 import 'package:globaladvice_new/features/home/presentation/component/property_form/widgets/Prop_insurance_appbar.dart';
 import 'package:globaladvice_new/features/home/presentation/component/property_form/widgets/Property_Checkbox.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../../../core/resource_manger/asset_path.dart';
 import '../../../../../../core/resource_manger/locale_keys.g.dart';

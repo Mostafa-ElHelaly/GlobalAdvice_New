@@ -1,6 +1,7 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:globaladvice_new/core/resource_manger/asset_path.dart';
@@ -9,12 +10,14 @@ import 'package:globaladvice_new/core/resource_manger/locale_keys.g.dart';
 import 'package:globaladvice_new/core/utils/config_size.dart';
 import 'package:globaladvice_new/core/widgets/custom_text_field.dart';
 import 'package:globaladvice_new/core/widgets/main_button.dart';
+import 'package:globaladvice_new/features/auth/presentation/login_screen.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import '../../../../../core/resource_manger/routs_manager.dart';
 import '../../../../../core/widgets/snack_bar.dart';
 import '../../manager/register_bloc/register_bloc.dart';
 import '../../manager/register_bloc/register_event.dart';
 import '../../manager/register_bloc/register_state.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CreateAccount extends StatefulWidget {
   const CreateAccount({super.key});
@@ -31,6 +34,7 @@ class _CreateAccountState extends State<CreateAccount> {
   TextEditingController dateOfBirthdayController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
+  FocusNode _focusNode = FocusNode();
   String phoneNumber = '';
 
   @override
@@ -42,6 +46,14 @@ class _CreateAccountState extends State<CreateAccount> {
     passwordController = TextEditingController();
     dateOfBirthdayController = TextEditingController();
     confirmPasswordController = TextEditingController();
+    _focusNode = FocusNode();
+
+    // Disable focus
+    _focusNode.addListener(() {
+      if (_focusNode.hasFocus) {
+        _focusNode.unfocus();
+      }
+    });
     super.initState();
   }
 
@@ -54,16 +66,14 @@ class _CreateAccountState extends State<CreateAccount> {
     passwordController.dispose();
     dateOfBirthdayController.dispose();
     confirmPasswordController.dispose();
+    _focusNode.dispose();
     super.dispose();
   }
 
   String? selectedValue;
   bool isVisible = true;
   bool isVisible1 = true;
-  final List<String> items = [
-    'Male',
-    'Female',
-  ];
+
   DateTime selectedDate = DateTime.now();
 
   Future<Null> _selectDate(BuildContext context) async {
@@ -96,6 +106,10 @@ class _CreateAccountState extends State<CreateAccount> {
 
   @override
   Widget build(BuildContext context) {
+    final List<String> items = [
+      AppLocalizations.of(context)!.male,
+      AppLocalizations.of(context)!.female,
+    ];
     return BlocListener<RegisterBloc, RegisterState>(
       listener: (context, state) {
         if (state is RegisterSuccessState) {
@@ -122,7 +136,7 @@ class _CreateAccountState extends State<CreateAccount> {
           ),
           centerTitle: true,
           title: Text(
-            StringManager.signUpWithUs.tr(),
+            AppLocalizations.of(context)!.signupwithus,
             style: TextStyle(
               fontWeight: FontWeight.w600,
               fontSize: ConfigSize.defaultSize! * 2,
@@ -151,7 +165,7 @@ class _CreateAccountState extends State<CreateAccount> {
                   height: ConfigSize.defaultSize! * 5,
                 ),
                 Text(
-                  StringManager.fullName.tr(),
+                  AppLocalizations.of(context)!.fullName,
                   style: TextStyle(
                     fontSize: ConfigSize.defaultSize! * 1.6,
                     fontWeight: FontWeight.w600,
@@ -163,7 +177,7 @@ class _CreateAccountState extends State<CreateAccount> {
                 ),
                 SizedBox(height: ConfigSize.defaultSize! * 2),
                 Text(
-                  StringManager.gander.tr(),
+                  AppLocalizations.of(context)!.gender,
                   style: TextStyle(
                     fontSize: ConfigSize.defaultSize! * 1.6,
                     fontWeight: FontWeight.w600,
@@ -177,7 +191,7 @@ class _CreateAccountState extends State<CreateAccount> {
                     child: DropdownButton2<String>(
                       isExpanded: true,
                       hint: Text(
-                        'Gander',
+                        AppLocalizations.of(context)!.gender,
                         style: TextStyle(
                           fontSize: 14,
                           color: Theme.of(context).hintColor,
@@ -221,7 +235,7 @@ class _CreateAccountState extends State<CreateAccount> {
                 ),
                 SizedBox(height: ConfigSize.defaultSize! * 2),
                 Text(
-                  StringManager.email.tr(),
+                  AppLocalizations.of(context)!.email,
                   style: TextStyle(
                     fontSize: ConfigSize.defaultSize! * 1.6,
                     fontWeight: FontWeight.w600,
@@ -236,7 +250,7 @@ class _CreateAccountState extends State<CreateAccount> {
                 ),
                 SizedBox(height: ConfigSize.defaultSize! * 2),
                 Text(
-                  StringManager.phone.tr(),
+                  AppLocalizations.of(context)!.phonenumber,
                   style: TextStyle(
                     fontSize: ConfigSize.defaultSize! * 1.6,
                     fontWeight: FontWeight.w600,
@@ -251,7 +265,7 @@ class _CreateAccountState extends State<CreateAccount> {
                 ),
                 SizedBox(height: ConfigSize.defaultSize! * 2),
                 Text(
-                  StringManager.dateOfBirthday.tr(),
+                  AppLocalizations.of(context)!.dateOfBirthday,
                   style: TextStyle(
                     fontSize: ConfigSize.defaultSize! * 1.6,
                     fontWeight: FontWeight.w600,
@@ -261,6 +275,7 @@ class _CreateAccountState extends State<CreateAccount> {
                   height: ConfigSize.defaultSize! - 5,
                 ),
                 CustomTextField(
+                  focusNode: _focusNode,
                   controller: dateOfBirthdayController,
                   inputType: TextInputType.none,
                   suffix: IconButton(
@@ -271,7 +286,7 @@ class _CreateAccountState extends State<CreateAccount> {
                 ),
                 SizedBox(height: ConfigSize.defaultSize! * 2),
                 Text(
-                  StringManager.password.tr(),
+                  AppLocalizations.of(context)!.password,
                   style: TextStyle(
                     fontSize: ConfigSize.defaultSize! * 1.6,
                     fontWeight: FontWeight.w600,
@@ -297,7 +312,7 @@ class _CreateAccountState extends State<CreateAccount> {
                 ),
                 SizedBox(height: ConfigSize.defaultSize! * 2),
                 Text(
-                  StringManager.confirmPassword.tr(),
+                  AppLocalizations.of(context)!.confirmPassword,
                   style: TextStyle(
                     fontSize: ConfigSize.defaultSize! * 1.6,
                     fontWeight: FontWeight.w600,
@@ -348,7 +363,7 @@ class _CreateAccountState extends State<CreateAccount> {
                     //   pageTransitionAnimation: PageTransitionAnimation.fade,
                     // );
 
-                    title: StringManager.next.tr(),
+                    title: AppLocalizations.of(context)!.next,
                   ),
                 ),
                 SizedBox(
@@ -358,7 +373,7 @@ class _CreateAccountState extends State<CreateAccount> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      StringManager.alreadyHaveAnAccount.tr(),
+                      AppLocalizations.of(context)!.alreadyHaveAnAccount,
                       style: TextStyle(
                         color: ColorManager.kPrimaryBlueDark,
                         fontWeight: FontWeight.bold,
@@ -367,12 +382,8 @@ class _CreateAccountState extends State<CreateAccount> {
                     ),
                     InkWell(
                       onTap: () {
-                        PersistentNavBarNavigator.pushNewScreen(
-                          context,
-                          screen: const CreateAccount(),
-                          withNavBar: false,
-                          pageTransitionAnimation: PageTransitionAnimation.fade,
-                        );
+                        Navigator.pushNamedAndRemoveUntil(
+                            context, Routes.login, (route) => false);
                       },
                       child: Container(
                         decoration: BoxDecoration(
@@ -385,7 +396,7 @@ class _CreateAccountState extends State<CreateAccount> {
                             horizontal: ConfigSize.defaultSize! * 3,
                           ),
                           child: Text(
-                            StringManager.login.tr(),
+                            AppLocalizations.of(context)!.login,
                             style: TextStyle(
                               color: ColorManager.kPrimaryBlueDark,
                               fontWeight: FontWeight.bold,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:globaladvice_new/features/auth/presentation/component/create_account/create_account_screen.dart';
 import 'package:globaladvice_new/features/auth/presentation/login_screen.dart';
 import 'package:globaladvice_new/features/home/presentation/component/card_screen/card_screen.dart';
 import 'package:globaladvice_new/features/profile/presentation/component/edit_my_profile/edit_my_profile_screen.dart';
@@ -39,6 +40,10 @@ class RouteGenerator {
         currentContext = Routes.homeScreen;
         return MaterialPageRoute(
             settings: settings, builder: (_) => const HomeScreen());
+      case Routes.createAccount:
+        currentContext = Routes.createAccount;
+        return MaterialPageRoute(
+            settings: settings, builder: (_) => const CreateAccount());
 
       case Routes.profile:
         currentContext = Routes.profile;

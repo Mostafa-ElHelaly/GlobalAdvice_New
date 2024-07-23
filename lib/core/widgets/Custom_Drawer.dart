@@ -43,7 +43,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
           ),
           SizedBox(height: ConfigSize.defaultSize! * 2),
           DrawerTile(
-            title: StringManager.home,
+            title: AppLocalizations.of(context)!.home,
             icon: Icons.home,
             onTap: () {
               Navigator.of(context)
@@ -52,7 +52,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
           ),
           const MyDivider(),
           DrawerTile(
-            title: StringManager.plans,
+            title: AppLocalizations.of(context)!.plans,
             icon: Icons.home_repair_service_rounded,
             onTap: () {
               Navigator.of(context).pushNamed(Routes.plans);
@@ -60,7 +60,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
           ),
           const MyDivider(),
           DrawerTile(
-            title: StringManager.myProfile,
+            title: AppLocalizations.of(context)!.myProfile,
             icon: Icons.person,
             onTap: () {
               Navigator.of(context).pushNamed(Routes.profile);
@@ -68,7 +68,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
           ),
           const MyDivider(),
           DrawerTile(
-            title: StringManager.editprofile,
+            title: AppLocalizations.of(context)!.editprofile,
             icon: Icons.edit,
             onTap: () {
               Navigator.of(context).pushNamed(Routes.editProfile);
@@ -76,7 +76,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
           ),
           const MyDivider(),
           DrawerTile(
-            title: StringManager.share,
+            title: AppLocalizations.of(context)!.share,
             icon: Icons.share,
             onTap: () {
               Share.share(
@@ -97,7 +97,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
           ),
           const MyDivider(),
           DrawerTile(
-            title: StringManager.logOut,
+            title: AppLocalizations.of(context)!.logOut,
             icon: Icons.exit_to_app,
             onTap: () {
               Navigator.of(context)

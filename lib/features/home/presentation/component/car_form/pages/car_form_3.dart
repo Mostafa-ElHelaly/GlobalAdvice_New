@@ -13,6 +13,7 @@ import '../../../../../../core/utils/config_size.dart';
 import '../../../../../../core/widgets/custom_text_field.dart';
 import '../../../../../../core/widgets/main_button.dart';
 import '../widgets/Motor_Dropdown_Widget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CarForm3 extends StatefulWidget {
   const CarForm3({super.key});
@@ -90,7 +91,7 @@ class _CarForm3State extends State<CarForm3> {
                               selectedValue3 = value;
                             });
                           },
-                          label: StringManager.carBrand.tr(),
+                          label: AppLocalizations.of(context)!.carbrand,
                           selectedValue: selectedValue3,
                         ),
                         SizedBox(height: ConfigSize.defaultSize! * 2),
@@ -101,7 +102,7 @@ class _CarForm3State extends State<CarForm3> {
                               selectedValue4 = value;
                             });
                           },
-                          label: StringManager.motorDeductibles.tr(),
+                          label: AppLocalizations.of(context)!.motorDeductibles,
                           selectedValue: selectedValue4,
                         ),
                         SizedBox(height: ConfigSize.defaultSize! * 2),
@@ -112,7 +113,7 @@ class _CarForm3State extends State<CarForm3> {
                               selectedValue5 = value;
                             });
                           },
-                          label: StringManager.manufactureYear.tr(),
+                          label: AppLocalizations.of(context)!.manufactureYear,
                           selectedValue: selectedValue5,
                         ),
                         SizedBox(height: ConfigSize.defaultSize! * 2),
@@ -142,7 +143,7 @@ class _CarForm3State extends State<CarForm3> {
                       );
                     });
                   },
-                  title: StringManager.submit.tr(),
+                  title: AppLocalizations.of(context)!.submit,
                 ),
               ),
             ],

@@ -2,25 +2,27 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../../core/utils/config_size.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DropDown extends StatelessWidget {
   DropDown({super.key, this.onchanged, this.selectedValue});
   final Function(String?)? onchanged;
   final String? selectedValue;
-  final List<String> items = [
-    'Male',
-    'Female',
-  ];
 
   bool isVisible = true;
   bool isVisible1 = true;
   @override
   Widget build(BuildContext context) {
+    final List<String> items = [
+      AppLocalizations.of(context)!.male,
+      AppLocalizations.of(context)!.female,
+    ];
+
     return DropdownButtonHideUnderline(
       child: DropdownButton2<String>(
         isExpanded: true,
         hint: Text(
-          'Gander',
+          AppLocalizations.of(context)!.gender,
           style: TextStyle(
             fontSize: 14,
             color: Theme.of(context).hintColor,

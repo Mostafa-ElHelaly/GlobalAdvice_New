@@ -8,6 +8,7 @@ import 'package:globaladvice_new/features/home/presentation/component/car_form/w
 import 'package:globaladvice_new/features/home/presentation/component/property_form/pages/property_form_3%20.dart';
 import 'package:globaladvice_new/features/home/presentation/component/property_form/widgets/Prop_insurance_appbar.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../../../core/resource_manger/asset_path.dart';
 import '../../../../../../core/resource_manger/locale_keys.g.dart';
