@@ -13,6 +13,7 @@ import 'package:globaladvice_new/features/home/presentation/component/property_f
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../../../../../core/widgets/Custom_Drawer.dart';
 import '../../../../../../core/widgets/main_button.dart';
 import '../../../home_screen.dart';
 import '../widgets/Life_Insu_Appbar.dart';
@@ -63,6 +64,7 @@ class _LifeFormMainPersonDataState extends State<LifeFormMainPersonData> {
         ;
       });
   }
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
@@ -112,9 +114,21 @@ class _LifeFormMainPersonDataState extends State<LifeFormMainPersonData> {
     ];
 
     return Scaffold(
-      backgroundColor: ColorManager.whiteColor,
-      appBar: LifeAppbar(context),
-      body: Padding(
+      drawer: const CustomDrawer(),
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.menu),
+          iconSize: 32, // Adjust the size as needed
+          onPressed: () {
+            _scaffoldKey.currentState!.openDrawer();
+          },
+        ),
+        centerTitle: true,
+        title: Image.asset(
+          AssetsPath.logo,
+          scale: 10,
+        ),
+      ),       body: Padding(
         padding: EdgeInsets.all(ConfigSize.defaultSize! * 1.5),
         child: SingleChildScrollView(
           child: Column(

@@ -12,6 +12,7 @@ import 'package:globaladvice_new/features/home/presentation/component/medical_fo
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../../../../../core/widgets/Custom_Drawer.dart';
 import '../../../../../../core/widgets/main_button.dart';
 
 class MedicalFormMainPersonData extends StatefulWidget {
@@ -41,12 +42,27 @@ class _MedicalFormMainPersonDataState extends State<MedicalFormMainPersonData> {
     phoneController.dispose();
     super.dispose();
   }
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: MedicalAppBar(context),
+      drawer: const CustomDrawer(),
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.menu),
+          iconSize: 32, // Adjust the size as needed
+          onPressed: () {
+            _scaffoldKey.currentState!.openDrawer();
+          },
+        ),
+        centerTitle: true,
+        title: Image.asset(
+          AssetsPath.logo,
+          scale: 10,
+        ),
+      ),
+
       body: Padding(
         padding: EdgeInsets.all(ConfigSize.defaultSize! * 1.5),
         child: SingleChildScrollView(

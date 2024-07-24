@@ -1,20 +1,14 @@
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:dots_indicator/dots_indicator.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:globaladvice_new/core/resource_manger/asset_path.dart';
 import 'package:globaladvice_new/core/resource_manger/color_manager.dart';
-import 'package:globaladvice_new/core/resource_manger/locale_keys.g.dart';
 import 'package:globaladvice_new/core/utils/config_size.dart';
 import 'package:globaladvice_new/features/home/presentation/component/car_form/pages/car_form_1.dart';
 import 'package:globaladvice_new/features/home/presentation/component/life_form/pages/life_form_main_person_data%20.dart';
 import 'package:globaladvice_new/features/home/presentation/component/property_form/pages/property_form_1%20.dart';
-import 'package:globaladvice_new/features/profile/presentation/profile_screen.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
-import 'package:pinput/pinput.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../../../../core/widgets/Custom_Drawer.dart';
 import '../medical_form/Pages/medical_form_1.dart';
 
 class CardScreen extends StatefulWidget {
@@ -24,11 +18,22 @@ class CardScreen extends StatefulWidget {
   State<CardScreen> createState() => _CardScreenState();
 }
 
+final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
 class _CardScreenState extends State<CardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
+      drawer: const CustomDrawer(),
       appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.menu),
+          iconSize: 32, // Adjust the size as needed
+          onPressed: () {
+            _scaffoldKey.currentState!.openDrawer();
+          },
+        ),
         centerTitle: true,
         title: Image.asset(
           AssetsPath.logo,
@@ -578,96 +583,24 @@ class _CardScreenState extends State<CardScreen> {
                     ),
                     // help & howto
                     SizedBox(
-                      height: ConfigSize.defaultSize! * 2,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            PersistentNavBarNavigator.pushNewScreen(
-                              context,
-                              screen: const CardScreen(),
-                              withNavBar: true,
-                              pageTransitionAnimation:
-                                  PageTransitionAnimation.fade,
-                            );
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                                color: ColorManager.kPrimaryBlueDark,
-                                borderRadius:
-                                    BorderRadiusDirectional.circular(12)),
-                            width: ConfigSize.defaultSize! * 18,
-                            height: ConfigSize.defaultSize! * 20,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const Icon(
-                                  Icons.how_to_vote_outlined,
-                                  color: ColorManager.whiteColor,
-                                  size: 50,
-                                ),
-                                SizedBox(
-                                  height: ConfigSize.defaultSize! * 1,
-                                ),
-                                Text(
-                                  AppLocalizations.of(context)!.howto,
-                                  textAlign: TextAlign.center,
-                                  style: const TextStyle(
-                                      color: ColorManager.whiteColor,
-                                      fontSize: 25,
-                                      fontWeight: FontWeight.w800),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            PersistentNavBarNavigator.pushNewScreen(
-                              context,
-                              screen: const CardScreen(),
-                              withNavBar: true,
-                              pageTransitionAnimation:
-                                  PageTransitionAnimation.fade,
-                            );
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                                color: ColorManager.kPrimaryBlueDark,
-                                borderRadius:
-                                    BorderRadiusDirectional.circular(12)),
-                            width: ConfigSize.defaultSize! * 18,
-                            height: ConfigSize.defaultSize! * 20,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const Icon(
-                                  Icons.help_outline,
-                                  color: ColorManager.whiteColor,
-                                  size: 50,
-                                ),
-                                SizedBox(
-                                  height: ConfigSize.defaultSize! * 1,
-                                ),
-                                Text(
-                                  AppLocalizations.of(context)!.help,
-                                  textAlign: TextAlign.center,
-                                  style: const TextStyle(
-                                      color: ColorManager.whiteColor,
-                                      fontSize: 25,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
+                      height: ConfigSize.defaultSize! * 4,
                     ),
                   ],
                 ),
               ),
+              Container(
+                width: ConfigSize.screenWidth,
+                color: ColorManager.kPrimaryBlueDark,
+                child: Padding(
+                  padding:  EdgeInsets.all(ConfigSize.defaultSize! * 2),
+                  child: Text(
+
+                    AppLocalizations.of(context)!.commercial,
+                    style: TextStyle(fontWeight: FontWeight.w500 , color: ColorManager.whiteColor , fontSize: ConfigSize.defaultSize! * 1.2),
+                  ),
+                ),
+              ),
+
             ],
           ),
         ),

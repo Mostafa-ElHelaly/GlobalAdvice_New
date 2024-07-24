@@ -377,93 +377,23 @@ class _HomeScreenState extends State<HomeScreen> {
                     SizedBox(
                       height: ConfigSize.defaultSize! * 4,
                     ),
-                    // Row(
-                    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    //   children: [
-                    //     Text(
-                    //       StringManager.insuranceType.tr(),
-                    //       style: const TextStyle(
-                    //           color: ColorManager.kPrimaryBlueDark,
-                    //           fontSize: 25,
-                    //           fontWeight: FontWeight.w800),
-                    //     ),
-                    //     InkWell(
-                    //       onTap: () {
-                    //         PersistentNavBarNavigator.pushNewScreen(
-                    //           context,
-                    //           screen: const CardScreen(),
-                    //           withNavBar: true,
-                    //           pageTransitionAnimation:
-                    //               PageTransitionAnimation.fade,
-                    //         );
-                    //       },
-                    //       child: Padding(
-                    //         padding: EdgeInsets.symmetric(
-                    //             horizontal: ConfigSize.defaultSize! * 1),
-                    //         child: Text(
-                    //           StringManager.viewAll.tr(),
-                    //           style: const TextStyle(
-                    //               color: Colors.black,
-                    //               decoration: TextDecoration.underline,
-                    //               fontSize: 13,
-                    //               fontWeight: FontWeight.w800),
-                    //         ),
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
-                    // SizedBox(
-                    //   height: ConfigSize.defaultSize! * 1,
-                    // ),
-                    // CarouselSlider(
-                    //   options: CarouselOptions(
-                    //     onPageChanged: (index, reason) {
-                    //       setState(() {
-                    //         currentIndexPage = index;
-                    //       });
-                    //     },
-                    //     height: ConfigSize.defaultSize! * 50,
-                    //     viewportFraction: 1,
-                    //     initialPage: 0,
-                    //     enableInfiniteScroll: true,
-                    //     reverse: false,
-                    //     autoPlay: true,
-                    //     autoPlayInterval: const Duration(seconds: 5),
-                    //     autoPlayAnimationDuration:
-                    //         const Duration(milliseconds: 800),
-                    //     autoPlayCurve: Curves.fastOutSlowIn,
-                    //     enlargeFactor: 0.3,
-                    //   ),
-                    //   items: card
-                    //     ..map((i) {
-                    //       return Builder(
-                    //         builder: (BuildContext context) {
-                    //           return Container(
-                    //               width: MediaQuery.of(context).size.width,
-                    //               margin: const EdgeInsets.symmetric(
-                    //                   horizontal: 5.0),
-                    //               decoration:
-                    //                   const BoxDecoration(color: Colors.amber),
-                    //               child: Text(
-                    //                 'text $i',
-                    //                 style: const TextStyle(fontSize: 16.0),
-                    //               ));
-                    //         },
-                    //       );
-                    //     }).toList(),
-                    // ),
-                    // Center(
-                    //   child: DotsIndicator(
-                    //     dotsCount: items.length,
-                    //     position: currentIndexPage,
-                    //     decorator: const DotsDecorator(
-                    //         activeColor: ColorManager.kPrimaryBlueDark),
-                    //     onTap: (index) {},
-                    //   ),
-                    // ),
+
                   ],
                 ),
               ),
+              Container(
+                width: ConfigSize.screenWidth,
+                color: ColorManager.kPrimaryBlueDark,
+                child: Padding(
+                  padding:  EdgeInsets.all(ConfigSize.defaultSize! * 2),
+                  child: Text(
+
+                    AppLocalizations.of(context)!.commercial,
+                    style: TextStyle(fontWeight: FontWeight.w500 , color: ColorManager.whiteColor , fontSize: ConfigSize.defaultSize! * 1.2),
+                  ),
+                ),
+              ),
+
             ],
           ),
         ),

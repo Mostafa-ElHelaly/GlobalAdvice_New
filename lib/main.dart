@@ -98,7 +98,7 @@ class MyApp extends StatelessWidget {
               },
               home: Provider.value(
                   value: isLogin,
-                  child: isLogin ? const HomeScreen() : const LoginScreen()),
+                  child: isLogin ? const HomeScreen() : const HomeScreen()),
             );
           },
         ));

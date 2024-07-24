@@ -5,6 +5,7 @@ import 'package:globaladvice_new/core/resource_manger/locale_keys.g.dart';
 import 'package:globaladvice_new/core/utils/config_size.dart';
 import 'package:globaladvice_new/features/auth/presentation/login_screen.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'component/edit_my_profile/edit_my_profile_screen.dart';
 
@@ -159,6 +160,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
             ),
+            Container(
+              width: ConfigSize.screenWidth,
+              color: ColorManager.kPrimaryBlueDark,
+              child: Padding(
+                padding:  EdgeInsets.all(ConfigSize.defaultSize! * 2),
+                child: Text(
+
+                  AppLocalizations.of(context)!.commercial,
+                  style: TextStyle(fontWeight: FontWeight.w500 , color: ColorManager.whiteColor , fontSize: ConfigSize.defaultSize! * 1.2),
+                ),
+              ),
+            ),
+
           ],
         ),
       ),

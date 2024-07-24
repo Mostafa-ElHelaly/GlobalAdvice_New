@@ -58,22 +58,22 @@ class _CustomDrawerState extends State<CustomDrawer> {
               Navigator.of(context).pushNamed(Routes.plans);
             },
           ),
-          const MyDivider(),
-          DrawerTile(
-            title: AppLocalizations.of(context)!.myProfile,
-            icon: Icons.person,
-            onTap: () {
-              Navigator.of(context).pushNamed(Routes.profile);
-            },
-          ),
-          const MyDivider(),
-          DrawerTile(
-            title: AppLocalizations.of(context)!.editprofile,
-            icon: Icons.edit,
-            onTap: () {
-              Navigator.of(context).pushNamed(Routes.editProfile);
-            },
-          ),
+          // const MyDivider(),
+          // DrawerTile(
+          //   title: AppLocalizations.of(context)!.myProfile,
+          //   icon: Icons.person,
+          //   onTap: () {
+          //     Navigator.of(context).pushNamed(Routes.profile);
+          //   },
+          // ),
+          // const MyDivider(),
+          // DrawerTile(
+          //   title: AppLocalizations.of(context)!.editprofile,
+          //   icon: Icons.edit,
+          //   onTap: () {
+          //     Navigator.of(context).pushNamed(Routes.editProfile);
+          //   },
+          // ),
           const MyDivider(),
           DrawerTile(
             title: AppLocalizations.of(context)!.share,
