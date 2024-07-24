@@ -11,6 +11,7 @@ import '../../../../../../core/resource_manger/locale_keys.g.dart';
 import '../../../../../../core/utils/config_size.dart';
 import '../../../../../../core/widgets/custom_text_field.dart';
 import '../../../../../../core/widgets/main_button.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CarForm2 extends StatefulWidget {
   const CarForm2({super.key});
@@ -22,6 +23,7 @@ class CarForm2 extends StatefulWidget {
 class _CarForm2State extends State<CarForm2> {
   TextEditingController emailController = TextEditingController();
   TextEditingController birthdayController = TextEditingController();
+  FocusNode _focusNode = FocusNode();
 
   String? selectedValue1;
   String? selectedValue2;
@@ -29,6 +31,14 @@ class _CarForm2State extends State<CarForm2> {
   void initState() {
     emailController = TextEditingController();
     birthdayController = TextEditingController();
+    _focusNode = FocusNode();
+
+    // Disable focus
+    _focusNode.addListener(() {
+      if (_focusNode.hasFocus) {
+        _focusNode.unfocus();
+      }
+    });
     super.initState();
   }
 
@@ -39,14 +49,6 @@ class _CarForm2State extends State<CarForm2> {
     super.dispose();
   }
 
-  final List<String> genders = [
-    'Male',
-    'Female',
-  ];
-  final List<String> licensed = [
-    'Licensed',
-    'Unlicensed',
-  ];
   DateTime selectedDate = DateTime.now();
 
   Future<Null> _selectDate(BuildContext context) async {
@@ -77,6 +79,14 @@ class _CarForm2State extends State<CarForm2> {
 
   @override
   Widget build(BuildContext context) {
+    final List<String> genders = [
+      AppLocalizations.of(context)!.male,
+      AppLocalizations.of(context)!.female,
+    ];
+    final List<String> licensed = [
+      AppLocalizations.of(context)!.licenced,
+      AppLocalizations.of(context)!.unlicensed,
+    ];
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: CarAppbar(context),
@@ -102,7 +112,7 @@ class _CarForm2State extends State<CarForm2> {
                 height: ConfigSize.defaultSize! * 2,
               ),
               CustomTextField(
-                labeltext: StringManager.email.tr(),
+                labeltext: AppLocalizations.of(context)!.email,
                 prefixicon: const Icon(Icons.email_rounded),
                 controller: emailController,
                 inputType: TextInputType.emailAddress,
@@ -111,7 +121,8 @@ class _CarForm2State extends State<CarForm2> {
                 height: ConfigSize.defaultSize! * 2,
               ),
               CustomTextField(
-                labeltext: StringManager.birthday.tr(),
+                focusNode: _focusNode,
+                labeltext: AppLocalizations.of(context)!.dateOfBirthday,
                 prefixicon: const Icon(Icons.cake),
                 controller: birthdayController,
                 inputType: TextInputType.none,
@@ -126,7 +137,7 @@ class _CarForm2State extends State<CarForm2> {
               ),
               CarDropdown(
                 selectedValue: selectedValue1,
-                label: StringManager.gender.tr(),
+                label: AppLocalizations.of(context)!.gender,
                 list: genders,
                 onChanged: (String? value) {
                   setState(() {
@@ -139,7 +150,7 @@ class _CarForm2State extends State<CarForm2> {
               ),
               CarDropdown(
                 selectedValue: selectedValue2,
-                label: StringManager.licensed.tr(),
+                label: AppLocalizations.of(context)!.licenced,
                 list: licensed,
                 onChanged: (String? value) {
                   setState(() {
@@ -151,7 +162,7 @@ class _CarForm2State extends State<CarForm2> {
                 height: ConfigSize.defaultSize! * 2,
               ),
               CustomTextField(
-                labeltext: StringManager.marketValue.tr(),
+                labeltext: AppLocalizations.of(context)!.marketvalue,
                 prefixicon: const Icon(Icons.price_change),
                 controller: emailController,
                 inputType: TextInputType.number,
@@ -171,7 +182,7 @@ class _CarForm2State extends State<CarForm2> {
                       pageTransitionAnimation: PageTransitionAnimation.fade,
                     );
                   },
-                  title: StringManager.next.tr(),
+                  title: AppLocalizations.of(context)!.next,
                 ),
               ),
             ],

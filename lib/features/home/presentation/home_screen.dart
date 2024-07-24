@@ -13,6 +13,8 @@ import 'component/car_form/pages/car_form_1.dart';
 import 'component/life_form/pages/life_form_main_person_data .dart';
 import 'component/medical_form/Pages/medical_form_1.dart';
 import 'component/property_form/pages/property_form_1 .dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -133,7 +135,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   horizontal: ConfigSize.defaultSize! * 3,
                                 ),
                                 child: Text(
-                                  StringManager.viewPlans.tr(),
+                                  AppLocalizations.of(context)!.viewPlans,
                                   style: TextStyle(
                                     color: ColorManager.kPrimaryBlueDark,
                                     fontWeight: FontWeight.bold,
@@ -163,7 +165,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          StringManager.service.tr(),
+                          AppLocalizations.of(context)!.service,
                           style: const TextStyle(
                               color: ColorManager.kPrimaryBlueDark,
                               fontSize: 25,
@@ -183,7 +185,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             padding: EdgeInsets.symmetric(
                                 horizontal: ConfigSize.defaultSize! * 1),
                             child: Text(
-                              StringManager.viewAll.tr(),
+                              AppLocalizations.of(context)!.viewall,
                               style: const TextStyle(
                                   color: Colors.black,
                                   decoration: TextDecoration.underline,
@@ -229,7 +231,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                   height: ConfigSize.defaultSize! * 1,
                                 ),
                                 Text(
-                                  StringManager.medicalInsurance.tr(),
+                                  AppLocalizations.of(context)!
+                                      .medicalinsurance,
+                                  textAlign: TextAlign.center,
                                   style: const TextStyle(
                                       color: ColorManager.whiteColor,
                                       fontSize: 20,
@@ -268,7 +272,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                   height: ConfigSize.defaultSize! * 1,
                                 ),
                                 Text(
-                                  StringManager.carInsurance.tr(),
+                                  AppLocalizations.of(context)!.carisurance,
+                                  textAlign: TextAlign.center,
                                   style: const TextStyle(
                                       color: ColorManager.whiteColor,
                                       fontSize: 25,
@@ -315,7 +320,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                   height: ConfigSize.defaultSize! * 1,
                                 ),
                                 Text(
-                                  StringManager.propertyInsurance.tr(),
+                                  AppLocalizations.of(context)!
+                                      .propertyinsurance,
+                                  textAlign: TextAlign.center,
                                   style: const TextStyle(
                                       color: ColorManager.whiteColor,
                                       fontSize: 25,
@@ -354,7 +361,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                   height: ConfigSize.defaultSize! * 1,
                                 ),
                                 Text(
-                                  StringManager.lifeInsurance.tr(),
+                                  AppLocalizations.of(context)!.lifeinsurance,
+                                  textAlign: TextAlign.center,
                                   style: const TextStyle(
                                       color: ColorManager.whiteColor,
                                       fontSize: 25,

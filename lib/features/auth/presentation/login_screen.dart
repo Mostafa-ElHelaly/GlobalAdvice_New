@@ -6,17 +6,21 @@ import 'package:globaladvice_new/core/resource_manger/asset_path.dart';
 import 'package:globaladvice_new/core/resource_manger/color_manager.dart';
 import 'package:globaladvice_new/core/resource_manger/locale_keys.g.dart';
 import 'package:globaladvice_new/core/utils/config_size.dart';
+import 'package:globaladvice_new/core/utils/translation_provider.dart';
 import 'package:globaladvice_new/core/widgets/custom_text_field.dart';
 import 'package:globaladvice_new/core/widgets/main_button.dart';
 import 'package:globaladvice_new/features/auth/presentation/component/create_account/create_account_screen.dart';
 import 'package:globaladvice_new/features/auth/presentation/component/forget_password/forget_password_screen.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:provider/provider.dart';
 
 import '../../../core/resource_manger/routs_manager.dart';
 import '../../../core/widgets/snack_bar.dart';
 import 'manager/login_bloc/login_bloc.dart';
 import 'manager/login_bloc/login_event.dart';
 import 'manager/login_bloc/login_state.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -81,7 +85,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    StringManager.email.tr(),
+                    AppLocalizations.of(context)!.email,
                     style: TextStyle(
                       fontSize: ConfigSize.defaultSize! * 1.6,
                       fontWeight: FontWeight.w600,
@@ -98,7 +102,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: ConfigSize.defaultSize! * 2,
                   ),
                   Text(
-                    StringManager.password.tr(),
+                    AppLocalizations.of(context)!.password,
                     style: TextStyle(
                       fontSize: ConfigSize.defaultSize! * 1.6,
                       fontWeight: FontWeight.w600,
@@ -139,7 +143,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           );
                         },
                         child: Text(
-                          StringManager.forgetPassword.tr(),
+                          AppLocalizations.of(context)!.forgetPassword,
                           style: TextStyle(
                             fontSize: ConfigSize.defaultSize! * 1.6,
                             fontWeight: FontWeight.w600,
@@ -150,26 +154,31 @@ class _LoginScreenState extends State<LoginScreen> {
                     ],
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(
-                        vertical: ConfigSize.defaultSize! * 3),
-                    child: MainButton(
-                      color: ColorManager.kPrimaryBlueDark,
-                      textColor: ColorManager.whiteColor,
-                      onTap: () {
-                        if (validation()) {
-                          BlocProvider.of<LoginBloc>(context).add(
-                            LoginEvent(
-                              email: emailController.text,
-                              password: passwordController.text,
-                            ),
+                      padding: EdgeInsets.symmetric(
+                          vertical: ConfigSize.defaultSize! * 3),
+                      child: Consumer<TranslationProvider>(
+                        builder: (context, login, child) {
+                          return MainButton(
+                            color: ColorManager.kPrimaryBlueDark,
+                            textColor: ColorManager.whiteColor,
+                            onTap: () {
+                              if (validation()) {
+                                BlocProvider.of<LoginBloc>(context).add(
+                                  LoginEvent(
+                                    email: emailController.text,
+                                    password: passwordController.text,
+                                  ),
+                                );
+                                login.check_login();
+                              } else {
+                                errorSnackBar(
+                                    context, StringManager.errorFillFields);
+                              }
+                            },
+                            title: AppLocalizations.of(context)!.signingIn,
                           );
-                        } else {
-                          errorSnackBar(context, StringManager.errorFillFields);
-                        }
-                      },
-                      title: StringManager.login.tr(),
-                    ),
-                  ),
+                        },
+                      )),
                 ],
               ),
             ),
@@ -180,19 +189,15 @@ class _LoginScreenState extends State<LoginScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    StringManager.dontHaveAccount.tr(),
+                    AppLocalizations.of(context)!.donthaveaccount,
                     style: const TextStyle(
                       color: ColorManager.gray,
                     ),
                   ),
                   InkWell(
                     onTap: () {
-                      PersistentNavBarNavigator.pushNewScreen(
-                        context,
-                        screen: const CreateAccount(),
-                        withNavBar: false,
-                        pageTransitionAnimation: PageTransitionAnimation.fade,
-                      );
+                      Navigator.pushNamedAndRemoveUntil(
+                          context, Routes.createAccount, (route) => false);
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -205,7 +210,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           horizontal: ConfigSize.defaultSize! * 3,
                         ),
                         child: Text(
-                          StringManager.createAccount.tr(),
+                          AppLocalizations.of(context)!.createAccount,
                           style: TextStyle(
                             color: ColorManager.kPrimaryBlueDark,
                             fontWeight: FontWeight.bold,

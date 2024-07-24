@@ -8,6 +8,7 @@ import 'package:globaladvice_new/features/home/presentation/component/car_form/w
 import 'package:globaladvice_new/features/home/presentation/component/property_form/pages/property_form_3%20.dart';
 import 'package:globaladvice_new/features/home/presentation/component/property_form/widgets/Prop_insurance_appbar.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../../../core/resource_manger/asset_path.dart';
 import '../../../../../../core/resource_manger/locale_keys.g.dart';
@@ -47,12 +48,12 @@ class _PropertyForm2State extends State<PropertyForm2> {
     super.dispose();
   }
 
-  final List<String> type = [
-    'Owner',
-    'Tenant',
-  ];
   @override
   Widget build(BuildContext context) {
+    final List<String> type = [
+      AppLocalizations.of(context)!.owner,
+      AppLocalizations.of(context)!.tenant,
+    ];
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: PropertyAppbar(context),
@@ -78,7 +79,7 @@ class _PropertyForm2State extends State<PropertyForm2> {
                 height: ConfigSize.defaultSize! * 2,
               ),
               CustomTextField(
-                labeltext: StringManager.email.tr(),
+                labeltext: AppLocalizations.of(context)!.email,
                 prefixicon: const Icon(Icons.email_rounded),
                 controller: emailController,
                 inputType: TextInputType.emailAddress,
@@ -88,7 +89,7 @@ class _PropertyForm2State extends State<PropertyForm2> {
               ),
               CarDropdown(
                 selectedValue: selectedValue,
-                label: StringManager.type.tr(),
+                label: AppLocalizations.of(context)!.type,
                 list: type,
                 onChanged: (String? value) {
                   setState(() {
@@ -96,29 +97,33 @@ class _PropertyForm2State extends State<PropertyForm2> {
                   });
                 },
               ),
-              selectedValue == 'Owner'
+              selectedValue == AppLocalizations.of(context)!.owner
                   ? SizedBox(
                       height: ConfigSize.defaultSize! * 2,
                     )
                   : SizedBox.shrink(),
               Visibility(
-                visible: selectedValue == 'Owner' ? true : false,
+                visible: selectedValue == AppLocalizations.of(context)!.owner
+                    ? true
+                    : false,
                 child: CustomTextField(
-                  labeltext: StringManager.buildingprice.tr(),
+                  labeltext: AppLocalizations.of(context)!.buildingprice,
                   prefixicon: const Icon(Icons.house_rounded),
                   controller: buildingpricecontroller,
                   inputType: TextInputType.text,
                 ),
               ),
-              selectedValue == 'Owner' || selectedValue == 'Tenant'
+              selectedValue == AppLocalizations.of(context)!.owner ||
+                      selectedValue == AppLocalizations.of(context)!.tenant
                   ? SizedBox(
                       height: ConfigSize.defaultSize! * 2,
                     )
                   : SizedBox.shrink(),
               Visibility(
-                visible: selectedValue == 'Owner' || selectedValue == 'Tenant',
+                visible: selectedValue == AppLocalizations.of(context)!.owner ||
+                    selectedValue == AppLocalizations.of(context)!.tenant,
                 child: CustomTextField(
-                  labeltext: StringManager.contentprice.tr(),
+                  labeltext: AppLocalizations.of(context)!.contentprice,
                   prefixicon: const Icon(Icons.price_change),
                   controller: contentpricecontroller,
                   inputType: TextInputType.text,
@@ -128,7 +133,7 @@ class _PropertyForm2State extends State<PropertyForm2> {
                 height: ConfigSize.defaultSize! * 2,
               ),
               CustomTextField(
-                labeltext: StringManager.address.tr(),
+                labeltext: AppLocalizations.of(context)!.address,
                 prefixicon: const Icon(Icons.pin_drop),
                 controller: addresscontroller,
                 inputType: TextInputType.text,
@@ -148,7 +153,7 @@ class _PropertyForm2State extends State<PropertyForm2> {
                       pageTransitionAnimation: PageTransitionAnimation.fade,
                     );
                   },
-                  title: StringManager.next.tr(),
+                  title: AppLocalizations.of(context)!.next,
                 ),
               ),
             ],

@@ -14,6 +14,7 @@ import 'package:globaladvice_new/features/auth/presentation/manager/reset_passwo
 import '../../../../../core/widgets/snack_bar.dart';
 import '../../manager/reset_password_bloc/bloc/reset_password_event.dart';
 import '../../manager/reset_password_bloc/bloc/reset_password_state.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ForgetPasswordScreen extends StatefulWidget {
   const ForgetPasswordScreen({super.key});
@@ -90,7 +91,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
             ),
             centerTitle: true,
             title: Text(
-              StringManager.forgetPassword2.tr(),
+              AppLocalizations.of(context)!.forgot,
               style: TextStyle(
                 fontWeight: FontWeight.w600,
                 fontSize: ConfigSize.defaultSize! * 2,
@@ -103,7 +104,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  StringManager.forgetPasswordHint.tr(),
+                  AppLocalizations.of(context)!.forgothint,
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
                     fontSize: ConfigSize.defaultSize! * 1.5,
@@ -113,7 +114,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                   height: ConfigSize.defaultSize! * 2,
                 ),
                 Text(
-                  StringManager.enterYourEmail.tr(),
+                  AppLocalizations.of(context)!.enterYourEmail,
                   style: TextStyle(
                     fontSize: ConfigSize.defaultSize! * 1.4,
                     fontWeight: FontWeight.w600,
@@ -136,10 +137,11 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                           ResetPasswordEvent(email: emailController.text),
                         );
                       } else {
-                        errorSnackBar(context, StringManager.errorFillFields);
+                        errorSnackBar(context,
+                            AppLocalizations.of(context)!.errorFillFields);
                       }
                     },
-                    title: StringManager.sendCode.tr(),
+                    title: AppLocalizations.of(context)!.sendCode,
                   ),
                 ),
               ],

@@ -10,6 +10,7 @@ import 'package:globaladvice_new/features/home/presentation/component/car_form/p
 import 'package:globaladvice_new/features/home/presentation/component/car_form/widgets/car_insurance_appbar.dart';
 import 'package:globaladvice_new/features/home/presentation/component/medical_form/Widgets/done.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../../../core/widgets/main_button.dart';
 
@@ -66,7 +67,7 @@ class _CarFormMainPersonDataState extends State<CarFormMainPersonData> {
                 height: ConfigSize.defaultSize! * 2,
               ),
               CustomTextField(
-                labeltext: StringManager.fullName.tr(),
+                labeltext: AppLocalizations.of(context)!.fullName,
                 prefixicon: const Icon(Icons.person),
                 controller: fullNameController,
                 inputType: TextInputType.name,
@@ -75,7 +76,7 @@ class _CarFormMainPersonDataState extends State<CarFormMainPersonData> {
                 height: ConfigSize.defaultSize! * 2,
               ),
               CustomTextField(
-                labeltext: StringManager.phone.tr(),
+                labeltext: AppLocalizations.of(context)!.phonenumber,
                 prefixicon: const Icon(Icons.phone_android_sharp),
                 controller: phoneController,
                 inputType: TextInputType.phone,
@@ -92,7 +93,7 @@ class _CarFormMainPersonDataState extends State<CarFormMainPersonData> {
                       pageTransitionAnimation: PageTransitionAnimation.fade,
                     );
                   },
-                  title: StringManager.next.tr(),
+                  title: AppLocalizations.of(context)!.next,
                 ),
               ),
             ],
