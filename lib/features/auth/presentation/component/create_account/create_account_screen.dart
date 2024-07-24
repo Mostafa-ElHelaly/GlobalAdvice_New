@@ -125,15 +125,7 @@ class _CreateAccountState extends State<CreateAccount> {
           backgroundColor: Colors.white,
           elevation: 0,
           automaticallyImplyLeading: false,
-          leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: const Icon(
-              Icons.arrow_back_ios_new,
-              color: ColorManager.mainColor,
-            ),
-          ),
+          leading: null,
           centerTitle: true,
           title: Text(
             AppLocalizations.of(context)!.signupwithus,
@@ -377,7 +369,7 @@ class _CreateAccountState extends State<CreateAccount> {
                       style: TextStyle(
                         color: ColorManager.kPrimaryBlueDark,
                         fontWeight: FontWeight.bold,
-                        fontSize: ConfigSize.defaultSize! * 2,
+                        fontSize: ConfigSize.defaultSize! * 1.5,
                       ),
                     ),
                     InkWell(
