@@ -92,7 +92,7 @@ class MyApp extends StatelessWidget {
                 }
                 return supportedLocales.first;
               },
-              home: const HomeScreen(),
+              home: const LoginScreen(),
             );
           },
         ));
