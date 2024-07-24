@@ -7,6 +7,7 @@ import 'package:globaladvice_new/core/service/navigation_service.dart';
 import 'package:globaladvice_new/core/service/service_locator.dart';
 import 'package:globaladvice_new/core/translations/codegen_loader.g.dart';
 import 'package:globaladvice_new/core/utils/config_size.dart';
+import 'package:globaladvice_new/core/utils/font_loader.dart';
 import 'package:globaladvice_new/features/auth/presentation/login_screen.dart';
 import 'package:globaladvice_new/features/home/presentation/home_screen.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/healthinsurancebloc/healthinsurancebloc_bloc.dart';
@@ -43,7 +44,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ConfigSize().init(context);
-
     return MultiProvider(
         providers: [
           BlocProvider(
@@ -79,7 +79,7 @@ class MyApp extends StatelessWidget {
               theme: ThemeData(
                 canvasColor: Colors
                     .white, // Change this to adjust dropdown background color
-
+                fontFamily: FontLoader.getFontFamily(translate.locale),
                 textTheme: GoogleFonts.poppinsTextTheme(),
               ),
               navigatorKey: getIt<NavigationService>().navigatorKey,
@@ -92,7 +92,7 @@ class MyApp extends StatelessWidget {
                 }
                 return supportedLocales.first;
               },
-              home: const LoginScreen(),
+              home: const HomeScreen(),
             );
           },
         ));

@@ -11,6 +11,7 @@ class PropertyCheckbox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var localetype = Localizations.localeOf(context).languageCode;
     return CheckboxListTile(
       controlAffinity: ListTileControlAffinity.leading,
       value: value,
@@ -18,10 +19,10 @@ class PropertyCheckbox extends StatelessWidget {
       activeColor: ColorManager.mainColor,
       checkColor: ColorManager.whiteColor,
       title: Text(
-        textAlign: TextAlign.start,
+        textAlign: localetype == 'ar' ? TextAlign.right : TextAlign.left,
         title!,
         style: TextStyle(
-          fontSize: 15,
+          fontSize: 12,
           fontWeight: FontWeight.w600,
         ),
       ),

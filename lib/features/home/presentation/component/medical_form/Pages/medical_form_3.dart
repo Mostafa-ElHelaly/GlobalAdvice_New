@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -14,10 +15,12 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../../../core/resource_manger/asset_path.dart';
 import '../../../../../../core/resource_manger/locale_keys.g.dart';
+import '../../../../../../core/resource_manger/routs_manager.dart';
 import '../../../../../../core/utils/config_size.dart';
 import '../../../../../../core/widgets/custom_text_field.dart';
 import '../../../../../../core/widgets/main_button.dart';
 import '../../../home_screen.dart';
+import '../../life_form/widgets/Back_Button.dart';
 
 class MedicalForm3 extends StatefulWidget {
   const MedicalForm3({super.key});
@@ -151,7 +154,21 @@ class _MedicalForm3State extends State<MedicalForm3> {
                     padding: EdgeInsets.symmetric(
                         vertical: ConfigSize.defaultSize! * 1),
                     child: MainButton(
-                      onTap: () {},
+                      onTap: () {
+                        AwesomeDialog(
+                                context: context,
+                                dialogType: DialogType.success,
+                                animType: AnimType.rightSlide,
+                                desc: AppLocalizations.of(context)!
+                                    .lifeinsurancerequest,
+                                btnOkOnPress: () {},
+                                btnOk: const CustomBackButton())
+                            .show();
+                        Future.delayed(Duration(seconds: 3), () {
+                          Navigator.pushNamedAndRemoveUntil(
+                              context, Routes.homeScreen, (route) => false);
+                        });
+                      },
                       title: AppLocalizations.of(context)!.submit,
                     ),
                   ),

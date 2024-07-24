@@ -26,6 +26,7 @@ class MedicalForm2 extends StatefulWidget {
 class _MedicalForm2State extends State<MedicalForm2> {
   TextEditingController emailController = TextEditingController();
   TextEditingController birthdayController = TextEditingController();
+  FocusNode _focusNode = FocusNode();
 
   String? selectedValue;
   DateTime selectedDate = DateTime.now();
@@ -33,6 +34,14 @@ class _MedicalForm2State extends State<MedicalForm2> {
   void initState() {
     emailController = TextEditingController();
     birthdayController = TextEditingController();
+    _focusNode = FocusNode();
+
+    // Disable focus
+    _focusNode.addListener(() {
+      if (_focusNode.hasFocus) {
+        _focusNode.unfocus();
+      }
+    });
     super.initState();
   }
 
@@ -105,6 +114,7 @@ class _MedicalForm2State extends State<MedicalForm2> {
                 height: ConfigSize.defaultSize! * 2,
               ),
               CustomTextField(
+                  focusNode: _focusNode,
                   labeltext: AppLocalizations.of(context)!.dateOfBirthday,
                   prefixicon: const Icon(Icons.cake),
                   controller: birthdayController,

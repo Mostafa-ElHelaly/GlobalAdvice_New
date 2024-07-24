@@ -94,7 +94,7 @@ class _PropertyFormMainPersonDataState
                 height: ConfigSize.defaultSize! * 2,
               ),
               CustomTextField(
-                labeltext: StringManager.fullName.tr(),
+                labeltext: AppLocalizations.of(context)!.fullName,
                 prefixicon: const Icon(Icons.person),
                 controller: fullNameController,
                 inputType: TextInputType.name,
@@ -103,7 +103,7 @@ class _PropertyFormMainPersonDataState
                 height: ConfigSize.defaultSize! * 2,
               ),
               CustomTextField(
-                labeltext: StringManager.phone.tr(),
+                labeltext: AppLocalizations.of(context)!.phonenumber,
                 prefixicon: const Icon(Icons.phone_android_sharp),
                 controller: phoneController,
                 inputType: TextInputType.phone,
@@ -120,7 +120,7 @@ class _PropertyFormMainPersonDataState
                       pageTransitionAnimation: PageTransitionAnimation.fade,
                     );
                   },
-                  title: StringManager.next.tr(),
+                  title: AppLocalizations.of(context)!.next,
                 ),
               ),
             ],

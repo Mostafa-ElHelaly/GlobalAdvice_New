@@ -72,3 +72,7 @@ flutter:
           weight: 300
         - asset: assets/font/Gilroy-Bold/Gilroy-Regular.ttf
           weight: 200
+    - family: Kufi-Bold
+      fonts:
+        - asset: assets/font/Kufi-Arabic/NotoKufiArabic-Bold.ttf
+          weight: 900

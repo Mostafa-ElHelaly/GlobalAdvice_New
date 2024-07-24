@@ -23,6 +23,7 @@ class CarForm2 extends StatefulWidget {
 class _CarForm2State extends State<CarForm2> {
   TextEditingController emailController = TextEditingController();
   TextEditingController birthdayController = TextEditingController();
+  FocusNode _focusNode = FocusNode();
 
   String? selectedValue1;
   String? selectedValue2;
@@ -30,6 +31,14 @@ class _CarForm2State extends State<CarForm2> {
   void initState() {
     emailController = TextEditingController();
     birthdayController = TextEditingController();
+    _focusNode = FocusNode();
+
+    // Disable focus
+    _focusNode.addListener(() {
+      if (_focusNode.hasFocus) {
+        _focusNode.unfocus();
+      }
+    });
     super.initState();
   }
 
@@ -112,6 +121,7 @@ class _CarForm2State extends State<CarForm2> {
                 height: ConfigSize.defaultSize! * 2,
               ),
               CustomTextField(
+                focusNode: _focusNode,
                 labeltext: AppLocalizations.of(context)!.dateOfBirthday,
                 prefixicon: const Icon(Icons.cake),
                 controller: birthdayController,
