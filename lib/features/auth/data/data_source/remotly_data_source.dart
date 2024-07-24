@@ -31,6 +31,11 @@ class AuthRemotelyDateSource extends BaseRemotelyDataSource {
 
     try {
       final response = await Dio().post(
+        options: Options(
+          headers: {
+            'Content-Type': Headers.formUrlEncodedContentType,
+          },
+        ),
         ConstantApi.login,
         data: FormData.fromMap(body),
       );
