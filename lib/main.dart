@@ -30,17 +30,20 @@ void main() async {
   Bloc.observer = MyBlocObserver();
   SharedPreferences prefs = await SharedPreferences.getInstance();
   final isArabic = prefs.getBool("is_arabic") ?? false;
+  final isLogin = prefs.getBool("is_login") ?? false;
 
   runApp(
     MyApp(
       isArabic: isArabic,
+      isLogin: isLogin,
     ),
   );
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key, required this.isArabic});
+  MyApp({super.key, required this.isArabic, required this.isLogin});
   final bool isArabic;
+  final bool isLogin;
   @override
   Widget build(BuildContext context) {
     ConfigSize().init(context);
@@ -58,7 +61,8 @@ class MyApp extends StatelessWidget {
           BlocProvider(
             create: (context) => getIt<HealthinsuranceBloc>(),
           ),
-          ChangeNotifierProvider(create: (_) => TranslationProvider(isArabic)),
+          ChangeNotifierProvider(
+              create: (_) => TranslationProvider(isArabic, isLogin)),
         ],
         child: Consumer<TranslationProvider>(
           builder: (context, translate, child) {
@@ -92,7 +96,9 @@ class MyApp extends StatelessWidget {
                 }
                 return supportedLocales.first;
               },
-              home: const LoginScreen(),
+              home: Provider.value(
+                  value: isLogin,
+                  child: isLogin ? const HomeScreen() : const LoginScreen()),
             );
           },
         ));

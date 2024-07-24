@@ -96,14 +96,19 @@ class _CustomDrawerState extends State<CustomDrawer> {
             },
           ),
           const MyDivider(),
-          DrawerTile(
-            title: AppLocalizations.of(context)!.logOut,
-            icon: Icons.exit_to_app,
-            onTap: () {
-              Navigator.of(context)
-                  .pushNamedAndRemoveUntil(Routes.login, (route) => false);
+          Consumer<TranslationProvider>(
+            builder: (context, logout, child) {
+              return DrawerTile(
+                title: AppLocalizations.of(context)!.logOut,
+                icon: Icons.exit_to_app,
+                onTap: () {
+                  Navigator.of(context)
+                      .pushNamedAndRemoveUntil(Routes.login, (route) => false);
+                  logout.check_login();
+                },
+              );
             },
-          ),
+          )
         ],
       ),
     );
