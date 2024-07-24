@@ -35,6 +35,8 @@ void main() async {
   );
 }
 
+//run flutter gen-l10n before build
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
