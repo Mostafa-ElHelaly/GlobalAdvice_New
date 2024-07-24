@@ -33,14 +33,14 @@ class AuthRemotelyDateSource extends BaseRemotelyDataSource {
       final response = await Dio().post(
         options: Options(
           headers: {
-            'Content-Type': Headers.formUrlEncodedContentType,
+            'Content-Type': 'application/x-www-form-urlencoded',
           },
         ),
         ConstantApi.login,
         data: FormData.fromMap(body),
       );
       if (response.statusCode == 200) {
-        print('reset password success');
+        print('login success');
         return Future.value(unit);
       } else {
         throw Exception(Strings.resetPasswordFailed);
