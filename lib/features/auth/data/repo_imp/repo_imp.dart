@@ -28,8 +28,8 @@ class RepositoryImp extends BaseRepository {
   }
 
   @override
-  Future<Either<LoginModel, Failure>> registerWithEmailAndPassword(
-      RegisterAuthModel registerAuthModel) async {
+  Future<Either<Unit, Failure>> registerWithEmailAndPassword(
+      LoginModel registerAuthModel) async {
     try {
       final result = await baseRemotelyDataSource
           .registerWithEmailAndPassword(registerAuthModel);
