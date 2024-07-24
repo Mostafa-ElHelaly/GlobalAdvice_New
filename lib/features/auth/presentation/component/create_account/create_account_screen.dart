@@ -338,9 +338,9 @@ class _CreateAccountState extends State<CreateAccount> {
                         BlocProvider.of<RegisterBloc>(context).add(
                           RegisterEvent(
                             email: emailController.text,
-                            password: 'Nn@\$${passwordController.text}',
+                            password: passwordController.text,
                             name: fullNameController.text,
-                            phone: int.tryParse(phoneController.text)!,
+                            telephone: phoneController.text,
                           ),
                         );
                       } else {
