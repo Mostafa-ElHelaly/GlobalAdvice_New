@@ -10,7 +10,13 @@ import 'package:globaladvice_new/core/utils/config_size.dart';
 import 'package:globaladvice_new/core/utils/font_loader.dart';
 import 'package:globaladvice_new/features/auth/presentation/login_screen.dart';
 import 'package:globaladvice_new/features/home/presentation/home_screen.dart';
+import 'package:globaladvice_new/features/home/presentation/manager/car_insurance/carinsurance_bloc.dart';
+import 'package:globaladvice_new/features/home/presentation/manager/car_insurance/carinsurance_event.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/healthinsurancebloc/healthinsurancebloc_bloc.dart';
+import 'package:globaladvice_new/features/home/presentation/manager/life_insurance/life_insurance_bloc.dart';
+import 'package:globaladvice_new/features/home/presentation/manager/life_insurance/life_insurance_event.dart';
+import 'package:globaladvice_new/features/home/presentation/manager/life_insurance/life_insurance_state.dart';
+import 'package:globaladvice_new/features/home/presentation/manager/property_insurance.dart/property_insurance_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -61,6 +67,15 @@ class MyApp extends StatelessWidget {
           BlocProvider(
             create: (context) => getIt<HealthinsuranceBloc>(),
           ),
+          BlocProvider(
+            create: (context) => getIt<CarinsuranceBloc>(),
+          ),
+          BlocProvider(
+            create: (context) => getIt<LifeInsuranceBloc>(),
+          ),
+          BlocProvider(
+            create: (context) => getIt<PropertyInsuranceBloc>(),
+          ),
           ChangeNotifierProvider(
               create: (_) => TranslationProvider(isArabic, isLogin)),
         ],
@@ -98,7 +113,7 @@ class MyApp extends StatelessWidget {
               },
               home: Provider.value(
                   value: isLogin,
-                  child: isLogin ? const HomeScreen() : const HomeScreen()),
+                  child: isLogin ? const LoginScreen() : const HomeScreen()),
             );
           },
         ));

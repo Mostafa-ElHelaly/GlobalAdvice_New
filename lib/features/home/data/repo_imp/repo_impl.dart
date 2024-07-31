@@ -22,4 +22,40 @@ class HomeRepositoryImp extends BaseHomeRepository {
       return right(DioHelper.buildFailure(e));
     }
   }
+
+  @override
+  Future<Either<Unit, Failure>> sendcarinsurancerequest(
+      HealthInsuranceModel healthInsuranceModel) async {
+    try {
+      final result = await baseHomeRemotelyDataSource
+          .sendcarinsurancerequest(healthInsuranceModel);
+      return Left(result);
+    } on Exception catch (e) {
+      return right(DioHelper.buildFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<Unit, Failure>> sendlifeinsurancerequest(
+      HealthInsuranceModel healthInsuranceModel) async {
+    try {
+      final result = await baseHomeRemotelyDataSource
+          .sendlifeinsurancerequest(healthInsuranceModel);
+      return Left(result);
+    } on Exception catch (e) {
+      return right(DioHelper.buildFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<Unit, Failure>> sendpropertyinsurancerequest(
+      HealthInsuranceModel healthInsuranceModel) async {
+    try {
+      final result = await baseHomeRemotelyDataSource
+          .sendlifeinsurancerequest(healthInsuranceModel);
+      return Left(result);
+    } on Exception catch (e) {
+      return right(DioHelper.buildFailure(e));
+    }
+  }
 }
