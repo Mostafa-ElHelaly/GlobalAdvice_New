@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -9,10 +10,14 @@ import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 import '../../../../../../core/resource_manger/asset_path.dart';
 import '../../../../../../core/resource_manger/locale_keys.g.dart';
+import '../../../../../../core/resource_manger/routs_manager.dart';
+import '../../../../../../core/utils/arabic_numbers.dart';
 import '../../../../../../core/utils/config_size.dart';
 import '../../../../../../core/widgets/custom_text_field.dart';
 import '../../../../../../core/widgets/main_button.dart';
+import '../../life_form/widgets/Back_Button.dart';
 import '../widgets/Motor_Dropdown_Widget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CarForm3 extends StatefulWidget {
   const CarForm3({super.key});
@@ -22,20 +27,6 @@ class CarForm3 extends StatefulWidget {
 }
 
 class _CarForm3State extends State<CarForm3> {
-  final List<String> carBrand = [
-    'skoda',
-    'kia',
-    'Honda',
-    'Bmw',
-    'Volvo',
-    'Seat',
-    'Mini',
-  ];
-  final List<String> motorDeductibles = [
-    '10%',
-    '25%',
-    'No Deductible',
-  ];
   final List<String> manufactureYear = [
     '2015',
     '2016',
@@ -53,6 +44,21 @@ class _CarForm3State extends State<CarForm3> {
   String? selectedValue5;
   @override
   Widget build(BuildContext context) {
+    final List<String> carBrand = [
+      AppLocalizations.of(context)!.skoda,
+      AppLocalizations.of(context)!.kia,
+      AppLocalizations.of(context)!.honda,
+      AppLocalizations.of(context)!.bmw,
+      AppLocalizations.of(context)!.volvo,
+      AppLocalizations.of(context)!.seat,
+      AppLocalizations.of(context)!.mini,
+    ];
+    final List<String> motorDeductibles = [
+      '10%',
+      '25%',
+      AppLocalizations.of(context)!.nodeductable,
+    ];
+    var localetype = Localizations.localeOf(context).languageCode;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: CarAppbar(context),
@@ -90,7 +96,7 @@ class _CarForm3State extends State<CarForm3> {
                               selectedValue3 = value;
                             });
                           },
-                          label: StringManager.carBrand.tr(),
+                          label: AppLocalizations.of(context)!.carbrand,
                           selectedValue: selectedValue3,
                         ),
                         SizedBox(height: ConfigSize.defaultSize! * 2),
@@ -101,7 +107,7 @@ class _CarForm3State extends State<CarForm3> {
                               selectedValue4 = value;
                             });
                           },
-                          label: StringManager.motorDeductibles.tr(),
+                          label: AppLocalizations.of(context)!.motorDeductibles,
                           selectedValue: selectedValue4,
                         ),
                         SizedBox(height: ConfigSize.defaultSize! * 2),
@@ -112,7 +118,7 @@ class _CarForm3State extends State<CarForm3> {
                               selectedValue5 = value;
                             });
                           },
-                          label: StringManager.manufactureYear.tr(),
+                          label: AppLocalizations.of(context)!.manufactureYear,
                           selectedValue: selectedValue5,
                         ),
                         SizedBox(height: ConfigSize.defaultSize! * 2),
@@ -127,22 +133,21 @@ class _CarForm3State extends State<CarForm3> {
                     EdgeInsets.symmetric(vertical: ConfigSize.defaultSize! * 1),
                 child: MainButton(
                   onTap: () {
-                    showDialog(
-                      context: context,
-                      builder: (context) {
-                        return const DoneScreen();
-                      },
-                    );
+                    AwesomeDialog(
+                            context: context,
+                            dialogType: DialogType.success,
+                            animType: AnimType.rightSlide,
+                            desc: AppLocalizations.of(context)!
+                                .lifeinsurancerequest,
+                            btnOkOnPress: () {},
+                            btnOk: const CustomBackButton())
+                        .show();
                     Future.delayed(Duration(seconds: 3), () {
-                      PersistentNavBarNavigator.pushNewScreen(
-                        context,
-                        screen: CarPrices(),
-                        withNavBar: false,
-                        pageTransitionAnimation: PageTransitionAnimation.fade,
-                      );
+                      Navigator.pushNamedAndRemoveUntil(
+                          context, Routes.homeScreen, (route) => false);
                     });
                   },
-                  title: StringManager.submit.tr(),
+                  title: AppLocalizations.of(context)!.submit,
                 ),
               ),
             ],

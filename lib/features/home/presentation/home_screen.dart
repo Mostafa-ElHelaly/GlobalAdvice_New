@@ -13,6 +13,8 @@ import 'component/car_form/pages/car_form_1.dart';
 import 'component/life_form/pages/life_form_main_person_data .dart';
 import 'component/medical_form/Pages/medical_form_1.dart';
 import 'component/property_form/pages/property_form_1 .dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -23,10 +25,9 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final items = [
-    "assets/images/home_img.png",
-    "assets/images/home_img.png",
-    "assets/images/home_img.png",
-    "assets/images/home_img.png"
+    "assets/images/1.png",
+    "assets/images/2.png",
+    "assets/images/6.png",
   ];
   int currentIndexPage = 0;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -134,7 +135,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   horizontal: ConfigSize.defaultSize! * 3,
                                 ),
                                 child: Text(
-                                  StringManager.viewPlans.tr(),
+                                  AppLocalizations.of(context)!.viewPlans,
                                   style: TextStyle(
                                     color: ColorManager.kPrimaryBlueDark,
                                     fontWeight: FontWeight.bold,
@@ -164,7 +165,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          StringManager.service.tr(),
+                          AppLocalizations.of(context)!.service,
                           style: const TextStyle(
                               color: ColorManager.kPrimaryBlueDark,
                               fontSize: 25,
@@ -184,7 +185,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             padding: EdgeInsets.symmetric(
                                 horizontal: ConfigSize.defaultSize! * 1),
                             child: Text(
-                              StringManager.viewAll.tr(),
+                              AppLocalizations.of(context)!.viewall,
                               style: const TextStyle(
                                   color: Colors.black,
                                   decoration: TextDecoration.underline,
@@ -230,7 +231,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                   height: ConfigSize.defaultSize! * 1,
                                 ),
                                 Text(
-                                  StringManager.medicalInsurance.tr(),
+                                  AppLocalizations.of(context)!
+                                      .medicalinsurance,
+                                  textAlign: TextAlign.center,
                                   style: const TextStyle(
                                       color: ColorManager.whiteColor,
                                       fontSize: 20,
@@ -269,7 +272,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                   height: ConfigSize.defaultSize! * 1,
                                 ),
                                 Text(
-                                  StringManager.carInsurance.tr(),
+                                  AppLocalizations.of(context)!.carisurance,
+                                  textAlign: TextAlign.center,
                                   style: const TextStyle(
                                       color: ColorManager.whiteColor,
                                       fontSize: 25,
@@ -316,7 +320,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                   height: ConfigSize.defaultSize! * 1,
                                 ),
                                 Text(
-                                  StringManager.propertyInsurance.tr(),
+                                  AppLocalizations.of(context)!
+                                      .propertyinsurance,
+                                  textAlign: TextAlign.center,
                                   style: const TextStyle(
                                       color: ColorManager.whiteColor,
                                       fontSize: 25,
@@ -355,7 +361,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                   height: ConfigSize.defaultSize! * 1,
                                 ),
                                 Text(
-                                  StringManager.lifeInsurance.tr(),
+                                  AppLocalizations.of(context)!.lifeinsurance,
+                                  textAlign: TextAlign.center,
                                   style: const TextStyle(
                                       color: ColorManager.whiteColor,
                                       fontSize: 25,
@@ -370,93 +377,23 @@ class _HomeScreenState extends State<HomeScreen> {
                     SizedBox(
                       height: ConfigSize.defaultSize! * 4,
                     ),
-                    // Row(
-                    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    //   children: [
-                    //     Text(
-                    //       StringManager.insuranceType.tr(),
-                    //       style: const TextStyle(
-                    //           color: ColorManager.kPrimaryBlueDark,
-                    //           fontSize: 25,
-                    //           fontWeight: FontWeight.w800),
-                    //     ),
-                    //     InkWell(
-                    //       onTap: () {
-                    //         PersistentNavBarNavigator.pushNewScreen(
-                    //           context,
-                    //           screen: const CardScreen(),
-                    //           withNavBar: true,
-                    //           pageTransitionAnimation:
-                    //               PageTransitionAnimation.fade,
-                    //         );
-                    //       },
-                    //       child: Padding(
-                    //         padding: EdgeInsets.symmetric(
-                    //             horizontal: ConfigSize.defaultSize! * 1),
-                    //         child: Text(
-                    //           StringManager.viewAll.tr(),
-                    //           style: const TextStyle(
-                    //               color: Colors.black,
-                    //               decoration: TextDecoration.underline,
-                    //               fontSize: 13,
-                    //               fontWeight: FontWeight.w800),
-                    //         ),
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
-                    // SizedBox(
-                    //   height: ConfigSize.defaultSize! * 1,
-                    // ),
-                    // CarouselSlider(
-                    //   options: CarouselOptions(
-                    //     onPageChanged: (index, reason) {
-                    //       setState(() {
-                    //         currentIndexPage = index;
-                    //       });
-                    //     },
-                    //     height: ConfigSize.defaultSize! * 50,
-                    //     viewportFraction: 1,
-                    //     initialPage: 0,
-                    //     enableInfiniteScroll: true,
-                    //     reverse: false,
-                    //     autoPlay: true,
-                    //     autoPlayInterval: const Duration(seconds: 5),
-                    //     autoPlayAnimationDuration:
-                    //         const Duration(milliseconds: 800),
-                    //     autoPlayCurve: Curves.fastOutSlowIn,
-                    //     enlargeFactor: 0.3,
-                    //   ),
-                    //   items: card
-                    //     ..map((i) {
-                    //       return Builder(
-                    //         builder: (BuildContext context) {
-                    //           return Container(
-                    //               width: MediaQuery.of(context).size.width,
-                    //               margin: const EdgeInsets.symmetric(
-                    //                   horizontal: 5.0),
-                    //               decoration:
-                    //                   const BoxDecoration(color: Colors.amber),
-                    //               child: Text(
-                    //                 'text $i',
-                    //                 style: const TextStyle(fontSize: 16.0),
-                    //               ));
-                    //         },
-                    //       );
-                    //     }).toList(),
-                    // ),
-                    // Center(
-                    //   child: DotsIndicator(
-                    //     dotsCount: items.length,
-                    //     position: currentIndexPage,
-                    //     decorator: const DotsDecorator(
-                    //         activeColor: ColorManager.kPrimaryBlueDark),
-                    //     onTap: (index) {},
-                    //   ),
-                    // ),
+
                   ],
                 ),
               ),
+              Container(
+                width: ConfigSize.screenWidth,
+                color: ColorManager.kPrimaryBlueDark,
+                child: Padding(
+                  padding:  EdgeInsets.all(ConfigSize.defaultSize! * 2),
+                  child: Text(
+
+                    AppLocalizations.of(context)!.commercial,
+                    style: TextStyle(fontWeight: FontWeight.w500 , color: ColorManager.whiteColor , fontSize: ConfigSize.defaultSize! * 1.2),
+                  ),
+                ),
+              ),
+
             ],
           ),
         ),

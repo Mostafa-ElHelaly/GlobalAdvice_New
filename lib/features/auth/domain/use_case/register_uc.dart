@@ -5,13 +5,13 @@ import '../../../../core/error/failure.dart';
 import '../../data/model/login_model.dart';
 import '../repo/base_repo.dart';
 
-class RegisterUseCase extends BaseUseCase<LoginModel, RegisterAuthModel> {
+class RegisterUseCase extends BaseUseCase<Unit, LoginModel> {
   BaseRepository baseRepository;
 
   RegisterUseCase({required this.baseRepository});
 
   @override
-  Future<Either<LoginModel, Failure>> call(RegisterAuthModel parameter) async {
+  Future<Either<Unit, Failure>> call(LoginModel parameter) async {
     final result = await baseRepository.registerWithEmailAndPassword(parameter);
 
     return result;
@@ -22,12 +22,12 @@ class RegisterAuthModel {
   final String email;
   final String password;
   final String name;
-  final int phone;
+  final int telephone;
 
   RegisterAuthModel({
     required this.email,
     required this.password,
     required this.name,
-    required this.phone,
+    required this.telephone,
   });
 }

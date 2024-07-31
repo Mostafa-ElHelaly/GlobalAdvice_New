@@ -7,7 +7,9 @@ import 'package:globaladvice_new/core/widgets/custom_text_field.dart';
 import 'package:globaladvice_new/features/home/presentation/component/property_form/pages/property_form_2%20.dart';
 import 'package:globaladvice_new/features/home/presentation/component/property_form/widgets/Prop_insurance_appbar.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../../../../../core/widgets/Custom_Drawer.dart';
 import '../../../../../../core/widgets/main_button.dart';
 
 class PropertyFormMainPersonData extends StatefulWidget {
@@ -68,13 +70,26 @@ class _PropertyFormMainPersonDataState
     '2023',
     '2024',
   ];
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: PropertyAppbar(context),
-      body: Padding(
+      drawer: const CustomDrawer(),
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.menu),
+          iconSize: 32, // Adjust the size as needed
+          onPressed: () {
+            _scaffoldKey.currentState!.openDrawer();
+          },
+        ),
+        centerTitle: true,
+        title: Image.asset(
+          AssetsPath.logo,
+          scale: 10,
+        ),
+      ),       body: Padding(
         padding: EdgeInsets.all(ConfigSize.defaultSize! * 1.5),
         child: SingleChildScrollView(
           child: Column(
@@ -93,7 +108,7 @@ class _PropertyFormMainPersonDataState
                 height: ConfigSize.defaultSize! * 2,
               ),
               CustomTextField(
-                labeltext: StringManager.fullName.tr(),
+                labeltext: AppLocalizations.of(context)!.fullName,
                 prefixicon: const Icon(Icons.person),
                 controller: fullNameController,
                 inputType: TextInputType.name,
@@ -102,7 +117,7 @@ class _PropertyFormMainPersonDataState
                 height: ConfigSize.defaultSize! * 2,
               ),
               CustomTextField(
-                labeltext: StringManager.phone.tr(),
+                labeltext: AppLocalizations.of(context)!.phonenumber,
                 prefixicon: const Icon(Icons.phone_android_sharp),
                 controller: phoneController,
                 inputType: TextInputType.phone,
@@ -119,7 +134,7 @@ class _PropertyFormMainPersonDataState
                       pageTransitionAnimation: PageTransitionAnimation.fade,
                     );
                   },
-                  title: StringManager.next.tr(),
+                  title: AppLocalizations.of(context)!.next,
                 ),
               ),
             ],

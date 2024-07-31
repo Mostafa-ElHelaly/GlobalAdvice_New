@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../../data/model/login_model.dart';
@@ -23,7 +24,7 @@ final class RegisterErrorState extends RegisterState {
 }
 
 final class RegisterSuccessState extends RegisterState {
-  final LoginModel authModelResponse;
+  final Unit authModelResponse;
 
   const RegisterSuccessState({required this.authModelResponse});
 }

@@ -14,6 +14,7 @@ import '../../../../../../core/widgets/main_button.dart';
 
 import '../../../home_screen.dart';
 import 'medical_form_3.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MedicalForm2 extends StatefulWidget {
   const MedicalForm2({super.key});
@@ -25,6 +26,7 @@ class MedicalForm2 extends StatefulWidget {
 class _MedicalForm2State extends State<MedicalForm2> {
   TextEditingController emailController = TextEditingController();
   TextEditingController birthdayController = TextEditingController();
+  FocusNode _focusNode = FocusNode();
 
   String? selectedValue;
   DateTime selectedDate = DateTime.now();
@@ -32,6 +34,14 @@ class _MedicalForm2State extends State<MedicalForm2> {
   void initState() {
     emailController = TextEditingController();
     birthdayController = TextEditingController();
+    _focusNode = FocusNode();
+
+    // Disable focus
+    _focusNode.addListener(() {
+      if (_focusNode.hasFocus) {
+        _focusNode.unfocus();
+      }
+    });
     super.initState();
   }
 
@@ -95,7 +105,7 @@ class _MedicalForm2State extends State<MedicalForm2> {
                 height: ConfigSize.defaultSize! * 2,
               ),
               CustomTextField(
-                labeltext: StringManager.email.tr(),
+                labeltext: AppLocalizations.of(context)!.email,
                 prefixicon: const Icon(Icons.email_rounded),
                 controller: emailController,
                 inputType: TextInputType.emailAddress,
@@ -104,7 +114,8 @@ class _MedicalForm2State extends State<MedicalForm2> {
                 height: ConfigSize.defaultSize! * 2,
               ),
               CustomTextField(
-                  labeltext: StringManager.birthday.tr(),
+                  focusNode: _focusNode,
+                  labeltext: AppLocalizations.of(context)!.dateOfBirthday,
                   prefixicon: const Icon(Icons.cake),
                   controller: birthdayController,
                   inputType: TextInputType.none,
@@ -135,7 +146,7 @@ class _MedicalForm2State extends State<MedicalForm2> {
                     pageTransitionAnimation: PageTransitionAnimation.fade,
                   );
                 },
-                title: StringManager.addYourFamily.tr(),
+                title: AppLocalizations.of(context)!.addyourmajority,
               ),
               Padding(
                 padding:
@@ -149,7 +160,7 @@ class _MedicalForm2State extends State<MedicalForm2> {
                       pageTransitionAnimation: PageTransitionAnimation.fade,
                     );
                   },
-                  title: StringManager.next.tr(),
+                  title: AppLocalizations.of(context)!.next,
                 ),
               ),
             ],

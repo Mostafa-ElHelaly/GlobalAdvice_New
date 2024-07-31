@@ -1,15 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:globaladvice_new/core/resource_manger/color_manager.dart';
 import 'package:globaladvice_new/core/resource_manger/locale_keys.g.dart';
 import 'package:globaladvice_new/core/resource_manger/routs_manager.dart';
 import 'package:globaladvice_new/core/utils/config_size.dart';
+import 'package:globaladvice_new/core/utils/methods.dart';
+import 'package:globaladvice_new/core/utils/translation_provider.dart';
+import 'package:globaladvice_new/main.dart';
+import 'package:provider/provider.dart';
 import 'package:share/share.dart';
 
 import '../resource_manger/asset_path.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class CustomDrawer extends StatelessWidget {
+class CustomDrawer extends StatefulWidget {
   const CustomDrawer({super.key});
 
+  @override
+  State<CustomDrawer> createState() => _CustomDrawerState();
+}
+
+class _CustomDrawerState extends State<CustomDrawer> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -32,7 +43,7 @@ class CustomDrawer extends StatelessWidget {
           ),
           SizedBox(height: ConfigSize.defaultSize! * 2),
           DrawerTile(
-            title: StringManager.home,
+            title: AppLocalizations.of(context)!.home,
             icon: Icons.home,
             onTap: () {
               Navigator.of(context)
@@ -41,31 +52,31 @@ class CustomDrawer extends StatelessWidget {
           ),
           const MyDivider(),
           DrawerTile(
-            title: StringManager.plans,
+            title: AppLocalizations.of(context)!.plans,
             icon: Icons.home_repair_service_rounded,
             onTap: () {
               Navigator.of(context).pushNamed(Routes.plans);
             },
           ),
+          // const MyDivider(),
+          // DrawerTile(
+          //   title: AppLocalizations.of(context)!.myProfile,
+          //   icon: Icons.person,
+          //   onTap: () {
+          //     Navigator.of(context).pushNamed(Routes.profile);
+          //   },
+          // ),
+          // const MyDivider(),
+          // DrawerTile(
+          //   title: AppLocalizations.of(context)!.editprofile,
+          //   icon: Icons.edit,
+          //   onTap: () {
+          //     Navigator.of(context).pushNamed(Routes.editProfile);
+          //   },
+          // ),
           const MyDivider(),
           DrawerTile(
-            title: StringManager.myProfile,
-            icon: Icons.person,
-            onTap: () {
-              Navigator.of(context).pushNamed(Routes.profile);
-            },
-          ),
-          const MyDivider(),
-          DrawerTile(
-            title: StringManager.editprofile,
-            icon: Icons.edit,
-            onTap: () {
-              Navigator.of(context).pushNamed(Routes.editProfile);
-            },
-          ),
-          const MyDivider(),
-          DrawerTile(
-            title: StringManager.share,
+            title: AppLocalizations.of(context)!.share,
             icon: Icons.share,
             onTap: () {
               Share.share(
@@ -73,14 +84,31 @@ class CustomDrawer extends StatelessWidget {
             },
           ),
           const MyDivider(),
-          DrawerTile(
-            title: StringManager.logOut,
-            icon: Icons.exit_to_app,
-            onTap: () {
-              Navigator.of(context)
-                  .pushNamedAndRemoveUntil(Routes.login, (route) => false);
+          Consumer<TranslationProvider>(
+            builder: (context, translate, child) {
+              return DrawerTile(
+                title: AppLocalizations.of(context)!.translation,
+                icon: Icons.translate,
+                onTap: () {
+                  translate.change_language();
+                },
+              );
             },
           ),
+          const MyDivider(),
+          Consumer<TranslationProvider>(
+            builder: (context, logout, child) {
+              return DrawerTile(
+                title: AppLocalizations.of(context)!.logOut,
+                icon: Icons.exit_to_app,
+                onTap: () {
+                  Navigator.of(context)
+                      .pushNamedAndRemoveUntil(Routes.login, (route) => false);
+                  logout.check_login();
+                },
+              );
+            },
+          )
         ],
       ),
     );
@@ -88,7 +116,8 @@ class CustomDrawer extends StatelessWidget {
 }
 
 class DrawerTile extends StatelessWidget {
-  const DrawerTile({super.key, required this.title, required this.icon, this.onTap});
+  const DrawerTile(
+      {super.key, required this.title, required this.icon, this.onTap});
   final String title;
   final IconData icon;
   final void Function()? onTap;

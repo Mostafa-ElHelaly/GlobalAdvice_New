@@ -6,6 +6,9 @@ class AssetsPath {
   static const String logo = "$pathImage/gaib-500-4.png";
   static const String person = "$pathImage/image@2x.png";
   static const String home = "$pathImage/home_img.png";
+  static const String home1 = "$pathImage/1.png";
+  static const String home2 = "$pathImage/2.png";
+  static const String home3 = "$pathImage/6.png";
 
 
 //icons

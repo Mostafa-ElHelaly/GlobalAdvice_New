@@ -11,21 +11,23 @@ class CustomTextField extends StatelessWidget {
   String? hint;
   Widget? prefixicon;
   String? labeltext;
+  FocusNode? focusNode;
 
-  CustomTextField({
-    super.key,
-    required this.controller,
-    this.suffix,
-    required this.inputType,
-    this.obscureText = false,
-    this.hint,
-    this.prefixicon,
-    this.labeltext,
-  });
+  CustomTextField(
+      {super.key,
+      required this.controller,
+      this.suffix,
+      required this.inputType,
+      this.obscureText = false,
+      this.hint,
+      this.prefixicon,
+      this.labeltext,
+      this.focusNode});
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      focusNode: focusNode,
       controller: controller,
       keyboardType: inputType,
       obscureText: obscureText ?? false,

@@ -11,7 +11,9 @@ import 'package:globaladvice_new/features/home/presentation/component/life_form/
 import 'package:globaladvice_new/features/home/presentation/component/medical_form/Widgets/done.dart';
 import 'package:globaladvice_new/features/home/presentation/component/property_form/widgets/Property_Dropdown_Widget.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../../../../../core/widgets/Custom_Drawer.dart';
 import '../../../../../../core/widgets/main_button.dart';
 import '../../../home_screen.dart';
 import '../widgets/Life_Insu_Appbar.dart';
@@ -33,9 +35,9 @@ class _LifeFormMainPersonDataState extends State<LifeFormMainPersonData> {
   TextEditingController insuredamountController = TextEditingController();
   TextEditingController occupationController = TextEditingController();
   TextEditingController birthdayController = TextEditingController();
+  FocusNode _focusNode = FocusNode();
 
   DateTime selectedDate = DateTime.now();
-  List<String> genders = ['Male', 'Female'];
   Future<Null> _selectDate(BuildContext context) async {
     DateTime currentdate = DateTime.now();
     final DateTime? picked = await showDatePicker(
@@ -62,6 +64,7 @@ class _LifeFormMainPersonDataState extends State<LifeFormMainPersonData> {
         ;
       });
   }
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
@@ -74,6 +77,14 @@ class _LifeFormMainPersonDataState extends State<LifeFormMainPersonData> {
     insuredamountController = TextEditingController();
     occupationController = TextEditingController();
     birthdayController = TextEditingController();
+    _focusNode = FocusNode();
+
+    // Disable focus
+    _focusNode.addListener(() {
+      if (_focusNode.hasFocus) {
+        _focusNode.unfocus();
+      }
+    });
 
     super.initState();
   }
@@ -89,6 +100,7 @@ class _LifeFormMainPersonDataState extends State<LifeFormMainPersonData> {
     insuredamountController.dispose();
     occupationController.dispose();
     birthdayController.dispose();
+    _focusNode.dispose();
     super.dispose();
   }
 
@@ -96,10 +108,27 @@ class _LifeFormMainPersonDataState extends State<LifeFormMainPersonData> {
 
   @override
   Widget build(BuildContext context) {
+    List<String> genders = [
+      AppLocalizations.of(context)!.male,
+      AppLocalizations.of(context)!.female
+    ];
+
     return Scaffold(
-      backgroundColor: ColorManager.whiteColor,
-      appBar: LifeAppbar(context),
-      body: Padding(
+      drawer: const CustomDrawer(),
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.menu),
+          iconSize: 32, // Adjust the size as needed
+          onPressed: () {
+            _scaffoldKey.currentState!.openDrawer();
+          },
+        ),
+        centerTitle: true,
+        title: Image.asset(
+          AssetsPath.logo,
+          scale: 10,
+        ),
+      ),       body: Padding(
         padding: EdgeInsets.all(ConfigSize.defaultSize! * 1.5),
         child: SingleChildScrollView(
           child: Column(
@@ -118,7 +147,7 @@ class _LifeFormMainPersonDataState extends State<LifeFormMainPersonData> {
                 height: ConfigSize.defaultSize! * 2,
               ),
               CustomTextField(
-                labeltext: StringManager.fullName.tr(),
+                labeltext: AppLocalizations.of(context)!.fullName,
                 prefixicon: const Icon(Icons.person),
                 controller: fullNameController,
                 inputType: TextInputType.name,
@@ -127,7 +156,7 @@ class _LifeFormMainPersonDataState extends State<LifeFormMainPersonData> {
                 height: ConfigSize.defaultSize! * 2,
               ),
               CustomTextField(
-                labeltext: StringManager.email.tr(),
+                labeltext: AppLocalizations.of(context)!.email,
                 prefixicon: const Icon(Icons.email),
                 controller: emailController,
                 inputType: TextInputType.emailAddress,
@@ -136,7 +165,7 @@ class _LifeFormMainPersonDataState extends State<LifeFormMainPersonData> {
                 height: ConfigSize.defaultSize! * 2,
               ),
               CustomTextField(
-                labeltext: StringManager.phone.tr(),
+                labeltext: AppLocalizations.of(context)!.phonenumber,
                 prefixicon: const Icon(Icons.phone_android_sharp),
                 controller: phoneController,
                 inputType: TextInputType.phone,
@@ -145,7 +174,8 @@ class _LifeFormMainPersonDataState extends State<LifeFormMainPersonData> {
                 height: ConfigSize.defaultSize! * 2,
               ),
               CustomTextField(
-                labeltext: StringManager.birthday.tr(),
+                focusNode: _focusNode,
+                labeltext: AppLocalizations.of(context)!.dateOfBirthday,
                 prefixicon: const Icon(Icons.cake),
                 controller: birthdayController,
                 inputType: TextInputType.none,
@@ -160,7 +190,7 @@ class _LifeFormMainPersonDataState extends State<LifeFormMainPersonData> {
               ),
               PropertyDropdown(
                 selectedValue: selectedValue,
-                label: StringManager.gender.tr(),
+                label: AppLocalizations.of(context)!.gender,
                 list: genders,
                 onChanged: (value) {
                   setState(() {
@@ -172,7 +202,7 @@ class _LifeFormMainPersonDataState extends State<LifeFormMainPersonData> {
                 height: ConfigSize.defaultSize! * 2,
               ),
               CustomTextField(
-                labeltext: StringManager.occupation.tr(),
+                labeltext: AppLocalizations.of(context)!.occupation,
                 prefixicon: const Icon(Icons.work_outline),
                 controller: occupationController,
                 inputType: TextInputType.text,
@@ -181,7 +211,7 @@ class _LifeFormMainPersonDataState extends State<LifeFormMainPersonData> {
                 height: ConfigSize.defaultSize! * 2,
               ),
               CustomTextField(
-                labeltext: StringManager.insuredAmount.tr(),
+                labeltext: AppLocalizations.of(context)!.insuredAmount,
                 prefixicon: const Icon(Icons.money),
                 controller: insuredamountController,
                 inputType: TextInputType.number,
@@ -190,7 +220,7 @@ class _LifeFormMainPersonDataState extends State<LifeFormMainPersonData> {
                 height: ConfigSize.defaultSize! * 2,
               ),
               CustomTextField(
-                labeltext: StringManager.premiumAmount.tr(),
+                labeltext: AppLocalizations.of(context)!.premiumAmount,
                 prefixicon: const Icon(Icons.workspace_premium),
                 controller: premiumamountController,
                 inputType: TextInputType.number,
@@ -199,7 +229,7 @@ class _LifeFormMainPersonDataState extends State<LifeFormMainPersonData> {
                 height: ConfigSize.defaultSize! * 2,
               ),
               CustomTextField(
-                labeltext: StringManager.disabilities.tr(),
+                labeltext: AppLocalizations.of(context)!.disabilities,
                 prefixicon: const Icon(Icons.elderly_woman_sharp),
                 controller: disabilitesController,
                 inputType: TextInputType.text,
@@ -208,7 +238,7 @@ class _LifeFormMainPersonDataState extends State<LifeFormMainPersonData> {
                 height: ConfigSize.defaultSize! * 2,
               ),
               CustomTextField(
-                labeltext: StringManager.terms.tr(),
+                labeltext: AppLocalizations.of(context)!.terms,
                 prefixicon: const Icon(Icons.library_books),
                 controller: termsController,
                 inputType: TextInputType.text,
@@ -222,7 +252,8 @@ class _LifeFormMainPersonDataState extends State<LifeFormMainPersonData> {
                             context: context,
                             dialogType: DialogType.success,
                             animType: AnimType.rightSlide,
-                            desc: StringManager.lifeinsurancerequest.tr(),
+                            desc: AppLocalizations.of(context)!
+                                .lifeinsurancerequest,
                             btnOkOnPress: () {},
                             btnOk: const CustomBackButton())
                         .show();
@@ -235,7 +266,7 @@ class _LifeFormMainPersonDataState extends State<LifeFormMainPersonData> {
                       );
                     });
                   },
-                  title: StringManager.finish.tr(),
+                  title: AppLocalizations.of(context)!.finish,
                 ),
               ),
             ],

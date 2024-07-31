@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:globaladvice_new/core/resource_manger/color_manager.dart';
@@ -7,11 +8,14 @@ import 'package:globaladvice_new/features/home/presentation/component/medical_fo
 import 'package:globaladvice_new/features/home/presentation/component/property_form/widgets/Prop_insurance_appbar.dart';
 import 'package:globaladvice_new/features/home/presentation/component/property_form/widgets/Property_Checkbox.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../../../core/resource_manger/asset_path.dart';
 import '../../../../../../core/resource_manger/locale_keys.g.dart';
+import '../../../../../../core/resource_manger/routs_manager.dart';
 import '../../../../../../core/utils/config_size.dart';
 import '../../../../../../core/widgets/main_button.dart';
+import '../../life_form/widgets/Back_Button.dart';
 import 'Prop_Prices_Page.dart';
 
 class PropertyForm3 extends StatefulWidget {
@@ -37,18 +41,8 @@ class _PropertyForm3State extends State<PropertyForm3> {
     'Strikes and riots',
     'Loss of rent',
     'Burglary or attempted theft of contents',
-    'Fire, lightning, and explosion',
-    'Bursting of water tanks',
-    'Damage of gas pipeline',
-    'Strikes and riots',
-    'Loss of rent',
   ];
   List<bool> bools = [
-    false,
-    false,
-    false,
-    false,
-    false,
     false,
     false,
     false,
@@ -60,6 +54,23 @@ class _PropertyForm3State extends State<PropertyForm3> {
 
   @override
   Widget build(BuildContext context) {
+    List<String> Homedata = [
+      AppLocalizations.of(context)!.burglaryorattemptedtheftofcontents,
+      AppLocalizations.of(context)!.fireorexplosion,
+      AppLocalizations.of(context)!.burstingofwatertanks,
+      AppLocalizations.of(context)!.damageofgaspipeline,
+      AppLocalizations.of(context)!.strikesandriots,
+      AppLocalizations.of(context)!.lossofrent,
+    ];
+    List<bool> bools = [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+    ];
     final List<bool> booleanList = List.generate(Homedata.length, (_) => false);
 
     return Scaffold(
@@ -132,22 +143,21 @@ class _PropertyForm3State extends State<PropertyForm3> {
                     EdgeInsets.symmetric(vertical: ConfigSize.defaultSize! * 1),
                 child: MainButton(
                   onTap: () {
-                    showDialog(
-                      context: context,
-                      builder: (context) {
-                        return const DoneScreen();
-                      },
-                    );
+                    AwesomeDialog(
+                            context: context,
+                            dialogType: DialogType.success,
+                            animType: AnimType.rightSlide,
+                            desc: AppLocalizations.of(context)!
+                                .lifeinsurancerequest,
+                            btnOkOnPress: () {},
+                            btnOk: const CustomBackButton())
+                        .show();
                     Future.delayed(Duration(seconds: 3), () {
-                      PersistentNavBarNavigator.pushNewScreen(
-                        context,
-                        screen: PropertyPrices(),
-                        withNavBar: false,
-                        pageTransitionAnimation: PageTransitionAnimation.fade,
-                      );
+                      Navigator.pushNamedAndRemoveUntil(
+                          context, Routes.homeScreen, (route) => false);
                     });
                   },
-                  title: StringManager.submit.tr(),
+                  title: AppLocalizations.of(context)!.submit,
                 ),
               ),
             ],
