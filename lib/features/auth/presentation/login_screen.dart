@@ -62,7 +62,13 @@ class _LoginScreenState extends State<LoginScreen> {
               context, Routes.homeScreen, (route) => false);
         } else if (state is LoginErrorState) {
           errorSnackBar(context, state.errorMessage);
-        } else if (state is LoginLoadingState) {}
+        } else if (state is LoginLoadingState) {
+          Center(
+            child: CircularProgressIndicator(
+              color: ColorManager.mainColor,
+            ),
+          );
+        }
       },
       child: Scaffold(
         backgroundColor: ColorManager.whiteColor,
