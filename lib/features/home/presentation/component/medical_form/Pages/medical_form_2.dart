@@ -25,14 +25,10 @@ class MedicalForm2 extends StatefulWidget {
 
 class _MedicalForm2State extends State<MedicalForm2> {
   TextEditingController emailController = TextEditingController();
-  TextEditingController fullnameController = TextEditingController();
   TextEditingController birthdayController = TextEditingController();
-  TextEditingController siblingbirthdayController = TextEditingController();
   FocusNode _focusNode = FocusNode();
 
   String? selectedValue;
-  String? siblinggenderselectedValue;
-  String? siblingrelationselectedValue;
 
   DateTime selectedDate = DateTime.now();
   int addcount = 0;
@@ -318,6 +314,11 @@ class _MedicalForm2State extends State<MedicalForm2> {
                         controller: fullnameControllers[index],
                         inputType: TextInputType.name,
                       ),
+                      SizedBox(height: ConfigSize.defaultSize! * 2),
+                      index == addcount - 1
+                          ? SizedBox.shrink()
+                          : Divider(
+                              thickness: 3, color: ColorManager.mainColor),
                       SizedBox(height: ConfigSize.defaultSize! * 2),
                     ],
                   );
