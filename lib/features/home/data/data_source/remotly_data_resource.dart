@@ -7,6 +7,7 @@ import 'package:globaladvice_new/core/utils/api_helper.dart';
 import 'package:globaladvice_new/core/utils/constant_api.dart';
 
 import '../model/lifeInsurance.dart';
+import '../model/other_forms_model.dart';
 
 abstract class BaseHomeRemotelyDataSource {
   Future<Unit> sendhealthinsurancerequest(
@@ -17,6 +18,7 @@ abstract class BaseHomeRemotelyDataSource {
       HealthInsuranceModel healthInsuranceModel);
   Future<Unit> SendLifeInsuranceRequest(
       LifeInsuranceModel lifeInsuranceModel);
+  Future<Unit> sendanotherinsurancerequest(OtherFormsModel otherFormsModel);
 }
 
 class HomeRemotelyDataSource extends BaseHomeRemotelyDataSource {
@@ -156,4 +158,45 @@ class HomeRemotelyDataSource extends BaseHomeRemotelyDataSource {
           dioError: e, endpointName: "HealthInsurance Request");
     }
   }
+
+
+
+  @override
+  Future<Unit> sendanotherinsurancerequest(
+      OtherFormsModel otherFormsModel) async {
+    final body = {
+      "name": otherFormsModel.name,
+      "contact": otherFormsModel.phoneNumber,
+      "type": otherFormsModel.type,
+      "message": otherFormsModel.message,
+    };
+    try {
+      final response = await Dio().post(
+        options: Options(
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+        ),
+        ConstantApi.form,
+        data: body,
+      );
+      if (response.statusCode == 200) {
+        print('Request Sent Successfully');
+        return Future.value(unit);
+      } else {
+        throw Exception(Strings.requestfalied);
+      }
+    } on DioException catch (e) {
+      throw DioHelper.handleDioError(
+          dioError: e, endpointName: "HealthInsurance Request");
+    }
+  }
+
+
+
+
+
+
+
+
 }

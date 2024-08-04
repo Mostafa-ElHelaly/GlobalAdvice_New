@@ -5,4 +5,5 @@ class ConstantApi {
   static const String resetPassword = "${baseUrl}client/access/reset-password";
   static const String healthInsurance = "${baseUrl}client/health/request";
   static const String lifeInsurance = "${baseUrl}client/life/send";
+  static const String form = "${baseUrl}client/form";
 }

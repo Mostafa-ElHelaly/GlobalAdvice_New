@@ -8,6 +8,7 @@ import 'package:globaladvice_new/core/resource_manger/asset_path.dart';
 import 'package:globaladvice_new/core/resource_manger/color_manager.dart';
 import 'package:globaladvice_new/core/resource_manger/locale_keys.g.dart';
 import 'package:globaladvice_new/core/utils/config_size.dart';
+import 'package:globaladvice_new/core/widgets/Loading.dart';
 import 'package:globaladvice_new/core/widgets/custom_text_field.dart';
 import 'package:globaladvice_new/core/widgets/main_button.dart';
 import 'package:globaladvice_new/features/auth/presentation/login_screen.dart';
@@ -118,11 +119,7 @@ class _CreateAccountState extends State<CreateAccount> {
         } else if (state is RegisterErrorState) {
           errorSnackBar(context, state.errorMessage);
         } else if (state is RegisterLoadingState) {
-          Center(
-            child: CircularProgressIndicator(
-              color: ColorManager.mainColor,
-            ),
-          );
+          showLoading(context);
         }
       },
       child: Scaffold(
