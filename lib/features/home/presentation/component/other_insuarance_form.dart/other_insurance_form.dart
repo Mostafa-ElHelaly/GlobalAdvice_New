@@ -136,8 +136,6 @@ class _OtherInsuranceFormState extends State<OtherInsuranceForm> {
                   SizedBox(height: ConfigSize.defaultSize! * 2),
                   CustomTextField(
                       maxLength: 100,
-                      maxLines: 4,
-                      minLines: 3,
                       controller: messageController,
                       inputType: TextInputType.text),
                   SizedBox(height: ConfigSize.defaultSize! * 2),
