@@ -37,10 +37,16 @@ class _MedicalForm2State extends State<MedicalForm2> {
 
   DateTime selectedDate = DateTime.now();
   int addcount = 0;
+  List<TextEditingController> birthdayControllers = [];
+  List<TextEditingController> fullnameControllers = [];
   @override
   void initState() {
     emailController = TextEditingController();
     birthdayController = TextEditingController();
+    for (int i = 0; i < addcount; i++) {
+      birthdayControllers.add(TextEditingController());
+      fullnameControllers.add(TextEditingController());
+    }
     _focusNode = FocusNode();
 
     // Disable focus
@@ -56,6 +62,12 @@ class _MedicalForm2State extends State<MedicalForm2> {
   void dispose() {
     emailController.dispose();
     birthdayController.dispose();
+    for (var controller in birthdayControllers) {
+      controller.dispose();
+    }
+    for (var controller in fullnameControllers) {
+      controller.dispose();
+    }
     super.dispose();
   }
 
@@ -88,6 +100,8 @@ class _MedicalForm2State extends State<MedicalForm2> {
 
   @override
   Widget build(BuildContext context) {
+    List<String?> selectedValues = List.generate(addcount, (_) => null);
+
     List<String> siblingrelations = [
       AppLocalizations.of(context)!.spouse,
       AppLocalizations.of(context)!.children,

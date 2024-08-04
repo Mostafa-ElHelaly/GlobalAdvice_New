@@ -12,8 +12,7 @@ class CustomTextField extends StatelessWidget {
   Widget? prefixicon;
   String? labeltext;
   FocusNode? focusNode;
-  int? minLines;
-  int? maxLines;
+
   int? maxLength;
 
   CustomTextField(
@@ -25,8 +24,6 @@ class CustomTextField extends StatelessWidget {
       this.hint,
       this.prefixicon,
       this.labeltext,
-      this.minLines,
-      this.maxLines,
       this.maxLength,
       this.focusNode});
 
@@ -34,8 +31,6 @@ class CustomTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextField(
       maxLength: maxLength,
-      maxLines: maxLines,
-      minLines: minLines,
       focusNode: focusNode,
       controller: controller,
       keyboardType: inputType,
