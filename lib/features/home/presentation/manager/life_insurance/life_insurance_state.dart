@@ -1,26 +1,26 @@
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 
-sealed class LifeinsuranceblocState extends Equatable {
-  const LifeinsuranceblocState();
+sealed class LifeInsuranceBlocState extends Equatable {
+  const LifeInsuranceBlocState();
 
   @override
   List<Object> get props => [];
 }
 
-final class LifeinsuranceblocInitial extends LifeinsuranceblocState {}
+final class LifeInsuranceBlocInitial extends LifeInsuranceBlocState {}
 
-final class LifeinsuranceRequestLoadingState extends LifeinsuranceblocState {
-  const LifeinsuranceRequestLoadingState();
+final class LifeInsuranceRequestLoadingState extends LifeInsuranceBlocState {
+  const LifeInsuranceRequestLoadingState();
 }
 
-final class LifeinsuranceRequestErrorState extends LifeinsuranceblocState {
+final class LifeInsuranceRequestErrorState extends LifeInsuranceBlocState {
   final String errorMessage;
 
-  const LifeinsuranceRequestErrorState({required this.errorMessage});
+  const LifeInsuranceRequestErrorState({required this.errorMessage});
 }
 
-final class LifeInsuranceSuccessState extends LifeinsuranceblocState {
+final class LifeInsuranceSuccessState extends LifeInsuranceBlocState {
   final Unit LifeInsuranceModel;
 
   const LifeInsuranceSuccessState({required this.LifeInsuranceModel});

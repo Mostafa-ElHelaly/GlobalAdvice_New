@@ -5,6 +5,7 @@ import 'package:globaladvice_new/features/home/domain/repo/homeBaseRepo.dart';
 
 import '../../../../core/error/failure.dart';
 import '../../../../core/utils/api_helper.dart';
+import '../model/lifeInsurance.dart';
 
 class HomeRepositoryImp extends BaseHomeRepository {
   final BaseHomeRemotelyDataSource baseHomeRemotelyDataSource;
@@ -36,11 +37,11 @@ class HomeRepositoryImp extends BaseHomeRepository {
   }
 
   @override
-  Future<Either<Unit, Failure>> sendlifeinsurancerequest(
-      HealthInsuranceModel healthInsuranceModel) async {
+  Future<Either<Unit, Failure>> SendLifeInsuranceRequest(
+      LifeInsuranceModel lifeInsuranceModel) async {
     try {
       final result = await baseHomeRemotelyDataSource
-          .sendlifeinsurancerequest(healthInsuranceModel);
+          .SendLifeInsuranceRequest(lifeInsuranceModel);
       return Left(result);
     } on Exception catch (e) {
       return right(DioHelper.buildFailure(e));
@@ -52,7 +53,7 @@ class HomeRepositoryImp extends BaseHomeRepository {
       HealthInsuranceModel healthInsuranceModel) async {
     try {
       final result = await baseHomeRemotelyDataSource
-          .sendlifeinsurancerequest(healthInsuranceModel);
+          .SendLifeInsuranceRequest(LifeInsuranceModel as LifeInsuranceModel);
       return Left(result);
     } on Exception catch (e) {
       return right(DioHelper.buildFailure(e));

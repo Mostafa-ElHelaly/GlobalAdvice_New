@@ -1,36 +1,27 @@
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
-import 'package:globaladvice_new/features/home/data/model/healthInsuranceModel.dart';
-import 'package:globaladvice_new/features/home/domain/use_case/car_inurance_uc.dart';
-import 'package:globaladvice_new/features/home/domain/use_case/healthInsuranceUsecase.dart';
 import 'package:globaladvice_new/features/home/domain/use_case/life_insurance_uc.dart';
-import 'package:globaladvice_new/features/home/presentation/manager/healthinsurancebloc/healthinsurancebloc_event.dart';
-import 'package:globaladvice_new/features/home/presentation/manager/healthinsurancebloc/healthinsurancebloc_state.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/life_insurance/life_insurance_state.dart';
-
-import '../../../../../core/utils/api_helper.dart';
-import 'life_insurance_event.dart';
+import 'package:globaladvice_new/core/utils/api_helper.dart';
+import 'package:globaladvice_new/features/home/data/model/lifeInsurance.dart';
+import 'package:globaladvice_new/features/home/presentation/manager/life_insurance/life_insurance_event.dart';
 
 class LifeInsuranceBloc
-    extends Bloc<LifeinsuranceblocEvent, LifeinsuranceblocState> {
-  LifeInsuranceUsecase healthinsuranceblocUsecase;
-  LifeInsuranceBloc({required this.healthinsuranceblocUsecase})
-      : super(LifeinsuranceblocInitial()) {
-    on<LifeinsuranceblocEvent>((event, emit) async {
-      emit(const LifeinsuranceRequestLoadingState());
-      final result = await healthinsuranceblocUsecase.call(HealthInsuranceModel(
-        uid: event.uid,
-        organizationId: event.organizationId,
-        planId: event.planId,
+    extends Bloc<LifeInsuranceBlocEvent, LifeInsuranceBlocState> {
+  LifeInsuranceUseCase lifeInsuranceUseCase;
+  LifeInsuranceBloc({required this.lifeInsuranceUseCase})
+      : super(LifeInsuranceBlocInitial()) {
+    on<LifeInsuranceBlocEvent>((event, emit) async {
+      emit(const LifeInsuranceRequestLoadingState());
+      final result = await lifeInsuranceUseCase.call(LifeInsuranceModel(
+        email: event.email,
         name: event.name,
-        age: event.age,
-        relation: event.relation,
-        price: event.price,
-        gende: event.gender,
+        phone: event.phone,
+        body: event.body,
+        uid: event.uid,
       ));
       result.fold(
           (l) => emit(LifeInsuranceSuccessState(LifeInsuranceModel: l)),
-          (r) => emit(LifeinsuranceRequestErrorState(
+          (r) => emit(LifeInsuranceRequestErrorState(
               errorMessage: DioHelper().getTypeOfFailure(r))));
     });
   }

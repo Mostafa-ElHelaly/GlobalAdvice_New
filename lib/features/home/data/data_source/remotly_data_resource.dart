@@ -1,12 +1,12 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:globaladvice_new/features/home/data/model/healthInsuranceModel.dart';
-import 'package:globaladvice_new/main.dart';
 
-import '../../../../core/error/failures_strings.dart';
-import '../../../../core/utils/api_helper.dart';
-import '../../../../core/utils/constant_api.dart';
+import 'package:globaladvice_new/core/error/failures_strings.dart';
+import 'package:globaladvice_new/core/utils/api_helper.dart';
+import 'package:globaladvice_new/core/utils/constant_api.dart';
+
+import '../model/lifeInsurance.dart';
 
 abstract class BaseHomeRemotelyDataSource {
   Future<Unit> sendhealthinsurancerequest(
@@ -15,8 +15,8 @@ abstract class BaseHomeRemotelyDataSource {
       HealthInsuranceModel healthInsuranceModel);
   Future<Unit> sendpropertyinsurancerequest(
       HealthInsuranceModel healthInsuranceModel);
-  Future<Unit> sendlifeinsurancerequest(
-      HealthInsuranceModel healthInsuranceModel);
+  Future<Unit> SendLifeInsuranceRequest(
+      LifeInsuranceModel lifeInsuranceModel);
 }
 
 class HomeRemotelyDataSource extends BaseHomeRemotelyDataSource {
@@ -40,7 +40,7 @@ class HomeRemotelyDataSource extends BaseHomeRemotelyDataSource {
             'Content-Type': 'application/x-www-form-urlencoded',
           },
         ),
-        ConstantApi.healthinsurance,
+        ConstantApi.healthInsurance,
         data: body,
       );
       if (response.statusCode == 200) {
@@ -75,7 +75,7 @@ class HomeRemotelyDataSource extends BaseHomeRemotelyDataSource {
             'Content-Type': 'application/x-www-form-urlencoded',
           },
         ),
-        ConstantApi.healthinsurance,
+        ConstantApi.healthInsurance,
         data: body,
       );
       if (response.statusCode == 200) {
@@ -91,17 +91,14 @@ class HomeRemotelyDataSource extends BaseHomeRemotelyDataSource {
   }
 
   @override
-  Future<Unit> sendlifeinsurancerequest(
-      HealthInsuranceModel healthInsuranceModel) async {
+  Future<Unit> SendLifeInsuranceRequest(
+      LifeInsuranceModel lifeInsuranceModel) async {
     final body = {
-      "UID": healthInsuranceModel.uid,
-      "organization_id": healthInsuranceModel.organizationId,
-      "plan_id": healthInsuranceModel.planId,
-      "name[]": healthInsuranceModel.name,
-      "age[]": healthInsuranceModel.age,
-      "relation[]": healthInsuranceModel.relation,
-      "price[]": healthInsuranceModel.price,
-      "gender[]": healthInsuranceModel.gende,
+      "UID": lifeInsuranceModel.uid,
+      "email": lifeInsuranceModel.email,
+      "name": lifeInsuranceModel.name,
+      "phone": lifeInsuranceModel.phone,
+      "body": lifeInsuranceModel.body,
     };
     try {
       final response = await Dio().post(
@@ -110,7 +107,7 @@ class HomeRemotelyDataSource extends BaseHomeRemotelyDataSource {
             'Content-Type': 'application/x-www-form-urlencoded',
           },
         ),
-        ConstantApi.healthinsurance,
+        ConstantApi.lifeInsurance,
         data: body,
       );
       if (response.statusCode == 200) {
@@ -121,7 +118,7 @@ class HomeRemotelyDataSource extends BaseHomeRemotelyDataSource {
       }
     } on DioException catch (e) {
       throw DioHelper.handleDioError(
-          dioError: e, endpointName: "HealthInsurance Request");
+          dioError: e, endpointName: "LifeInsurance Request");
     }
   }
 
@@ -145,7 +142,7 @@ class HomeRemotelyDataSource extends BaseHomeRemotelyDataSource {
             'Content-Type': 'application/x-www-form-urlencoded',
           },
         ),
-        ConstantApi.healthinsurance,
+        ConstantApi.healthInsurance,
         data: body,
       );
       if (response.statusCode == 200) {

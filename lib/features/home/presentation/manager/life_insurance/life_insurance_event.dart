@@ -1,22 +1,17 @@
 abstract class ResetEvent {}
 
-class LifeinsuranceblocEvent extends ResetEvent {
-  final String uid;
-  final String organizationId;
-  final String planId;
+class LifeInsuranceBlocEvent extends ResetEvent {
+  final String? uid;
+  final String email;
   final String name;
-  final String age;
-  final String relation;
-  final String price;
-  final String gender;
-  LifeinsuranceblocEvent({
-    required this.uid,
-    required this.organizationId,
-    required this.planId,
+  final String phone;
+  final String body;
+
+  LifeInsuranceBlocEvent({
+     this.uid,
+    required this.email,
     required this.name,
-    required this.age,
-    required this.relation,
-    required this.price,
-    required this.gender,
+    required this.phone,
+    required this.body,
   });
 }

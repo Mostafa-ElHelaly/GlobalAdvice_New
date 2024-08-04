@@ -43,7 +43,7 @@ class ServerLocator {
     getIt.registerLazySingleton(
         () => CarinsuranceBloc(healthinsuranceblocUsecase: getIt()));
     getIt.registerLazySingleton(
-        () => LifeInsuranceBloc(healthinsuranceblocUsecase: getIt()));
+        () => LifeInsuranceBloc(lifeInsuranceUseCase: getIt()));
     getIt.registerLazySingleton(
         () => PropertyInsuranceBloc(healthinsuranceblocUsecase: getIt()));
 
@@ -57,7 +57,7 @@ class ServerLocator {
     getIt.registerLazySingleton(
         () => CarInsuranceUsecase(baseRepository: getIt()));
     getIt.registerLazySingleton(
-        () => LifeInsuranceUsecase(baseRepository: getIt()));
+        () => LifeInsuranceUseCase(baseRepository: getIt()));
     getIt.registerLazySingleton(
         () => PropertyInsuranceUsecase(baseRepository: getIt()));
 
