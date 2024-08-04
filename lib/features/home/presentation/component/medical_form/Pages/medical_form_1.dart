@@ -42,11 +42,13 @@ class _MedicalFormMainPersonDataState extends State<MedicalFormMainPersonData> {
     phoneController.dispose();
     super.dispose();
   }
+
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       drawer: const CustomDrawer(),
       appBar: AppBar(
         leading: IconButton(
@@ -62,7 +64,6 @@ class _MedicalFormMainPersonDataState extends State<MedicalFormMainPersonData> {
           scale: 10,
         ),
       ),
-
       body: Padding(
         padding: EdgeInsets.all(ConfigSize.defaultSize! * 1.5),
         child: SingleChildScrollView(

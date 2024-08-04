@@ -56,179 +56,183 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     ConfigSize().init(context);
 
-    return BlocListener<LoginBloc, LoginState>(
-      listener: (context, state) {
-        if (state is LoginSuccessState) {
-          Navigator.pushNamedAndRemoveUntil(
-              context, Routes.homeScreen, (route) => false);
-        } else if (state is LoginErrorState) {
-          errorSnackBar(context, state.errorMessage);
-        } else if (state is LoginLoadingState) {
-          showloading(context);
-        }
-      },
-      child: Scaffold(
-        backgroundColor: ColorManager.whiteColor,
-        resizeToAvoidBottomInset: false,
-        body: Column(
-          children: [
-            SizedBox(
-              height: ConfigSize.defaultSize! * 10,
-            ),
-            Image.asset(
-              AssetsPath.logo,
-              scale: 4,
-            ),
-            SizedBox(
-              height: ConfigSize.defaultSize! * 4,
-            ),
-            Padding(
-              padding: EdgeInsets.all(ConfigSize.defaultSize! * 1.5),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    AppLocalizations.of(context)!.email,
-                    style: TextStyle(
-                      fontSize: ConfigSize.defaultSize! * 1.6,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  SizedBox(
-                    height: ConfigSize.defaultSize! - 5,
-                  ),
-                  CustomTextField(
-                    controller: emailController,
-                    inputType: TextInputType.emailAddress,
-                  ),
-                  SizedBox(
-                    height: ConfigSize.defaultSize! * 2,
-                  ),
-                  Text(
-                    AppLocalizations.of(context)!.password,
-                    style: TextStyle(
-                      fontSize: ConfigSize.defaultSize! * 1.6,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  SizedBox(
-                    height: ConfigSize.defaultSize! - 5,
-                  ),
-                  CustomTextField(
-                    controller: passwordController,
-                    inputType: TextInputType.text,
-                    obscureText: isVisible,
-                    suffix: InkWell(
-                        onTap: () {
-                          {
-                            isVisible = !isVisible;
-                          }
-                          setState(() {});
-                        },
-                        child: Icon(isVisible
-                            ? Icons.visibility_off_outlined
-                            : Icons.remove_red_eye_outlined)),
-                  ),
-                  SizedBox(
-                    height: ConfigSize.defaultSize! * 1,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+    return Consumer<TranslationProvider>(
+      builder: (context, login, child) {
+        return BlocListener<LoginBloc, LoginState>(
+          listener: (context, state) {
+            if (state is LoginSuccessState) {
+              login.check_login();
+              Navigator.pushNamedAndRemoveUntil(
+                  context, Routes.homeScreen, (route) => false);
+            } else if (state is LoginErrorState) {
+              errorSnackBar(context, state.errorMessage);
+            } else if (state is LoginLoadingState) {
+              showLoading(context);
+            }
+          },
+          child: Scaffold(
+            backgroundColor: ColorManager.whiteColor,
+            resizeToAvoidBottomInset: false,
+            body: Column(
+              children: [
+                SizedBox(
+                  height: ConfigSize.defaultSize! * 10,
+                ),
+                Image.asset(
+                  AssetsPath.logo,
+                  scale: 4,
+                ),
+                SizedBox(
+                  height: ConfigSize.defaultSize! * 4,
+                ),
+                Padding(
+                  padding: EdgeInsets.all(ConfigSize.defaultSize! * 1.5),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      Text(
+                        AppLocalizations.of(context)!.email,
+                        style: TextStyle(
+                          fontSize: ConfigSize.defaultSize! * 1.6,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      SizedBox(
+                        height: ConfigSize.defaultSize! - 5,
+                      ),
+                      CustomTextField(
+                        controller: emailController,
+                        inputType: TextInputType.emailAddress,
+                      ),
+                      SizedBox(
+                        height: ConfigSize.defaultSize! * 2,
+                      ),
+                      Text(
+                        AppLocalizations.of(context)!.password,
+                        style: TextStyle(
+                          fontSize: ConfigSize.defaultSize! * 1.6,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      SizedBox(
+                        height: ConfigSize.defaultSize! - 5,
+                      ),
+                      CustomTextField(
+                        controller: passwordController,
+                        inputType: TextInputType.text,
+                        obscureText: isVisible,
+                        suffix: InkWell(
+                            onTap: () {
+                              {
+                                isVisible = !isVisible;
+                              }
+                              setState(() {});
+                            },
+                            child: Icon(isVisible
+                                ? Icons.visibility_off_outlined
+                                : Icons.remove_red_eye_outlined)),
+                      ),
+                      SizedBox(
+                        height: ConfigSize.defaultSize! * 1,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              PersistentNavBarNavigator.pushNewScreen(
+                                context,
+                                screen: const ForgetPasswordScreen(),
+                                withNavBar: false,
+                                pageTransitionAnimation:
+                                    PageTransitionAnimation.fade,
+                              );
+                            },
+                            child: Text(
+                              AppLocalizations.of(context)!.forgetPassword,
+                              style: TextStyle(
+                                fontSize: ConfigSize.defaultSize! * 1.6,
+                                fontWeight: FontWeight.w600,
+                                color: ColorManager.mainColor,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Padding(
+                          padding: EdgeInsets.symmetric(
+                              vertical: ConfigSize.defaultSize! * 3),
+                          child: Consumer<TranslationProvider>(
+                            builder: (context, login, child) {
+                              return MainButton(
+                                color: ColorManager.kPrimaryBlueDark,
+                                textColor: ColorManager.whiteColor,
+                                onTap: () {
+                                  if (validation()) {
+                                    BlocProvider.of<LoginBloc>(context).add(
+                                      LoginEvent(
+                                        email: emailController.text,
+                                        password: passwordController.text,
+                                      ),
+                                    );
+                                  } else {
+                                    errorSnackBar(
+                                        context, StringManager.errorFillFields);
+                                  }
+                                },
+                                title: AppLocalizations.of(context)!.signingIn,
+                              );
+                            },
+                          )),
+                    ],
+                  ),
+                ),
+                const Spacer(),
+                Padding(
+                  padding: EdgeInsets.all(ConfigSize.defaultSize! * 1.5),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        AppLocalizations.of(context)!.donthaveaccount,
+                        style: const TextStyle(
+                          color: ColorManager.gray,
+                        ),
+                      ),
                       InkWell(
                         onTap: () {
-                          PersistentNavBarNavigator.pushNewScreen(
-                            context,
-                            screen: const ForgetPasswordScreen(),
-                            withNavBar: false,
-                            pageTransitionAnimation:
-                                PageTransitionAnimation.fade,
-                          );
+                          Navigator.pushNamedAndRemoveUntil(
+                              context, Routes.createAccount, (route) => false);
                         },
-                        child: Text(
-                          AppLocalizations.of(context)!.forgetPassword,
-                          style: TextStyle(
-                            fontSize: ConfigSize.defaultSize! * 1.6,
-                            fontWeight: FontWeight.w600,
-                            color: ColorManager.mainColor,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: ColorManager.gray,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                              vertical: ConfigSize.defaultSize! * 1.5,
+                              horizontal: ConfigSize.defaultSize! * 3,
+                            ),
+                            child: Text(
+                              AppLocalizations.of(context)!.createAccount,
+                              style: TextStyle(
+                                color: ColorManager.kPrimaryBlueDark,
+                                fontWeight: FontWeight.bold,
+                                fontSize: ConfigSize.defaultSize! * 1.5,
+                              ),
+                            ),
                           ),
                         ),
                       ),
                     ],
                   ),
-                  Padding(
-                      padding: EdgeInsets.symmetric(
-                          vertical: ConfigSize.defaultSize! * 3),
-                      child: Consumer<TranslationProvider>(
-                        builder: (context, login, child) {
-                          return MainButton(
-                            color: ColorManager.kPrimaryBlueDark,
-                            textColor: ColorManager.whiteColor,
-                            onTap: () {
-                              if (validation()) {
-                                BlocProvider.of<LoginBloc>(context).add(
-                                  LoginEvent(
-                                    email: emailController.text,
-                                    password: passwordController.text,
-                                  ),
-                                );
-                                login.check_login();
-                              } else {
-                                errorSnackBar(
-                                    context, StringManager.errorFillFields);
-                              }
-                            },
-                            title: AppLocalizations.of(context)!.signingIn,
-                          );
-                        },
-                      )),
-                ],
-              ),
+                ),
+              ],
             ),
-            const Spacer(),
-            Padding(
-              padding: EdgeInsets.all(ConfigSize.defaultSize! * 1.5),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    AppLocalizations.of(context)!.donthaveaccount,
-                    style: const TextStyle(
-                      color: ColorManager.gray,
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.pushNamedAndRemoveUntil(
-                          context, Routes.createAccount, (route) => false);
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: ColorManager.gray,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(
-                          vertical: ConfigSize.defaultSize! * 1.5,
-                          horizontal: ConfigSize.defaultSize! * 3,
-                        ),
-                        child: Text(
-                          AppLocalizations.of(context)!.createAccount,
-                          style: TextStyle(
-                            color: ColorManager.kPrimaryBlueDark,
-                            fontWeight: FontWeight.bold,
-                            fontSize: ConfigSize.defaultSize! * 1.5,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 
