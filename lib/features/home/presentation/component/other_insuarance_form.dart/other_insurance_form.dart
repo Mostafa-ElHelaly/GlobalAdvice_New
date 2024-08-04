@@ -31,6 +31,7 @@ class _OtherInsuranceFormState extends State<OtherInsuranceForm> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   TextEditingController namecontroller = TextEditingController();
   TextEditingController phonenumberController = TextEditingController();
+  TextEditingController messageController = TextEditingController();
   TextStyle labelstyle = TextStyle(
     fontSize: ConfigSize.defaultSize! * 2,
     fontWeight: FontWeight.w700,
@@ -39,6 +40,7 @@ class _OtherInsuranceFormState extends State<OtherInsuranceForm> {
   void initState() {
     namecontroller = TextEditingController();
     phonenumberController = TextEditingController();
+    messageController = TextEditingController();
     print(widget.Insurance_type);
     super.initState();
   }
@@ -47,6 +49,7 @@ class _OtherInsuranceFormState extends State<OtherInsuranceForm> {
   void dispose() {
     namecontroller.dispose();
     phonenumberController.dispose();
+    messageController.dispose();
     super.dispose();
   }
 
@@ -126,15 +129,39 @@ class _OtherInsuranceFormState extends State<OtherInsuranceForm> {
                       controller: phonenumberController,
                       inputType: TextInputType.phone),
                   SizedBox(height: ConfigSize.defaultSize! * 2),
+                  Text(
+                    AppLocalizations.of(context)!.message,
+                    style: labelstyle,
+                  ),
+                  SizedBox(height: ConfigSize.defaultSize! * 2),
+                  CustomTextField(
+                      maxLength: 100,
+                      maxLines: 4,
+                      minLines: 3,
+                      controller: messageController,
+                      inputType: TextInputType.text),
+                  SizedBox(height: ConfigSize.defaultSize! * 2),
                   MainButton(
                       onTap: () {
-                        BlocProvider.of<OtherInsuranceBloc>(context)
-                            .add(OtherinsuranceblocEvent(
-                          name: namecontroller.text,
-                          phonenumber: phonenumberController.text,
-                          type: widget.Insurance_type,
-                          message: 'I Need ${widget.Insurance_type} Insurance',
-                        ));
+                        if (namecontroller.text.isNotEmpty &&
+                            phonenumberController.text.isNotEmpty &&
+                            messageController.text.isNotEmpty) {
+                          BlocProvider.of<OtherInsuranceBloc>(context)
+                              .add(OtherinsuranceblocEvent(
+                            name: namecontroller.text,
+                            phonenumber: phonenumberController.text,
+                            type: widget.Insurance_type,
+                            message: messageController.text,
+                          ));
+                        } else {
+                          errorSnackBar(
+                              context,
+                              namecontroller.text.isEmpty
+                                  ? '${AppLocalizations.of(context)!.fullName} is required'
+                                  : phonenumberController.text.isEmpty
+                                      ? '${AppLocalizations.of(context)!.phonenumber} is required'
+                                      : '${AppLocalizations.of(context)!.message} is required');
+                        }
                       },
                       title: AppLocalizations.of(context)!.submit)
                 ],

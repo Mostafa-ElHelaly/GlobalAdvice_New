@@ -1,3 +1,4 @@
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -25,11 +26,17 @@ class MedicalForm2 extends StatefulWidget {
 
 class _MedicalForm2State extends State<MedicalForm2> {
   TextEditingController emailController = TextEditingController();
+  TextEditingController fullnameController = TextEditingController();
   TextEditingController birthdayController = TextEditingController();
+  TextEditingController siblingbirthdayController = TextEditingController();
   FocusNode _focusNode = FocusNode();
 
   String? selectedValue;
+  String? siblinggenderselectedValue;
+  String? siblingrelationselectedValue;
+
   DateTime selectedDate = DateTime.now();
+  int addcount = 0;
   @override
   void initState() {
     emailController = TextEditingController();
@@ -52,7 +59,8 @@ class _MedicalForm2State extends State<MedicalForm2> {
     super.dispose();
   }
 
-  Future<Null> _selectDate(BuildContext context) async {
+  Future<Null> _selectDate(
+      BuildContext context, TextEditingController controller) async {
     DateTime currentdate = DateTime.now();
     final DateTime? picked = await showDatePicker(
         builder: (context, child) {
@@ -73,13 +81,17 @@ class _MedicalForm2State extends State<MedicalForm2> {
         selectedDate = picked;
         String convertedDateTime =
             "${picked.year.toString()}-${picked.month.toString().padLeft(2, '0')}-${picked.day.toString().padLeft(2, '0')}";
-        birthdayController.value = TextEditingValue(text: convertedDateTime);
+        controller.value = TextEditingValue(text: convertedDateTime);
         ;
       });
   }
 
   @override
   Widget build(BuildContext context) {
+    List<String> siblingrelations = [
+      AppLocalizations.of(context)!.spouse,
+      AppLocalizations.of(context)!.children,
+    ];
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: MedicalAppBar(context),
@@ -121,7 +133,7 @@ class _MedicalForm2State extends State<MedicalForm2> {
                   inputType: TextInputType.none,
                   suffix: IconButton(
                       onPressed: () async {
-                        await _selectDate(context);
+                        await _selectDate(context, birthdayController);
                       },
                       icon: Icon(Icons.calendar_today))),
               SizedBox(
@@ -137,16 +149,124 @@ class _MedicalForm2State extends State<MedicalForm2> {
                 selectedValue: selectedValue,
               )),
               SizedBox(height: ConfigSize.defaultSize! * 2),
-              MainButton(
-                onTap: () {
-                  PersistentNavBarNavigator.pushNewScreen(
-                    context,
-                    screen: const HomeScreen(),
-                    withNavBar: false,
-                    pageTransitionAnimation: PageTransitionAnimation.fade,
+              Text(
+                AppLocalizations.of(context)!.addyourmajority,
+                style: TextStyle(
+                    fontSize: ConfigSize.defaultSize! * 2,
+                    fontWeight: FontWeight.w500),
+              ),
+              SizedBox(height: ConfigSize.defaultSize! * 2),
+              ListView.builder(
+                physics: NeverScrollableScrollPhysics(),
+                itemBuilder: (context, index) {
+                  return Column(
+                    children: [
+                      CustomTextField(
+                          focusNode: _focusNode,
+                          labeltext:
+                              AppLocalizations.of(context)!.dateOfBirthday,
+                          prefixicon: const Icon(Icons.cake),
+                          controller: birthdayController,
+                          inputType: TextInputType.none,
+                          suffix: IconButton(
+                              onPressed: () async {
+                                await _selectDate(context, birthdayController);
+                              },
+                              icon: Icon(Icons.calendar_today))),
+                      SizedBox(
+                        height: ConfigSize.defaultSize! * 2,
+                      ),
+                      Center(
+                          child: DropDown(
+                        onchanged: (String? value) {
+                          setState(() {
+                            siblinggenderselectedValue = value;
+                          });
+                        },
+                        selectedValue: siblinggenderselectedValue,
+                      )),
+                      SizedBox(height: ConfigSize.defaultSize! * 2),
+                      Center(
+                          child: DropdownButtonHideUnderline(
+                        child: DropdownButton2<String>(
+                          isExpanded: true,
+                          hint: Text(
+                            AppLocalizations.of(context)!.gender,
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Theme.of(context).hintColor,
+                            ),
+                          ),
+                          items: siblingrelations
+                              .map((String item) => DropdownMenuItem<String>(
+                                    value: item,
+                                    child: Text(
+                                      item,
+                                      style: const TextStyle(
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                  ))
+                              .toList(),
+                          value: siblingrelationselectedValue,
+                          onChanged: (value) {
+                            setState(() {
+                              siblingrelationselectedValue = value;
+                            });
+                          },
+                          buttonStyleData: ButtonStyleData(
+                            decoration: BoxDecoration(
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(12)),
+                              color: Colors.white,
+                              border: Border.all(
+                                  color: Colors.grey.shade300, width: 1),
+                            ),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: ConfigSize.defaultSize! * 1.6),
+                            height: ConfigSize.defaultSize! * 5.5,
+                            width: ConfigSize.screenWidth,
+                          ),
+                          menuItemStyleData: const MenuItemStyleData(
+                            height: 40,
+                          ),
+                        ),
+                      )),
+                      SizedBox(height: ConfigSize.defaultSize! * 2),
+                      CustomTextField(
+                        labeltext: AppLocalizations.of(context)!.fullName,
+                        prefixicon: const Icon(Icons.person),
+                        controller: fullnameController,
+                        inputType: TextInputType.name,
+                      ),
+                      SizedBox(height: ConfigSize.defaultSize! * 2),
+                    ],
                   );
                 },
-                title: AppLocalizations.of(context)!.addyourmajority,
+                itemCount: addcount,
+                shrinkWrap: true,
+              ),
+              MainButton(
+                onTap: () {
+                  setState(() {
+                    addcount++;
+                  });
+                },
+                title: AppLocalizations.of(context)!.add,
+              ),
+              Visibility(
+                  visible: addcount > 0,
+                  child: SizedBox(height: ConfigSize.defaultSize! * 2)),
+              Visibility(
+                visible: addcount > 0,
+                child: MainButton(
+                  onTap: () {
+                    setState(() {
+                      addcount--;
+                    });
+                  },
+                  title: AppLocalizations.of(context)!.remove,
+                ),
               ),
               Padding(
                 padding:
