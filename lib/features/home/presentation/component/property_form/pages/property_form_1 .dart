@@ -75,6 +75,7 @@ class _PropertyFormMainPersonDataState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       drawer: const CustomDrawer(),
       appBar: AppBar(
         leading: IconButton(
@@ -89,7 +90,8 @@ class _PropertyFormMainPersonDataState
           AssetsPath.logo,
           scale: 10,
         ),
-      ),       body: Padding(
+      ),
+      body: Padding(
         padding: EdgeInsets.all(ConfigSize.defaultSize! * 1.5),
         child: SingleChildScrollView(
           child: Column(

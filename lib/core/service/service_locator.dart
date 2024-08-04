@@ -21,7 +21,9 @@ import '../../features/auth/presentation/manager/register_bloc/register_bloc.dar
 import '../../features/auth/presentation/manager/reset_password_bloc/bloc/reset_password_bloc.dart';
 import '../../features/home/data/repo_imp/repo_impl.dart';
 import '../../features/home/domain/use_case/life_insurance_uc.dart';
+import '../../features/home/domain/use_case/other_insurance_uc.dart';
 import '../../features/home/domain/use_case/translation_use_case.dart';
+import '../../features/home/presentation/manager/other_forms_bloc/other_forms_bloc.dart';
 
 final getIt = GetIt.instance;
 
@@ -46,6 +48,8 @@ class ServerLocator {
         () => LifeInsuranceBloc(healthinsuranceblocUsecase: getIt()));
     getIt.registerLazySingleton(
         () => PropertyInsuranceBloc(healthinsuranceblocUsecase: getIt()));
+    getIt.registerLazySingleton(
+        () => OtherInsuranceBloc(healthinsuranceblocUsecase: getIt()));
 
     //use_case
     getIt.registerLazySingleton(() => RegisterUseCase(baseRepository: getIt()));
@@ -60,6 +64,8 @@ class ServerLocator {
         () => LifeInsuranceUsecase(baseRepository: getIt()));
     getIt.registerLazySingleton(
         () => PropertyInsuranceUsecase(baseRepository: getIt()));
+    getIt.registerLazySingleton(
+        () => OtherInsuranceUsecase(baseRepository: getIt()));
 
     //Remote Date
     getIt.registerLazySingleton<BaseRemotelyDataSource>(

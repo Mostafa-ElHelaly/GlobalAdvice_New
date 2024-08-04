@@ -64,6 +64,7 @@ class _LifeFormMainPersonDataState extends State<LifeFormMainPersonData> {
         ;
       });
   }
+
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -114,6 +115,7 @@ class _LifeFormMainPersonDataState extends State<LifeFormMainPersonData> {
     ];
 
     return Scaffold(
+      key: _scaffoldKey,
       drawer: const CustomDrawer(),
       appBar: AppBar(
         leading: IconButton(
@@ -128,7 +130,8 @@ class _LifeFormMainPersonDataState extends State<LifeFormMainPersonData> {
           AssetsPath.logo,
           scale: 10,
         ),
-      ),       body: Padding(
+      ),
+      body: Padding(
         padding: EdgeInsets.all(ConfigSize.defaultSize! * 1.5),
         child: SingleChildScrollView(
           child: Column(

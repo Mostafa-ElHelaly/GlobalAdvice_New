@@ -16,6 +16,8 @@ import 'package:globaladvice_new/features/home/presentation/manager/healthinsura
 import 'package:globaladvice_new/features/home/presentation/manager/life_insurance/life_insurance_bloc.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/life_insurance/life_insurance_event.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/life_insurance/life_insurance_state.dart';
+import 'package:globaladvice_new/features/home/presentation/manager/other_forms_bloc/other_forms_bloc.dart';
+import 'package:globaladvice_new/features/home/presentation/manager/other_forms_bloc/other_forms_state.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/property_insurance.dart/property_insurance_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -75,6 +77,9 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) => getIt<PropertyInsuranceBloc>(),
+          ),
+          BlocProvider(
+            create: (context) => getIt<OtherInsuranceBloc>(),
           ),
           ChangeNotifierProvider(
               create: (_) => TranslationProvider(isArabic, isLogin)),

@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:globaladvice_new/features/home/data/model/healthInsuranceModel.dart';
+import 'package:globaladvice_new/features/home/data/model/other_forms_model.dart';
 import 'package:globaladvice_new/main.dart';
 
 import '../../../../core/error/failures_strings.dart';
@@ -17,6 +18,7 @@ abstract class BaseHomeRemotelyDataSource {
       HealthInsuranceModel healthInsuranceModel);
   Future<Unit> sendlifeinsurancerequest(
       HealthInsuranceModel healthInsuranceModel);
+  Future<Unit> sendanotherinsurancerequest(OtherFormsModel otherFormsModel);
 }
 
 class HomeRemotelyDataSource extends BaseHomeRemotelyDataSource {
@@ -153,6 +155,37 @@ class HomeRemotelyDataSource extends BaseHomeRemotelyDataSource {
         return Future.value(unit);
       } else {
         throw Exception(Strings.resetPasswordFailed);
+      }
+    } on DioException catch (e) {
+      throw DioHelper.handleDioError(
+          dioError: e, endpointName: "HealthInsurance Request");
+    }
+  }
+
+  @override
+  Future<Unit> sendanotherinsurancerequest(
+      OtherFormsModel otherFormsModel) async {
+    final body = {
+      "name": otherFormsModel.name,
+      "contact": otherFormsModel.phonenumber,
+      "type": otherFormsModel.type,
+      "message": otherFormsModel.message,
+    };
+    try {
+      final response = await Dio().post(
+        options: Options(
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+        ),
+        ConstantApi.form,
+        data: body,
+      );
+      if (response.statusCode == 200) {
+        print('Request Sent Successfully');
+        return Future.value(unit);
+      } else {
+        throw Exception(Strings.requestfalied);
       }
     } on DioException catch (e) {
       throw DioHelper.handleDioError(

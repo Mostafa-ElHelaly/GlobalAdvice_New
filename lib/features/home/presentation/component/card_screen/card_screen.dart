@@ -4,12 +4,14 @@ import 'package:globaladvice_new/core/resource_manger/color_manager.dart';
 import 'package:globaladvice_new/core/utils/config_size.dart';
 import 'package:globaladvice_new/features/home/presentation/component/car_form/pages/car_form_1.dart';
 import 'package:globaladvice_new/features/home/presentation/component/life_form/pages/life_form_main_person_data%20.dart';
+import 'package:globaladvice_new/features/home/presentation/component/other_insuarance_form.dart/other_insurance_form.dart';
 import 'package:globaladvice_new/features/home/presentation/component/property_form/pages/property_form_1%20.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../../core/widgets/Custom_Drawer.dart';
 import '../medical_form/Pages/medical_form_1.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CardScreen extends StatefulWidget {
   const CardScreen({super.key});
@@ -235,8 +237,10 @@ class _CardScreenState extends State<CardScreen> {
                           onTap: () {
                             PersistentNavBarNavigator.pushNewScreen(
                               context,
-                              screen: const CardScreen(),
-                              withNavBar: true,
+                              screen: const OtherInsuranceForm(
+                                Insurance_type: 'pension',
+                              ),
+                              withNavBar: false,
                               pageTransitionAnimation:
                                   PageTransitionAnimation.fade,
                             );
@@ -276,8 +280,10 @@ class _CardScreenState extends State<CardScreen> {
                           onTap: () {
                             PersistentNavBarNavigator.pushNewScreen(
                               context,
-                              screen: const CardScreen(),
-                              withNavBar: true,
+                              screen: const OtherInsuranceForm(
+                                Insurance_type: 'marine',
+                              ),
+                              withNavBar: false,
                               pageTransitionAnimation:
                                   PageTransitionAnimation.fade,
                             );
@@ -324,8 +330,10 @@ class _CardScreenState extends State<CardScreen> {
                           onTap: () {
                             PersistentNavBarNavigator.pushNewScreen(
                               context,
-                              screen: const CardScreen(),
-                              withNavBar: true,
+                              screen: const OtherInsuranceForm(
+                                Insurance_type: 'travel',
+                              ),
+                              withNavBar: false,
                               pageTransitionAnimation:
                                   PageTransitionAnimation.fade,
                             );
@@ -364,8 +372,10 @@ class _CardScreenState extends State<CardScreen> {
                           onTap: () {
                             PersistentNavBarNavigator.pushNewScreen(
                               context,
-                              screen: const CardScreen(),
-                              withNavBar: true,
+                              screen: const OtherInsuranceForm(
+                                Insurance_type: 'cyper',
+                              ),
+                              withNavBar: false,
                               pageTransitionAnimation:
                                   PageTransitionAnimation.fade,
                             );
@@ -412,8 +422,10 @@ class _CardScreenState extends State<CardScreen> {
                           onTap: () {
                             PersistentNavBarNavigator.pushNewScreen(
                               context,
-                              screen: const CardScreen(),
-                              withNavBar: true,
+                              screen: const OtherInsuranceForm(
+                                Insurance_type: 'burglary',
+                              ),
+                              withNavBar: false,
                               pageTransitionAnimation:
                                   PageTransitionAnimation.fade,
                             );
@@ -453,8 +465,10 @@ class _CardScreenState extends State<CardScreen> {
                           onTap: () {
                             PersistentNavBarNavigator.pushNewScreen(
                               context,
-                              screen: const CardScreen(),
-                              withNavBar: true,
+                              screen: const OtherInsuranceForm(
+                                Insurance_type: 'contractors risk',
+                              ),
+                              withNavBar: false,
                               pageTransitionAnimation:
                                   PageTransitionAnimation.fade,
                             );
@@ -501,8 +515,10 @@ class _CardScreenState extends State<CardScreen> {
                           onTap: () {
                             PersistentNavBarNavigator.pushNewScreen(
                               context,
-                              screen: const CardScreen(),
-                              withNavBar: true,
+                              screen: const OtherInsuranceForm(
+                                Insurance_type: 'personal accidents',
+                              ),
+                              withNavBar: false,
                               pageTransitionAnimation:
                                   PageTransitionAnimation.fade,
                             );
@@ -542,8 +558,10 @@ class _CardScreenState extends State<CardScreen> {
                           onTap: () {
                             PersistentNavBarNavigator.pushNewScreen(
                               context,
-                              screen: const CardScreen(),
-                              withNavBar: true,
+                              screen: const OtherInsuranceForm(
+                                Insurance_type: 'general accidents',
+                              ),
+                              withNavBar: false,
                               pageTransitionAnimation:
                                   PageTransitionAnimation.fade,
                             );
@@ -592,15 +610,16 @@ class _CardScreenState extends State<CardScreen> {
                 width: ConfigSize.screenWidth,
                 color: ColorManager.kPrimaryBlueDark,
                 child: Padding(
-                  padding:  EdgeInsets.all(ConfigSize.defaultSize! * 2),
+                  padding: EdgeInsets.all(ConfigSize.defaultSize! * 2),
                   child: Text(
-
                     AppLocalizations.of(context)!.commercial,
-                    style: TextStyle(fontWeight: FontWeight.w500 , color: ColorManager.whiteColor , fontSize: ConfigSize.defaultSize! * 1.2),
+                    style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        color: ColorManager.whiteColor,
+                        fontSize: ConfigSize.defaultSize! * 1.2),
                   ),
                 ),
               ),
-
             ],
           ),
         ),

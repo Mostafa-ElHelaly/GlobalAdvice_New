@@ -25,7 +25,7 @@ void showLoading(BuildContext context) {
   );
 
   // Dismiss the dialog after the specified duration
-  Future.delayed(Duration(seconds: 5), () {
+  Future.delayed(Duration(seconds: 3), () {
     Navigator.of(context, rootNavigator: true)
         .pop(); // Use rootNavigator to ensure it's closed
   });

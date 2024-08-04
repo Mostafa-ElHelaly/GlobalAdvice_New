@@ -41,6 +41,7 @@ class _CarFormMainPersonDataState extends State<CarFormMainPersonData> {
     phoneController.dispose();
     super.dispose();
   }
+
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   String? selectedValue;
@@ -48,6 +49,7 @@ class _CarFormMainPersonDataState extends State<CarFormMainPersonData> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       drawer: const CustomDrawer(),
       appBar: AppBar(
         leading: IconButton(
@@ -62,7 +64,8 @@ class _CarFormMainPersonDataState extends State<CarFormMainPersonData> {
           AssetsPath.logo,
           scale: 10,
         ),
-      ),       body: Padding(
+      ),
+      body: Padding(
         padding: EdgeInsets.all(ConfigSize.defaultSize! * 1.5),
         child: SingleChildScrollView(
           child: Column(
