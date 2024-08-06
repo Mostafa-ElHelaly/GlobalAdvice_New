@@ -1,5 +1,4 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:globaladvice_new/core/resource_manger/color_manager.dart';
@@ -26,27 +25,23 @@ class MedicalForm2 extends StatefulWidget {
 
 class _MedicalForm2State extends State<MedicalForm2> {
   TextEditingController emailController = TextEditingController();
-  TextEditingController fullnameController = TextEditingController();
   TextEditingController birthdayController = TextEditingController();
-  TextEditingController siblingbirthdayController = TextEditingController();
   FocusNode _focusNode = FocusNode();
 
   String? selectedValue;
-  String? siblinggenderselectedValue;
-  String? siblingrelationselectedValue;
 
   DateTime selectedDate = DateTime.now();
   int addcount = 0;
   List<TextEditingController> birthdayControllers = [];
   List<TextEditingController> fullnameControllers = [];
+  List<String?> genderselectedValues =
+      []; // Initialize list for dropdown selected values
+  List<String?> relationselectedValues =
+      []; // Initialize list for dropdown selected values
+
   @override
   void initState() {
-    emailController = TextEditingController();
-    birthdayController = TextEditingController();
-    for (int i = 0; i < addcount; i++) {
-      birthdayControllers.add(TextEditingController());
-      fullnameControllers.add(TextEditingController());
-    }
+    super.initState();
     _focusNode = FocusNode();
 
     // Disable focus
@@ -55,7 +50,23 @@ class _MedicalForm2State extends State<MedicalForm2> {
         _focusNode.unfocus();
       }
     });
-    super.initState();
+
+    // Initialize controllers based on addcount
+    _initializeControllers();
+  }
+
+  void _initializeControllers() {
+    birthdayControllers.clear();
+    fullnameControllers.clear();
+    genderselectedValues.clear();
+    relationselectedValues.clear();
+
+    for (int i = 0; i < addcount; i++) {
+      birthdayControllers.add(TextEditingController());
+      fullnameControllers.add(TextEditingController());
+      genderselectedValues.add(null); // Initialize dropdown selected values
+      relationselectedValues.add(null); // Initialize dropdown selected values
+    }
   }
 
   @override
@@ -75,37 +86,42 @@ class _MedicalForm2State extends State<MedicalForm2> {
       BuildContext context, TextEditingController controller) async {
     DateTime currentdate = DateTime.now();
     final DateTime? picked = await showDatePicker(
-        builder: (context, child) {
-          return Theme(
-              data: ThemeData.light().copyWith(
-                hintColor: ColorManager.gray,
-                colorScheme: ColorScheme.light(primary: ColorManager.mainColor),
-              ),
-              child: child!);
-        },
-        context: context,
-        initialDate: selectedDate,
-        firstDate: DateTime(1940, 1),
-        lastDate:
-            DateTime.utc(currentdate.year, currentdate.month, currentdate.day));
-    if (picked != null && picked != selectedDate)
+      builder: (context, child) {
+        return Theme(
+          data: ThemeData.light().copyWith(
+            hintColor: ColorManager.gray,
+            colorScheme: const ColorScheme.light(primary: ColorManager.mainColor),
+          ),
+          child: child!,
+        );
+      },
+      context: context,
+      initialDate: selectedDate,
+      firstDate: DateTime(1940, 1),
+      lastDate:
+          DateTime.utc(currentdate.year, currentdate.month, currentdate.day),
+    );
+    if (picked != null && picked != selectedDate) {
       setState(() {
         selectedDate = picked;
         String convertedDateTime =
             "${picked.year.toString()}-${picked.month.toString().padLeft(2, '0')}-${picked.day.toString().padLeft(2, '0')}";
         controller.value = TextEditingValue(text: convertedDateTime);
-        ;
       });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    List<String?> selectedValues = List.generate(addcount, (_) => null);
-
     List<String> siblingrelations = [
       AppLocalizations.of(context)!.spouse,
       AppLocalizations.of(context)!.children,
     ];
+    List<String> genders = [
+      AppLocalizations.of(context)!.male,
+      AppLocalizations.of(context)!.female,
+    ];
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: MedicalAppBar(context),
@@ -140,119 +156,169 @@ class _MedicalForm2State extends State<MedicalForm2> {
                 height: ConfigSize.defaultSize! * 2,
               ),
               CustomTextField(
-                  focusNode: _focusNode,
-                  labeltext: AppLocalizations.of(context)!.dateOfBirthday,
-                  prefixicon: const Icon(Icons.cake),
-                  controller: birthdayController,
-                  inputType: TextInputType.none,
-                  suffix: IconButton(
-                      onPressed: () async {
-                        await _selectDate(context, birthdayController);
-                      },
-                      icon: Icon(Icons.calendar_today))),
+                focusNode: _focusNode,
+                labeltext: AppLocalizations.of(context)!.dateOfBirthday,
+                prefixicon: const Icon(Icons.cake),
+                controller: birthdayController,
+                inputType: TextInputType.none,
+                suffix: IconButton(
+                  onPressed: () async {
+                    await _selectDate(context, birthdayController);
+                  },
+                  icon: const Icon(Icons.calendar_today),
+                ),
+              ),
               SizedBox(
                 height: ConfigSize.defaultSize! * 2,
               ),
               Center(
-                  child: DropDown(
-                onchanged: (String? value) {
-                  setState(() {
-                    selectedValue = value;
-                  });
-                },
-                selectedValue: selectedValue,
-              )),
+                child: DropDown(
+                  onchanged: (String? value) {
+                    setState(() {
+                      selectedValue = value;
+                    });
+                  },
+                  selectedValue: selectedValue,
+                ),
+              ),
               SizedBox(height: ConfigSize.defaultSize! * 2),
               Text(
                 AppLocalizations.of(context)!.addyourmajority,
                 style: TextStyle(
-                    fontSize: ConfigSize.defaultSize! * 2,
-                    fontWeight: FontWeight.w500),
+                  fontSize: ConfigSize.defaultSize! * 2,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
               SizedBox(height: ConfigSize.defaultSize! * 2),
               ListView.builder(
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) {
                   return Column(
                     children: [
                       CustomTextField(
-                          focusNode: _focusNode,
-                          labeltext:
-                              AppLocalizations.of(context)!.dateOfBirthday,
-                          prefixicon: const Icon(Icons.cake),
-                          controller: birthdayController,
-                          inputType: TextInputType.none,
-                          suffix: IconButton(
-                              onPressed: () async {
-                                await _selectDate(context, birthdayController);
-                              },
-                              icon: Icon(Icons.calendar_today))),
+                        focusNode: _focusNode,
+                        labeltext: AppLocalizations.of(context)!.dateOfBirthday,
+                        prefixicon: const Icon(Icons.cake),
+                        controller: birthdayControllers[index],
+                        inputType: TextInputType.none,
+                        suffix: IconButton(
+                          onPressed: () async {
+                            await _selectDate(
+                                context, birthdayControllers[index]);
+                          },
+                          icon: const Icon(Icons.calendar_today),
+                        ),
+                      ),
                       SizedBox(
                         height: ConfigSize.defaultSize! * 2,
                       ),
                       Center(
-                          child: DropDown(
-                        onchanged: (String? value) {
-                          setState(() {
-                            siblinggenderselectedValue = value;
-                          });
-                        },
-                        selectedValue: siblinggenderselectedValue,
-                      )),
-                      SizedBox(height: ConfigSize.defaultSize! * 2),
-                      Center(
-                          child: DropdownButtonHideUnderline(
-                        child: DropdownButton2<String>(
-                          isExpanded: true,
-                          hint: Text(
-                            AppLocalizations.of(context)!.gender,
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Theme.of(context).hintColor,
+                        child: DropdownButtonHideUnderline(
+                          child: DropdownButton2<String>(
+                            isExpanded: true,
+                            hint: Text(
+                              AppLocalizations.of(context)!.gender,
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: Theme.of(context).hintColor,
+                              ),
                             ),
-                          ),
-                          items: siblingrelations
-                              .map((String item) => DropdownMenuItem<String>(
-                                    value: item,
-                                    child: Text(
-                                      item,
-                                      style: const TextStyle(
-                                        fontSize: 14,
+                            items: genders
+                                .map((String item) => DropdownMenuItem<String>(
+                                      value: item,
+                                      child: Text(
+                                        item,
+                                        style: const TextStyle(
+                                          fontSize: 14,
+                                        ),
                                       ),
-                                    ),
-                                  ))
-                              .toList(),
-                          value: siblingrelationselectedValue,
-                          onChanged: (value) {
-                            setState(() {
-                              siblingrelationselectedValue = value;
-                            });
-                          },
-                          buttonStyleData: ButtonStyleData(
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(12)),
-                              color: Colors.white,
-                              border: Border.all(
-                                  color: Colors.grey.shade300, width: 1),
+                                    ))
+                                .toList(),
+                            value: genderselectedValues[index],
+                            onChanged: (value) {
+                              setState(() {
+                                genderselectedValues[index] = value;
+                              });
+                            },
+                            buttonStyleData: ButtonStyleData(
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    const BorderRadius.all(Radius.circular(12)),
+                                color: Colors.white,
+                                border: Border.all(
+                                    color: Colors.grey.shade300, width: 1),
+                              ),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: ConfigSize.defaultSize! * 1.6),
+                              height: ConfigSize.defaultSize! * 5.5,
+                              width: ConfigSize.screenWidth,
                             ),
-                            padding: EdgeInsets.symmetric(
-                                horizontal: ConfigSize.defaultSize! * 1.6),
-                            height: ConfigSize.defaultSize! * 5.5,
-                            width: ConfigSize.screenWidth,
-                          ),
-                          menuItemStyleData: const MenuItemStyleData(
-                            height: 40,
+                            menuItemStyleData: const MenuItemStyleData(
+                              height: 40,
+                            ),
                           ),
                         ),
-                      )),
+                      ),
+                      SizedBox(height: ConfigSize.defaultSize! * 2),
+                      Center(
+                        child: DropdownButtonHideUnderline(
+                          child: DropdownButton2<String>(
+                            isExpanded: true,
+                            hint: Text(
+                              AppLocalizations.of(context)!.realtion,
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: Theme.of(context).hintColor,
+                              ),
+                            ),
+                            items: siblingrelations
+                                .map((String item) => DropdownMenuItem<String>(
+                                      value: item,
+                                      child: Text(
+                                        item,
+                                        style: const TextStyle(
+                                          fontSize: 14,
+                                        ),
+                                      ),
+                                    ))
+                                .toList(),
+                            value: relationselectedValues[index],
+                            onChanged: (value) {
+                              setState(() {
+                                relationselectedValues[index] = value;
+                              });
+                            },
+                            buttonStyleData: ButtonStyleData(
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    const BorderRadius.all(Radius.circular(12)),
+                                color: Colors.white,
+                                border: Border.all(
+                                    color: Colors.grey.shade300, width: 1),
+                              ),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: ConfigSize.defaultSize! * 1.6),
+                              height: ConfigSize.defaultSize! * 5.5,
+                              width: ConfigSize.screenWidth,
+                            ),
+                            menuItemStyleData: const MenuItemStyleData(
+                              height: 40,
+                            ),
+                          ),
+                        ),
+                      ),
                       SizedBox(height: ConfigSize.defaultSize! * 2),
                       CustomTextField(
                         labeltext: AppLocalizations.of(context)!.fullName,
                         prefixicon: const Icon(Icons.person),
-                        controller: fullnameController,
+                        controller: fullnameControllers[index],
                         inputType: TextInputType.name,
                       ),
+                      SizedBox(height: ConfigSize.defaultSize! * 2),
+                      index == addcount - 1
+                          ? const SizedBox.shrink()
+                          : const Divider(
+                              thickness: 3, color: ColorManager.mainColor),
                       SizedBox(height: ConfigSize.defaultSize! * 2),
                     ],
                   );
@@ -264,19 +330,24 @@ class _MedicalForm2State extends State<MedicalForm2> {
                 onTap: () {
                   setState(() {
                     addcount++;
+                    _initializeControllers(); // Initialize controllers and values when addcount changes
                   });
                 },
                 title: AppLocalizations.of(context)!.add,
               ),
               Visibility(
-                  visible: addcount > 0,
-                  child: SizedBox(height: ConfigSize.defaultSize! * 2)),
+                visible: addcount > 0,
+                child: SizedBox(height: ConfigSize.defaultSize! * 2),
+              ),
               Visibility(
                 visible: addcount > 0,
                 child: MainButton(
                   onTap: () {
                     setState(() {
-                      addcount--;
+                      if (addcount > 0) {
+                        addcount--;
+                        _initializeControllers(); // Initialize controllers and values when addcount changes
+                      }
                     });
                   },
                   title: AppLocalizations.of(context)!.remove,
@@ -289,7 +360,7 @@ class _MedicalForm2State extends State<MedicalForm2> {
                   onTap: () {
                     PersistentNavBarNavigator.pushNewScreen(
                       context,
-                      screen: MedicalForm3(),
+                      screen: const MedicalForm3(),
                       withNavBar: false,
                       pageTransitionAnimation: PageTransitionAnimation.fade,
                     );

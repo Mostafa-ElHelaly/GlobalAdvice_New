@@ -1,29 +1,29 @@
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 
-sealed class PropertyinsuranceblocState extends Equatable {
-  const PropertyinsuranceblocState();
+sealed class PropertyInsuranceBlocState extends Equatable {
+  const PropertyInsuranceBlocState();
 
   @override
   List<Object> get props => [];
 }
 
-final class PropertyinsuranceblocInitial extends PropertyinsuranceblocState {}
+final class PropertyInsuranceBlocInitial extends PropertyInsuranceBlocState {}
 
-final class PropertyinsuranceRequestLoadingState
-    extends PropertyinsuranceblocState {
-  const PropertyinsuranceRequestLoadingState();
+final class PropertyInsuranceBlocRequestLoadingState
+    extends PropertyInsuranceBlocState {
+  const PropertyInsuranceBlocRequestLoadingState();
 }
 
-final class PropertyinsuranceRequestErrorState
-    extends PropertyinsuranceblocState {
+final class PropertyInsuranceRequestErrorState
+    extends PropertyInsuranceBlocState {
   final String errorMessage;
 
-  const PropertyinsuranceRequestErrorState({required this.errorMessage});
+  const PropertyInsuranceRequestErrorState({required this.errorMessage});
 }
 
-final class PropertyInsuranceSuccessState extends PropertyinsuranceblocState {
-  final Unit PropertyInsuranceModel;
+final class PropertyInsuranceSuccessState extends PropertyInsuranceBlocState {
+  final Unit PropertyModel;
 
-  const PropertyInsuranceSuccessState({required this.PropertyInsuranceModel});
+  const PropertyInsuranceSuccessState({required this.PropertyModel});
 }

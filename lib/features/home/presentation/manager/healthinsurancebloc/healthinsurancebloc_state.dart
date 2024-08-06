@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 
-import '../../../data/model/healthInsuranceModel.dart';
+import '../../../data/model/health_insurance_model.dart';
 
 sealed class HealthinsuranceblocState extends Equatable {
   const HealthinsuranceblocState();

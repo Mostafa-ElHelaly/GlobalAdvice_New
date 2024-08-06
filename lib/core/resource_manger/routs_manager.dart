@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:globaladvice_new/features/auth/presentation/component/create_account/create_account_screen.dart';
 import 'package:globaladvice_new/features/auth/presentation/login_screen.dart';
 import 'package:globaladvice_new/features/home/presentation/component/card_screen/card_screen.dart';
+import 'package:globaladvice_new/features/home/presentation/component/property_form/pages/property_form_2%20.dart';
 import 'package:globaladvice_new/features/profile/presentation/component/edit_my_profile/edit_my_profile_screen.dart';
 import 'package:globaladvice_new/features/profile/presentation/profile_screen.dart';
 
-import '../../features/home/presentation/home_screen.dart';
+import 'package:globaladvice_new/features/home/presentation/home_screen.dart';
 
 class Routes {
   static const String login = "/LoginScreen";
@@ -20,6 +21,7 @@ class Routes {
   static const String matchingRequestScreen = "/MatchingRequestScreen";
   static const String editMyProfileScreen = "/EditMyProfileScreen";
   static const String editDogProfileScreen = "/EditDogProfileScreen";
+  static const String propertyForm2 = "/PropertyForm2";
 
   static const String profile = "/Profile";
   static const String editProfile = "/EditProfile";
@@ -57,6 +59,11 @@ class RouteGenerator {
         currentContext = Routes.plans;
         return MaterialPageRoute(
             settings: settings, builder: (_) => const CardScreen());
+
+      case Routes.propertyForm2:
+        currentContext = Routes.propertyForm2;
+        return MaterialPageRoute(
+            settings: settings, builder: (_) => const PropertyForm2());
     }
     return unDefinedRoute();
   }

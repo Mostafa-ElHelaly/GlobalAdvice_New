@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:globaladvice_new/features/home/data/model/healthInsuranceModel.dart';
+import 'package:globaladvice_new/features/home/data/model/health_insurance_model.dart';
 import 'package:globaladvice_new/features/home/domain/use_case/car_inurance_uc.dart';
 import 'package:globaladvice_new/features/home/domain/use_case/healthInsuranceUsecase.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/healthinsurancebloc/healthinsurancebloc_event.dart';
