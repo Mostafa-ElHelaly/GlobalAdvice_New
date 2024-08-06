@@ -20,9 +20,11 @@ import '../../features/auth/presentation/manager/login_bloc/login_bloc.dart';
 import '../../features/auth/presentation/manager/register_bloc/register_bloc.dart';
 import '../../features/auth/presentation/manager/reset_password_bloc/bloc/reset_password_bloc.dart';
 import '../../features/home/data/repo_imp/repo_impl.dart';
+import '../../features/home/domain/use_case/car_data_uc.dart';
 import '../../features/home/domain/use_case/life_insurance_uc.dart';
 import '../../features/home/domain/use_case/other_insurance_uc.dart';
 import '../../features/home/domain/use_case/translation_use_case.dart';
+import '../../features/home/presentation/manager/car_data_bloc/car_data_bloc.dart';
 import '../../features/home/presentation/manager/other_forms_bloc/other_forms_bloc.dart';
 
 final getIt = GetIt.instance;
@@ -50,6 +52,7 @@ class ServerLocator {
         () => PropertyInsuranceBloc(healthInsuranceBlocUseCase: getIt()));
     getIt.registerLazySingleton(
         () => OtherInsuranceBloc(healthinsuranceblocUsecase: getIt()));
+    getIt.registerLazySingleton(() => CarDataBloc(CountriesUseCase: getIt()));
 
     //use_case
     getIt.registerLazySingleton(() => RegisterUseCase(baseRepository: getIt()));
@@ -66,6 +69,7 @@ class ServerLocator {
         () => PropertyInsuranceUseCase(baseRepository: getIt()));
     getIt.registerLazySingleton(
         () => OtherInsuranceUsecase(baseRepository: getIt()));
+    getIt.registerLazySingleton(() => CarDataUsecase(baseRepository: getIt()));
 
     //Remote Date
     getIt.registerLazySingleton<BaseRemotelyDataSource>(

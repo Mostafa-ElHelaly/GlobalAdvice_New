@@ -10,6 +10,7 @@ import 'package:globaladvice_new/core/utils/config_size.dart';
 import 'package:globaladvice_new/core/utils/font_loader.dart';
 import 'package:globaladvice_new/features/auth/presentation/login_screen.dart';
 import 'package:globaladvice_new/features/home/presentation/home_screen.dart';
+import 'package:globaladvice_new/features/home/presentation/manager/car_data_bloc/car_data_bloc.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/car_insurance/carinsurance_bloc.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/car_insurance/carinsurance_event.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/healthinsurancebloc/healthinsurancebloc_bloc.dart';
@@ -77,11 +78,15 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) => getIt<PropertyInsuranceBloc>(),
-          ),  BlocProvider(
+          ),
+          BlocProvider(
             create: (context) => getIt<LifeInsuranceBloc>(),
           ),
           BlocProvider(
             create: (context) => getIt<OtherInsuranceBloc>(),
+          ),
+          BlocProvider(
+            create: (context) => getIt<CarDataBloc>(),
           ),
           ChangeNotifierProvider(
               create: (_) => TranslationProvider(isArabic, isLogin)),
@@ -120,7 +125,7 @@ class MyApp extends StatelessWidget {
               },
               home: Provider.value(
                   value: isLogin,
-                  child: isLogin ? const LoginScreen() : const HomeScreen()),
+                  child: isLogin ? const HomeScreen() : const HomeScreen()),
             );
           },
         ));
