@@ -1,29 +1,30 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:globaladvice_new/features/home/data/model/healthInsuranceModel.dart';
+import 'package:globaladvice_new/features/home/data/model/health_insurance_model.dart';
 
 import 'package:globaladvice_new/core/error/failures_strings.dart';
 import 'package:globaladvice_new/core/utils/api_helper.dart';
 import 'package:globaladvice_new/core/utils/constant_api.dart';
+import 'package:globaladvice_new/features/home/data/model/property_model.dart';
 
-import '../model/lifeInsurance.dart';
-import '../model/other_forms_model.dart';
+import 'package:globaladvice_new/features/home/data/model/life_insurance_model.dart';
+import 'package:globaladvice_new/features/home/data/model/other_forms_model.dart';
 
 abstract class BaseHomeRemotelyDataSource {
-  Future<Unit> sendhealthinsurancerequest(
+  Future<Unit> SendHealthInsuranceRequest(
       HealthInsuranceModel healthInsuranceModel);
-  Future<Unit> sendcarinsurancerequest(
+  Future<Unit> SendCarInsuranceRequest(
       HealthInsuranceModel healthInsuranceModel);
-  Future<Unit> sendpropertyinsurancerequest(
-      HealthInsuranceModel healthInsuranceModel);
+  Future<Unit> SendPropertyInsuranceRequest(
+      PropertyModel propertyModel);
   Future<Unit> SendLifeInsuranceRequest(
       LifeInsuranceModel lifeInsuranceModel);
-  Future<Unit> sendanotherinsurancerequest(OtherFormsModel otherFormsModel);
+  Future<Unit> SendAnotherInsuranceRequest(OtherFormsModel otherFormsModel);
 }
 
 class HomeRemotelyDataSource extends BaseHomeRemotelyDataSource {
   @override
-  Future<Unit> sendhealthinsurancerequest(
+  Future<Unit> SendHealthInsuranceRequest(
       HealthInsuranceModel healthInsuranceModel) async {
     final body = {
       "UID": healthInsuranceModel.uid,
@@ -58,7 +59,7 @@ class HomeRemotelyDataSource extends BaseHomeRemotelyDataSource {
   }
 
   @override
-  Future<Unit> sendcarinsurancerequest(
+  Future<Unit> SendCarInsuranceRequest(
       HealthInsuranceModel healthInsuranceModel) async {
     final body = {
       "UID": healthInsuranceModel.uid,
@@ -77,7 +78,7 @@ class HomeRemotelyDataSource extends BaseHomeRemotelyDataSource {
             'Content-Type': 'application/x-www-form-urlencoded',
           },
         ),
-        ConstantApi.healthInsurance,
+        ConstantApi.property,
         data: body,
       );
       if (response.statusCode == 200) {
@@ -125,17 +126,12 @@ class HomeRemotelyDataSource extends BaseHomeRemotelyDataSource {
   }
 
   @override
-  Future<Unit> sendpropertyinsurancerequest(
-      HealthInsuranceModel healthInsuranceModel) async {
+  Future<Unit> SendPropertyInsuranceRequest(
+      PropertyModel propertyModel) async {
     final body = {
-      "UID": healthInsuranceModel.uid,
-      "organization_id": healthInsuranceModel.organizationId,
-      "plan_id": healthInsuranceModel.planId,
-      "name[]": healthInsuranceModel.name,
-      "age[]": healthInsuranceModel.age,
-      "relation[]": healthInsuranceModel.relation,
-      "price[]": healthInsuranceModel.price,
-      "gender[]": healthInsuranceModel.gende,
+      "UID": propertyModel.uid,
+      "name[]": propertyModel.name,
+
     };
     try {
       final response = await Dio().post(
@@ -162,7 +158,7 @@ class HomeRemotelyDataSource extends BaseHomeRemotelyDataSource {
 
 
   @override
-  Future<Unit> sendanotherinsurancerequest(
+  Future<Unit> SendAnotherInsuranceRequest(
       OtherFormsModel otherFormsModel) async {
     final body = {
       "name": otherFormsModel.name,

@@ -139,7 +139,7 @@ class _LifeFormMainPersonDataState extends State<LifeFormMainPersonData> {
                   height: ConfigSize.defaultSize! * 2,
                 ),
                 CustomTextField(
-                  labeltext: AppLocalizations.of(context)!.massage,
+                  labeltext: AppLocalizations.of(context)!.message,
                   prefixicon: const Icon(Icons.library_books),
                   controller: massageController,
                   inputType: TextInputType.text,

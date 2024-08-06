@@ -93,8 +93,8 @@ class MyApp extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               locale: translate.locale, // Set initial locale
               supportedLocales: [
-                Locale('en', ''),
-                Locale('ar', ''),
+                const Locale('en', ''),
+                const Locale('ar', ''),
               ],
               localizationsDelegates: const [
                 AppLocalizations.delegate,

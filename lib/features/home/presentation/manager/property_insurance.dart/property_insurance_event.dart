@@ -1,22 +1,21 @@
 abstract class ResetEvent {}
 
-class PropertyinsuranceblocEvent extends ResetEvent {
+class PropertyInsuranceBlocEvent extends ResetEvent {
   final String uid;
-  final String organizationId;
-  final String planId;
+  final int buildingPrice;
+  final int contentPrice;
+  final String type;
+  final List<int> homeBenefits;
+  final String phone;
   final String name;
-  final String age;
-  final String relation;
-  final String price;
-  final String gender;
-  PropertyinsuranceblocEvent({
+
+  PropertyInsuranceBlocEvent({
     required this.uid,
-    required this.organizationId,
-    required this.planId,
+    required this.buildingPrice,
+    required this.contentPrice,
+    required this.type,
+    required this.homeBenefits,
+    required this.phone,
     required this.name,
-    required this.age,
-    required this.relation,
-    required this.price,
-    required this.gender,
   });
 }
