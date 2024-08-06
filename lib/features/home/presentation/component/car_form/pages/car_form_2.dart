@@ -1,16 +1,14 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:globaladvice_new/features/home/presentation/component/car_form/pages/car_form_3.dart';
 import 'package:globaladvice_new/features/home/presentation/component/car_form/widgets/Motor_Dropdown_Widget.dart';
 import 'package:globaladvice_new/features/home/presentation/component/car_form/widgets/car_insurance_appbar.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
-import '../../../../../../core/resource_manger/asset_path.dart';
-import '../../../../../../core/resource_manger/color_manager.dart';
-import '../../../../../../core/resource_manger/locale_keys.g.dart';
-import '../../../../../../core/utils/config_size.dart';
-import '../../../../../../core/widgets/custom_text_field.dart';
-import '../../../../../../core/widgets/main_button.dart';
+import 'package:globaladvice_new/core/resource_manger/asset_path.dart';
+import 'package:globaladvice_new/core/resource_manger/color_manager.dart';
+import 'package:globaladvice_new/core/utils/config_size.dart';
+import 'package:globaladvice_new/core/widgets/custom_text_field.dart';
+import 'package:globaladvice_new/core/widgets/main_button.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CarForm2 extends StatefulWidget {
@@ -58,7 +56,7 @@ class _CarForm2State extends State<CarForm2> {
           return Theme(
               data: ThemeData.light().copyWith(
                 hintColor: ColorManager.gray,
-                colorScheme: ColorScheme.light(primary: ColorManager.mainColor),
+                colorScheme: const ColorScheme.light(primary: ColorManager.mainColor),
               ),
               child: child!);
         },
@@ -130,7 +128,7 @@ class _CarForm2State extends State<CarForm2> {
                     onPressed: () async {
                       await _selectDate(context);
                     },
-                    icon: Icon(Icons.calendar_today)),
+                    icon: const Icon(Icons.calendar_today)),
               ),
               SizedBox(
                 height: ConfigSize.defaultSize! * 2,
@@ -177,7 +175,7 @@ class _CarForm2State extends State<CarForm2> {
                   onTap: () {
                     PersistentNavBarNavigator.pushNewScreen(
                       context,
-                      screen: CarForm3(),
+                      screen: const CarForm3(),
                       withNavBar: false,
                       pageTransitionAnimation: PageTransitionAnimation.fade,
                     );
