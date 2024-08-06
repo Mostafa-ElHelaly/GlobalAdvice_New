@@ -23,7 +23,9 @@ import '../../../home_screen.dart';
 import '../../life_form/widgets/Back_Button.dart';
 
 class MedicalForm3 extends StatefulWidget {
-  const MedicalForm3({super.key});
+  const MedicalForm3({
+    super.key,
+  });
 
   @override
   State<MedicalForm3> createState() => _MedicalForm3State();
@@ -37,6 +39,10 @@ class _MedicalForm3State extends State<MedicalForm3> {
     '550,000 EGP',
   ];
   String? selectedValue;
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
