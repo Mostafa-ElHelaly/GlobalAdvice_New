@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:globaladvice_new/core/widgets/snack_bar.dart';
 import 'package:globaladvice_new/features/home/presentation/component/car_form/pages/car_form_3.dart';
 import 'package:globaladvice_new/features/home/presentation/component/car_form/widgets/Motor_Dropdown_Widget.dart';
 import 'package:globaladvice_new/features/home/presentation/component/car_form/widgets/car_insurance_appbar.dart';
@@ -58,7 +59,8 @@ class _CarForm2State extends State<CarForm2> {
           return Theme(
               data: ThemeData.light().copyWith(
                 hintColor: ColorManager.gray,
-                colorScheme: const ColorScheme.light(primary: ColorManager.mainColor),
+                colorScheme:
+                    const ColorScheme.light(primary: ColorManager.mainColor),
               ),
               child: child!);
         },
@@ -175,18 +177,28 @@ class _CarForm2State extends State<CarForm2> {
                     EdgeInsets.symmetric(vertical: ConfigSize.defaultSize! * 2),
                 child: MainButton(
                   onTap: () {
-                    PersistentNavBarNavigator.pushNewScreen(
-                      context,
-                      screen: CarForm3(
-                          phoneNumber: widget.phoneNumber,
-                          price: int.parse(priceController.text),
-                          is_licenced: selectedValue2 ==
-                                  AppLocalizations.of(context)!.licenced
-                              ? '1'
-                              : '0'),
-                      withNavBar: false,
-                      pageTransitionAnimation: PageTransitionAnimation.fade,
-                    );
+                    if (priceController.text.isNotEmpty &&
+                        emailController.text.isNotEmpty &&
+                        birthdayController.text.isNotEmpty &&
+                        priceController.text.isNotEmpty &&
+                        selectedValue1 != null &&
+                        selectedValue2 != null) {
+                      PersistentNavBarNavigator.pushNewScreen(
+                        context,
+                        screen: CarForm3(
+                            phoneNumber: widget.phoneNumber,
+                            price: int.parse(priceController.text),
+                            is_licenced: selectedValue2 ==
+                                    AppLocalizations.of(context)!.licenced
+                                ? '1'
+                                : '0'),
+                        withNavBar: false,
+                        pageTransitionAnimation: PageTransitionAnimation.fade,
+                      );
+                    } else {
+                      errorSnackBar(context,
+                          AppLocalizations.of(context)!.errorFillFields);
+                    }
                   },
                   title: AppLocalizations.of(context)!.next,
                 ),

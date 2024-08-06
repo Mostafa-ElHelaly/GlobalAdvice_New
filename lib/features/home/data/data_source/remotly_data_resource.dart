@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:globaladvice_new/features/home/data/model/health_insurance_model.dart';
@@ -12,6 +14,7 @@ import 'package:globaladvice_new/features/home/data/model/other_forms_model.dart
 
 import '../model/car_dependinces_model.dart';
 import '../model/car_insurance_request_model.dart';
+import '../model/property_dependinces_model.dart';
 
 abstract class BaseHomeRemotelyDataSource {
   Future<Unit> SendHealthInsuranceRequest(
@@ -21,6 +24,7 @@ abstract class BaseHomeRemotelyDataSource {
   Future<Unit> SendLifeInsuranceRequest(LifeInsuranceModel lifeInsuranceModel);
   Future<Unit> SendAnotherInsuranceRequest(OtherFormsModel otherFormsModel);
   Future<List<CarData>> Get_Car_Data();
+  Future<List<PropertyData>> Get_Property_Data();
 }
 
 class HomeRemotelyDataSource extends BaseHomeRemotelyDataSource {
@@ -84,7 +88,7 @@ class HomeRemotelyDataSource extends BaseHomeRemotelyDataSource {
             'Content-Type': 'application/x-www-form-urlencoded',
           },
         ),
-        ConstantApi.property,
+        ConstantApi.car,
         data: body,
       );
       if (response.statusCode == 200) {
@@ -199,13 +203,38 @@ class HomeRemotelyDataSource extends BaseHomeRemotelyDataSource {
       Response response = await dio.get(ConstantApi.car_dependencies);
 
       if (response.statusCode == 200) {
-        // Parse the JSON response
         final Map<String, dynamic> jsonResponse = response.data;
         final List<dynamic> countriesJson = jsonResponse['data']["plans_data"];
 
         // Convert JSON list to List<CountriesModel>
         List<CarData> countries = countriesJson.map((json) {
           return CarData.fromJson(json);
+        }).toList();
+
+        return countries;
+      } else {
+        throw Exception('Getting Car Data Failed: ${response.statusCode}');
+      }
+    } catch (e) {
+      throw Exception('Error fetching Car Data: ${e.toString()}');
+    }
+  }
+
+  @override
+  Future<List<PropertyData>> Get_Property_Data() async {
+    Dio dio = Dio();
+    dio.interceptors.add(LogInterceptor(responseBody: true));
+
+    try {
+      Response response = await dio.get(ConstantApi.property_dependencies);
+
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> jsonResponse = response.data;
+        final List<dynamic> countriesJson = jsonResponse['data']["plans_data"];
+
+        // Convert JSON list to List<CountriesModel>
+        List<PropertyData> countries = countriesJson.map((json) {
+          return PropertyData.fromJson(json);
         }).toList();
 
         return countries;

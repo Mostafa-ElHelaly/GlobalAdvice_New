@@ -8,6 +8,7 @@ import 'package:globaladvice_new/features/home/data/model/other_forms_model.dart
 import 'package:globaladvice_new/features/home/data/model/property_model.dart';
 
 import '../../data/model/car_dependinces_model.dart';
+import '../../data/model/property_dependinces_model.dart';
 
 abstract class BaseHomeRepository {
   Future<Either<Unit, Failure>> SendHealthInsuranceRequest(
@@ -25,4 +26,5 @@ abstract class BaseHomeRepository {
   Future<Either<Unit, Failure>> SendAnotherInsuranceRequest(
       OtherFormsModel otherFormsModel);
   Future<Either<List<CarData>, Failure>> Get_Car_Data();
+  Future<Either<List<PropertyData>, Failure>> Get_Property_Data();
 }

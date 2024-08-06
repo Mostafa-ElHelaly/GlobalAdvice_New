@@ -4,6 +4,7 @@ import 'package:globaladvice_new/features/home/data/model/car_dependinces_model.
 import 'package:globaladvice_new/features/home/data/model/car_insurance_request_model.dart';
 import 'package:globaladvice_new/features/home/data/model/health_insurance_model.dart';
 import 'package:globaladvice_new/features/home/data/model/other_forms_model.dart';
+import 'package:globaladvice_new/features/home/data/model/property_dependinces_model.dart';
 import 'package:globaladvice_new/features/home/data/model/property_model.dart';
 import 'package:globaladvice_new/features/home/domain/repo/homeBaseRepo.dart';
 
@@ -83,6 +84,16 @@ class HomeRepositoryImp extends BaseHomeRepository {
   Future<Either<List<CarData>, Failure>> Get_Car_Data() async {
     try {
       final result = await baseHomeRemotelyDataSource.Get_Car_Data();
+      return Left(result);
+    } on Exception catch (e) {
+      return right(DioHelper.buildFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<List<PropertyData>, Failure>> Get_Property_Data() async {
+    try {
+      final result = await baseHomeRemotelyDataSource.Get_Property_Data();
       return Left(result);
     } on Exception catch (e) {
       return right(DioHelper.buildFailure(e));

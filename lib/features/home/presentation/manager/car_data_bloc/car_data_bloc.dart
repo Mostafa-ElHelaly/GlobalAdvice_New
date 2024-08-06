@@ -6,12 +6,12 @@ import '../../../../../core/base_use_case/base_use_case.dart';
 import '../../../../../core/utils/api_helper.dart';
 
 class CarDataBloc extends Bloc<CarDataEvent, CarDataState> {
-  CarDataUsecase CountriesUseCase;
+  CarDataUsecase CarInuranceUseCase;
 
-  CarDataBloc({required this.CountriesUseCase}) : super(CarDataInitial()) {
+  CarDataBloc({required this.CarInuranceUseCase}) : super(CarDataInitial()) {
     on<CarDataEvent>((event, emit) async {
       emit(const CarDataLoadingState());
-      final result = await CountriesUseCase.call(const Noparamiter());
+      final result = await CarInuranceUseCase.call(const Noparamiter());
       result.fold(
           (l) => emit(CarDataSuccessState(l)),
           (r) => emit(CarDataErrorState(

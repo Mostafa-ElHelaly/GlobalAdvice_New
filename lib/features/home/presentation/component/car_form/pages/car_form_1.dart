@@ -104,14 +104,20 @@ class _CarFormMainPersonDataState extends State<CarFormMainPersonData> {
                     EdgeInsets.symmetric(vertical: ConfigSize.defaultSize! * 3),
                 child: MainButton(
                   onTap: () {
-                    PersistentNavBarNavigator.pushNewScreen(
-                      context,
-                      screen: CarForm2(
-                        phoneNumber: phoneController.text,
-                      ),
-                      withNavBar: false,
-                      pageTransitionAnimation: PageTransitionAnimation.fade,
-                    );
+                    if (fullNameController.text.isNotEmpty &&
+                        phoneController.text.isNotEmpty) {
+                      PersistentNavBarNavigator.pushNewScreen(
+                        context,
+                        screen: CarForm2(
+                          phoneNumber: phoneController.text,
+                        ),
+                        withNavBar: false,
+                        pageTransitionAnimation: PageTransitionAnimation.fade,
+                      );
+                    } else {
+                      errorSnackBar(context,
+                          AppLocalizations.of(context)!.errorFillFields);
+                    }
                   },
                   title: AppLocalizations.of(context)!.next,
                 ),

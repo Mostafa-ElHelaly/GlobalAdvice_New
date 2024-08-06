@@ -57,15 +57,7 @@ class _PropertyForm3State extends State<PropertyForm3> {
     'Loss of rent',
     'Burglary or attempted theft of contents',
   ];
-  List<bool> bools = [
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-  ];
+
 
   @override
   Widget build(BuildContext context) {

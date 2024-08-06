@@ -7,6 +7,8 @@ class ConstantApi {
   static const String lifeInsurance = "${baseUrl}client/life/send";
   static const String form = "${baseUrl}client/form";
   static const String property = "${baseUrl}client/home/quick-quotation";
+  static const String property_dependencies =
+      "${baseUrl}client/home/dependants";
   static const String car_dependencies = "${baseUrl}client/motor2/dependants";
   static const String car = "${baseUrl}client/motor2/quick-quotation";
 }
