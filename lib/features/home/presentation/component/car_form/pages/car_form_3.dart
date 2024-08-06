@@ -46,7 +46,6 @@ class _CarForm3State extends State<CarForm3> {
 
   @override
   Widget build(BuildContext context) {
-
     return BlocListener<CarinsuranceBloc, CarinsuranceblocState>(
       listener: (context, state) {
         if (state is CarInsuranceSuccessState) {
@@ -360,7 +359,7 @@ class _CarForm3State extends State<CarForm3> {
                         motorBrands: int.parse(selectedValue3!),
                         motorDeductibles: int.parse(selectedValue4!),
                         motorManufactureYear: int.parse(selectedValue5!),
-                        phone: widget.phoneNumber,
+                        phone: int.parse(widget.phoneNumber),
                         price: widget.price,
                       ));
                     },

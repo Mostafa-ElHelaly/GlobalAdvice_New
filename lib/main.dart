@@ -77,7 +77,8 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) => getIt<PropertyInsuranceBloc>(),
-          ),  BlocProvider(
+          ),
+          BlocProvider(
             create: (context) => getIt<LifeInsuranceBloc>(),
           ),
           BlocProvider(
@@ -123,7 +124,7 @@ class MyApp extends StatelessWidget {
               },
               home: Provider.value(
                   value: isLogin,
-                  child: isLogin ? const LoginScreen() : const HomeScreen()),
+                  child: isLogin ? const HomeScreen() : const HomeScreen()),
             );
           },
         ));

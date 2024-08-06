@@ -4,7 +4,7 @@ class CarInusranceRequest {
   int? motorBrands;
   int? motorDeductibles;
   int? motorManufactureYear;
-  String? phone;
+  int? phone;
 
   // Constructor
   CarInusranceRequest({
