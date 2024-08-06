@@ -4,7 +4,7 @@ import 'package:globaladvice_new/core/utils/api_helper.dart';
 import 'package:globaladvice_new/core/utils/constant_api.dart';
 import 'package:globaladvice_new/core/utils/methods.dart';
 import 'package:globaladvice_new/features/auth/data/model/login_model.dart';
-import '../../../../core/error/failures_strings.dart';
+import 'package:globaladvice_new/core/error/failures_strings.dart';
 abstract class BaseRemotelyDataSource {
   Future<Unit> loginWithEmailAndPassword(LoginModel authModel);
 

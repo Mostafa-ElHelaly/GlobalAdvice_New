@@ -9,21 +9,19 @@ import 'package:globaladvice_new/features/home/presentation/manager/car_insuranc
 import 'package:globaladvice_new/features/home/presentation/manager/healthinsurancebloc/healthinsurancebloc_bloc.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/life_insurance/life_insurance_bloc.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/property_insurance.dart/property_insurance_bloc.dart';
-import 'package:globaladvice_new/features/home/presentation/manager/property_insurance.dart/property_insurance_event.dart';
-import '../../features/auth/data/data_source/remotly_data_source.dart';
-import '../../features/auth/data/repo_imp/repo_imp.dart';
-import '../../features/auth/domain/repo/base_repo.dart';
-import '../../features/auth/domain/use_case/login_uc.dart';
-import '../../features/auth/domain/use_case/register_uc.dart';
-import '../../features/auth/domain/use_case/reset_password_us.dart';
-import '../../features/auth/presentation/manager/login_bloc/login_bloc.dart';
-import '../../features/auth/presentation/manager/register_bloc/register_bloc.dart';
-import '../../features/auth/presentation/manager/reset_password_bloc/bloc/reset_password_bloc.dart';
-import '../../features/home/data/repo_imp/repo_impl.dart';
-import '../../features/home/domain/use_case/life_insurance_uc.dart';
-import '../../features/home/domain/use_case/other_insurance_uc.dart';
-import '../../features/home/domain/use_case/translation_use_case.dart';
-import '../../features/home/presentation/manager/other_forms_bloc/other_forms_bloc.dart';
+import 'package:globaladvice_new/features/auth/data/data_source/remotly_data_source.dart';
+import 'package:globaladvice_new/features/auth/data/repo_imp/repo_imp.dart';
+import 'package:globaladvice_new/features/auth/domain/repo/base_repo.dart';
+import 'package:globaladvice_new/features/auth/domain/use_case/login_uc.dart';
+import 'package:globaladvice_new/features/auth/domain/use_case/register_uc.dart';
+import 'package:globaladvice_new/features/auth/domain/use_case/reset_password_us.dart';
+import 'package:globaladvice_new/features/auth/presentation/manager/login_bloc/login_bloc.dart';
+import 'package:globaladvice_new/features/auth/presentation/manager/register_bloc/register_bloc.dart';
+import 'package:globaladvice_new/features/auth/presentation/manager/reset_password_bloc/bloc/reset_password_bloc.dart';
+import 'package:globaladvice_new/features/home/data/repo_imp/repo_impl.dart';
+import 'package:globaladvice_new/features/home/domain/use_case/life_insurance_uc.dart';
+import 'package:globaladvice_new/features/home/domain/use_case/other_insurance_uc.dart';
+import 'package:globaladvice_new/features/home/presentation/manager/other_forms_bloc/other_forms_bloc.dart';
 
 final getIt = GetIt.instance;
 
@@ -46,8 +44,9 @@ class ServerLocator {
         () => CarinsuranceBloc(healthinsuranceblocUsecase: getIt()));
     getIt.registerLazySingleton(
         () => LifeInsuranceBloc(lifeInsuranceUseCase: getIt()));
-    getIt.registerLazySingleton(
-        () => PropertyInsuranceBloc(healthInsuranceBlocUseCase: getIt()));
+    getIt.registerLazySingleton(() => PropertyInsuranceBloc(
+          propertyInsuranceUseCase: getIt(),
+        ));
     getIt.registerLazySingleton(
         () => OtherInsuranceBloc(healthinsuranceblocUsecase: getIt()));
 

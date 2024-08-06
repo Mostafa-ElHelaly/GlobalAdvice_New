@@ -1,20 +1,20 @@
 class PropertyModel {
-  String uid;
-  int buildingPrice;
-  int contentPrice;
-  String type;
-  List<int> homeBenefits;
-  String phone;
-  String name;
+  String? uid;
+  int? buildingPrice;
+  int? contentPrice;
+  String? type;
+  List<int>? homeBenefits;
+  String? phone;
+  String? name;
 
   PropertyModel({
-    required this.uid,
-    required this.buildingPrice,
-    required this.contentPrice,
-    required this.type,
-    required this.homeBenefits,
-    required this.phone,
-    required this.name,
+     this.uid,
+     this.buildingPrice,
+     this.contentPrice,
+     this.type,
+     this.homeBenefits,
+     this.phone,
+     this.name,
   });
 
   factory PropertyModel.fromJson(Map<String, dynamic> json) {

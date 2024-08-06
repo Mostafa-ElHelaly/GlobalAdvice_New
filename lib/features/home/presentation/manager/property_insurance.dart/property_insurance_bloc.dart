@@ -8,13 +8,13 @@ import 'package:globaladvice_new/features/home/presentation/manager/property_ins
 
 class PropertyInsuranceBloc
     extends Bloc<PropertyInsuranceBlocEvent, PropertyInsuranceBlocState> {
-  PropertyInsuranceUseCase healthInsuranceBlocUseCase;
+  PropertyInsuranceUseCase propertyInsuranceUseCase;
 
-  PropertyInsuranceBloc({required this.healthInsuranceBlocUseCase})
+  PropertyInsuranceBloc({required this.propertyInsuranceUseCase})
       : super(PropertyInsuranceBlocInitial()) {
     on<PropertyInsuranceBlocEvent>((event, emit) async {
       emit(const PropertyInsuranceBlocRequestLoadingState());
-      final result = await healthInsuranceBlocUseCase.call(PropertyModel(
+      final result = await propertyInsuranceUseCase.call(PropertyModel(
         uid: event.uid,
         name: event.name,
         buildingPrice: event.buildingPrice,

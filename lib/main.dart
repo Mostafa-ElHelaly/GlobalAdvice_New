@@ -83,6 +83,9 @@ class MyApp extends StatelessWidget {
           BlocProvider(
             create: (context) => getIt<OtherInsuranceBloc>(),
           ),
+          BlocProvider(
+            create: (context) => getIt<PropertyInsuranceBloc>(),
+          ),
           ChangeNotifierProvider(
               create: (_) => TranslationProvider(isArabic, isLogin)),
         ],

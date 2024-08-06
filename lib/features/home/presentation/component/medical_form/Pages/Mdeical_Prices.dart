@@ -8,7 +8,7 @@ class MedicalPrices extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(StringManager.medicalprices),
+        title: const Text(StringManager.medicalprices),
         centerTitle: true,
       ),
     );

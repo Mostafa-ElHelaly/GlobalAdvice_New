@@ -144,7 +144,7 @@ class HomeRemotelyDataSource extends BaseHomeRemotelyDataSource {
         data: body,
       );
       if (response.statusCode == 200) {
-        print('reset password success');
+        print('Done');
         return Future.value(unit);
       } else {
         throw Exception(Strings.resetPasswordFailed);

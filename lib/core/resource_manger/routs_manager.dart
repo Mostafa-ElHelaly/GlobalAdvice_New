@@ -3,6 +3,7 @@ import 'package:globaladvice_new/features/auth/presentation/component/create_acc
 import 'package:globaladvice_new/features/auth/presentation/login_screen.dart';
 import 'package:globaladvice_new/features/home/presentation/component/card_screen/card_screen.dart';
 import 'package:globaladvice_new/features/home/presentation/component/property_form/pages/property_form_2%20.dart';
+import 'package:globaladvice_new/features/home/presentation/component/property_form/pages/property_form_3%20.dart';
 import 'package:globaladvice_new/features/profile/presentation/component/edit_my_profile/edit_my_profile_screen.dart';
 import 'package:globaladvice_new/features/profile/presentation/profile_screen.dart';
 
@@ -22,6 +23,7 @@ class Routes {
   static const String editMyProfileScreen = "/EditMyProfileScreen";
   static const String editDogProfileScreen = "/EditDogProfileScreen";
   static const String propertyForm2 = "/PropertyForm2";
+  static const String propertyForm3 = "/PropertyForm3";
 
   static const String profile = "/Profile";
   static const String editProfile = "/EditProfile";
@@ -64,6 +66,11 @@ class RouteGenerator {
         currentContext = Routes.propertyForm2;
         return MaterialPageRoute(
             settings: settings, builder: (_) => const PropertyForm2());
+
+        case Routes.propertyForm3:
+        currentContext = Routes.propertyForm3;
+        return MaterialPageRoute(
+            settings: settings, builder: (_) => const PropertyForm3());
     }
     return unDefinedRoute();
   }

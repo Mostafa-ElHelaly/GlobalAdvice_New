@@ -1,26 +1,21 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:globaladvice_new/features/home/presentation/component/medical_form/Pages/Mdeical_Prices.dart';
 import 'package:globaladvice_new/features/home/presentation/component/medical_form/Widgets/done.dart';
 import 'package:globaladvice_new/features/home/presentation/component/medical_form/Widgets/medical_appbar.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/healthinsurancebloc/healthinsurancebloc_bloc.dart';
-import 'package:globaladvice_new/features/home/presentation/manager/healthinsurancebloc/healthinsurancebloc_event.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/healthinsurancebloc/healthinsurancebloc_state.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../../../../core/resource_manger/asset_path.dart';
-import '../../../../../../core/resource_manger/locale_keys.g.dart';
-import '../../../../../../core/resource_manger/routs_manager.dart';
-import '../../../../../../core/utils/config_size.dart';
-import '../../../../../../core/widgets/custom_text_field.dart';
-import '../../../../../../core/widgets/main_button.dart';
-import '../../../home_screen.dart';
-import '../../life_form/widgets/Back_Button.dart';
+import 'package:globaladvice_new/core/resource_manger/asset_path.dart';
+import 'package:globaladvice_new/core/resource_manger/routs_manager.dart';
+import 'package:globaladvice_new/core/utils/config_size.dart';
+import 'package:globaladvice_new/core/widgets/main_button.dart';
+import 'package:globaladvice_new/features/home/presentation/home_screen.dart';
+import 'package:globaladvice_new/features/home/presentation/component/life_form/widgets/Back_Button.dart';
 
 class MedicalForm3 extends StatefulWidget {
   const MedicalForm3({
@@ -39,6 +34,7 @@ class _MedicalForm3State extends State<MedicalForm3> {
     '550,000 EGP',
   ];
   String? selectedValue;
+
   @override
   void initState() {
     super.initState();

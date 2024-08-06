@@ -117,7 +117,7 @@ class _MedicalFormMainPersonDataState extends State<MedicalFormMainPersonData> {
                   onTap: () {
                     PersistentNavBarNavigator.pushNewScreen(
                       context,
-                      screen: MedicalForm2(),
+                      screen: const MedicalForm2(),
                       withNavBar: false,
                       pageTransitionAnimation: PageTransitionAnimation.fade,
                     );
