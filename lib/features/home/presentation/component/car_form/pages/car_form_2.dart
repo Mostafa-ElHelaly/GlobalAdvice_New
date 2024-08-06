@@ -12,7 +12,8 @@ import 'package:globaladvice_new/core/widgets/main_button.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CarForm2 extends StatefulWidget {
-  const CarForm2({super.key});
+  const CarForm2({super.key, required this.phoneNumber});
+  final String phoneNumber;
 
   @override
   State<CarForm2> createState() => _CarForm2State();
@@ -21,6 +22,7 @@ class CarForm2 extends StatefulWidget {
 class _CarForm2State extends State<CarForm2> {
   TextEditingController emailController = TextEditingController();
   TextEditingController birthdayController = TextEditingController();
+  TextEditingController priceController = TextEditingController();
   FocusNode _focusNode = FocusNode();
 
   String? selectedValue1;
@@ -50,7 +52,7 @@ class _CarForm2State extends State<CarForm2> {
   DateTime selectedDate = DateTime.now();
 
   Future<Null> _selectDate(BuildContext context) async {
-    DateTime currentdate = DateTime.now();
+    DateTime currentDate = DateTime.now();
     final DateTime? picked = await showDatePicker(
         builder: (context, child) {
           return Theme(
@@ -64,7 +66,7 @@ class _CarForm2State extends State<CarForm2> {
         initialDate: selectedDate,
         firstDate: DateTime(1940, 1),
         lastDate:
-            DateTime.utc(currentdate.year, currentdate.month, currentdate.day));
+            DateTime.utc(currentDate.year, currentDate.month, currentDate.day));
     if (picked != null && picked != selectedDate)
       setState(() {
         selectedDate = picked;
@@ -162,7 +164,7 @@ class _CarForm2State extends State<CarForm2> {
               CustomTextField(
                 labeltext: AppLocalizations.of(context)!.marketvalue,
                 prefixicon: const Icon(Icons.price_change),
-                controller: emailController,
+                controller: priceController,
                 inputType: TextInputType.number,
               ),
               SizedBox(
@@ -175,7 +177,13 @@ class _CarForm2State extends State<CarForm2> {
                   onTap: () {
                     PersistentNavBarNavigator.pushNewScreen(
                       context,
-                      screen: const CarForm3(),
+                      screen: CarForm3(
+                          phoneNumber: widget.phoneNumber,
+                          price: int.parse(priceController.text),
+                          is_licenced: selectedValue2 ==
+                                  AppLocalizations.of(context)!.licenced
+                              ? '1'
+                              : '0'),
                       withNavBar: false,
                       pageTransitionAnimation: PageTransitionAnimation.fade,
                     );

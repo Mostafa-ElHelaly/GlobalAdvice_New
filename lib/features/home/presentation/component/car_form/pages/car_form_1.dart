@@ -105,7 +105,9 @@ class _CarFormMainPersonDataState extends State<CarFormMainPersonData> {
                   onTap: () {
                     PersistentNavBarNavigator.pushNewScreen(
                       context,
-                      screen: const CarForm2(),
+                      screen: CarForm2(
+                        phoneNumber: phoneController.text,
+                      ),
                       withNavBar: false,
                       pageTransitionAnimation: PageTransitionAnimation.fade,
                     );

@@ -1,9 +1,7 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../../core/resource_manger/color_manager.dart';
-import '../../../../../../core/resource_manger/locale_keys.g.dart';
-import '../../../../../../core/utils/config_size.dart';
+import 'package:globaladvice_new/core/resource_manger/color_manager.dart';
+import 'package:globaladvice_new/core/utils/config_size.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CarAppbar extends AppBar {
