@@ -10,16 +10,17 @@ import 'package:globaladvice_new/features/home/data/model/property_model.dart';
 import 'package:globaladvice_new/features/home/data/model/life_insurance_model.dart';
 import 'package:globaladvice_new/features/home/data/model/other_forms_model.dart';
 
+import '../model/car_dependinces_model.dart';
+import '../model/car_insurance_request_model.dart';
+
 abstract class BaseHomeRemotelyDataSource {
   Future<Unit> SendHealthInsuranceRequest(
       HealthInsuranceModel healthInsuranceModel);
-  Future<Unit> SendCarInsuranceRequest(
-      HealthInsuranceModel healthInsuranceModel);
-  Future<Unit> SendPropertyInsuranceRequest(
-      PropertyModel propertyModel);
-  Future<Unit> SendLifeInsuranceRequest(
-      LifeInsuranceModel lifeInsuranceModel);
+  Future<Unit> SendCarInsuranceRequest(CarInusranceRequest carInusranceRequest);
+  Future<Unit> SendPropertyInsuranceRequest(PropertyModel propertyModel);
+  Future<Unit> SendLifeInsuranceRequest(LifeInsuranceModel lifeInsuranceModel);
   Future<Unit> SendAnotherInsuranceRequest(OtherFormsModel otherFormsModel);
+  Future<List<CarData>> Get_Car_Data();
 }
 
 class HomeRemotelyDataSource extends BaseHomeRemotelyDataSource {
@@ -60,17 +61,22 @@ class HomeRemotelyDataSource extends BaseHomeRemotelyDataSource {
 
   @override
   Future<Unit> SendCarInsuranceRequest(
-      HealthInsuranceModel healthInsuranceModel) async {
+      CarInusranceRequest carInusranceRequest) async {
     final body = {
-      "UID": healthInsuranceModel.uid,
-      "organization_id": healthInsuranceModel.organizationId,
-      "plan_id": healthInsuranceModel.planId,
-      "name[]": healthInsuranceModel.name,
-      "age[]": healthInsuranceModel.age,
-      "relation[]": healthInsuranceModel.relation,
-      "price[]": healthInsuranceModel.price,
-      "gender[]": healthInsuranceModel.gende,
+      'price': carInusranceRequest.price,
+      'is_licensed': carInusranceRequest.isLicensed,
+      'motorBrands': carInusranceRequest.motorBrands,
+      'motorDeductibles': carInusranceRequest.motorDeductibles,
+      'motorManufactureYear': carInusranceRequest.motorManufactureYear,
+      'phone': carInusranceRequest.phone,
     };
+    print(body['price']);
+    print(body['is_licensed']);
+    print(body['motorBrands']);
+    print(body['motorDeductibles']);
+    print(body['motorManufactureYear']);
+    print(body['phone']);
+
     try {
       final response = await Dio().post(
         options: Options(
@@ -82,10 +88,10 @@ class HomeRemotelyDataSource extends BaseHomeRemotelyDataSource {
         data: body,
       );
       if (response.statusCode == 200) {
-        print('reset password success');
+        print('Sending Car Insurance Request Successfully');
         return Future.value(unit);
       } else {
-        throw Exception(Strings.resetPasswordFailed);
+        throw Exception('Sending Car Insurance Request Failed');
       }
     } on DioException catch (e) {
       throw DioHelper.handleDioError(
@@ -126,12 +132,10 @@ class HomeRemotelyDataSource extends BaseHomeRemotelyDataSource {
   }
 
   @override
-  Future<Unit> SendPropertyInsuranceRequest(
-      PropertyModel propertyModel) async {
+  Future<Unit> SendPropertyInsuranceRequest(PropertyModel propertyModel) async {
     final body = {
       "UID": propertyModel.uid,
       "name[]": propertyModel.name,
-
     };
     try {
       final response = await Dio().post(
@@ -154,8 +158,6 @@ class HomeRemotelyDataSource extends BaseHomeRemotelyDataSource {
           dioError: e, endpointName: "HealthInsurance Request");
     }
   }
-
-
 
   @override
   Future<Unit> SendAnotherInsuranceRequest(
@@ -188,11 +190,30 @@ class HomeRemotelyDataSource extends BaseHomeRemotelyDataSource {
     }
   }
 
+  @override
+  Future<List<CarData>> Get_Car_Data() async {
+    Dio dio = Dio();
+    dio.interceptors.add(LogInterceptor(responseBody: true));
 
+    try {
+      Response response = await dio.get(ConstantApi.car_dependencies);
 
+      if (response.statusCode == 200) {
+        // Parse the JSON response
+        final Map<String, dynamic> jsonResponse = response.data;
+        final List<dynamic> countriesJson = jsonResponse['data']["plans_data"];
 
+        // Convert JSON list to List<CountriesModel>
+        List<CarData> countries = countriesJson.map((json) {
+          return CarData.fromJson(json);
+        }).toList();
 
-
-
-
+        return countries;
+      } else {
+        throw Exception('Getting Car Data Failed: ${response.statusCode}');
+      }
+    } catch (e) {
+      throw Exception('Error fetching Car Data: ${e.toString()}');
+    }
+  }
 }
