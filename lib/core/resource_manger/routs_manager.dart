@@ -61,16 +61,6 @@ class RouteGenerator {
         currentContext = Routes.plans;
         return MaterialPageRoute(
             settings: settings, builder: (_) => const CardScreen());
-
-      case Routes.propertyForm2:
-        currentContext = Routes.propertyForm2;
-        return MaterialPageRoute(
-            settings: settings, builder: (_) => const PropertyForm2());
-
-        case Routes.propertyForm3:
-        currentContext = Routes.propertyForm3;
-        return MaterialPageRoute(
-            settings: settings, builder: (_) => const PropertyForm3());
     }
     return unDefinedRoute();
   }

@@ -16,7 +16,7 @@ class RepositoryImp extends BaseRepository {
   RepositoryImp({required this.baseRemotelyDataSource});
 
   @override
-  Future<Either<Unit, Failure>> loginWithEmailAndPassword(
+  Future<Either<Map<String, dynamic>, Failure>> loginWithEmailAndPassword(
       LoginModel authModel) async {
     try {
       final result =

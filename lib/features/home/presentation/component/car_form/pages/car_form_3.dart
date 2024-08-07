@@ -3,6 +3,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:globaladvice_new/core/resource_manger/color_manager.dart';
+import 'package:globaladvice_new/core/utils/translation_provider.dart';
 import 'package:globaladvice_new/core/widgets/snack_bar.dart';
 import 'package:globaladvice_new/features/home/presentation/component/car_form/widgets/car_insurance_appbar.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/car_data_bloc/car_data_bloc.dart';
@@ -18,6 +19,8 @@ import 'package:globaladvice_new/features/home/presentation/manager/car_data_blo
 import 'package:globaladvice_new/features/home/presentation/manager/car_insurance/carinsurance_event.dart';
 import 'package:globaladvice_new/features/home/presentation/component/life_form/widgets/Back_Button.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
+import 'package:uuid/uuid.dart';
 
 class CarForm3 extends StatefulWidget {
   const CarForm3(
@@ -38,6 +41,7 @@ class _CarForm3State extends State<CarForm3> {
   String? selectedValue4;
   String? selectedValue5;
   int motor_Brands_index = 0;
+
   @override
   void initState() {
     super.initState();
@@ -46,6 +50,8 @@ class _CarForm3State extends State<CarForm3> {
 
   @override
   Widget build(BuildContext context) {
+    var localetype = Localizations.localeOf(context).languageCode;
+
     return BlocListener<CarinsuranceBloc, CarinsuranceblocState>(
       listener: (context, state) {
         if (state is CarInsuranceSuccessState) {
@@ -117,7 +123,10 @@ class _CarForm3State extends State<CarForm3> {
                                       value: e.id
                                           .toString(), // Ensure value is not null
                                       child: Text(
-                                        e.name?.toUpperCase() ?? 'Unknown',
+                                        localetype == 'en'
+                                            ? e.name?.toUpperCase() ?? 'Unknown'
+                                            : e.nameAlt?.toUpperCase() ??
+                                                'Unknown',
                                         style: TextStyle(
                                           fontSize:
                                               ConfigSize.defaultSize! * 1.6,
@@ -196,7 +205,10 @@ class _CarForm3State extends State<CarForm3> {
                                       value: e.id
                                           .toString(), // Ensure value is not null
                                       child: Text(
-                                        e.name?.toUpperCase() ?? 'Unknown',
+                                        localetype == 'en'
+                                            ? e.name?.toUpperCase() ?? 'Unknown'
+                                            : e.nameAlt?.toUpperCase() ??
+                                                'Unknown',
                                         style: TextStyle(
                                           fontSize:
                                               ConfigSize.defaultSize! * 1.6,
@@ -276,7 +288,10 @@ class _CarForm3State extends State<CarForm3> {
                                       value: e.id
                                           .toString(), // Ensure value is not null
                                       child: Text(
-                                        e.name?.toUpperCase() ?? 'Unknown',
+                                        localetype == 'en'
+                                            ? e.name?.toUpperCase() ?? 'Unknown'
+                                            : e.nameAlt?.toUpperCase() ??
+                                                'Unknown',
                                         style: TextStyle(
                                           fontSize:
                                               ConfigSize.defaultSize! * 1.6,
@@ -349,23 +364,29 @@ class _CarForm3State extends State<CarForm3> {
                   ],
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(
-                      vertical: ConfigSize.defaultSize! * 1),
-                  child: MainButton(
-                    onTap: () {
-                      BlocProvider.of<CarinsuranceBloc>(context)
-                          .add(CarinsuranceblocEvent(
-                        isLicensed: widget.is_licenced,
-                        motorBrands: int.parse(selectedValue3!),
-                        motorDeductibles: int.parse(selectedValue4!),
-                        motorManufactureYear: int.parse(selectedValue5!),
-                        phone: int.parse(widget.phoneNumber),
-                        price: widget.price,
-                      ));
-                    },
-                    title: AppLocalizations.of(context)!.submit,
-                  ),
-                ),
+                    padding: EdgeInsets.symmetric(
+                        vertical: ConfigSize.defaultSize! * 1),
+                    child: Consumer<TranslationProvider>(
+                      builder: (context, getuid, child) {
+                        return MainButton(
+                          onTap: () {
+                            print('uid: ${getuid.response.data!.uID}');
+                            BlocProvider.of<CarinsuranceBloc>(context).add(
+                                CarinsuranceblocEvent(
+                                    isLicensed: widget.is_licenced,
+                                    motorBrands: int.parse(selectedValue3!),
+                                    motorDeductibles:
+                                        int.parse(selectedValue4!),
+                                    motorManufactureYear:
+                                        int.parse(selectedValue5!),
+                                    phone: int.parse(widget.phoneNumber),
+                                    price: widget.price,
+                                    uid: getuid.response.data!.uID));
+                          },
+                          title: AppLocalizations.of(context)!.submit,
+                        );
+                      },
+                    )),
               ],
             ),
           ),

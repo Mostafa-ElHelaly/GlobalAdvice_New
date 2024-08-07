@@ -1,7 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
-
-import '../../../data/model/Property_dependinces_model.dart';
+import 'package:globaladvice_new/features/home/data/model/property_dependinces_model.dart';
 
 abstract class PropertyDataState extends Equatable {
   const PropertyDataState();
@@ -23,6 +22,6 @@ final class PropertyDataErrorState extends PropertyDataState {
 }
 
 final class PropertyDataSuccessState extends PropertyDataState {
-  final List<PropertyData> PropertyDependinces;
+  final List<PropertyDependincesData> PropertyDependinces;
   const PropertyDataSuccessState(this.PropertyDependinces);
 }

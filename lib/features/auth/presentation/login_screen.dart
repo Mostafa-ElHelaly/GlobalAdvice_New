@@ -62,6 +62,7 @@ class _LoginScreenState extends State<LoginScreen> {
           listener: (context, state) {
             if (state is LoginSuccessState) {
               login.check_login();
+              login.get_uid(emailController.text, passwordController.text);
               Navigator.pushNamedAndRemoveUntil(
                   context, Routes.homeScreen, (route) => false);
             } else if (state is LoginErrorState) {

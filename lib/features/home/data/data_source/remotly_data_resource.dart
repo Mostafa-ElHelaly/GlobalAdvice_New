@@ -24,7 +24,7 @@ abstract class BaseHomeRemotelyDataSource {
   Future<Unit> SendLifeInsuranceRequest(LifeInsuranceModel lifeInsuranceModel);
   Future<Unit> SendAnotherInsuranceRequest(OtherFormsModel otherFormsModel);
   Future<List<CarData>> Get_Car_Data();
-  Future<List<PropertyData>> Get_Property_Data();
+  Future<List<PropertyDependincesData>> Get_Property_Data();
 }
 
 class HomeRemotelyDataSource extends BaseHomeRemotelyDataSource {
@@ -67,6 +67,7 @@ class HomeRemotelyDataSource extends BaseHomeRemotelyDataSource {
   Future<Unit> SendCarInsuranceRequest(
       CarInusranceRequest carInusranceRequest) async {
     final body = {
+      'UID': carInusranceRequest.uid,
       'price': carInusranceRequest.price,
       'is_licensed': carInusranceRequest.isLicensed,
       'motorBrands': carInusranceRequest.motorBrands,
@@ -91,7 +92,10 @@ class HomeRemotelyDataSource extends BaseHomeRemotelyDataSource {
         ConstantApi.car,
         data: body,
       );
-      if (response.statusCode == 200) {
+      Map<String, dynamic> jsonData = response.data;
+
+      if (jsonData['status'] == 200) {
+        print(jsonData);
         print('Sending Car Insurance Request Successfully');
         return Future.value(unit);
       } else {
@@ -123,11 +127,14 @@ class HomeRemotelyDataSource extends BaseHomeRemotelyDataSource {
         ConstantApi.lifeInsurance,
         data: body,
       );
-      if (response.statusCode == 200) {
-        print('Send success');
+      Map<String, dynamic> jsonData = response.data;
+
+      if (jsonData['status'] == 200) {
+        print(jsonData);
+        print('Sending Car Insurance Request Successfully');
         return Future.value(unit);
       } else {
-        throw Exception(Strings.resetPasswordFailed);
+        throw Exception('Sending Car Insurance Request Failed');
       }
     } on DioException catch (e) {
       throw DioHelper.handleDioError(
@@ -139,7 +146,11 @@ class HomeRemotelyDataSource extends BaseHomeRemotelyDataSource {
   Future<Unit> SendPropertyInsuranceRequest(PropertyModel propertyModel) async {
     final body = {
       "UID": propertyModel.uid,
-      "name[]": propertyModel.name,
+      "building_price": propertyModel.buildingPrice,
+      "content_price": propertyModel.contentPrice,
+      "type": propertyModel.type,
+      "homeBenefits[]": propertyModel.homeBenefits,
+      "phone": propertyModel.phone,
     };
     try {
       final response = await Dio().post(
@@ -151,11 +162,14 @@ class HomeRemotelyDataSource extends BaseHomeRemotelyDataSource {
         ConstantApi.healthInsurance,
         data: body,
       );
-      if (response.statusCode == 200) {
-        print('Done');
+      Map<String, dynamic> jsonData = response.data;
+
+      if (jsonData['status'] == 200) {
+        print(jsonData);
+        print('Sending Car Insurance Request Successfully');
         return Future.value(unit);
       } else {
-        throw Exception(Strings.resetPasswordFailed);
+        throw Exception('Sending Car Insurance Request Failed');
       }
     } on DioException catch (e) {
       throw DioHelper.handleDioError(
@@ -182,11 +196,14 @@ class HomeRemotelyDataSource extends BaseHomeRemotelyDataSource {
         ConstantApi.form,
         data: body,
       );
-      if (response.statusCode == 200) {
-        print('Request Sent Successfully');
+      Map<String, dynamic> jsonData = response.data;
+
+      if (jsonData['status'] == 200) {
+        print(jsonData);
+        print('Sending Car Insurance Request Successfully');
         return Future.value(unit);
       } else {
-        throw Exception(Strings.requestfalied);
+        throw Exception('Sending Car Insurance Request Failed');
       }
     } on DioException catch (e) {
       throw DioHelper.handleDioError(
@@ -221,7 +238,7 @@ class HomeRemotelyDataSource extends BaseHomeRemotelyDataSource {
   }
 
   @override
-  Future<List<PropertyData>> Get_Property_Data() async {
+  Future<List<PropertyDependincesData>> Get_Property_Data() async {
     Dio dio = Dio();
     dio.interceptors.add(LogInterceptor(responseBody: true));
 
@@ -233,8 +250,8 @@ class HomeRemotelyDataSource extends BaseHomeRemotelyDataSource {
         final List<dynamic> countriesJson = jsonResponse['data']["plans_data"];
 
         // Convert JSON list to List<CountriesModel>
-        List<PropertyData> countries = countriesJson.map((json) {
-          return PropertyData.fromJson(json);
+        List<PropertyDependincesData> countries = countriesJson.map((json) {
+          return PropertyDependincesData.fromJson(json);
         }).toList();
 
         return countries;

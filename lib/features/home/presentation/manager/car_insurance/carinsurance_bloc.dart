@@ -19,6 +19,7 @@ class CarinsuranceBloc
     on<CarinsuranceblocEvent>((event, emit) async {
       emit(const CarinsuranceRequestLoadingState());
       final result = await healthinsuranceblocUsecase.call(CarInusranceRequest(
+        uid: event.uid,
         isLicensed: event.isLicensed,
         motorBrands: event.motorBrands,
         motorDeductibles: event.motorDeductibles,

@@ -1,4 +1,4 @@
-class PropertyData {
+class PropertyDependincesData {
   String? id;
   String? service;
   String? name;
@@ -11,7 +11,7 @@ class PropertyData {
   String? updatestamp;
   List<PlansDataValues>? plansDataValues;
 
-  PropertyData(
+  PropertyDependincesData(
       {this.id,
       this.service,
       this.name,
@@ -24,7 +24,7 @@ class PropertyData {
       this.updatestamp,
       this.plansDataValues});
 
-  PropertyData.fromJson(Map<String, dynamic> json) {
+  PropertyDependincesData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     service = json['service'];
     name = json['name'];

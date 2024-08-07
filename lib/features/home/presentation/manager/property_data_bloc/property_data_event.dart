@@ -5,4 +5,4 @@ class PropertyDataEvent extends Equatable {
   List<Object?> get props => throw UnimplementedError();
 }
 
-class GetallcardataEvent extends PropertyDataEvent {}
+class GetallPropertydataEvent extends PropertyDataEvent {}

@@ -91,7 +91,8 @@ class HomeRepositoryImp extends BaseHomeRepository {
   }
 
   @override
-  Future<Either<List<PropertyData>, Failure>> Get_Property_Data() async {
+  Future<Either<List<PropertyDependincesData>, Failure>>
+      Get_Property_Data() async {
     try {
       final result = await baseHomeRemotelyDataSource.Get_Property_Data();
       return Left(result);

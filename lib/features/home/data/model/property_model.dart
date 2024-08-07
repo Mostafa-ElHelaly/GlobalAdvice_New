@@ -5,16 +5,14 @@ class PropertyModel {
   String? type;
   List<int>? homeBenefits;
   String? phone;
-  String? name;
 
   PropertyModel({
-     this.uid,
-     this.buildingPrice,
-     this.contentPrice,
-     this.type,
-     this.homeBenefits,
-     this.phone,
-     this.name,
+    this.uid,
+    this.buildingPrice,
+    this.contentPrice,
+    this.type,
+    this.homeBenefits,
+    this.phone,
   });
 
   factory PropertyModel.fromJson(Map<String, dynamic> json) {
@@ -25,7 +23,6 @@ class PropertyModel {
       type: json['type'] as String,
       homeBenefits: List<int>.from(json['homeBenefits']),
       phone: json['phone'] as String,
-      name: json['name'] as String,
     );
   }
 
@@ -37,7 +34,6 @@ class PropertyModel {
       'type': type,
       'homeBenefits': homeBenefits,
       'phone': phone,
-      'name': name,
     };
   }
 }

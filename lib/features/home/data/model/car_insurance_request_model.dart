@@ -1,4 +1,5 @@
 class CarInusranceRequest {
+  String? uid;
   int? price;
   String? isLicensed;
   int? motorBrands;
@@ -8,6 +9,7 @@ class CarInusranceRequest {
 
   // Constructor
   CarInusranceRequest({
+    required this.uid,
     required this.price,
     required this.isLicensed,
     required this.motorBrands,
@@ -18,6 +20,7 @@ class CarInusranceRequest {
 
   // Factory method to create an instance from JSON
   CarInusranceRequest.fromJson(Map<String, dynamic> json) {
+    uid = json['UID'];
     price = json['price'];
     isLicensed = json['is_licensed']; // Convert 1 to true
     motorBrands = json['motorBrands'];
@@ -29,12 +32,13 @@ class CarInusranceRequest {
   // Method to convert the instance to JSON
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.price;
-    data['service'] = this.isLicensed;
-    data['name'] = this.motorBrands;
-    data['name_alt'] = this.motorDeductibles;
-    data['multiple'] = this.motorManufactureYear;
-    data['plan_multiple'] = this.phone;
+    data['UID'] = this.uid;
+    data['price'] = this.price;
+    data['islicensed'] = this.isLicensed;
+    data['motorbrands'] = this.motorBrands;
+    data['motordeductibles'] = this.motorDeductibles;
+    data['motormanufactureyear'] = this.motorManufactureYear;
+    data['phone'] = this.phone;
 
     return data;
   }

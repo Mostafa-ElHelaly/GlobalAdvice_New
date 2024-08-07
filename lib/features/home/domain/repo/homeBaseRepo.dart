@@ -25,6 +25,8 @@ abstract class BaseHomeRepository {
 
   Future<Either<Unit, Failure>> SendAnotherInsuranceRequest(
       OtherFormsModel otherFormsModel);
+
   Future<Either<List<CarData>, Failure>> Get_Car_Data();
-  Future<Either<List<PropertyData>, Failure>> Get_Property_Data();
+
+  Future<Either<List<PropertyDependincesData>, Failure>> Get_Property_Data();
 }

@@ -5,19 +5,15 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:globaladvice_new/core/resource_manger/routs_manager.dart';
 import 'package:globaladvice_new/core/service/navigation_service.dart';
 import 'package:globaladvice_new/core/service/service_locator.dart';
-import 'package:globaladvice_new/core/translations/codegen_loader.g.dart';
 import 'package:globaladvice_new/core/utils/config_size.dart';
 import 'package:globaladvice_new/core/utils/font_loader.dart';
 import 'package:globaladvice_new/features/auth/presentation/login_screen.dart';
 import 'package:globaladvice_new/features/home/presentation/home_screen.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/car_insurance/carinsurance_bloc.dart';
-import 'package:globaladvice_new/features/home/presentation/manager/car_insurance/carinsurance_event.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/healthinsurancebloc/healthinsurancebloc_bloc.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/life_insurance/life_insurance_bloc.dart';
-import 'package:globaladvice_new/features/home/presentation/manager/life_insurance/life_insurance_event.dart';
-import 'package:globaladvice_new/features/home/presentation/manager/life_insurance/life_insurance_state.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/other_forms_bloc/other_forms_bloc.dart';
-import 'package:globaladvice_new/features/home/presentation/manager/other_forms_bloc/other_forms_state.dart';
+import 'package:globaladvice_new/features/home/presentation/manager/property_data_bloc/property_data_bloc.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/property_insurance.dart/property_insurance_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -25,7 +21,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'core/service/bloc_observer.dart';
 import 'core/utils/translation_provider.dart';
-import 'core/widgets/Custom_Drawer.dart';
 import 'features/auth/presentation/manager/login_bloc/login_bloc.dart';
 import 'features/auth/presentation/manager/register_bloc/register_bloc.dart';
 import 'features/auth/presentation/manager/reset_password_bloc/bloc/reset_password_bloc.dart';
@@ -41,19 +36,26 @@ void main() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   final isArabic = prefs.getBool("is_arabic") ?? false;
   final isLogin = prefs.getBool("is_login") ?? false;
+  final uid_success = prefs.getString("user_uid") ?? 'false';
 
   runApp(
     MyApp(
       isArabic: isArabic,
       isLogin: isLogin,
+      uid_success: uid_success,
     ),
   );
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key, required this.isArabic, required this.isLogin});
+  MyApp(
+      {super.key,
+      required this.isArabic,
+      required this.isLogin,
+      this.uid_success});
   final bool isArabic;
   final bool isLogin;
+  final String? uid_success;
   @override
   Widget build(BuildContext context) {
     ConfigSize().init(context);
@@ -92,8 +94,12 @@ class MyApp extends StatelessWidget {
           BlocProvider(
             create: (context) => getIt<CarDataBloc>(),
           ),
+          BlocProvider(
+            create: (context) => getIt<PropertyDataBloc>(),
+          ),
           ChangeNotifierProvider(
-              create: (_) => TranslationProvider(isArabic, isLogin)),
+              create: (_) =>
+                  TranslationProvider(isArabic, isLogin, uid_success!)),
         ],
         child: Consumer<TranslationProvider>(
           builder: (context, translate, child) {
@@ -129,7 +135,7 @@ class MyApp extends StatelessWidget {
               },
               home: Provider.value(
                   value: isLogin,
-                  child: isLogin ? const HomeScreen() : const HomeScreen()),
+                  child: isLogin ? const LoginScreen() : const HomeScreen()),
             );
           },
         ));

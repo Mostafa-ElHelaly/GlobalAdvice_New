@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:globaladvice_new/core/resource_manger/color_manager.dart';
@@ -16,12 +17,24 @@ import 'package:globaladvice_new/core/resource_manger/routs_manager.dart';
 import 'package:globaladvice_new/core/utils/config_size.dart';
 import 'package:globaladvice_new/core/widgets/main_button.dart';
 import 'package:globaladvice_new/features/home/presentation/component/life_form/widgets/Back_Button.dart';
+import 'package:globaladvice_new/features/home/presentation/manager/property_data_bloc/property_data_bloc.dart';
+import 'package:globaladvice_new/features/home/presentation/manager/property_data_bloc/property_data_event.dart';
+import 'package:globaladvice_new/features/home/presentation/manager/property_data_bloc/property_data_state.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/property_insurance.dart/property_insurance_bloc.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/property_insurance.dart/property_insurance_event.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/property_insurance.dart/property_insurance_state.dart';
 
 class PropertyForm3 extends StatefulWidget {
-  const PropertyForm3({super.key});
+  const PropertyForm3(
+      {super.key,
+      required this.buildingPrice,
+      required this.contentPrice,
+      this.phone_number,
+      this.type});
+  final int buildingPrice;
+  final int contentPrice;
+  final String? phone_number;
+  final String? type;
 
   @override
   State<PropertyForm3> createState() => _PropertyForm3State();
@@ -40,6 +53,7 @@ class _PropertyForm3State extends State<PropertyForm3> {
   void initState() {
     super.initState();
     _scrollController = ScrollController();
+    BlocProvider.of<PropertyDataBloc>(context).add(GetallPropertydataEvent());
   }
 
   @override
@@ -47,17 +61,6 @@ class _PropertyForm3State extends State<PropertyForm3> {
     _scrollController.dispose();
     super.dispose();
   }
-
-  List<String> Homedata = [
-    'Burglary or attempted theft of contents',
-    'Fire, lightning, and explosion',
-    'Bursting of water tanks',
-    'Damage of gas pipeline',
-    'Strikes and riots',
-    'Loss of rent',
-    'Burglary or attempted theft of contents',
-  ];
-
 
   @override
   Widget build(BuildContext context) {
@@ -131,36 +134,47 @@ class _PropertyForm3State extends State<PropertyForm3> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(
-                            decoration: BoxDecoration(
-                                border: Border.all(color: ColorManager.gray)),
-                            height: ConfigSize.defaultSize! * 50,
-                            child: GridView.builder(
-                              controller: _scrollController,
-                              physics: const ClampingScrollPhysics(),
-                              shrinkWrap: true,
-                              itemCount: HomeData.length,
-                              gridDelegate:
-                                  SliverGridDelegateWithFixedCrossAxisCount(
-                                      crossAxisSpacing:
-                                          ConfigSize.defaultSize! * 1,
-                                      mainAxisSpacing:
-                                          ConfigSize.defaultSize! * 1,
-                                      childAspectRatio: 2,
-                                      crossAxisCount: 2),
-                              itemBuilder: (context, index) {
-                                return PropertyCheckbox(
-                                  title: HomeData[index],
-                                  value: bools[index],
-                                  onChanged: (bool? value) {
-                                    setState(() {
-                                      bools[index] = value!;
-                                    });
+                          BlocBuilder<PropertyDataBloc, PropertyDataState>(
+                            builder: (context, state) {
+                              if (state is PropertyDataSuccessState) {
+                                return ListView.builder(
+                                  shrinkWrap: true,
+                                  itemCount: state.PropertyDependinces.length,
+                                  itemBuilder: (context, index) {
+                                    return ListView.builder(
+                                      shrinkWrap: true,
+                                      itemCount: state
+                                          .PropertyDependinces[index]
+                                          .plansDataValues!
+                                          .length,
+                                      itemBuilder: (context, index) {
+                                        return CheckboxListTile(
+                                          value: false,
+                                          onChanged: (value) {
+                                            setState(() {
+                                              bools[index] = value!;
+                                            });
+                                          },
+                                          title: Text(state
+                                              .PropertyDependinces[index]
+                                              .plansDataValues![index]
+                                              .name!),
+                                        );
+                                      },
+                                    );
                                   },
                                 );
-                              },
-                            ),
-                          )
+                              } else if (state is PropertyDataErrorState) {
+                                return Text(state.errorMessage);
+                              } else {
+                                return const Center(
+                                  child: CircularProgressIndicator(
+                                    color: ColorManager.mainColor,
+                                  ),
+                                );
+                              }
+                            },
+                          ),
                         ],
                       ),
                     ),
@@ -175,13 +189,12 @@ class _PropertyForm3State extends State<PropertyForm3> {
                       if (validation()) {
                         BlocProvider.of<PropertyInsuranceBloc>(context).add(
                           PropertyInsuranceBlocEvent(
-                            name: '',
                             phone: '',
                             uid: '',
                             buildingPrice: null ?? 1,
                             contentPrice: null ?? 1,
                             type: '',
-                            homeBenefits:  [_scrollController.hashCode],
+                            homeBenefits: [_scrollController.hashCode],
                           ),
                         );
                       } else {
