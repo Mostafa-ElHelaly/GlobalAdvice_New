@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:globaladvice_new/core/utils/api_helper.dart';
 import 'package:globaladvice_new/core/utils/constant_api.dart';
 import 'package:globaladvice_new/core/utils/methods.dart';
+import 'package:globaladvice_new/core/widgets/snack_bar.dart';
 import 'package:globaladvice_new/features/auth/data/model/login_model.dart';
 import 'package:globaladvice_new/core/error/failures_strings.dart';
 
@@ -102,11 +103,14 @@ class AuthRemotelyDateSource extends BaseRemotelyDataSource {
         ConstantApi.resetPassword,
         data: body,
       );
-      if (response.statusCode == 200) {
-        print('reset password success');
+      Map<String, dynamic> jsonData = response.data;
+
+      if (jsonData['status'] == 200) {
+        print(jsonData);
+        print('Reset Password Successfully');
         return Future.value(unit);
       } else {
-        throw Exception(Strings.resetPasswordFailed);
+        throw Exception('Reset Password Failed');
       }
     } on DioException catch (e) {
       throw DioHelper.handleDioError(

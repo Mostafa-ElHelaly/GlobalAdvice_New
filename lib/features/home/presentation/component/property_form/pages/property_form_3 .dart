@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:globaladvice_new/core/resource_manger/color_manager.dart';
 import 'package:globaladvice_new/core/resource_manger/locale_keys.g.dart';
+import 'package:globaladvice_new/core/utils/translation_provider.dart';
 import 'package:globaladvice_new/core/widgets/Loading.dart';
 import 'package:globaladvice_new/core/widgets/snack_bar.dart';
 import 'package:globaladvice_new/features/home/presentation/component/property_form/widgets/Prop_insurance_appbar.dart';
@@ -23,6 +24,7 @@ import 'package:globaladvice_new/features/home/presentation/manager/property_dat
 import 'package:globaladvice_new/features/home/presentation/manager/property_insurance.dart/property_insurance_bloc.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/property_insurance.dart/property_insurance_event.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/property_insurance.dart/property_insurance_state.dart';
+import 'package:provider/provider.dart';
 
 class PropertyForm3 extends StatefulWidget {
   const PropertyForm3(
@@ -62,6 +64,10 @@ class _PropertyForm3State extends State<PropertyForm3> {
     super.dispose();
   }
 
+  bool intToBool(int value) {
+    return value != 0;
+  }
+
   @override
   Widget build(BuildContext context) {
     List<String> HomeData = [
@@ -73,6 +79,15 @@ class _PropertyForm3State extends State<PropertyForm3> {
       AppLocalizations.of(context)!.lossofrent,
     ];
     List<bool> bools = [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
       false,
       false,
       false,
@@ -81,8 +96,7 @@ class _PropertyForm3State extends State<PropertyForm3> {
       false,
       false,
     ];
-    final List<bool> booleanList = List.generate(HomeData.length, (_) => false);
-
+    Set homeBenefitsSet = Set();
     return BlocListener<PropertyInsuranceBloc, PropertyInsuranceBlocState>(
       listener: (context, state) {
         if (state is PropertyInsuranceSuccessState) {
@@ -138,26 +152,50 @@ class _PropertyForm3State extends State<PropertyForm3> {
                             builder: (context, state) {
                               if (state is PropertyDataSuccessState) {
                                 return ListView.builder(
+                                  physics: ClampingScrollPhysics(),
                                   shrinkWrap: true,
                                   itemCount: state.PropertyDependinces.length,
                                   itemBuilder: (context, index) {
                                     return ListView.builder(
+                                      physics: ClampingScrollPhysics(),
                                       shrinkWrap: true,
                                       itemCount: state
                                           .PropertyDependinces[index]
                                           .plansDataValues!
                                           .length,
-                                      itemBuilder: (context, index) {
+                                      itemBuilder: (context, index2) {
+                                        final List<bool> booleanList =
+                                            List.generate(
+                                                state.PropertyDependinces[index]
+                                                    .plansDataValues!.length,
+                                                (_) => false);
+
                                         return CheckboxListTile(
-                                          value: false,
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(
+                                                      ConfigSize.defaultSize! *
+                                                          1.5)),
+                                          activeColor: ColorManager.mainColor,
+                                          checkColor: ColorManager.whiteColor,
+                                          value: intToBool(state
+                                              .PropertyDependinces[index]
+                                              .plansDataValues![index2]
+                                              .alwaysChecked!),
                                           onChanged: (value) {
                                             setState(() {
-                                              bools[index] = value!;
+                                              bools[index2] = value!;
                                             });
+                                            homeBenefitsSet.add(state
+                                                .PropertyDependinces[index]
+                                                .plansDataValues![index2]
+                                                .id!);
+                                            print(homeBenefitsSet.length);
+                                            print(homeBenefitsSet.first);
                                           },
                                           title: Text(state
                                               .PropertyDependinces[index]
-                                              .plansDataValues![index]
+                                              .plansDataValues![index2]
                                               .name!),
                                         );
                                       },
@@ -182,28 +220,34 @@ class _PropertyForm3State extends State<PropertyForm3> {
                 ),
                 SizedBox(height: ConfigSize.defaultSize! * 2),
                 Padding(
-                  padding: EdgeInsets.symmetric(
-                      vertical: ConfigSize.defaultSize! * 1),
-                  child: MainButton(
-                    onTap: () {
-                      if (validation()) {
-                        BlocProvider.of<PropertyInsuranceBloc>(context).add(
-                          PropertyInsuranceBlocEvent(
-                            phone: '',
-                            uid: '',
-                            buildingPrice: null ?? 1,
-                            contentPrice: null ?? 1,
-                            type: '',
-                            homeBenefits: [_scrollController.hashCode],
-                          ),
+                    padding: EdgeInsets.symmetric(
+                        vertical: ConfigSize.defaultSize! * 1),
+                    child: Consumer<TranslationProvider>(
+                      builder: (context, getuid, child) {
+                        return MainButton(
+                          onTap: () {
+                            if (validation()) {
+                              BlocProvider.of<PropertyInsuranceBloc>(context)
+                                  .add(
+                                PropertyInsuranceBlocEvent(
+                                  phone: widget.phone_number!,
+                                  uid: getuid.response.data!.uID!,
+                                  buildingPrice: widget.buildingPrice,
+                                  contentPrice: widget.contentPrice,
+                                  type: widget.type!,
+                                  homeBenefits:
+                                      homeBenefitsSet.toList().cast<int>(),
+                                ),
+                              );
+                            } else {
+                              errorSnackBar(
+                                  context, StringManager.errorFillFields);
+                            }
+                          },
+                          title: AppLocalizations.of(context)!.submit,
                         );
-                      } else {
-                        errorSnackBar(context, StringManager.errorFillFields);
-                      }
-                    },
-                    title: AppLocalizations.of(context)!.submit,
-                  ),
-                ),
+                      },
+                    )),
               ],
             ),
           ),
