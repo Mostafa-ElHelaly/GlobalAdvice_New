@@ -19,7 +19,8 @@ import '../model/property_dependinces_model.dart';
 abstract class BaseHomeRemotelyDataSource {
   Future<Unit> SendHealthInsuranceRequest(
       HealthInsuranceModel healthInsuranceModel);
-  Future<Unit> SendCarInsuranceRequest(CarInusranceRequest carInusranceRequest);
+  Future<Map<String, dynamic>> SendCarInsuranceRequest(
+      CarInusranceRequest carInusranceRequest);
   Future<Unit> SendPropertyInsuranceRequest(PropertyModel propertyModel);
   Future<Unit> SendLifeInsuranceRequest(LifeInsuranceModel lifeInsuranceModel);
   Future<Unit> SendAnotherInsuranceRequest(OtherFormsModel otherFormsModel);
@@ -64,7 +65,7 @@ class HomeRemotelyDataSource extends BaseHomeRemotelyDataSource {
   }
 
   @override
-  Future<Unit> SendCarInsuranceRequest(
+  Future<Map<String, dynamic>> SendCarInsuranceRequest(
       CarInusranceRequest carInusranceRequest) async {
     final body = {
       'UID': carInusranceRequest.uid,
@@ -76,6 +77,7 @@ class HomeRemotelyDataSource extends BaseHomeRemotelyDataSource {
       'phone': carInusranceRequest.phone,
     };
     print(body['price']);
+    print(body['UID']);
     print(body['is_licensed']);
     print(body['motorBrands']);
     print(body['motorDeductibles']);
@@ -96,10 +98,9 @@ class HomeRemotelyDataSource extends BaseHomeRemotelyDataSource {
 
       if (jsonData['status'] == 200) {
         print(jsonData);
-        print('Sending Car Insurance Request Successfully');
-        return Future.value(unit);
+        return jsonData; // Return response data
       } else {
-        throw Exception('Sending Car Insurance Request Failed');
+        throw Exception('Request failed because ${jsonData['error']}');
       }
     } on DioException catch (e) {
       throw DioHelper.handleDioError(

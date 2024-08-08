@@ -14,7 +14,7 @@ abstract class BaseHomeRepository {
   Future<Either<Unit, Failure>> SendHealthInsuranceRequest(
       HealthInsuranceModel healthInsuranceModel);
 
-  Future<Either<Unit, Failure>> SendCarInsuranceRequest(
+  Future<Either<Map<String, dynamic>, Failure>> SendCarInsuranceRequest(
       CarInusranceRequest carInusranceRequest);
 
   Future<Either<Unit, Failure>> SendPropertyInsuranceRequest(

@@ -104,7 +104,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                 onTap: () {
                   Navigator.of(context)
                       .pushNamedAndRemoveUntil(Routes.login, (route) => false);
-                  logout.check_login();
+                  logout.logout();
                 },
               );
             },

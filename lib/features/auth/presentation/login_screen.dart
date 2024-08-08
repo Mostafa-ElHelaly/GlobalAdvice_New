@@ -14,6 +14,7 @@ import 'package:globaladvice_new/features/auth/presentation/component/create_acc
 import 'package:globaladvice_new/features/auth/presentation/component/forget_password/forget_password_screen.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../core/resource_manger/routs_manager.dart';
 import '../../../core/widgets/snack_bar.dart';
@@ -61,8 +62,11 @@ class _LoginScreenState extends State<LoginScreen> {
         return BlocListener<LoginBloc, LoginState>(
           listener: (context, state) {
             if (state is LoginSuccessState) {
-              login.check_login();
-              login.get_uid(emailController.text, passwordController.text);
+              var UID = state.loginAuthModelResponse['data']['UID'];
+              login.setUID(UID);
+              // login.check_login();
+              // login.get_uid(emailController.text, passwordController.text);
+              print('UID: ${login.response.data!.uID}');
               Navigator.pushNamedAndRemoveUntil(
                   context, Routes.homeScreen, (route) => false);
             } else if (state is LoginErrorState) {

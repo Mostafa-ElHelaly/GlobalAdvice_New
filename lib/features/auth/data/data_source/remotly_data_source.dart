@@ -34,12 +34,12 @@ class AuthRemotelyDateSource extends BaseRemotelyDataSource {
         ConstantApi.login,
         data: FormData.fromMap(body),
       );
+      Map<String, dynamic> jsonData = response.data;
 
-      if (response.statusCode == 200) {
-        Map<String, dynamic> jsonData = response.data;
+      if (jsonData['status'] == 200) {
         return jsonData; // Return response data
       } else {
-        throw Exception('Login failed with status code ${response.statusCode}');
+        throw Exception('Login failed with status code ${jsonData['error']}');
       }
     } on DioException catch (e) {
       throw DioHelper.handleDioError(

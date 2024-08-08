@@ -7,6 +7,7 @@ import 'package:globaladvice_new/core/service/navigation_service.dart';
 import 'package:globaladvice_new/core/service/service_locator.dart';
 import 'package:globaladvice_new/core/utils/config_size.dart';
 import 'package:globaladvice_new/core/utils/font_loader.dart';
+import 'package:globaladvice_new/features/auth/data/model/get_uid_model.dart';
 import 'package:globaladvice_new/features/auth/presentation/login_screen.dart';
 import 'package:globaladvice_new/features/home/presentation/home_screen.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/car_insurance/carinsurance_bloc.dart';
@@ -35,8 +36,11 @@ void main() async {
   Bloc.observer = MyBlocObserver();
   SharedPreferences prefs = await SharedPreferences.getInstance();
   final isArabic = prefs.getBool("is_arabic") ?? false;
-  final isLogin = prefs.getBool("is_login") ?? false;
-  final uid_success = prefs.getString("user_uid") ?? 'false';
+  final uid_success = prefs.getString("user_uid");
+  final isLogin = uid_success == null;
+
+  print(isLogin);
+  print(uid_success);
 
   runApp(
     MyApp(
@@ -52,7 +56,7 @@ class MyApp extends StatelessWidget {
       {super.key,
       required this.isArabic,
       required this.isLogin,
-      this.uid_success});
+      required this.uid_success});
   final bool isArabic;
   final bool isLogin;
   final String? uid_success;
@@ -98,8 +102,8 @@ class MyApp extends StatelessWidget {
             create: (context) => getIt<PropertyDataBloc>(),
           ),
           ChangeNotifierProvider(
-              create: (_) =>
-                  TranslationProvider(isArabic, isLogin, uid_success!)),
+              create: (_) => TranslationProvider(
+                  isArabic)), //isLogin, uid_success ?? 'none'
         ],
         child: Consumer<TranslationProvider>(
           builder: (context, translate, child) {
@@ -134,8 +138,9 @@ class MyApp extends StatelessWidget {
                 return supportedLocales.first;
               },
               home: Provider.value(
-                  value: isLogin,
-                  child: isLogin ? const LoginScreen() : const HomeScreen()),
+                value: isLogin,
+                child: isLogin ? const LoginScreen() : const HomeScreen(),
+              ),
             );
           },
         ));

@@ -54,8 +54,8 @@ class Data {
 class Client {
   int? id;
   String? name;
-  Null? birthdate;
-  Null? gender;
+  String? birthdate;
+  String? gender;
   String? email;
   String? telephone;
   int? banned;

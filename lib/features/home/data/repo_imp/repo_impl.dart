@@ -31,7 +31,7 @@ class HomeRepositoryImp extends BaseHomeRepository {
   }
 
   @override
-  Future<Either<Unit, Failure>> SendCarInsuranceRequest(
+  Future<Either<Map<String, dynamic>, Failure>> SendCarInsuranceRequest(
       CarInusranceRequest carInusranceRequest) async {
     try {
       final result = await baseHomeRemotelyDataSource.SendCarInsuranceRequest(
