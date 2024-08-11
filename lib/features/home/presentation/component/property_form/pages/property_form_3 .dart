@@ -86,7 +86,6 @@ class _PropertyForm3State extends State<PropertyForm3> {
       false,
       false,
     ];
-    final List<bool> booleanList = List.generate(HomeData.length, (_) => false);
 
     return BlocListener<PropertyInsuranceBloc, PropertyInsuranceBlocState>(
       listener: (context, state) {
