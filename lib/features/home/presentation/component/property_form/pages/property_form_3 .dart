@@ -52,6 +52,11 @@ class _PropertyForm3State extends State<PropertyForm3> {
   Random random = Random();
   late ScrollController _scrollController;
   late SharedPreferences prefs;
+  List<bool> get_checked(int index) {
+    List<bool> homeBenefitsSet = List.generate(index, (index) => false);
+
+    return homeBenefitsSet;
+  }
 
   @override
   void initState() {
@@ -71,6 +76,18 @@ class _PropertyForm3State extends State<PropertyForm3> {
     return value != 0;
   }
 
+  List<List<bool>> _checkboxValues = [];
+
+  void _initializeCheckboxValues() {
+    _checkboxValues = List.generate(
+      state.PropertyDependinces.length,
+      (index) => List.generate(
+        state.PropertyDependinces[index].plansDataValues!.length,
+        (index2) => false, // Initial value for each checkbox
+      ),
+    );
+  }
+
   Future<void> _initSharedPreferences() async {
     prefs = await SharedPreferences.getInstance();
     setState(
@@ -87,24 +104,8 @@ class _PropertyForm3State extends State<PropertyForm3> {
       AppLocalizations.of(context)!.strikesandriots,
       AppLocalizations.of(context)!.lossofrent,
     ];
-    List<bool> bools = [
-      true,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-    ];
+    List<bool> _checkboxValues = List.generate(14, (index) => false);
+
     Set homeBenefitsSet = Set();
     return BlocListener<PropertyInsuranceBloc, PropertyInsuranceBlocState>(
       listener: (context, state) {
@@ -160,53 +161,63 @@ class _PropertyForm3State extends State<PropertyForm3> {
                           BlocBuilder<PropertyDataBloc, PropertyDataState>(
                             builder: (context, state) {
                               if (state is PropertyDataSuccessState) {
-                                return ListView.builder(
-                                  physics: ClampingScrollPhysics(),
-                                  shrinkWrap: true,
-                                  itemCount: state.PropertyDependinces.length,
-                                  itemBuilder: (context, index) {
-                                    return ListView.builder(
-                                      physics: ClampingScrollPhysics(),
-                                      shrinkWrap: true,
-                                      itemCount: state
-                                          .PropertyDependinces[index]
-                                          .plansDataValues!
-                                          .length,
-                                      itemBuilder: (context, index2) {
-                                        final List<bool> booleanList =
-                                            List.generate(
-                                                state.PropertyDependinces[index]
-                                                    .plansDataValues!.length,
-                                                (_) => false);
+                                return Container(
+                                  height: ConfigSize.defaultSize! * 45,
+                                  child: ListView.builder(
+                                    physics: ClampingScrollPhysics(),
+                                    shrinkWrap: true,
+                                    itemCount: state.PropertyDependinces.length,
+                                    itemBuilder: (context, index) {
+                                      return ListView.builder(
+                                        physics: ClampingScrollPhysics(),
+                                        shrinkWrap: true,
+                                        itemCount: state
+                                            .PropertyDependinces[index]
+                                            .plansDataValues!
+                                            .length,
+                                        itemBuilder: (context, index2) {
+                                          return CheckboxListTile(
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        ConfigSize
+                                                                .defaultSize! *
+                                                            1.5)),
+                                            activeColor: ColorManager.mainColor,
+                                            checkColor: ColorManager.whiteColor,
+                                            value: _checkboxValues[index],
+                                            onChanged: (bool? value) {
+                                              setState(() {
+                                                _checkboxValues[index] = true;
+                                              });
 
-                                        return CheckboxListTile(
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(
-                                                      ConfigSize.defaultSize! *
-                                                          1.5)),
-                                          activeColor: ColorManager.mainColor,
-                                          checkColor: ColorManager.whiteColor,
-                                          value: bools[index2],
-                                          onChanged: (value) {
-                                            setState(() {
-                                              bools[index2] = value!;
-                                            });
-                                            homeBenefitsSet.add(state
+                                              if (value == true) {
+                                                homeBenefitsSet.add(
+                                                  state
+                                                      .PropertyDependinces[
+                                                          index]
+                                                      .plansDataValues![index2]
+                                                      .id!,
+                                                );
+                                              } else {
+                                                homeBenefitsSet.remove(
+                                                  state
+                                                      .PropertyDependinces[
+                                                          index]
+                                                      .plansDataValues![index2]
+                                                      .id!,
+                                                );
+                                              }
+                                            },
+                                            title: Text(state
                                                 .PropertyDependinces[index]
                                                 .plansDataValues![index2]
-                                                .id!);
-                                            print(homeBenefitsSet.length);
-                                            print(homeBenefitsSet.first);
-                                          },
-                                          title: Text(state
-                                              .PropertyDependinces[index]
-                                              .plansDataValues![index2]
-                                              .name!),
-                                        );
-                                      },
-                                    );
-                                  },
+                                                .name!),
+                                          );
+                                        },
+                                      );
+                                    },
+                                  ),
                                 );
                               } else if (state is PropertyDataErrorState) {
                                 return Text(state.errorMessage);
