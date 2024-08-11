@@ -13,6 +13,7 @@ import 'package:globaladvice_new/features/home/data/model/property_model.dart';
 
 import 'package:globaladvice_new/features/home/data/model/life_insurance_model.dart';
 import 'package:globaladvice_new/features/home/data/model/other_forms_model.dart';
+import 'package:globaladvice_new/features/home/data/model/property_policy_request_model.dart';
 
 import '../model/car_dependinces_model.dart';
 import '../model/car_insurance_request_model.dart';
@@ -28,6 +29,8 @@ abstract class BaseHomeRemotelyDataSource {
   Future<Unit> SendLifeInsuranceRequest(LifeInsuranceModel lifeInsuranceModel);
   Future<Unit> SendAnotherInsuranceRequest(OtherFormsModel otherFormsModel);
   Future<Unit> CarPolicyRequest(CarPolicyrequest carPolicyRequest);
+  Future<Unit> PropertyPolicyRequest(
+      PropertyPolicyrequest propertyPolicyRequest);
   Future<List<CarData>> Get_Car_Data();
   Future<List<PropertyDependincesData>> Get_Property_Data();
 }
@@ -156,6 +159,7 @@ class HomeRemotelyDataSource extends BaseHomeRemotelyDataSource {
       "type": propertyModel.type,
       "homeBenefits[]": propertyModel.homeBenefits,
       "phone": propertyModel.phone,
+      "tenant_price": propertyModel.tenantPrice,
     };
     try {
       final response = await Dio().post(
@@ -164,16 +168,23 @@ class HomeRemotelyDataSource extends BaseHomeRemotelyDataSource {
             'Content-Type': 'application/x-www-form-urlencoded',
           },
         ),
-        ConstantApi.healthInsurance,
+        ConstantApi.property,
         data: body,
       );
       Map<String, dynamic> jsonData = response.data;
 
+      print(body['phone']);
+      print(body['building_price']);
+      print(body['tenant_price']);
+      print(body['content_price']);
+      print(body['type']);
+      print(body['homeBenefits[]']);
+      print(body['phone']);
       if (jsonData['status'] == 200) {
         print(jsonData);
         return jsonData; // Return response data
       } else {
-        throw Exception('Request failed because ${jsonData['error']}');
+        throw Exception('Request failed because ${jsonData['data']}');
       }
     } on DioException catch (e) {
       throw DioHelper.handleDioError(
@@ -286,6 +297,43 @@ class HomeRemotelyDataSource extends BaseHomeRemotelyDataSource {
           },
         ),
         ConstantApi.carpolicy,
+        data: body,
+      );
+      Map<String, dynamic> jsonData = response.data;
+
+      if (jsonData['status'] == 200) {
+        print(jsonData);
+        return Future.value(unit);
+      } else {
+        throw Exception('Request failed because ${jsonData['error']}');
+      }
+    } on DioException catch (e) {
+      throw DioHelper.handleDioError(
+          dioError: e, endpointName: "HealthInsurance Request");
+    }
+  }
+
+  @override
+  Future<Unit> PropertyPolicyRequest(
+      PropertyPolicyrequest propertyPolicyRequest) async {
+    final body = {
+      "UID": propertyPolicyRequest.uID,
+      "organization_id": propertyPolicyRequest.organizationId,
+      "plan_id": propertyPolicyRequest.planId,
+      "type": propertyPolicyRequest.type,
+      "building_price": propertyPolicyRequest.building_price,
+      "content_price": propertyPolicyRequest.content_price,
+      "tenant_price": propertyPolicyRequest.tenant_price,
+      "address": propertyPolicyRequest.address,
+    };
+    try {
+      final response = await Dio().post(
+        options: Options(
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+        ),
+        ConstantApi.propertypolicy,
         data: body,
       );
       Map<String, dynamic> jsonData = response.data;

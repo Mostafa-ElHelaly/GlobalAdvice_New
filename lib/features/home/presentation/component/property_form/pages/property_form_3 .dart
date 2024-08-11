@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:globaladvice_new/core/resource_manger/color_manager.dart';
@@ -10,7 +9,6 @@ import 'package:globaladvice_new/core/utils/translation_provider.dart';
 import 'package:globaladvice_new/core/widgets/Loading.dart';
 import 'package:globaladvice_new/core/widgets/snack_bar.dart';
 import 'package:globaladvice_new/features/home/presentation/component/property_form/widgets/Prop_insurance_appbar.dart';
-import 'package:globaladvice_new/features/home/presentation/component/property_form/widgets/Property_Checkbox.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:globaladvice_new/core/resource_manger/asset_path.dart';
@@ -27,17 +25,23 @@ import 'package:globaladvice_new/features/home/presentation/manager/property_ins
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'Prop_Prices_Page.dart';
+
 class PropertyForm3 extends StatefulWidget {
   const PropertyForm3(
       {super.key,
       required this.buildingPrice,
       required this.contentPrice,
       this.phone_number,
-      this.type});
+      this.type,
+      required this.tenantPrice,
+      this.address});
   final int buildingPrice;
   final int contentPrice;
+  final int tenantPrice;
   final String? phone_number;
   final String? type;
+  final String? address;
 
   @override
   State<PropertyForm3> createState() => _PropertyForm3State();
@@ -48,15 +52,13 @@ class _PropertyForm3State extends State<PropertyForm3> {
   String? selectedValue4;
   String? selectedValue5;
 
+  Map<String, dynamic> Options = new Map();
+
+  List<int> homeBenefitsSet = [];
   bool value1 = false;
   Random random = Random();
   late ScrollController _scrollController;
   late SharedPreferences prefs;
-  List<bool> get_checked(int index) {
-    List<bool> homeBenefitsSet = List.generate(index, (index) => false);
-
-    return homeBenefitsSet;
-  }
 
   @override
   void initState() {
@@ -76,18 +78,6 @@ class _PropertyForm3State extends State<PropertyForm3> {
     return value != 0;
   }
 
-  List<List<bool>> _checkboxValues = [];
-
-  void _initializeCheckboxValues() {
-    _checkboxValues = List.generate(
-      state.PropertyDependinces.length,
-      (index) => List.generate(
-        state.PropertyDependinces[index].plansDataValues!.length,
-        (index2) => false, // Initial value for each checkbox
-      ),
-    );
-  }
-
   Future<void> _initSharedPreferences() async {
     prefs = await SharedPreferences.getInstance();
     setState(
@@ -96,37 +86,56 @@ class _PropertyForm3State extends State<PropertyForm3> {
 
   @override
   Widget build(BuildContext context) {
-    List<String> HomeData = [
-      AppLocalizations.of(context)!.burglaryorattemptedtheftofcontents,
-      AppLocalizations.of(context)!.fireorexplosion,
-      AppLocalizations.of(context)!.burstingofwatertanks,
-      AppLocalizations.of(context)!.damageofgaspipeline,
-      AppLocalizations.of(context)!.strikesandriots,
-      AppLocalizations.of(context)!.lossofrent,
-    ];
-    List<bool> _checkboxValues = List.generate(14, (index) => false);
-
-    Set homeBenefitsSet = Set();
+    var localetype = Localizations.localeOf(context).languageCode;
     return BlocListener<PropertyInsuranceBloc, PropertyInsuranceBlocState>(
       listener: (context, state) {
         if (state is PropertyInsuranceSuccessState) {
-          AwesomeDialog(
-                  context: context,
-                  dialogType: DialogType.success,
-                  animType: AnimType.rightSlide,
-                  desc: AppLocalizations.of(context)!.lifeinsurancerequest,
-                  btnOkOnPress: () {},
-                  btnOk: const CustomBackButton())
-              .show();
-          Future.delayed(const Duration(seconds: 3), () {
-            Navigator.pushNamedAndRemoveUntil(
-                context, Routes.homeScreen, (route) => false);
-          });
+          // AwesomeDialog(
+          //         context: context,
+          //         dialogType: DialogType.success,
+          //         animType: AnimType.rightSlide,
+          //         desc: AppLocalizations.of(context)!.lifeinsurancerequest,
+          //         btnOkOnPress: () {},
+          //         btnOk: const CustomBackButton())
+          //     .show();
+          // Future.delayed(const Duration(seconds: 3), () {
+          //   Navigator.pushNamedAndRemoveUntil(
+          //       context, Routes.homeScreen, (route) => false);
+          // });
+          List<dynamic> plan_name = state.PropertyModel['data']
+              .map((e) => localetype == 'ar' ? e['name_alt'] : e['name'])
+              .toList();
+          List<dynamic> total_price =
+              state.PropertyModel['data'].map((e) => e['total_price']).toList();
+          List<dynamic> org_id =
+              state.PropertyModel['data'].map((e) => e['org_id']).toList();
+          List<dynamic> plan_id =
+              state.PropertyModel['data'].map((e) => e['id']).toList();
+          Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(
+                  builder: (context) => PropertyPrices(
+                        building_price:
+                            widget.type == AppLocalizations.of(context)!.tenant
+                                ? 0
+                                : widget.buildingPrice,
+                        content_price:
+                            widget.type == AppLocalizations.of(context)!.tenant
+                                ? 0
+                                : widget.contentPrice,
+                        tenant_price:
+                            widget.type == AppLocalizations.of(context)!.tenant
+                                ? 0
+                                : widget.tenantPrice,
+                        org_id: org_id,
+                        plan_id: plan_id,
+                        address: widget.address,
+                        plan_name: plan_name,
+                        total_price: total_price,
+                      )),
+              (route) => false);
         } else if (state is PropertyInsuranceRequestErrorState) {
           errorSnackBar(context, state.errorMessage);
-        } else if (state is PropertyInsuranceBlocRequestLoadingState) {
-          showLoading(context);
-        }
+        } else if (state is PropertyInsuranceBlocRequestLoadingState) {}
       },
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -168,14 +177,33 @@ class _PropertyForm3State extends State<PropertyForm3> {
                                     shrinkWrap: true,
                                     itemCount: state.PropertyDependinces.length,
                                     itemBuilder: (context, index) {
+                                      var dep =
+                                          state.PropertyDependinces[index];
+                                      var depId = dep.id!;
+                                      var values = dep.plansDataValues!;
+
+                                      if (Options[depId] == null) {
+                                        Options[depId] = new Map<int, bool>();
+                                      }
+                                      print(Options);
+
                                       return ListView.builder(
                                         physics: ClampingScrollPhysics(),
                                         shrinkWrap: true,
-                                        itemCount: state
-                                            .PropertyDependinces[index]
-                                            .plansDataValues!
-                                            .length,
+                                        itemCount: values.length,
                                         itemBuilder: (context, index2) {
+                                          var item = values[index2];
+                                          var itemId = item.id!;
+                                          var itemName = localetype == 'ar'
+                                              ? item.nameAlt
+                                              : item.name!;
+
+                                          if (Options[depId][itemId] == null) {
+                                            Options[depId][itemId] = false;
+                                          }
+
+                                          var selected = Options[depId][itemId];
+
                                           return CheckboxListTile(
                                             shape: RoundedRectangleBorder(
                                                 borderRadius:
@@ -185,34 +213,22 @@ class _PropertyForm3State extends State<PropertyForm3> {
                                                             1.5)),
                                             activeColor: ColorManager.mainColor,
                                             checkColor: ColorManager.whiteColor,
-                                            value: _checkboxValues[index],
+                                            value: selected,
                                             onChanged: (bool? value) {
                                               setState(() {
-                                                _checkboxValues[index] = true;
+                                                Options[depId][itemId] = value!;
                                               });
 
-                                              if (value == true) {
-                                                homeBenefitsSet.add(
-                                                  state
-                                                      .PropertyDependinces[
-                                                          index]
-                                                      .plansDataValues![index2]
-                                                      .id!,
-                                                );
+                                              if (Options[depId][itemId] ==
+                                                  true) {
+                                                homeBenefitsSet.add(itemId);
                                               } else {
-                                                homeBenefitsSet.remove(
-                                                  state
-                                                      .PropertyDependinces[
-                                                          index]
-                                                      .plansDataValues![index2]
-                                                      .id!,
-                                                );
+                                                homeBenefitsSet.remove(itemId);
                                               }
+                                              print(homeBenefitsSet);
+                                              print(selected);
                                             },
-                                            title: Text(state
-                                                .PropertyDependinces[index]
-                                                .plansDataValues![index2]
-                                                .name!),
+                                            title: Text(itemName!),
                                           );
                                         },
                                       );
@@ -247,13 +263,13 @@ class _PropertyForm3State extends State<PropertyForm3> {
                               BlocProvider.of<PropertyInsuranceBloc>(context)
                                   .add(
                                 PropertyInsuranceBlocEvent(
-                                  phone: widget.phone_number!,
+                                  tenantPrice: widget.tenantPrice,
+                                  phone: int.parse(widget.phone_number!),
                                   uid: prefs.getString("user_uid")!,
                                   buildingPrice: widget.buildingPrice,
                                   contentPrice: widget.contentPrice,
                                   type: widget.type!,
-                                  homeBenefits:
-                                      homeBenefitsSet.toList().cast<int>(),
+                                  homeBenefits: homeBenefitsSet,
                                 ),
                               );
                             } else {

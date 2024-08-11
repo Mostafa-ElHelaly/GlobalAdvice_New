@@ -12,4 +12,5 @@ class ConstantApi {
   static const String car_dependencies = "${baseUrl}client/motor2/dependants";
   static const String car = "${baseUrl}client/motor2/quick-quotation";
   static const String carpolicy = "${baseUrl}client/motor2/request";
+  static const String propertypolicy = "${baseUrl}/client/home/request";
 }

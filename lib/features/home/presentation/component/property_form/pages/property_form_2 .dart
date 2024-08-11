@@ -33,6 +33,7 @@ class _PropertyForm2State extends State<PropertyForm2> {
   TextEditingController addressController = TextEditingController();
   TextEditingController contentPriceController = TextEditingController();
   TextEditingController buildingPriceController = TextEditingController();
+  TextEditingController tenantPriceController = TextEditingController();
 
   String? selectedValue;
 
@@ -42,6 +43,7 @@ class _PropertyForm2State extends State<PropertyForm2> {
     addressController = TextEditingController();
     contentPriceController = TextEditingController();
     buildingPriceController = TextEditingController();
+    tenantPriceController = TextEditingController();
     super.initState();
   }
 
@@ -51,12 +53,23 @@ class _PropertyForm2State extends State<PropertyForm2> {
     addressController.dispose();
     contentPriceController.dispose();
     buildingPriceController.dispose();
+    tenantPriceController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final List<String> type = [
+    var localetype = Localizations.localeOf(context).languageCode;
+
+    // final List<String> english_type = [
+    //   'Tenant',
+    //   'Owner',
+    // ];
+    // final List<String> arabic_type = [
+    //   'ايجار',
+    //   'تمليك',
+    // ];
+    final List<String> building_type = [
       AppLocalizations.of(context)!.owner,
       AppLocalizations.of(context)!.tenant,
     ];
@@ -96,7 +109,7 @@ class _PropertyForm2State extends State<PropertyForm2> {
               CarDropdown(
                 selectedValue: selectedValue,
                 label: AppLocalizations.of(context)!.type,
-                list: type,
+                list: building_type,
                 onChanged: (String? value) {
                   setState(() {
                     selectedValue = value;
@@ -119,19 +132,31 @@ class _PropertyForm2State extends State<PropertyForm2> {
                   inputType: TextInputType.text,
                 ),
               ),
-              selectedValue == AppLocalizations.of(context)!.owner ||
-                      selectedValue == AppLocalizations.of(context)!.tenant
+              selectedValue == AppLocalizations.of(context)!.owner
                   ? SizedBox(
                       height: ConfigSize.defaultSize! * 2,
                     )
                   : const SizedBox.shrink(),
               Visibility(
-                visible: selectedValue == AppLocalizations.of(context)!.owner ||
-                    selectedValue == AppLocalizations.of(context)!.tenant,
+                visible: selectedValue == AppLocalizations.of(context)!.owner,
                 child: CustomTextField(
                   labeltext: AppLocalizations.of(context)!.contentprice,
                   prefixicon: const Icon(Icons.price_change),
                   controller: contentPriceController,
+                  inputType: TextInputType.text,
+                ),
+              ),
+              selectedValue == AppLocalizations.of(context)!.tenant
+                  ? SizedBox(
+                      height: ConfigSize.defaultSize! * 2,
+                    )
+                  : const SizedBox.shrink(),
+              Visibility(
+                visible: selectedValue == AppLocalizations.of(context)!.tenant,
+                child: CustomTextField(
+                  labeltext: AppLocalizations.of(context)!.tenantprice,
+                  prefixicon: const Icon(Icons.price_change),
+                  controller: tenantPriceController,
                   inputType: TextInputType.text,
                 ),
               ),
@@ -156,19 +181,32 @@ class _PropertyForm2State extends State<PropertyForm2> {
                       PersistentNavBarNavigator.pushNewScreen(
                         context,
                         screen: PropertyForm3(
+                          address: addressController.text,
+                          tenantPrice: selectedValue ==
+                                  AppLocalizations.of(context)!.owner
+                              ? 0
+                              : int.parse(tenantPriceController.text),
                           phone_number: widget.phone_number,
-                          type: selectedValue,
+                          type: selectedValue == 'تمليك'
+                              ? 'owner'
+                              : selectedValue == 'ايجار'
+                                  ? 'tenant'
+                                  : selectedValue,
                           buildingPrice: selectedValue ==
                                   AppLocalizations.of(context)!.tenant
                               ? 0
                               : int.parse(buildingPriceController.text),
-                          contentPrice: int.parse(contentPriceController.text),
+                          contentPrice: selectedValue ==
+                                  AppLocalizations.of(context)!.tenant
+                              ? 0
+                              : int.parse(contentPriceController.text),
                         ),
                         withNavBar: false,
                         pageTransitionAnimation: PageTransitionAnimation.fade,
                       );
                     } else {
-                      errorSnackBar(context, StringManager.errorFillFields);
+                      errorSnackBar(context,
+                          AppLocalizations.of(context)!.errorFillFields);
                     }
                   },
                   title: AppLocalizations.of(context)!.next,

@@ -22,6 +22,7 @@ class PropertyInsuranceBloc
         type: event.type,
         homeBenefits: event.homeBenefits,
         phone: event.phone,
+        tenantPrice: event.tenantPrice,
       ));
       result.fold(
           (l) => emit(PropertyInsuranceSuccessState(PropertyModel: l)),
