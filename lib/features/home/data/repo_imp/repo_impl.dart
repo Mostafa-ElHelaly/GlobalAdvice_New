@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:globaladvice_new/features/home/data/data_source/remotly_data_resource.dart';
 import 'package:globaladvice_new/features/home/data/model/car_dependinces_model.dart';
 import 'package:globaladvice_new/features/home/data/model/car_insurance_request_model.dart';
+import 'package:globaladvice_new/features/home/data/model/car_policy_request_model.dart';
 import 'package:globaladvice_new/features/home/data/model/health_insurance_model.dart';
 import 'package:globaladvice_new/features/home/data/model/other_forms_model.dart';
 import 'package:globaladvice_new/features/home/data/model/property_dependinces_model.dart';
@@ -55,7 +56,7 @@ class HomeRepositoryImp extends BaseHomeRepository {
   }
 
   @override
-  Future<Either<Unit, Failure>> SendPropertyInsuranceRequest(
+  Future<Either<Map<String, dynamic>, Failure>> SendPropertyInsuranceRequest(
       PropertyModel propertyModel) async {
     try {
       final result =
@@ -95,6 +96,18 @@ class HomeRepositoryImp extends BaseHomeRepository {
       Get_Property_Data() async {
     try {
       final result = await baseHomeRemotelyDataSource.Get_Property_Data();
+      return Left(result);
+    } on Exception catch (e) {
+      return right(DioHelper.buildFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<Unit, Failure>> CarPolicyRequest(
+      CarPolicyrequest otherFormsModel) async {
+    try {
+      final result =
+          await baseHomeRemotelyDataSource.CarPolicyRequest(otherFormsModel);
       return Left(result);
     } on Exception catch (e) {
       return right(DioHelper.buildFailure(e));

@@ -25,6 +25,7 @@ import 'package:globaladvice_new/features/home/presentation/manager/property_ins
 import 'package:globaladvice_new/features/home/presentation/manager/property_insurance.dart/property_insurance_event.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/property_insurance.dart/property_insurance_state.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PropertyForm3 extends StatefulWidget {
   const PropertyForm3(
@@ -50,10 +51,12 @@ class _PropertyForm3State extends State<PropertyForm3> {
   bool value1 = false;
   Random random = Random();
   late ScrollController _scrollController;
+  late SharedPreferences prefs;
 
   @override
   void initState() {
     super.initState();
+    _initSharedPreferences();
     _scrollController = ScrollController();
     BlocProvider.of<PropertyDataBloc>(context).add(GetallPropertydataEvent());
   }
@@ -66,6 +69,12 @@ class _PropertyForm3State extends State<PropertyForm3> {
 
   bool intToBool(int value) {
     return value != 0;
+  }
+
+  Future<void> _initSharedPreferences() async {
+    prefs = await SharedPreferences.getInstance();
+    setState(
+        () {}); // Ensure the state is updated after SharedPreferences is initialized
   }
 
   @override
@@ -178,10 +187,7 @@ class _PropertyForm3State extends State<PropertyForm3> {
                                                           1.5)),
                                           activeColor: ColorManager.mainColor,
                                           checkColor: ColorManager.whiteColor,
-                                          value: intToBool(state
-                                              .PropertyDependinces[index]
-                                              .plansDataValues![index2]
-                                              .alwaysChecked!),
+                                          value: bools[index2],
                                           onChanged: (value) {
                                             setState(() {
                                               bools[index2] = value!;
@@ -231,7 +237,7 @@ class _PropertyForm3State extends State<PropertyForm3> {
                                   .add(
                                 PropertyInsuranceBlocEvent(
                                   phone: widget.phone_number!,
-                                  uid: getuid.response.data!.uID!,
+                                  uid: prefs.getString("user_uid")!,
                                   buildingPrice: widget.buildingPrice,
                                   contentPrice: widget.contentPrice,
                                   type: widget.type!,

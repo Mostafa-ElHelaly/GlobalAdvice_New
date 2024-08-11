@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 
 import 'package:globaladvice_new/core/error/failure.dart';
 import 'package:globaladvice_new/features/home/data/model/car_insurance_request_model.dart';
+import 'package:globaladvice_new/features/home/data/model/car_policy_request_model.dart';
 import 'package:globaladvice_new/features/home/data/model/health_insurance_model.dart';
 import 'package:globaladvice_new/features/home/data/model/life_insurance_model.dart';
 import 'package:globaladvice_new/features/home/data/model/other_forms_model.dart';
@@ -17,7 +18,7 @@ abstract class BaseHomeRepository {
   Future<Either<Map<String, dynamic>, Failure>> SendCarInsuranceRequest(
       CarInusranceRequest carInusranceRequest);
 
-  Future<Either<Unit, Failure>> SendPropertyInsuranceRequest(
+  Future<Either<Map<String, dynamic>, Failure>> SendPropertyInsuranceRequest(
       PropertyModel propertyModel);
 
   Future<Either<Unit, Failure>> SendLifeInsuranceRequest(
@@ -25,6 +26,8 @@ abstract class BaseHomeRepository {
 
   Future<Either<Unit, Failure>> SendAnotherInsuranceRequest(
       OtherFormsModel otherFormsModel);
+  Future<Either<Unit, Failure>> CarPolicyRequest(
+      CarPolicyrequest otherFormsModel);
 
   Future<Either<List<CarData>, Failure>> Get_Car_Data();
 

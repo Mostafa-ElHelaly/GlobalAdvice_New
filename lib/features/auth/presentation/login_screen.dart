@@ -62,13 +62,12 @@ class _LoginScreenState extends State<LoginScreen> {
         return BlocListener<LoginBloc, LoginState>(
           listener: (context, state) {
             if (state is LoginSuccessState) {
-              var UID = state.loginAuthModelResponse['data']['UID'];
-              login.setUID(UID);
-              // login.check_login();
-              // login.get_uid(emailController.text, passwordController.text);
-              print('UID: ${login.response.data!.uID}');
               Navigator.pushNamedAndRemoveUntil(
                   context, Routes.homeScreen, (route) => false);
+              var UID = state.loginAuthModelResponse['data']['UID'];
+              login.setUID(UID);
+
+              print('UID: UID');
             } else if (state is LoginErrorState) {
               errorSnackBar(context, state.errorMessage);
             } else if (state is LoginLoadingState) {

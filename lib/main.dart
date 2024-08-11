@@ -7,10 +7,10 @@ import 'package:globaladvice_new/core/service/navigation_service.dart';
 import 'package:globaladvice_new/core/service/service_locator.dart';
 import 'package:globaladvice_new/core/utils/config_size.dart';
 import 'package:globaladvice_new/core/utils/font_loader.dart';
-import 'package:globaladvice_new/features/auth/data/model/get_uid_model.dart';
 import 'package:globaladvice_new/features/auth/presentation/login_screen.dart';
 import 'package:globaladvice_new/features/home/presentation/home_screen.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/car_insurance/carinsurance_bloc.dart';
+import 'package:globaladvice_new/features/home/presentation/manager/car_policy/car_policy_bloc.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/healthinsurancebloc/healthinsurancebloc_bloc.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/life_insurance/life_insurance_bloc.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/other_forms_bloc/other_forms_bloc.dart';
@@ -100,6 +100,9 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) => getIt<PropertyDataBloc>(),
+          ),
+          BlocProvider(
+            create: (context) => getIt<CarPolicyBloc>(),
           ),
           ChangeNotifierProvider(
               create: (_) => TranslationProvider(

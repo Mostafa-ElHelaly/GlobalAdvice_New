@@ -28,8 +28,6 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 
-import '../../../../data/model/car_request_response_model.dart';
-
 class CarForm3 extends StatefulWidget {
   const CarForm3(
       {super.key,
@@ -49,22 +47,21 @@ class _CarForm3State extends State<CarForm3> {
   String? selectedValue4;
   String? selectedValue5;
   int motor_Brands_index = 0;
-  late SharedPreferences prefs;
 
   @override
-  void initState() async {
+  void initState() {
     super.initState();
     _initSharedPreferences();
     BlocProvider.of<CarDataBloc>(context).add(GetallcardataEvent());
   }
+
+  late SharedPreferences prefs;
 
   Future<void> _initSharedPreferences() async {
     prefs = await SharedPreferences.getInstance();
     setState(
         () {}); // Ensure the state is updated after SharedPreferences is initialized
   }
-
-  CarResponseModel? _response;
 
   @override
   Widget build(BuildContext context) {
@@ -74,27 +71,31 @@ class _CarForm3State extends State<CarForm3> {
         return BlocListener<CarinsuranceBloc, CarinsuranceblocState>(
           listener: (context, state) {
             if (state is CarInsuranceSuccessState) {
-              Int percent = state.CarInsuranceModel['data']['percent'];
-              String PlanName = state.CarInsuranceModel['data']['plan_name'];
+              List<dynamic> total = state.CarInsuranceModel['data']
+                  .map((e) => e['total'])
+                  .toList();
+              List<dynamic> PlanName = state.CarInsuranceModel['data']
+                  .map((e) => e['plan_name'])
+                  .toList();
+              List<dynamic> plan_id = state.CarInsuranceModel['data']
+                  .map((e) => e['plan_id'])
+                  .toList();
+              List<dynamic> organizationId = state.CarInsuranceModel['data']
+                  .map((e) => e['org_id'])
+                  .toList();
+
               Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => CarPrices(
+                        motorBrands: int.parse(selectedValue3!),
+                        motorDeductibles: int.parse(selectedValue4!),
+                        motorManufactureYear: int.parse(selectedValue5!),
+                        organizationId: organizationId,
+                        planId: plan_id,
+                        isLicensed: widget.is_licenced,
                         PlanName: PlanName,
-                        percent: int.parse(percent.toString()),
+                        total: total,
                         price: widget.price,
                       )));
-
-              // AwesomeDialog(
-              //         context: context,
-              //         dialogType: DialogType.success,
-              //         animType: AnimType.rightSlide,
-              //         desc: AppLocalizations.of(context)!.lifeinsurancerequest,
-              //         btnOkOnPress: () {},
-              //         btnOk: const CustomBackButton())
-              //     .show();
-              // Future.delayed(const Duration(seconds: 3), () {
-              //   Navigator.pushNamedAndRemoveUntil(
-              //       context, Routes.homeScreen, (route) => false);
-              // });
             }
             if (state is CarinsuranceRequestErrorState) {
               errorSnackBar(context, state.errorMessage);

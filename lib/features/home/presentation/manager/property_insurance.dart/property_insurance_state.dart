@@ -23,7 +23,7 @@ final class PropertyInsuranceRequestErrorState
 }
 
 final class PropertyInsuranceSuccessState extends PropertyInsuranceBlocState {
-  final Unit PropertyModel;
+  final Map<String, dynamic> PropertyModel;
 
   const PropertyInsuranceSuccessState({required this.PropertyModel});
 }

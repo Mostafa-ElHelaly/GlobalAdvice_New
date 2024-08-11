@@ -2,6 +2,8 @@ import 'dart:math';
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:globaladvice_new/features/home/data/model/car_policy_request_model.dart';
+import 'package:globaladvice_new/features/home/data/model/car_policy_request_model.dart';
 import 'package:globaladvice_new/features/home/data/model/health_insurance_model.dart';
 
 import 'package:globaladvice_new/core/error/failures_strings.dart';
@@ -21,9 +23,11 @@ abstract class BaseHomeRemotelyDataSource {
       HealthInsuranceModel healthInsuranceModel);
   Future<Map<String, dynamic>> SendCarInsuranceRequest(
       CarInusranceRequest carInusranceRequest);
-  Future<Unit> SendPropertyInsuranceRequest(PropertyModel propertyModel);
+  Future<Map<String, dynamic>> SendPropertyInsuranceRequest(
+      PropertyModel propertyModel);
   Future<Unit> SendLifeInsuranceRequest(LifeInsuranceModel lifeInsuranceModel);
   Future<Unit> SendAnotherInsuranceRequest(OtherFormsModel otherFormsModel);
+  Future<Unit> CarPolicyRequest(CarPolicyrequest carPolicyRequest);
   Future<List<CarData>> Get_Car_Data();
   Future<List<PropertyDependincesData>> Get_Property_Data();
 }
@@ -132,10 +136,9 @@ class HomeRemotelyDataSource extends BaseHomeRemotelyDataSource {
 
       if (jsonData['status'] == 200) {
         print(jsonData);
-        print('Sending Car Insurance Request Successfully');
         return Future.value(unit);
       } else {
-        throw Exception('Sending Car Insurance Request Failed');
+        throw Exception('Request failed because ${jsonData['error']}');
       }
     } on DioException catch (e) {
       throw DioHelper.handleDioError(
@@ -144,7 +147,8 @@ class HomeRemotelyDataSource extends BaseHomeRemotelyDataSource {
   }
 
   @override
-  Future<Unit> SendPropertyInsuranceRequest(PropertyModel propertyModel) async {
+  Future<Map<String, dynamic>> SendPropertyInsuranceRequest(
+      PropertyModel propertyModel) async {
     final body = {
       "UID": propertyModel.uid,
       "building_price": propertyModel.buildingPrice,
@@ -167,10 +171,9 @@ class HomeRemotelyDataSource extends BaseHomeRemotelyDataSource {
 
       if (jsonData['status'] == 200) {
         print(jsonData);
-        print('Sending Car Insurance Request Successfully');
-        return Future.value(unit);
+        return jsonData; // Return response data
       } else {
-        throw Exception('Sending Car Insurance Request Failed');
+        throw Exception('Request failed because ${jsonData['error']}');
       }
     } on DioException catch (e) {
       throw DioHelper.handleDioError(
@@ -201,10 +204,9 @@ class HomeRemotelyDataSource extends BaseHomeRemotelyDataSource {
 
       if (jsonData['status'] == 200) {
         print(jsonData);
-        print('Sending Car Insurance Request Successfully');
         return Future.value(unit);
       } else {
-        throw Exception('Sending Car Insurance Request Failed');
+        throw Exception('Request failed because ${jsonData['error']}');
       }
     } on DioException catch (e) {
       throw DioHelper.handleDioError(
@@ -261,6 +263,42 @@ class HomeRemotelyDataSource extends BaseHomeRemotelyDataSource {
       }
     } catch (e) {
       throw Exception('Error fetching Car Data: ${e.toString()}');
+    }
+  }
+
+  @override
+  Future<Unit> CarPolicyRequest(CarPolicyrequest carPolicyRequest) async {
+    final body = {
+      "UID": carPolicyRequest.uID,
+      "organization_id": carPolicyRequest.organizationId,
+      "plan_id": carPolicyRequest.planId,
+      "price": carPolicyRequest.price,
+      "is_licensed": carPolicyRequest.isLicensed,
+      "motorBrands": carPolicyRequest.motorBrands,
+      "motorDeductibles": carPolicyRequest.motorDeductibles,
+      "motorManufactureYear": carPolicyRequest.motorManufactureYear,
+    };
+    try {
+      final response = await Dio().post(
+        options: Options(
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+        ),
+        ConstantApi.carpolicy,
+        data: body,
+      );
+      Map<String, dynamic> jsonData = response.data;
+
+      if (jsonData['status'] == 200) {
+        print(jsonData);
+        return Future.value(unit);
+      } else {
+        throw Exception('Request failed because ${jsonData['error']}');
+      }
+    } on DioException catch (e) {
+      throw DioHelper.handleDioError(
+          dioError: e, endpointName: "HealthInsurance Request");
     }
   }
 }

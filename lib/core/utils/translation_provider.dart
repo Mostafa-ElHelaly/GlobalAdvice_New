@@ -5,11 +5,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
 import '../../features/auth/data/data_source/remotly_data_source.dart';
-import '../../features/auth/data/model/get_uid_model.dart';
 import '../../features/auth/data/model/login_model.dart';
 import '../../features/auth/presentation/login_screen.dart';
 import '../../features/home/data/model/car_insurance_request_model.dart';
-import '../../features/home/data/model/car_request_response_model.dart';
 
 class TranslationProvider with ChangeNotifier {
   TranslationProvider(bool isArabic) {
@@ -33,9 +31,6 @@ class TranslationProvider with ChangeNotifier {
     // }
   }
 
-  ApiResponse? _response;
-  CarResponseModel? car_response;
-  ApiResponse get response => _response!;
   Locale _locale = Locale('en', '');
   Locale get locale => _locale;
   void change_language() async {
@@ -80,19 +75,19 @@ class TranslationProvider with ChangeNotifier {
     prefs.setString('user_uid', uid);
   }
 
-  void get_uid(String email, String password) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
+  // void get_uid(String email, String password) async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    try {
-      final authModel = LoginModel(email: email, password: password);
-      final response =
-          await AuthRemotelyDateSource().loginWithEmailAndPassword(authModel);
+  //   try {
+  //     final authModel = LoginModel(email: email, password: password);
+  //     final response =
+  //         await AuthRemotelyDateSource().loginWithEmailAndPassword(authModel);
 
-      _response = ApiResponse.fromJson(response);
-      prefs.setString("user_uid", _response!.data!.uID!);
-    } catch (e) {
-      print(e);
-    }
-    notifyListeners();
-  }
+  //     _response = ApiResponse.fromJson(response);
+  //     prefs.setString("user_uid", _response!.data!.uID!);
+  //   } catch (e) {
+  //     print(e);
+  //   }
+  //   notifyListeners();
+  // }
 }
