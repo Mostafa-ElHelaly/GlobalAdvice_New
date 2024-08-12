@@ -4,10 +4,12 @@ import 'package:globaladvice_new/features/home/data/data_source/remotly_data_res
 import 'package:globaladvice_new/features/home/domain/repo/homeBaseRepo.dart';
 import 'package:globaladvice_new/features/home/domain/use_case/car_inurance_uc.dart';
 import 'package:globaladvice_new/features/home/domain/use_case/healthInsuranceUsecase.dart';
+import 'package:globaladvice_new/features/home/domain/use_case/property_data_uc.dart';
 import 'package:globaladvice_new/features/home/domain/use_case/property_inusrance_uc.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/car_insurance/carinsurance_bloc.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/healthinsurancebloc/healthinsurancebloc_bloc.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/life_insurance/life_insurance_bloc.dart';
+import 'package:globaladvice_new/features/home/presentation/manager/property_data_bloc/property_data_bloc.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/property_insurance.dart/property_insurance_bloc.dart';
 import 'package:globaladvice_new/features/auth/data/data_source/remotly_data_source.dart';
 import 'package:globaladvice_new/features/auth/data/repo_imp/repo_imp.dart';
@@ -22,6 +24,13 @@ import 'package:globaladvice_new/features/home/data/repo_imp/repo_impl.dart';
 import 'package:globaladvice_new/features/home/domain/use_case/life_insurance_uc.dart';
 import 'package:globaladvice_new/features/home/domain/use_case/other_insurance_uc.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/other_forms_bloc/other_forms_bloc.dart';
+
+import '../../features/home/domain/use_case/car_data_uc.dart';
+import '../../features/home/domain/use_case/car_policy_uc.dart';
+import '../../features/home/domain/use_case/property_policy_uc.dart';
+import '../../features/home/presentation/manager/car_data_bloc/car_data_bloc.dart';
+import '../../features/home/presentation/manager/car_policy/car_policy_bloc.dart';
+import '../../features/home/presentation/manager/property_policy/property_policy_bloc.dart';
 
 final getIt = GetIt.instance;
 
@@ -49,8 +58,16 @@ class ServerLocator {
           propertyInsuranceUseCase: getIt(),
         ));
 
+    getIt.registerLazySingleton(() => CarDataBloc(CarInuranceUseCase: getIt()));
+    getIt.registerLazySingleton(
+        () => PropertyDataBloc(propertyDataUseCase: getIt()));
+
     getIt.registerLazySingleton(
         () => OtherInsuranceBloc(healthinsuranceblocUsecase: getIt()));
+    getIt.registerLazySingleton(
+        () => CarPolicyBloc(carpolicyblocUsecase: getIt()));
+    getIt.registerLazySingleton(
+        () => PropertyPolicyBloc(propertypolicyblocUsecase: getIt()));
 
     //use_case
     getIt.registerLazySingleton(() => RegisterUseCase(baseRepository: getIt()));
@@ -67,6 +84,13 @@ class ServerLocator {
         () => PropertyInsuranceUseCase(baseRepository: getIt()));
     getIt.registerLazySingleton(
         () => OtherInsuranceUsecase(baseRepository: getIt()));
+    getIt.registerLazySingleton(() => CarDataUsecase(baseRepository: getIt()));
+    getIt.registerLazySingleton(
+        () => PropertyDataUsecase(baseRepository: getIt()));
+    getIt
+        .registerLazySingleton(() => CarPolicyUsecase(baseRepository: getIt()));
+    getIt.registerLazySingleton(
+        () => PropertyPolicyUsecase(baseRepository: getIt()));
 
     //Remote Date
     getIt.registerLazySingleton<BaseRemotelyDataSource>(

@@ -6,8 +6,8 @@ class PropertyInsuranceBlocEvent extends ResetEvent {
   final int contentPrice;
   final String type;
   final List<int> homeBenefits;
-  final String phone;
-  final String name;
+  final int phone;
+  final int tenantPrice;
 
   PropertyInsuranceBlocEvent({
     required this.uid,
@@ -16,6 +16,6 @@ class PropertyInsuranceBlocEvent extends ResetEvent {
     required this.type,
     required this.homeBenefits,
     required this.phone,
-    required this.name,
+    required this.tenantPrice,
   });
 }

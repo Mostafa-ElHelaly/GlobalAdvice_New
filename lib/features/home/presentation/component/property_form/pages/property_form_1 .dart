@@ -6,6 +6,7 @@ import 'package:globaladvice_new/core/utils/config_size.dart';
 import 'package:globaladvice_new/core/widgets/Loading.dart';
 import 'package:globaladvice_new/core/widgets/custom_text_field.dart';
 import 'package:globaladvice_new/core/widgets/snack_bar.dart';
+import 'package:globaladvice_new/features/home/presentation/component/property_form/pages/property_form_2%20.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/property_insurance.dart/property_insurance_bloc.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/property_insurance.dart/property_insurance_event.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/property_insurance.dart/property_insurance_state.dart';
@@ -15,6 +16,7 @@ import 'package:globaladvice_new/core/widgets/Custom_Drawer.dart';
 import 'package:globaladvice_new/core/widgets/main_button.dart';
 
 import 'package:globaladvice_new/core/resource_manger/routs_manager.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 class PropertyFormMainPersonData extends StatefulWidget {
   const PropertyFormMainPersonData({super.key});
@@ -47,93 +49,79 @@ class _PropertyFormMainPersonDataState
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<PropertyInsuranceBloc, PropertyInsuranceBlocState>(
-      listener: (context, state) {
-        if (state is PropertyInsuranceSuccessState) {
-          Navigator.pushNamedAndRemoveUntil(
-              context, Routes.propertyForm2, (route) => false);
-        } else if (state is PropertyInsuranceRequestErrorState) {
-          errorSnackBar(context, state.errorMessage);
-        } else if (state is PropertyInsuranceBlocRequestLoadingState) {
-          showLoading(context);
-        }
-      },
-      child: Scaffold(
-        key: _scaffoldKey,
-        drawer: const CustomDrawer(),
-        appBar: AppBar(
-          leading: IconButton(
-            icon: const Icon(Icons.menu),
-            iconSize: 32, // Adjust the size as needed
-            onPressed: () {
-              _scaffoldKey.currentState!.openDrawer();
-            },
-          ),
-          centerTitle: true,
-          title: Image.asset(
-            AssetsPath.logo,
-            scale: 10,
-          ),
+    return Scaffold(
+      key: _scaffoldKey,
+      drawer: const CustomDrawer(),
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.menu),
+          iconSize: 32, // Adjust the size as needed
+          onPressed: () {
+            _scaffoldKey.currentState!.openDrawer();
+          },
         ),
-        body: Padding(
-          padding: EdgeInsets.all(ConfigSize.defaultSize! * 1.5),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      AssetsPath.logo,
-                      scale: 5,
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: ConfigSize.defaultSize! * 2,
-                ),
-                CustomTextField(
-                  labeltext: AppLocalizations.of(context)!.fullName,
-                  prefixicon: const Icon(Icons.person),
-                  controller: fullNameController,
-                  inputType: TextInputType.name,
-                ),
-                SizedBox(
-                  height: ConfigSize.defaultSize! * 2,
-                ),
-                CustomTextField(
-                  labeltext: AppLocalizations.of(context)!.phonenumber,
-                  prefixicon: const Icon(Icons.phone_android_sharp),
-                  controller: phoneController,
-                  inputType: TextInputType.phone,
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                      vertical: ConfigSize.defaultSize! * 3),
-                  child: MainButton(
-                    onTap: () {
-                      if (validation()) {
-                        BlocProvider.of<PropertyInsuranceBloc>(context).add(
-                          PropertyInsuranceBlocEvent(
-                            name: fullNameController.text,
-                            phone: phoneController.text,
-                            uid: '',
-                            buildingPrice: null??1,
-                            contentPrice: null??1,
-                            type: '',
-                            homeBenefits: [],
-                          ),
-                        );
-                      } else {
-                        errorSnackBar(context, StringManager.errorFillFields);
-                      }
-                    },
-                    title: AppLocalizations.of(context)!.next,
+        centerTitle: true,
+        title: Image.asset(
+          AssetsPath.logo,
+          scale: 10,
+        ),
+      ),
+      body: Padding(
+        padding: EdgeInsets.all(ConfigSize.defaultSize! * 1.5),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    AssetsPath.logo,
+                    scale: 5,
                   ),
+                ],
+              ),
+              SizedBox(
+                height: ConfigSize.defaultSize! * 2,
+              ),
+              CustomTextField(
+                labeltext: AppLocalizations.of(context)!.fullName,
+                prefixicon: const Icon(Icons.person),
+                controller: fullNameController,
+                inputType: TextInputType.name,
+              ),
+              SizedBox(
+                height: ConfigSize.defaultSize! * 2,
+              ),
+              CustomTextField(
+                labeltext: AppLocalizations.of(context)!.phonenumber,
+                prefixicon: const Icon(Icons.phone_android_sharp),
+                controller: phoneController,
+                inputType: TextInputType.phone,
+              ),
+              Padding(
+                padding:
+                    EdgeInsets.symmetric(vertical: ConfigSize.defaultSize! * 3),
+                child: MainButton(
+                  onTap: () {
+                    if (validation()) {
+                      PersistentNavBarNavigator.pushNewScreen(
+                        context,
+                        screen: PropertyForm2(
+                          fullname: fullNameController.text,
+                          phone_number: phoneController.text,
+                        ),
+                        withNavBar: false,
+                        pageTransitionAnimation: PageTransitionAnimation.fade,
+                      );
+                    } else {
+                      errorSnackBar(context, StringManager.errorFillFields);
+                    }
+                  },
+                  title: AppLocalizations.of(context)!.next,
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

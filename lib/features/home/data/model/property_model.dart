@@ -2,42 +2,41 @@ class PropertyModel {
   String? uid;
   int? buildingPrice;
   int? contentPrice;
+  int? tenantPrice;
   String? type;
   List<int>? homeBenefits;
-  String? phone;
-  String? name;
+  int? phone;
 
   PropertyModel({
-     this.uid,
-     this.buildingPrice,
-     this.contentPrice,
-     this.type,
-     this.homeBenefits,
-     this.phone,
-     this.name,
+    this.uid,
+    this.buildingPrice,
+    this.contentPrice,
+    this.type,
+    this.homeBenefits,
+    this.phone,
+    this.tenantPrice,
   });
-
-  factory PropertyModel.fromJson(Map<String, dynamic> json) {
-    return PropertyModel(
-      uid: json['uid'] as String,
-      buildingPrice: json['building_price'] as int,
-      contentPrice: json['content_price'] as int,
-      type: json['type'] as String,
-      homeBenefits: List<int>.from(json['homeBenefits']),
-      phone: json['phone'] as String,
-      name: json['name'] as String,
-    );
+  PropertyModel.fromJson(Map<String, dynamic> json) {
+    uid = json['UID'];
+    buildingPrice = json['buildingPrice'];
+    contentPrice = json['contentPrice'];
+    type = json['type'];
+    homeBenefits = json['homeBenefits'];
+    phone = json['phone'];
+    phone = json['phone'];
   }
 
+  // Method to convert the instance to JSON
   Map<String, dynamic> toJson() {
-    return {
-      'uid': uid,
-      'building_price': buildingPrice,
-      'content_price': contentPrice,
-      'type': type,
-      'homeBenefits': homeBenefits,
-      'phone': phone,
-      'name': name,
-    };
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['UID'] = this.uid;
+    data['buildingPrice'] = this.buildingPrice;
+    data['contentPrice'] = this.contentPrice;
+    data['type'] = this.type;
+    data['homeBenefits'] = this.homeBenefits;
+    data['tenantPrice'] = this.tenantPrice;
+    data['phone'] = this.phone;
+
+    return data;
   }
 }

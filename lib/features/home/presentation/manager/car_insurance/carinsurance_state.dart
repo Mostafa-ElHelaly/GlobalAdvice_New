@@ -21,7 +21,7 @@ final class CarinsuranceRequestErrorState extends CarinsuranceblocState {
 }
 
 final class CarInsuranceSuccessState extends CarinsuranceblocState {
-  final Unit CarInsuranceModel;
+  final Map<String, dynamic> CarInsuranceModel;
 
   const CarInsuranceSuccessState({required this.CarInsuranceModel});
 }

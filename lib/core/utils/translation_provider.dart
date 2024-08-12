@@ -1,21 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:globaladvice_new/features/home/data/data_source/remotly_data_resource.dart';
 import 'package:globaladvice_new/features/home/presentation/home_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:dio/dio.dart';
 
+import '../../features/auth/data/data_source/remotly_data_source.dart';
+import '../../features/auth/data/model/login_model.dart';
 import '../../features/auth/presentation/login_screen.dart';
+import '../../features/home/data/model/car_insurance_request_model.dart';
 
 class TranslationProvider with ChangeNotifier {
-  TranslationProvider(bool isArabic, bool isLogin) {
+  TranslationProvider(bool isArabic) {
+    //}, bool isLogin, String uid_success) {
     if (isArabic) {
       _locale = Locale('ar', '');
     } else {
       _locale = Locale('en', '');
     }
-    if (isLogin) {
-      is_Login = true;
-    } else {
-      is_Login = false;
-    }
+    // if (isLogin) {
+    //   is_Login = true;
+    // } else {
+    //   is_Login = false;
+    // }
+    // if (is_Login == true) {
+    //   if (_response != null && _response!.data != null) {
+    //     _response!.data!.uID = uid_success;
+    //   }
+    // } else {
+    //   uid_success = 'none';
+    // }
   }
 
   Locale _locale = Locale('en', '');
@@ -38,6 +51,8 @@ class TranslationProvider with ChangeNotifier {
   void check_login() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
+    bool isUser = prefs.getString('user_uid') != null;
+
     if (is_Login == false) {
       is_Login = true;
       homePage = const HomeScreen();
@@ -49,4 +64,30 @@ class TranslationProvider with ChangeNotifier {
     }
     notifyListeners();
   }
+
+  void logout() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.remove('user_uid');
+  }
+
+  void setUID(String uid) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('user_uid', uid);
+  }
+
+  // void get_uid(String email, String password) async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+
+  //   try {
+  //     final authModel = LoginModel(email: email, password: password);
+  //     final response =
+  //         await AuthRemotelyDateSource().loginWithEmailAndPassword(authModel);
+
+  //     _response = ApiResponse.fromJson(response);
+  //     prefs.setString("user_uid", _response!.data!.uID!);
+  //   } catch (e) {
+  //     print(e);
+  //   }
+  //   notifyListeners();
+  // }
 }

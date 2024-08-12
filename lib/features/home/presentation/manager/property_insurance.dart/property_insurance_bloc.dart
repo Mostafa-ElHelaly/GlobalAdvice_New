@@ -17,12 +17,12 @@ class PropertyInsuranceBloc
       emit(const PropertyInsuranceBlocRequestLoadingState());
       final result = await propertyInsuranceUseCase.call(PropertyModel(
         uid: event.uid,
-        name: event.name,
         buildingPrice: event.buildingPrice,
         contentPrice: event.contentPrice,
         type: event.type,
         homeBenefits: event.homeBenefits,
         phone: event.phone,
+        tenantPrice: event.tenantPrice,
       ));
       result.fold(
           (l) => emit(PropertyInsuranceSuccessState(PropertyModel: l)),
