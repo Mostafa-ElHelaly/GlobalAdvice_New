@@ -28,6 +28,7 @@ import 'features/auth/presentation/manager/reset_password_bloc/bloc/reset_passwo
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'features/home/presentation/manager/car_data_bloc/car_data_bloc.dart';
+import 'features/home/presentation/manager/property_policy/property_policy_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -104,6 +105,10 @@ class MyApp extends StatelessWidget {
           BlocProvider(
             create: (context) => getIt<CarPolicyBloc>(),
           ),
+          BlocProvider(
+            create: (context) => getIt<PropertyPolicyBloc>(),
+          ),
+
           ChangeNotifierProvider(
               create: (_) => TranslationProvider(
                   isArabic)), //isLogin, uid_success ?? 'none'

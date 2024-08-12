@@ -338,11 +338,20 @@ class HomeRemotelyDataSource extends BaseHomeRemotelyDataSource {
       );
       Map<String, dynamic> jsonData = response.data;
 
+      print(body['UID']);
+      print(body['organization_id']);
+      print(body['plan_id']);
+      print(body['building_price']);
+      print(body['tenant_price']);
+      print(body['content_price']);
+      print(body['type']);
+      print(body['address']);
+
       if (jsonData['status'] == 200) {
         print(jsonData);
         return Future.value(unit);
       } else {
-        throw Exception('Request failed because ${jsonData['error']}');
+        throw Exception('Request failed because ${jsonData['data']}');
       }
     } on DioException catch (e) {
       throw DioHelper.handleDioError(

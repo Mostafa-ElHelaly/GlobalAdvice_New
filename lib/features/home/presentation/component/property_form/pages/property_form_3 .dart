@@ -63,6 +63,7 @@ class _PropertyForm3State extends State<PropertyForm3> {
   @override
   void initState() {
     super.initState();
+    print('type : ' + widget.type.toString());
     _initSharedPreferences();
     _scrollController = ScrollController();
     BlocProvider.of<PropertyDataBloc>(context).add(GetallPropertydataEvent());
@@ -90,18 +91,6 @@ class _PropertyForm3State extends State<PropertyForm3> {
     return BlocListener<PropertyInsuranceBloc, PropertyInsuranceBlocState>(
       listener: (context, state) {
         if (state is PropertyInsuranceSuccessState) {
-          // AwesomeDialog(
-          //         context: context,
-          //         dialogType: DialogType.success,
-          //         animType: AnimType.rightSlide,
-          //         desc: AppLocalizations.of(context)!.lifeinsurancerequest,
-          //         btnOkOnPress: () {},
-          //         btnOk: const CustomBackButton())
-          //     .show();
-          // Future.delayed(const Duration(seconds: 3), () {
-          //   Navigator.pushNamedAndRemoveUntil(
-          //       context, Routes.homeScreen, (route) => false);
-          // });
           List<dynamic> plan_name = state.PropertyModel['data']
               .map((e) => localetype == 'ar' ? e['name_alt'] : e['name'])
               .toList();
@@ -111,28 +100,27 @@ class _PropertyForm3State extends State<PropertyForm3> {
               state.PropertyModel['data'].map((e) => e['org_id']).toList();
           List<dynamic> plan_id =
               state.PropertyModel['data'].map((e) => e['id']).toList();
-          Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute(
-                  builder: (context) => PropertyPrices(
-                        building_price:
-                            widget.type == AppLocalizations.of(context)!.tenant
-                                ? 0
-                                : widget.buildingPrice,
-                        content_price:
-                            widget.type == AppLocalizations.of(context)!.tenant
-                                ? 0
-                                : widget.contentPrice,
-                        tenant_price:
-                            widget.type == AppLocalizations.of(context)!.tenant
-                                ? 0
-                                : widget.tenantPrice,
-                        org_id: org_id,
-                        plan_id: plan_id,
-                        address: widget.address,
-                        plan_name: plan_name,
-                        total_price: total_price,
-                      )),
-              (route) => false);
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => PropertyPrices(
+                    type: widget.type!,
+                    building_price:
+                        widget.type == AppLocalizations.of(context)!.tenant
+                            ? 0
+                            : widget.buildingPrice,
+                    content_price:
+                        widget.type == AppLocalizations.of(context)!.tenant
+                            ? 0
+                            : widget.contentPrice,
+                    tenant_price:
+                        widget.type == AppLocalizations.of(context)!.tenant
+                            ? 0
+                            : widget.tenantPrice,
+                    org_id: org_id,
+                    plan_id: plan_id,
+                    address: widget.address,
+                    plan_name: plan_name,
+                    total_price: total_price,
+                  )));
         } else if (state is PropertyInsuranceRequestErrorState) {
           errorSnackBar(context, state.errorMessage);
         } else if (state is PropertyInsuranceBlocRequestLoadingState) {}

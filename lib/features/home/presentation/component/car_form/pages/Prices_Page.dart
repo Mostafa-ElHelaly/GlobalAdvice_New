@@ -85,11 +85,21 @@ class _CarPricesState extends State<CarPrices> {
             child: SingleChildScrollView(
           child: Column(
             children: [
-              Text(
-                AppLocalizations.of(context)!.listofmotorprice,
-                style: TextStyle(
-                    fontSize: ConfigSize.defaultSize! * 3,
-                    fontWeight: FontWeight.bold),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  IconButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      icon: Icon(Icons.arrow_back_ios_new_rounded)),
+                  Text(
+                    AppLocalizations.of(context)!.listofmotorprice,
+                    style: TextStyle(
+                        fontSize: ConfigSize.defaultSize! * 3,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ],
               ),
               widget.total.isNotEmpty || widget.total != null
                   ? ListView.builder(

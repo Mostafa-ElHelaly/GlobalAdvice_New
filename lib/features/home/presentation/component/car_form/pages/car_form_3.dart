@@ -84,20 +84,18 @@ class _CarForm3State extends State<CarForm3> {
                   .map((e) => e['org_id'])
                   .toList();
 
-              Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(
-                      builder: (context) => CarPrices(
-                            motorBrands: int.parse(selectedValue3!),
-                            motorDeductibles: int.parse(selectedValue4!),
-                            motorManufactureYear: int.parse(selectedValue5!),
-                            organizationId: organizationId,
-                            planId: plan_id,
-                            isLicensed: widget.is_licenced,
-                            PlanName: PlanName,
-                            total: total,
-                            price: widget.price,
-                          )),
-                  (route) => false);
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => CarPrices(
+                        motorBrands: int.parse(selectedValue3!),
+                        motorDeductibles: int.parse(selectedValue4!),
+                        motorManufactureYear: int.parse(selectedValue5!),
+                        organizationId: organizationId,
+                        planId: plan_id,
+                        isLicensed: widget.is_licenced,
+                        PlanName: PlanName,
+                        total: total,
+                        price: widget.price,
+                      )));
             }
             if (state is CarinsuranceRequestErrorState) {
               errorSnackBar(context, state.errorMessage);
