@@ -115,7 +115,8 @@ class _PropertyFormMainPersonDataState
                         pageTransitionAnimation: PageTransitionAnimation.fade,
                       );
                     } else {
-                      errorSnackBar(context, StringManager.errorFillFields);
+                      errorSnackBar(context,
+                          AppLocalizations.of(context)!.errorFillFields);
                     }
                   },
                   title: AppLocalizations.of(context)!.next,

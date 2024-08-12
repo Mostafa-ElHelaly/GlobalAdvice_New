@@ -191,7 +191,7 @@ class _PropertyForm2State extends State<PropertyForm2> {
                               ? 'owner'
                               : selectedValue == 'ايجار'
                                   ? 'tenant'
-                                  : selectedValue,
+                                  : selectedValue!.toLowerCase(),
                           buildingPrice: selectedValue ==
                                   AppLocalizations.of(context)!.tenant
                               ? 0
@@ -227,8 +227,12 @@ class _PropertyForm2State extends State<PropertyForm2> {
     } else if (selectedValue == AppLocalizations.of(context)!.tenant &&
         buildingPriceController.text == '') {
       return true;
-    } else if (contentPriceController.text == '') {
-      return false;
+    } else if (selectedValue == AppLocalizations.of(context)!.tenant &&
+        contentPriceController.text == '') {
+      return true;
+    } else if (selectedValue == AppLocalizations.of(context)!.owner &&
+        tenantPriceController.text == '') {
+      return true;
     } else {
       return true;
     }

@@ -419,17 +419,27 @@ class _CarForm3State extends State<CarForm3> {
                           builder: (context, getuid, child) {
                             return MainButton(
                               onTap: () {
-                                BlocProvider.of<CarinsuranceBloc>(context).add(
-                                    CarinsuranceblocEvent(
-                                        isLicensed: widget.is_licenced,
-                                        motorBrands: int.parse(selectedValue3!),
-                                        motorDeductibles:
-                                            int.parse(selectedValue4!),
-                                        motorManufactureYear:
-                                            int.parse(selectedValue5!),
-                                        phone: int.parse(widget.phoneNumber),
-                                        price: widget.price,
-                                        uid: prefs.getString("user_uid")));
+                                if (selectedValue3 != null &&
+                                    selectedValue4 != null &&
+                                    selectedValue5 != null) {
+                                  BlocProvider.of<CarinsuranceBloc>(context)
+                                      .add(CarinsuranceblocEvent(
+                                          isLicensed: widget.is_licenced,
+                                          motorBrands:
+                                              int.parse(selectedValue3!),
+                                          motorDeductibles:
+                                              int.parse(selectedValue4!),
+                                          motorManufactureYear:
+                                              int.parse(selectedValue5!),
+                                          phone: int.parse(widget.phoneNumber),
+                                          price: widget.price,
+                                          uid: prefs.getString("user_uid")));
+                                } else {
+                                  errorSnackBar(
+                                      context,
+                                      AppLocalizations.of(context)!
+                                          .errorFillFields);
+                                }
                               },
                               title: AppLocalizations.of(context)!.submit,
                             );

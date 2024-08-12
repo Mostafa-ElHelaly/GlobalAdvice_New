@@ -262,7 +262,9 @@ class _PropertyForm3State extends State<PropertyForm3> {
                               );
                             } else {
                               errorSnackBar(
-                                  context, StringManager.errorFillFields);
+                                  context,
+                                  AppLocalizations.of(context)!
+                                      .errorFillFields);
                             }
                           },
                           title: AppLocalizations.of(context)!.submit,
@@ -278,7 +280,7 @@ class _PropertyForm3State extends State<PropertyForm3> {
   }
 
   bool validation() {
-    if (_scrollController == '') {
+    if (homeBenefitsSet.isEmpty) {
       return false;
     } else {
       return true;
