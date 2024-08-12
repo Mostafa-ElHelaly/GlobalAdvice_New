@@ -4,8 +4,8 @@ import 'package:globaladvice_new/features/home/data/model/car_insurance_request_
 import 'package:globaladvice_new/features/home/data/model/health_insurance_model.dart';
 import 'package:globaladvice_new/features/home/domain/use_case/car_inurance_uc.dart';
 import 'package:globaladvice_new/features/home/domain/use_case/healthInsuranceUsecase.dart';
-import 'package:globaladvice_new/features/home/presentation/manager/healthinsurancebloc/healthinsurancebloc_event.dart';
-import 'package:globaladvice_new/features/home/presentation/manager/healthinsurancebloc/healthinsurancebloc_state.dart';
+import 'package:globaladvice_new/features/home/presentation/manager/health_insurance_request/healthinsurancebloc_event.dart';
+import 'package:globaladvice_new/features/home/presentation/manager/health_insurance_request/healthinsurancebloc_state.dart';
 
 import '../../../../../core/utils/api_helper.dart';
 import 'carinsurance_event.dart';

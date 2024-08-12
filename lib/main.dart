@@ -11,7 +11,7 @@ import 'package:globaladvice_new/features/auth/presentation/login_screen.dart';
 import 'package:globaladvice_new/features/home/presentation/home_screen.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/car_insurance/carinsurance_bloc.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/car_policy/car_policy_bloc.dart';
-import 'package:globaladvice_new/features/home/presentation/manager/healthinsurancebloc/healthinsurancebloc_bloc.dart';
+import 'package:globaladvice_new/features/home/presentation/manager/health_insurance_request/healthinsurancebloc_bloc.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/life_insurance/life_insurance_bloc.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/other_forms_bloc/other_forms_bloc.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/property_data_bloc/property_data_bloc.dart';
@@ -28,6 +28,7 @@ import 'features/auth/presentation/manager/reset_password_bloc/bloc/reset_passwo
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'features/home/presentation/manager/car_data_bloc/car_data_bloc.dart';
+import 'features/home/presentation/manager/health_data/health_data_bloc.dart';
 import 'features/home/presentation/manager/property_policy/property_policy_bloc.dart';
 
 void main() async {
@@ -107,6 +108,9 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) => getIt<PropertyPolicyBloc>(),
+          ),
+          BlocProvider(
+            create: (context) => getIt<HealthDataBloc>(),
           ),
 
           ChangeNotifierProvider(

@@ -8,8 +8,8 @@ import 'package:globaladvice_new/features/home/domain/use_case/car_policy_uc.dar
 import 'package:globaladvice_new/features/home/domain/use_case/healthInsuranceUsecase.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/car_policy/car_policy_event.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/car_policy/car_policy_state.dart';
-import 'package:globaladvice_new/features/home/presentation/manager/healthinsurancebloc/healthinsurancebloc_event.dart';
-import 'package:globaladvice_new/features/home/presentation/manager/healthinsurancebloc/healthinsurancebloc_state.dart';
+import 'package:globaladvice_new/features/home/presentation/manager/health_insurance_request/healthinsurancebloc_event.dart';
+import 'package:globaladvice_new/features/home/presentation/manager/health_insurance_request/healthinsurancebloc_state.dart';
 
 import '../../../../../core/utils/api_helper.dart';
 

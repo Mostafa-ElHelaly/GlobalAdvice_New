@@ -17,7 +17,9 @@ import 'medical_form_3.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MedicalForm2 extends StatefulWidget {
-  const MedicalForm2({super.key});
+  const MedicalForm2({super.key, required this.name, required this.phone});
+  final String name;
+  final String phone;
 
   @override
   State<MedicalForm2> createState() => _MedicalForm2State();
@@ -39,17 +41,22 @@ class _MedicalForm2State extends State<MedicalForm2> {
   List<String?> relationselectedValues =
       []; // Initialize list for dropdown selected values
 
+  List<String>? genders = [];
+  List<String>? names = [];
+  List<int>? ages = [];
   @override
   void initState() {
     super.initState();
     _focusNode = FocusNode();
-
+    names!.add(widget.name);
     // Disable focus
     _focusNode.addListener(() {
       if (_focusNode.hasFocus) {
         _focusNode.unfocus();
       }
     });
+
+    // genders.clear();
 
     // Initialize controllers based on addcount
     _initializeControllers();
@@ -69,6 +76,15 @@ class _MedicalForm2State extends State<MedicalForm2> {
     }
   }
 
+  //  genders = genderselectedValues;
+  //   relations = relationselectedValues;
+  //   ages =
+  //       birthdayControllers.map((controller) => (int.parse(controller.value.text.substring(0,4)) - today.year).toString()).toList();
+  //       ages.add(( (int.parse(birthdayController.value.text.substring(0,4)) - today.year)).toString());
+  //   names =
+  //       fullnameControllers.map((controller) => controller.value.text).toList();
+  //       names.add(widget.name);
+
   @override
   void dispose() {
     emailController.dispose();
@@ -82,6 +98,8 @@ class _MedicalForm2State extends State<MedicalForm2> {
     super.dispose();
   }
 
+  DateTime today = DateTime.now();
+
   Future<Null> _selectDate(
       BuildContext context, TextEditingController controller) async {
     DateTime currentdate = DateTime.now();
@@ -90,7 +108,8 @@ class _MedicalForm2State extends State<MedicalForm2> {
         return Theme(
           data: ThemeData.light().copyWith(
             hintColor: ColorManager.gray,
-            colorScheme: const ColorScheme.light(primary: ColorManager.mainColor),
+            colorScheme:
+                const ColorScheme.light(primary: ColorManager.mainColor),
           ),
           child: child!,
         );
@@ -117,7 +136,7 @@ class _MedicalForm2State extends State<MedicalForm2> {
       AppLocalizations.of(context)!.spouse,
       AppLocalizations.of(context)!.children,
     ];
-    List<String> genders = [
+    List<String> genderstype = [
       AppLocalizations.of(context)!.male,
       AppLocalizations.of(context)!.female,
     ];
@@ -177,6 +196,8 @@ class _MedicalForm2State extends State<MedicalForm2> {
                     setState(() {
                       selectedValue = value;
                     });
+                    print(selectedValue);
+                    print(genders);
                   },
                   selectedValue: selectedValue,
                 ),
@@ -205,6 +226,18 @@ class _MedicalForm2State extends State<MedicalForm2> {
                           onPressed: () async {
                             await _selectDate(
                                 context, birthdayControllers[index]);
+                            if (!ages!.contains(today.year -
+                                int.parse(
+                                    birthdayController.text.substring(0, 4)))) {
+                              ages!.add(today.year -
+                                  int.parse(
+                                      birthdayController.text.substring(0, 4)));
+                            }
+                            ages!.add(today.year -
+                                int.parse((int.parse(birthdayControllers[index]
+                                        .text
+                                        .substring(0, 4)))
+                                    .toString()));
                           },
                           icon: const Icon(Icons.calendar_today),
                         ),
@@ -223,7 +256,7 @@ class _MedicalForm2State extends State<MedicalForm2> {
                                 color: Theme.of(context).hintColor,
                               ),
                             ),
-                            items: genders
+                            items: genderstype
                                 .map((String item) => DropdownMenuItem<String>(
                                       value: item,
                                       child: Text(
@@ -309,6 +342,9 @@ class _MedicalForm2State extends State<MedicalForm2> {
                       ),
                       SizedBox(height: ConfigSize.defaultSize! * 2),
                       CustomTextField(
+                        onSubmitted: (value) {
+                          names!.add(fullnameControllers[index].text);
+                        },
                         labeltext: AppLocalizations.of(context)!.fullName,
                         prefixicon: const Icon(Icons.person),
                         controller: fullnameControllers[index],
@@ -360,7 +396,15 @@ class _MedicalForm2State extends State<MedicalForm2> {
                   onTap: () {
                     PersistentNavBarNavigator.pushNewScreen(
                       context,
-                      screen: const MedicalForm3(),
+                      screen: MedicalForm3(
+                        phone: widget.phone,
+                        gender: selectedValue!,
+                        relations: relationselectedValues.isEmpty
+                            ? []
+                            : relationselectedValues,
+                        ages: ages,
+                        names: names,
+                      ),
                       withNavBar: false,
                       pageTransitionAnimation: PageTransitionAnimation.fade,
                     );

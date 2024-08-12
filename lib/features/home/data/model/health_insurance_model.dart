@@ -1,44 +1,41 @@
 class HealthInsuranceModel {
   String? uid;
-  String? organizationId;
-  String? planId;
-  String? name;
-  String? age;
-  String? relation;
-  String? price;
-  String? gende;
+  List<String>? name;
+  List<int>? age;
+  late List<String?> relation;
+  String? gender;
+  int? healthLimit;
+  String? phone;
 
-  HealthInsuranceModel(
-      {this.uid,
-      this.organizationId,
-      this.planId,
-      this.name,
-      this.age,
-      this.relation,
-      this.price,
-      this.gende});
+  HealthInsuranceModel({
+    this.uid,
+    this.name,
+    this.age,
+    required this.relation,
+    required this.gender,
+    this.healthLimit,
+    this.phone,
+  });
 
   HealthInsuranceModel.fromJson(Map<String, dynamic> json) {
     uid = json['uid'];
-    organizationId = json['organization_id'];
-    planId = json['plan_id'];
     name = json['name'];
     age = json['age'];
-    relation = json['relation'];
-    price = json['price'];
-    gende = json['gende'];
+    relation = json['relation'] ?? [];
+    gender = json['gender'] ?? [];
+    healthLimit = json['healthLimit'];
+    phone = json['phone'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['uid'] = this.uid;
-    data['organization_id'] = this.organizationId;
-    data['plan_id'] = this.planId;
     data['name'] = this.name;
     data['age'] = this.age;
     data['relation'] = this.relation;
-    data['price'] = this.price;
-    data['gende'] = this.gende;
+    data['gender'] = this.gender;
+    data['healthLimit'] = this.healthLimit;
+    data['phone'] = this.phone;
     return data;
   }
 }

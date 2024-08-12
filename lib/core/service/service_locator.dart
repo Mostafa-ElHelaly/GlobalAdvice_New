@@ -7,7 +7,8 @@ import 'package:globaladvice_new/features/home/domain/use_case/healthInsuranceUs
 import 'package:globaladvice_new/features/home/domain/use_case/property_data_uc.dart';
 import 'package:globaladvice_new/features/home/domain/use_case/property_inusrance_uc.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/car_insurance/carinsurance_bloc.dart';
-import 'package:globaladvice_new/features/home/presentation/manager/healthinsurancebloc/healthinsurancebloc_bloc.dart';
+import 'package:globaladvice_new/features/home/presentation/manager/health_data/health_data_bloc.dart';
+import 'package:globaladvice_new/features/home/presentation/manager/health_insurance_request/healthinsurancebloc_bloc.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/life_insurance/life_insurance_bloc.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/property_data_bloc/property_data_bloc.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/property_insurance.dart/property_insurance_bloc.dart';
@@ -27,6 +28,7 @@ import 'package:globaladvice_new/features/home/presentation/manager/other_forms_
 
 import '../../features/home/domain/use_case/car_data_uc.dart';
 import '../../features/home/domain/use_case/car_policy_uc.dart';
+import '../../features/home/domain/use_case/health_data_uc.dart';
 import '../../features/home/domain/use_case/property_policy_uc.dart';
 import '../../features/home/presentation/manager/car_data_bloc/car_data_bloc.dart';
 import '../../features/home/presentation/manager/car_policy/car_policy_bloc.dart';
@@ -68,6 +70,8 @@ class ServerLocator {
         () => CarPolicyBloc(carpolicyblocUsecase: getIt()));
     getIt.registerLazySingleton(
         () => PropertyPolicyBloc(propertypolicyblocUsecase: getIt()));
+    getIt.registerLazySingleton(
+        () => HealthDataBloc(HealthdataUseCase: getIt()));
 
     //use_case
     getIt.registerLazySingleton(() => RegisterUseCase(baseRepository: getIt()));
@@ -91,6 +95,8 @@ class ServerLocator {
         .registerLazySingleton(() => CarPolicyUsecase(baseRepository: getIt()));
     getIt.registerLazySingleton(
         () => PropertyPolicyUsecase(baseRepository: getIt()));
+    getIt.registerLazySingleton(
+        () => FetchingHealthDataUsecase(baseRepository: getIt()));
 
     //Remote Date
     getIt.registerLazySingleton<BaseRemotelyDataSource>(
