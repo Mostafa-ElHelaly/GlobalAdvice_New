@@ -43,7 +43,7 @@ class _MedicalForm2State extends State<MedicalForm2> {
 
   List<String>? genders = [];
   List<String>? names = [];
-  List<int>? ages = [];
+  List<String>? relations = [];
   @override
   void initState() {
     super.initState();
@@ -75,15 +75,6 @@ class _MedicalForm2State extends State<MedicalForm2> {
       relationselectedValues.add(null); // Initialize dropdown selected values
     }
   }
-
-  //  genders = genderselectedValues;
-  //   relations = relationselectedValues;
-  //   ages =
-  //       birthdayControllers.map((controller) => (int.parse(controller.value.text.substring(0,4)) - today.year).toString()).toList();
-  //       ages.add(( (int.parse(birthdayController.value.text.substring(0,4)) - today.year)).toString());
-  //   names =
-  //       fullnameControllers.map((controller) => controller.value.text).toList();
-  //       names.add(widget.name);
 
   @override
   void dispose() {
@@ -140,9 +131,52 @@ class _MedicalForm2State extends State<MedicalForm2> {
       AppLocalizations.of(context)!.male,
       AppLocalizations.of(context)!.female,
     ];
+    List<int> new_ages;
+    List<int> modify_ages_list() {
+      new_ages = birthdayControllers
+          .map((controller) {
+            String text = controller.text;
+            if (text.length >= 4) {
+              int birthYear = int.tryParse(text.substring(0, 4)) ?? 0;
+              return today.year - birthYear;
+            }
+            return 0; // Default value if text is invalid
+          })
+          .where((age) => age > 0)
+          .toList();
+      int main_age =
+          today.year - int.parse(birthdayController.text.substring(0, 4));
+      new_ages.insert(0, main_age);
+      return new_ages;
+    }
 
-    int calculate_age(String birthday) {
-      return today.year - int.parse(birthday.substring(0, 4));
+    String return_gender(String gender) {
+      if (gender == 'ذكر') {
+        return 'male';
+      } else if (gender == 'أنثى') {
+        return 'female';
+      } else {
+        return gender;
+      }
+    }
+
+    List<String> modify_genders_list() {
+      genders =
+          genderselectedValues.map((e) => return_gender(e.toString())).toList();
+      genders!.insert(0, return_gender(selectedValue!));
+      return genders!;
+    }
+
+    List<String> modify_names_list() {
+      genders = fullnameControllers.map((e) => e.text.toString()).toList();
+      genders!.insert(0, widget.name);
+      return genders!;
+    }
+
+    List<String> modify_realtions_list() {
+      relations = genderselectedValues.map((e) => e.toString()).toList();
+      relations!.insert(0, return_gender('self'));
+      return relations!;
     }
 
     return Scaffold(
@@ -218,20 +252,6 @@ class _MedicalForm2State extends State<MedicalForm2> {
               ListView.builder(
                 physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) {
-                  int controllers_age =
-                      birthdayControllers[index].text.isNotEmpty
-                          ? (today.year -
-                              int.parse((int.parse(birthdayControllers[index]
-                                      .text
-                                      .substring(0, 4)))
-                                  .toString()))
-                          : 0;
-                  int main_age = birthdayController.text.isNotEmpty
-                      ? (today.year -
-                          int.parse((int.parse(
-                                  birthdayController.text.substring(0, 4)))
-                              .toString()))
-                      : 0;
                   return Column(
                     children: [
                       CustomTextField(
@@ -348,10 +368,6 @@ class _MedicalForm2State extends State<MedicalForm2> {
                       ),
                       SizedBox(height: ConfigSize.defaultSize! * 2),
                       CustomTextField(
-                        onSubmitted: (value) {
-                          names!.add(fullnameControllers[index].text);
-                          print(names);
-                        },
                         labeltext: AppLocalizations.of(context)!.fullName,
                         prefixicon: const Icon(Icons.person),
                         controller: fullnameControllers[index],
@@ -401,20 +417,15 @@ class _MedicalForm2State extends State<MedicalForm2> {
                     EdgeInsets.symmetric(vertical: ConfigSize.defaultSize! * 2),
                 child: MainButton(
                   onTap: () {
-                    ages!.add(calculate_age(birthdayController.text));
-                    ages!.add(calculate_age(birthdayControllers
-                        .map((controller) => controller.text)
-                        .toString()));
                     PersistentNavBarNavigator.pushNewScreen(
                       context,
                       screen: MedicalForm3(
                         phone: widget.phone,
                         gender: selectedValue!,
-                        relations: relationselectedValues.isEmpty
-                            ? []
-                            : relationselectedValues,
-                        ages: ages,
-                        names: names,
+                        relations: modify_realtions_list(),
+                        ages: modify_ages_list(),
+                        names: modify_names_list(),
+                        genders: modify_genders_list(),
                       ),
                       withNavBar: false,
                       pageTransitionAnimation: PageTransitionAnimation.fade,

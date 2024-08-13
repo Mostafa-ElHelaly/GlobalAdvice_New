@@ -35,12 +35,14 @@ class MedicalForm3 extends StatefulWidget {
     this.ages,
     this.names,
     required this.gender,
+    this.genders,
   });
   final String phone;
   final String gender;
   final List<String?> relations;
   final List<int>? ages;
   final List<String>? names;
+  final List<String>? genders;
 
   @override
   State<MedicalForm3> createState() => _MedicalForm3State();
@@ -60,6 +62,7 @@ class _MedicalForm3State extends State<MedicalForm3> {
   void initState() {
     print(widget.names);
     print(widget.ages);
+    print(widget.genders);
     _initSharedPreferences();
     BlocProvider.of<HealthDataBloc>(context).add(GetallHealthDataEvent());
     super.initState();
@@ -76,9 +79,7 @@ class _MedicalForm3State extends State<MedicalForm3> {
                 MaterialPageRoute(builder: (context) => const MedicalPrices()));
           } else if (state is HealthinsuranceRequestErrorState) {
             errorSnackBar(context, state.errorMessage);
-          } else if (state is HealthinsuranceRequestLoadingState) {
-            showLoading(context);
-          }
+          } else if (state is HealthinsuranceRequestLoadingState) {}
         },
         child: Scaffold(
           backgroundColor: Colors.white,
