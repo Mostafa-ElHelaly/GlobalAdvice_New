@@ -12,12 +12,12 @@ import '../../../data/model/property_policy_request_model.dart';
 
 class PropertyPolicyBloc
     extends Bloc<PropertyPolicyblocEvent, PropertyPolicyblocState> {
-  PropertyPolicyUsecase propertypolicyblocUsecase;
+  PropertyPolicyUseCase propertypolicyblocUsecase;
   PropertyPolicyBloc({required this.propertypolicyblocUsecase})
       : super(PropertyPolicyblocInitial()) {
     on<PropertyPolicyblocEvent>((event, emit) async {
       emit(const PropertyPolicyRequestLoadingState());
-      final result = await propertypolicyblocUsecase.call(PropertyPolicyrequest(
+      final result = await propertypolicyblocUsecase.call(PropertyPolicyRequestModel(
         address: event.address,
         uID: event.uID,
         organizationId: event.organizationId,

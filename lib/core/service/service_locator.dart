@@ -48,8 +48,8 @@ class ServerLocator {
     getIt.registerLazySingleton(() => ResetPasswordBloc(
           passwordUseCase: getIt(),
         ));
-    getIt.registerLazySingleton(() => HealthinsuranceBloc(
-          healthinsuranceblocUsecase: getIt(),
+    getIt.registerLazySingleton(() => HealthInsuranceBloc(
+          healthInsuranceBlocUseCase: getIt(),
         ));
     getIt.registerLazySingleton(
         () => CarinsuranceBloc(healthinsuranceblocUsecase: getIt()));
@@ -67,11 +67,11 @@ class ServerLocator {
     getIt.registerLazySingleton(
         () => OtherInsuranceBloc(healthinsuranceblocUsecase: getIt()));
     getIt.registerLazySingleton(
-        () => CarPolicyBloc(carpolicyblocUsecase: getIt()));
+        () => CarPolicyBloc(carPolicyBlocUseCase: getIt()));
     getIt.registerLazySingleton(
         () => PropertyPolicyBloc(propertypolicyblocUsecase: getIt()));
     getIt.registerLazySingleton(
-        () => HealthDataBloc(HealthdataUseCase: getIt()));
+        () => HealthDataBloc(HealthDataUseCase: getIt()));
 
     //use_case
     getIt.registerLazySingleton(() => RegisterUseCase(baseRepository: getIt()));
@@ -79,24 +79,24 @@ class ServerLocator {
     getIt.registerLazySingleton(
         () => ResetPasswordUseCase(baseRepository: getIt()));
     getIt.registerLazySingleton(
-        () => HealthInsuranceUsecase(baseRepository: getIt()));
+        () => HealthInsuranceUseCase(baseRepository: getIt()));
     getIt.registerLazySingleton(
-        () => CarInsuranceUsecase(baseRepository: getIt()));
+        () => CarInsuranceUseCase(baseRepository: getIt()));
     getIt.registerLazySingleton(
         () => LifeInsuranceUseCase(baseRepository: getIt()));
     getIt.registerLazySingleton(
         () => PropertyInsuranceUseCase(baseRepository: getIt()));
     getIt.registerLazySingleton(
-        () => OtherInsuranceUsecase(baseRepository: getIt()));
-    getIt.registerLazySingleton(() => CarDataUsecase(baseRepository: getIt()));
+        () => OtherInsuranceUseCase(baseRepository: getIt()));
+    getIt.registerLazySingleton(() => CarDataUseCase(baseRepository: getIt()));
     getIt.registerLazySingleton(
-        () => PropertyDataUsecase(baseRepository: getIt()));
+        () => PropertyDataUseCase(baseRepository: getIt()));
     getIt
-        .registerLazySingleton(() => CarPolicyUsecase(baseRepository: getIt()));
+        .registerLazySingleton(() => CarPolicyUseCase(baseRepository: getIt()));
     getIt.registerLazySingleton(
-        () => PropertyPolicyUsecase(baseRepository: getIt()));
+        () => PropertyPolicyUseCase(baseRepository: getIt()));
     getIt.registerLazySingleton(
-        () => FetchingHealthDataUsecase(baseRepository: getIt()));
+        () => FetchingHealthDataUseCase(baseRepository: getIt()));
 
     //Remote Date
     getIt.registerLazySingleton<BaseRemotelyDataSource>(

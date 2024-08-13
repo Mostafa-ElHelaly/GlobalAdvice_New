@@ -1,18 +1,15 @@
 import 'package:dartz/dartz.dart';
-import 'package:globaladvice_new/features/home/data/model/car_insurance_request_model.dart';
-import 'package:globaladvice_new/features/home/data/model/car_policy_request_model.dart';
 import 'package:globaladvice_new/features/home/data/model/health_dependinces_model.dart';
-import 'package:globaladvice_new/features/home/data/model/health_insurance_model.dart';
 import 'package:globaladvice_new/features/home/domain/repo/homeBaseRepo.dart';
 
 import 'package:globaladvice_new/core/base_use_case/base_use_case.dart';
 import 'package:globaladvice_new/core/error/failure.dart';
 
-class FetchingHealthDataUsecase
+class FetchingHealthDataUseCase
     extends BaseUseCase<List<HealthDependincesModel>, Noparamiter> {
   BaseHomeRepository baseRepository;
 
-  FetchingHealthDataUsecase({required this.baseRepository});
+  FetchingHealthDataUseCase({required this.baseRepository});
 
   @override
   Future<Either<List<HealthDependincesModel>, Failure>> call(

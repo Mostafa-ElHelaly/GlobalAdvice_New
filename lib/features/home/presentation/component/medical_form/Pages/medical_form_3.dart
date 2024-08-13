@@ -1,31 +1,21 @@
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:globaladvice_new/core/widgets/Loading.dart';
-import 'package:globaladvice_new/features/home/presentation/component/medical_form/Widgets/done.dart';
 import 'package:globaladvice_new/features/home/presentation/component/medical_form/Widgets/medical_appbar.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/health_data/health_data_bloc.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/health_data/health_data_state.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/health_insurance_request/healthinsurancebloc_bloc.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/health_insurance_request/healthinsurancebloc_event.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/health_insurance_request/healthinsurancebloc_state.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import 'package:globaladvice_new/core/resource_manger/asset_path.dart';
-import 'package:globaladvice_new/core/resource_manger/routs_manager.dart';
 import 'package:globaladvice_new/core/utils/config_size.dart';
 import 'package:globaladvice_new/core/widgets/main_button.dart';
-import 'package:globaladvice_new/features/home/presentation/home_screen.dart';
-import 'package:globaladvice_new/features/home/presentation/component/life_form/widgets/Back_Button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../../../../../../core/resource_manger/color_manager.dart';
-import '../../../../../../core/widgets/snack_bar.dart';
-import '../../../manager/health_data/health_data_event.dart';
-import 'Mdeical_Prices.dart';
+import 'package:globaladvice_new/core/resource_manger/color_manager.dart';
+import 'package:globaladvice_new/core/widgets/snack_bar.dart';
+import 'package:globaladvice_new/features/home/presentation/manager/health_data/health_data_event.dart';
+import 'package:globaladvice_new/features/home/presentation/component/medical_form/Pages/Mdeical_Prices.dart';
 
 class MedicalForm3 extends StatefulWidget {
   const MedicalForm3({
@@ -37,6 +27,7 @@ class MedicalForm3 extends StatefulWidget {
     required this.gender,
     this.genders,
   });
+
   final String phone;
   final String gender;
   final List<String?> relations;
@@ -64,7 +55,7 @@ class _MedicalForm3State extends State<MedicalForm3> {
     print(widget.ages);
     print(widget.genders);
     _initSharedPreferences();
-    BlocProvider.of<HealthDataBloc>(context).add(GetallHealthDataEvent());
+    BlocProvider.of<HealthDataBloc>(context).add(GetAllHealthDataEvent());
     super.initState();
   }
 
@@ -72,7 +63,7 @@ class _MedicalForm3State extends State<MedicalForm3> {
   Widget build(BuildContext context) {
     var localetype = Localizations.localeOf(context).languageCode;
 
-    return BlocListener<HealthinsuranceBloc, HealthinsuranceblocState>(
+    return BlocListener<HealthInsuranceBloc, HealthinsuranceblocState>(
         listener: (context, state) {
           if (state is HealthInsuranceSuccessState) {
             Navigator.of(context).push(
@@ -144,8 +135,8 @@ class _MedicalForm3State extends State<MedicalForm3> {
                                 ),
                               ),
                               items: dropdownItems,
-                              value:
-                                  selectedValue, // Set this to the currently selected value
+                              value: selectedValue,
+                              // Set this to the currently selected value
                               onChanged: (String? value) {
                                 setState(() {
                                   selectedValue = value;
@@ -186,8 +177,8 @@ class _MedicalForm3State extends State<MedicalForm3> {
                         vertical: ConfigSize.defaultSize! * 1),
                     child: MainButton(
                       onTap: () {
-                        BlocProvider.of<HealthinsuranceBloc>(context)
-                            .add(HealthinsuranceblocEvent(
+                        BlocProvider.of<HealthInsuranceBloc>(context)
+                            .add(HealthInsuranceBlocEvent(
                           uid: prefs.getString("user_uid"),
                           name: widget.names,
                           age: widget.ages,

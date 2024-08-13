@@ -1,25 +1,18 @@
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
-import 'package:globaladvice_new/features/home/data/model/car_insurance_request_model.dart';
 import 'package:globaladvice_new/features/home/data/model/car_policy_request_model.dart';
-import 'package:globaladvice_new/features/home/data/model/health_insurance_model.dart';
-import 'package:globaladvice_new/features/home/domain/use_case/car_inurance_uc.dart';
 import 'package:globaladvice_new/features/home/domain/use_case/car_policy_uc.dart';
-import 'package:globaladvice_new/features/home/domain/use_case/healthInsuranceUsecase.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/car_policy/car_policy_event.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/car_policy/car_policy_state.dart';
-import 'package:globaladvice_new/features/home/presentation/manager/health_insurance_request/healthinsurancebloc_event.dart';
-import 'package:globaladvice_new/features/home/presentation/manager/health_insurance_request/healthinsurancebloc_state.dart';
 
-import '../../../../../core/utils/api_helper.dart';
+import 'package:globaladvice_new/core/utils/api_helper.dart';
 
-class CarPolicyBloc extends Bloc<CarPolicyblocEvent, CarPolicyblocState> {
-  CarPolicyUsecase carpolicyblocUsecase;
-  CarPolicyBloc({required this.carpolicyblocUsecase})
-      : super(CarPolicyblocInitial()) {
-    on<CarPolicyblocEvent>((event, emit) async {
+class CarPolicyBloc extends Bloc<CarPolicyBlocEvent, CarPolicyBlocState> {
+  CarPolicyUseCase carPolicyBlocUseCase;
+  CarPolicyBloc({required this.carPolicyBlocUseCase})
+      : super(CarPolicyBlocInitial()) {
+    on<CarPolicyBlocEvent>((event, emit) async {
       emit(const CarPolicyRequestLoadingState());
-      final result = await carpolicyblocUsecase.call(CarPolicyrequest(
+      final result = await carPolicyBlocUseCase.call(CarPolicyrequestModel(
         isLicensed: event.isLicensed,
         motorBrands: event.motorBrands,
         motorDeductibles: event.motorDeductibles,

@@ -1,19 +1,16 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:globaladvice_new/core/resource_manger/color_manager.dart';
 import 'package:globaladvice_new/features/home/presentation/component/medical_form/Widgets/Gender_Drop_Down_Widget.dart';
 import 'package:globaladvice_new/features/home/presentation/component/medical_form/Widgets/medical_appbar.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
-import '../../../../../../core/resource_manger/asset_path.dart';
-import '../../../../../../core/resource_manger/locale_keys.g.dart';
-import '../../../../../../core/utils/config_size.dart';
-import '../../../../../../core/widgets/custom_text_field.dart';
-import '../../../../../../core/widgets/main_button.dart';
+import 'package:globaladvice_new/core/resource_manger/asset_path.dart';
+import 'package:globaladvice_new/core/utils/config_size.dart';
+import 'package:globaladvice_new/core/widgets/custom_text_field.dart';
+import 'package:globaladvice_new/core/widgets/main_button.dart';
 
-import '../../../home_screen.dart';
-import 'medical_form_3.dart';
+import 'package:globaladvice_new/features/home/presentation/component/medical_form/Pages/medical_form_3.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MedicalForm2 extends StatefulWidget {
@@ -33,12 +30,12 @@ class _MedicalForm2State extends State<MedicalForm2> {
   String? selectedValue;
 
   DateTime selectedDate = DateTime.now();
-  int addcount = 0;
+  int addCount = 0;
   List<TextEditingController> birthdayControllers = [];
-  List<TextEditingController> fullnameControllers = [];
-  List<String?> genderselectedValues =
+  List<TextEditingController> fullNameControllers = [];
+  List<String?> genderSelectedValues =
       []; // Initialize list for dropdown selected values
-  List<String?> relationselectedValues =
+  List<String?> relationSelectedValues =
       []; // Initialize list for dropdown selected values
 
   List<String>? genders = [];
@@ -58,21 +55,21 @@ class _MedicalForm2State extends State<MedicalForm2> {
 
     // genders.clear();
 
-    // Initialize controllers based on addcount
+    // Initialize controllers based on add count
     _initializeControllers();
   }
 
   void _initializeControllers() {
     birthdayControllers.clear();
-    fullnameControllers.clear();
-    genderselectedValues.clear();
-    relationselectedValues.clear();
+    fullNameControllers.clear();
+    genderSelectedValues.clear();
+    relationSelectedValues.clear();
 
-    for (int i = 0; i < addcount; i++) {
+    for (int i = 0; i < addCount; i++) {
       birthdayControllers.add(TextEditingController());
-      fullnameControllers.add(TextEditingController());
-      genderselectedValues.add(null); // Initialize dropdown selected values
-      relationselectedValues.add(null); // Initialize dropdown selected values
+      fullNameControllers.add(TextEditingController());
+      genderSelectedValues.add(null); // Initialize dropdown selected values
+      relationSelectedValues.add(null); // Initialize dropdown selected values
     }
   }
 
@@ -83,7 +80,7 @@ class _MedicalForm2State extends State<MedicalForm2> {
     for (var controller in birthdayControllers) {
       controller.dispose();
     }
-    for (var controller in fullnameControllers) {
+    for (var controller in fullNameControllers) {
       controller.dispose();
     }
     super.dispose();
@@ -127,7 +124,7 @@ class _MedicalForm2State extends State<MedicalForm2> {
       AppLocalizations.of(context)!.spouse,
       AppLocalizations.of(context)!.children,
     ];
-    List<String> genderstype = [
+    List<String> gendersType = [
       AppLocalizations.of(context)!.male,
       AppLocalizations.of(context)!.female,
     ];
@@ -162,19 +159,19 @@ class _MedicalForm2State extends State<MedicalForm2> {
 
     List<String> modify_genders_list() {
       genders =
-          genderselectedValues.map((e) => return_gender(e.toString())).toList();
+          genderSelectedValues.map((e) => return_gender(e.toString())).toList();
       genders!.insert(0, return_gender(selectedValue!));
       return genders!;
     }
 
     List<String> modify_names_list() {
-      genders = fullnameControllers.map((e) => e.text.toString()).toList();
+      genders = fullNameControllers.map((e) => e.text.toString()).toList();
       genders!.insert(0, widget.name);
       return genders!;
     }
 
     List<String> modify_realtions_list() {
-      relations = genderselectedValues.map((e) => e.toString()).toList();
+      relations = genderSelectedValues.map((e) => e.toString()).toList();
       relations!.insert(0, return_gender('self'));
       return relations!;
     }
@@ -282,7 +279,7 @@ class _MedicalForm2State extends State<MedicalForm2> {
                                 color: Theme.of(context).hintColor,
                               ),
                             ),
-                            items: genderstype
+                            items: gendersType
                                 .map((String item) => DropdownMenuItem<String>(
                                       value: item,
                                       child: Text(
@@ -293,10 +290,10 @@ class _MedicalForm2State extends State<MedicalForm2> {
                                       ),
                                     ))
                                 .toList(),
-                            value: genderselectedValues[index],
+                            value: genderSelectedValues[index],
                             onChanged: (value) {
                               setState(() {
-                                genderselectedValues[index] = value;
+                                genderSelectedValues[index] = value;
                               });
                             },
                             buttonStyleData: ButtonStyleData(
@@ -341,10 +338,10 @@ class _MedicalForm2State extends State<MedicalForm2> {
                                       ),
                                     ))
                                 .toList(),
-                            value: relationselectedValues[index],
+                            value: relationSelectedValues[index],
                             onChanged: (value) {
                               setState(() {
-                                relationselectedValues[index] = value;
+                                relationSelectedValues[index] = value;
                               });
                             },
                             buttonStyleData: ButtonStyleData(
@@ -370,11 +367,11 @@ class _MedicalForm2State extends State<MedicalForm2> {
                       CustomTextField(
                         labeltext: AppLocalizations.of(context)!.fullName,
                         prefixicon: const Icon(Icons.person),
-                        controller: fullnameControllers[index],
+                        controller: fullNameControllers[index],
                         inputType: TextInputType.name,
                       ),
                       SizedBox(height: ConfigSize.defaultSize! * 2),
-                      index == addcount - 1
+                      index == addCount - 1
                           ? const SizedBox.shrink()
                           : const Divider(
                               thickness: 3, color: ColorManager.mainColor),
@@ -382,29 +379,29 @@ class _MedicalForm2State extends State<MedicalForm2> {
                     ],
                   );
                 },
-                itemCount: addcount,
+                itemCount: addCount,
                 shrinkWrap: true,
               ),
               MainButton(
                 onTap: () {
                   setState(() {
-                    addcount++;
+                    addCount++;
                     _initializeControllers(); // Initialize controllers and values when addcount changes
                   });
                 },
                 title: AppLocalizations.of(context)!.add,
               ),
               Visibility(
-                visible: addcount > 0,
+                visible: addCount > 0,
                 child: SizedBox(height: ConfigSize.defaultSize! * 2),
               ),
               Visibility(
-                visible: addcount > 0,
+                visible: addCount > 0,
                 child: MainButton(
                   onTap: () {
                     setState(() {
-                      if (addcount > 0) {
-                        addcount--;
+                      if (addCount > 0) {
+                        addCount--;
                         _initializeControllers(); // Initialize controllers and values when addcount changes
                       }
                     });

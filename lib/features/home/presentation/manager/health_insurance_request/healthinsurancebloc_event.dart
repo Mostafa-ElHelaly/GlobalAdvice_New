@@ -1,6 +1,6 @@
 abstract class ResetEvent {}
 
-class HealthinsuranceblocEvent extends ResetEvent {
+class HealthInsuranceBlocEvent extends ResetEvent {
   final String? uid;
   final List<String>? name;
   final List<int>? age;
@@ -8,7 +8,7 @@ class HealthinsuranceblocEvent extends ResetEvent {
   String? gender;
   final int? healthLimit;
   final String? phone;
-  HealthinsuranceblocEvent({
+  HealthInsuranceBlocEvent({
     this.uid,
     this.name,
     this.age,

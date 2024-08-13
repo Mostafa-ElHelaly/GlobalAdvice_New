@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:globaladvice_new/core/resource_manger/color_manager.dart';
-import 'package:globaladvice_new/core/utils/config_size.dart';
 
 class PropertyCheckbox extends StatelessWidget {
   PropertyCheckbox(

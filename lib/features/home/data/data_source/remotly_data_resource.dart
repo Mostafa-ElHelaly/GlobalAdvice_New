@@ -11,25 +11,25 @@ import 'package:globaladvice_new/features/home/data/model/life_insurance_model.d
 import 'package:globaladvice_new/features/home/data/model/other_forms_model.dart';
 import 'package:globaladvice_new/features/home/data/model/property_policy_request_model.dart';
 
-import '../model/car_dependinces_model.dart';
-import '../model/car_insurance_request_model.dart';
-import '../model/health_dependinces_model.dart';
-import '../model/property_dependinces_model.dart';
+import 'package:globaladvice_new/features/home/data/model/car_dependinces_model.dart';
+import 'package:globaladvice_new/features/home/data/model/car_insurance_request_model.dart';
+import 'package:globaladvice_new/features/home/data/model/health_dependinces_model.dart';
+import 'package:globaladvice_new/features/home/data/model/property_dependinces_model.dart';
 
 abstract class BaseHomeRemotelyDataSource {
   Future<Map<String, dynamic>> SendHealthInsuranceRequest(
       HealthInsuranceModel healthInsuranceModel);
   Future<Map<String, dynamic>> SendCarInsuranceRequest(
-      CarInusranceRequest carInusranceRequest);
+      CarInusranceRequestModel carInusranceRequest);
   Future<Map<String, dynamic>> SendPropertyInsuranceRequest(
       PropertyModel propertyModel);
   Future<Unit> SendLifeInsuranceRequest(LifeInsuranceModel lifeInsuranceModel);
   Future<Unit> SendAnotherInsuranceRequest(OtherFormsModel otherFormsModel);
-  Future<Unit> CarPolicyRequest(CarPolicyrequest carPolicyRequest);
+  Future<Unit> CarPolicyRequest(CarPolicyrequestModel carPolicyRequest);
   Future<Unit> PropertyPolicyRequest(
-      PropertyPolicyrequest propertyPolicyRequest);
-  Future<List<CarData>> Get_Car_Data();
-  Future<List<PropertyDependincesData>> Get_Property_Data();
+      PropertyPolicyRequestModel propertyPolicyRequest);
+  Future<List<CarDataModel>> Get_Car_Data();
+  Future<List<PropertyDependincesDataModel>> Get_Property_Data();
   Future<List<HealthDependincesModel>> Get_Health_Data();
 }
 
@@ -80,7 +80,7 @@ class HomeRemotelyDataSource extends BaseHomeRemotelyDataSource {
 
   @override
   Future<Map<String, dynamic>> SendCarInsuranceRequest(
-      CarInusranceRequest carInusranceRequest) async {
+      CarInusranceRequestModel carInusranceRequest) async {
     final body = {
       'UID': carInusranceRequest.uid,
       'price': carInusranceRequest.price,
@@ -233,7 +233,7 @@ class HomeRemotelyDataSource extends BaseHomeRemotelyDataSource {
   }
 
   @override
-  Future<List<CarData>> Get_Car_Data() async {
+  Future<List<CarDataModel>> Get_Car_Data() async {
     Dio dio = Dio();
     dio.interceptors.add(LogInterceptor(responseBody: true));
 
@@ -245,8 +245,8 @@ class HomeRemotelyDataSource extends BaseHomeRemotelyDataSource {
         final List<dynamic> countriesJson = jsonResponse['data']["plans_data"];
 
         // Convert JSON list to List<CountriesModel>
-        List<CarData> countries = countriesJson.map((json) {
-          return CarData.fromJson(json);
+        List<CarDataModel> countries = countriesJson.map((json) {
+          return CarDataModel.fromJson(json);
         }).toList();
 
         return countries;
@@ -259,7 +259,7 @@ class HomeRemotelyDataSource extends BaseHomeRemotelyDataSource {
   }
 
   @override
-  Future<List<PropertyDependincesData>> Get_Property_Data() async {
+  Future<List<PropertyDependincesDataModel>> Get_Property_Data() async {
     Dio dio = Dio();
     dio.interceptors.add(LogInterceptor(responseBody: true));
 
@@ -271,8 +271,8 @@ class HomeRemotelyDataSource extends BaseHomeRemotelyDataSource {
         final List<dynamic> countriesJson = jsonResponse['data']["plans_data"];
 
         // Convert JSON list to List<CountriesModel>
-        List<PropertyDependincesData> countries = countriesJson.map((json) {
-          return PropertyDependincesData.fromJson(json);
+        List<PropertyDependincesDataModel> countries = countriesJson.map((json) {
+          return PropertyDependincesDataModel.fromJson(json);
         }).toList();
 
         return countries;
@@ -285,7 +285,7 @@ class HomeRemotelyDataSource extends BaseHomeRemotelyDataSource {
   }
 
   @override
-  Future<Unit> CarPolicyRequest(CarPolicyrequest carPolicyRequest) async {
+  Future<Unit> CarPolicyRequest(CarPolicyrequestModel carPolicyRequest) async {
     final body = {
       "UID": carPolicyRequest.uID,
       "organization_id": carPolicyRequest.organizationId,
@@ -322,7 +322,7 @@ class HomeRemotelyDataSource extends BaseHomeRemotelyDataSource {
 
   @override
   Future<Unit> PropertyPolicyRequest(
-      PropertyPolicyrequest propertyPolicyRequest) async {
+      PropertyPolicyRequestModel propertyPolicyRequest) async {
     final body = {
       "UID": propertyPolicyRequest.uID,
       "organization_id": propertyPolicyRequest.organizationId,

@@ -14,7 +14,7 @@ import '../../../../../core/utils/api_helper.dart';
 
 class OtherInsuranceBloc
     extends Bloc<OtherinsuranceblocEvent, OtherinsuranceblocState> {
-  OtherInsuranceUsecase healthinsuranceblocUsecase;
+  OtherInsuranceUseCase healthinsuranceblocUsecase;
   OtherInsuranceBloc({required this.healthinsuranceblocUsecase})
       : super(OtherinsuranceblocInitial()) {
     on<OtherinsuranceblocEvent>((event, emit) async {

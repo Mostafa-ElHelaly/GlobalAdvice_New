@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:globaladvice_new/core/resource_manger/locale_keys.g.dart';
 
 class MedicalPrices extends StatelessWidget {

@@ -11,9 +11,9 @@ import 'package:globaladvice_new/features/home/data/model/property_model.dart';
 import 'package:globaladvice_new/features/home/data/model/property_policy_request_model.dart';
 import 'package:globaladvice_new/features/home/domain/repo/homeBaseRepo.dart';
 
-import '../../../../core/error/failure.dart';
-import '../../../../core/utils/api_helper.dart';
-import '../model/life_insurance_model.dart';
+import 'package:globaladvice_new/core/error/failure.dart';
+import 'package:globaladvice_new/core/utils/api_helper.dart';
+import 'package:globaladvice_new/features/home/data/model/life_insurance_model.dart';
 
 class HomeRepositoryImp extends BaseHomeRepository {
   final BaseHomeRemotelyDataSource baseHomeRemotelyDataSource;
@@ -35,7 +35,7 @@ class HomeRepositoryImp extends BaseHomeRepository {
 
   @override
   Future<Either<Map<String, dynamic>, Failure>> SendCarInsuranceRequest(
-      CarInusranceRequest carInusranceRequest) async {
+      CarInusranceRequestModel carInusranceRequest) async {
     try {
       final result = await baseHomeRemotelyDataSource.SendCarInsuranceRequest(
           carInusranceRequest);
@@ -84,7 +84,7 @@ class HomeRepositoryImp extends BaseHomeRepository {
   }
 
   @override
-  Future<Either<List<CarData>, Failure>> Get_Car_Data() async {
+  Future<Either<List<CarDataModel>, Failure>> Get_Car_Data() async {
     try {
       final result = await baseHomeRemotelyDataSource.Get_Car_Data();
       return Left(result);
@@ -94,7 +94,7 @@ class HomeRepositoryImp extends BaseHomeRepository {
   }
 
   @override
-  Future<Either<List<PropertyDependincesData>, Failure>>
+  Future<Either<List<PropertyDependincesDataModel>, Failure>>
       Get_Property_Data() async {
     try {
       final result = await baseHomeRemotelyDataSource.Get_Property_Data();
@@ -106,7 +106,7 @@ class HomeRepositoryImp extends BaseHomeRepository {
 
   @override
   Future<Either<Unit, Failure>> CarPolicyRequest(
-      CarPolicyrequest otherFormsModel) async {
+      CarPolicyrequestModel otherFormsModel) async {
     try {
       final result =
           await baseHomeRemotelyDataSource.CarPolicyRequest(otherFormsModel);
@@ -118,7 +118,7 @@ class HomeRepositoryImp extends BaseHomeRepository {
 
   @override
   Future<Either<Unit, Failure>> PropertyPolicyRequest(
-      PropertyPolicyrequest otherFormsModel) async {
+      PropertyPolicyRequestModel otherFormsModel) async {
     try {
       final result = await baseHomeRemotelyDataSource.PropertyPolicyRequest(
           otherFormsModel);

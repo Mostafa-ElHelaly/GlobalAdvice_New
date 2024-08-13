@@ -1,15 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:globaladvice_new/core/resource_manger/locale_keys.g.dart';
-import 'package:globaladvice_new/core/resource_manger/routs_manager.dart';
-import 'package:globaladvice_new/core/widgets/Loading.dart';
 import 'package:globaladvice_new/core/widgets/snack_bar.dart';
 import 'package:globaladvice_new/features/home/presentation/component/car_form/widgets/Motor_Dropdown_Widget.dart';
 import 'package:globaladvice_new/features/home/presentation/component/property_form/pages/property_form_3%20.dart';
 import 'package:globaladvice_new/features/home/presentation/component/property_form/widgets/Prop_insurance_appbar.dart';
-import 'package:globaladvice_new/features/home/presentation/manager/property_insurance.dart/property_insurance_bloc.dart';
-import 'package:globaladvice_new/features/home/presentation/manager/property_insurance.dart/property_insurance_event.dart';
-import 'package:globaladvice_new/features/home/presentation/manager/property_insurance.dart/property_insurance_state.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:globaladvice_new/core/resource_manger/asset_path.dart';
@@ -20,8 +13,8 @@ import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 class PropertyForm2 extends StatefulWidget {
   const PropertyForm2(
-      {super.key, required this.fullname, required this.phone_number});
-  final String fullname;
+      {super.key, required this.fullName, required this.phone_number});
+  final String fullName;
   final String phone_number;
 
   @override
@@ -59,16 +52,8 @@ class _PropertyForm2State extends State<PropertyForm2> {
 
   @override
   Widget build(BuildContext context) {
-    var localetype = Localizations.localeOf(context).languageCode;
 
-    // final List<String> english_type = [
-    //   'Tenant',
-    //   'Owner',
-    // ];
-    // final List<String> arabic_type = [
-    //   'ايجار',
-    //   'تمليك',
-    // ];
+
     final List<String> building_type = [
       AppLocalizations.of(context)!.owner,
       AppLocalizations.of(context)!.tenant,

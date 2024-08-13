@@ -2,18 +2,17 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:globaladvice_new/core/resource_manger/color_manager.dart';
-import 'package:globaladvice_new/core/resource_manger/locale_keys.g.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:globaladvice_new/core/utils/config_size.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/property_policy/property_policy_bloc.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/property_policy/property_policy_event.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../../../../core/resource_manger/routs_manager.dart';
-import '../../../../../../core/widgets/main_button.dart';
-import '../../../../../../core/widgets/snack_bar.dart';
-import '../../../manager/property_policy/property_policy_state.dart';
-import '../../life_form/widgets/Back_Button.dart';
+import 'package:globaladvice_new/core/resource_manger/routs_manager.dart';
+import 'package:globaladvice_new/core/widgets/main_button.dart';
+import 'package:globaladvice_new/core/widgets/snack_bar.dart';
+import 'package:globaladvice_new/features/home/presentation/manager/property_policy/property_policy_state.dart';
+import 'package:globaladvice_new/features/home/presentation/component/life_form/widgets/Back_Button.dart';
 
 class PropertyPrices extends StatefulWidget {
   const PropertyPrices(
