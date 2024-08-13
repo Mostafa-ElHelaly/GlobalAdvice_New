@@ -141,6 +141,10 @@ class _MedicalForm2State extends State<MedicalForm2> {
       AppLocalizations.of(context)!.female,
     ];
 
+    int calculate_age(String birthday) {
+      return today.year - int.parse(birthday.substring(0, 4));
+    }
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: MedicalAppBar(context),
@@ -214,6 +218,20 @@ class _MedicalForm2State extends State<MedicalForm2> {
               ListView.builder(
                 physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) {
+                  int controllers_age =
+                      birthdayControllers[index].text.isNotEmpty
+                          ? (today.year -
+                              int.parse((int.parse(birthdayControllers[index]
+                                      .text
+                                      .substring(0, 4)))
+                                  .toString()))
+                          : 0;
+                  int main_age = birthdayController.text.isNotEmpty
+                      ? (today.year -
+                          int.parse((int.parse(
+                                  birthdayController.text.substring(0, 4)))
+                              .toString()))
+                      : 0;
                   return Column(
                     children: [
                       CustomTextField(
@@ -226,18 +244,6 @@ class _MedicalForm2State extends State<MedicalForm2> {
                           onPressed: () async {
                             await _selectDate(
                                 context, birthdayControllers[index]);
-                            if (!ages!.contains(today.year -
-                                int.parse(
-                                    birthdayController.text.substring(0, 4)))) {
-                              ages!.add(today.year -
-                                  int.parse(
-                                      birthdayController.text.substring(0, 4)));
-                            }
-                            ages!.add(today.year -
-                                int.parse((int.parse(birthdayControllers[index]
-                                        .text
-                                        .substring(0, 4)))
-                                    .toString()));
                           },
                           icon: const Icon(Icons.calendar_today),
                         ),
@@ -344,6 +350,7 @@ class _MedicalForm2State extends State<MedicalForm2> {
                       CustomTextField(
                         onSubmitted: (value) {
                           names!.add(fullnameControllers[index].text);
+                          print(names);
                         },
                         labeltext: AppLocalizations.of(context)!.fullName,
                         prefixicon: const Icon(Icons.person),
@@ -394,6 +401,10 @@ class _MedicalForm2State extends State<MedicalForm2> {
                     EdgeInsets.symmetric(vertical: ConfigSize.defaultSize! * 2),
                 child: MainButton(
                   onTap: () {
+                    ages!.add(calculate_age(birthdayController.text));
+                    ages!.add(calculate_age(birthdayControllers
+                        .map((controller) => controller.text)
+                        .toString()));
                     PersistentNavBarNavigator.pushNewScreen(
                       context,
                       screen: MedicalForm3(
