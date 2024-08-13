@@ -1,25 +1,17 @@
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:globaladvice_new/core/widgets/Loading.dart';
-import 'package:globaladvice_new/features/home/presentation/component/medical_form/Widgets/done.dart';
 import 'package:globaladvice_new/features/home/presentation/component/medical_form/Widgets/medical_appbar.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/health_data/health_data_bloc.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/health_data/health_data_state.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/health_insurance_request/healthinsurancebloc_bloc.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/health_insurance_request/healthinsurancebloc_event.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/health_insurance_request/healthinsurancebloc_state.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:globaladvice_new/core/resource_manger/asset_path.dart';
-import 'package:globaladvice_new/core/resource_manger/routs_manager.dart';
 import 'package:globaladvice_new/core/utils/config_size.dart';
 import 'package:globaladvice_new/core/widgets/main_button.dart';
-import 'package:globaladvice_new/features/home/presentation/home_screen.dart';
-import 'package:globaladvice_new/features/home/presentation/component/life_form/widgets/Back_Button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../../../core/resource_manger/color_manager.dart';
@@ -39,7 +31,7 @@ class MedicalForm3 extends StatefulWidget {
   });
   final String phone;
   final String gender;
-  final List<String?> relations;
+  final List<String>? relations;
   final List<int>? ages;
   final List<String>? names;
   final List<String>? genders;
@@ -75,8 +67,49 @@ class _MedicalForm3State extends State<MedicalForm3> {
     return BlocListener<HealthinsuranceBloc, HealthinsuranceblocState>(
         listener: (context, state) {
           if (state is HealthInsuranceSuccessState) {
-            Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => const MedicalPrices()));
+            int data_length = state.healthInsuranceModel['data'].length;
+            int amounts_length = state.healthInsuranceModel['data']
+                .map((e) => e["persons"])
+                .length;
+            List<dynamic> org_id = state.healthInsuranceModel['data']
+                .map((e) => e['org_id'])
+                .toList();
+            List<dynamic> plan_id = state.healthInsuranceModel['data']
+                .map((e) => e['plan_id'])
+                .toList();
+            List<dynamic> total_price = state.healthInsuranceModel['data']
+                .map((e) => e['total'])
+                .toList();
+            List<dynamic> persons = state.healthInsuranceModel['data']
+                .map((e) => e["persons"])
+                .toList();
+            List<dynamic> health_limit = state.healthInsuranceModel['data']
+                .map((e) => e["healthLimit"])
+                .toList();
+            List<dynamic> health_penefits = state.healthInsuranceModel['data']
+                .map((e) => e["healthBenefits"])
+                .toList();
+            List<dynamic> plan_name = state.healthInsuranceModel['data']
+                .map((e) =>
+                    localetype == 'ar' ? e['plan_name_alt'] : e['plan_name'])
+                .toList();
+
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => MedicalPrices(
+                      amounts_length: amounts_length,
+                      ages: widget.ages,
+                      relations: widget.relations,
+                      names: widget.names,
+                      org_id: org_id,
+                      plan_id: plan_id,
+                      data_length: data_length,
+                      health_penefits: health_penefits,
+                      genders: widget.genders,
+                      health_limit: health_limit,
+                      persons: persons,
+                      total_price: total_price,
+                      plan_name: plan_name,
+                    )));
           } else if (state is HealthinsuranceRequestErrorState) {
             errorSnackBar(context, state.errorMessage);
           } else if (state is HealthinsuranceRequestLoadingState) {}
@@ -186,16 +219,21 @@ class _MedicalForm3State extends State<MedicalForm3> {
                         vertical: ConfigSize.defaultSize! * 1),
                     child: MainButton(
                       onTap: () {
-                        BlocProvider.of<HealthinsuranceBloc>(context)
-                            .add(HealthinsuranceblocEvent(
-                          uid: prefs.getString("user_uid"),
-                          name: widget.names,
-                          age: widget.ages,
-                          relation: widget.relations,
-                          gender: widget.gender,
-                          healthLimit: int.parse(selectedValue!),
-                          phone: widget.phone,
-                        ));
+                        if (selectedValue != null) {
+                          BlocProvider.of<HealthinsuranceBloc>(context)
+                              .add(HealthinsuranceblocEvent(
+                            uid: prefs.getString("user_uid"),
+                            name: widget.names,
+                            age: widget.ages,
+                            relation: widget.relations,
+                            gender: widget.gender,
+                            healthLimit: int.parse(selectedValue!),
+                            phone: widget.phone,
+                          ));
+                        } else {
+                          errorSnackBar(context,
+                              AppLocalizations.of(context)!.errorFillFields);
+                        }
                       },
                       title: AppLocalizations.of(context)!.submit,
                     ),

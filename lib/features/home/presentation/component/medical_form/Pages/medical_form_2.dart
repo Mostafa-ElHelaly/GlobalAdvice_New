@@ -12,6 +12,7 @@ import '../../../../../../core/utils/config_size.dart';
 import '../../../../../../core/widgets/custom_text_field.dart';
 import '../../../../../../core/widgets/main_button.dart';
 
+import '../../../../../../core/widgets/snack_bar.dart';
 import '../../../home_screen.dart';
 import 'medical_form_3.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -160,6 +161,16 @@ class _MedicalForm2State extends State<MedicalForm2> {
       }
     }
 
+    String return_relation(String relation) {
+      if (relation == 'زوج') {
+        return 'spouse';
+      } else if (relation == 'ابن') {
+        return 'children';
+      } else {
+        return relation;
+      }
+    }
+
     List<String> modify_genders_list() {
       genders =
           genderselectedValues.map((e) => return_gender(e.toString())).toList();
@@ -174,8 +185,10 @@ class _MedicalForm2State extends State<MedicalForm2> {
     }
 
     List<String> modify_realtions_list() {
-      relations = genderselectedValues.map((e) => e.toString()).toList();
-      relations!.insert(0, return_gender('self'));
+      relations = relationselectedValues
+          .map((e) => return_relation(e.toString().toLowerCase()))
+          .toList();
+      relations!.insert(0, 'self');
       return relations!;
     }
 
@@ -417,19 +430,56 @@ class _MedicalForm2State extends State<MedicalForm2> {
                     EdgeInsets.symmetric(vertical: ConfigSize.defaultSize! * 2),
                 child: MainButton(
                   onTap: () {
-                    PersistentNavBarNavigator.pushNewScreen(
-                      context,
-                      screen: MedicalForm3(
-                        phone: widget.phone,
-                        gender: selectedValue!,
-                        relations: modify_realtions_list(),
-                        ages: modify_ages_list(),
-                        names: modify_names_list(),
-                        genders: modify_genders_list(),
-                      ),
-                      withNavBar: false,
-                      pageTransitionAnimation: PageTransitionAnimation.fade,
-                    );
+                    print(addcount);
+                    print(selectedValue);
+                    print(birthdayController.text);
+                    if (addcount > 0 &&
+                        selectedValue != null &&
+                        modify_ages_list().isNotEmpty &&
+                        modify_names_list().isNotEmpty &&
+                        modify_genders_list().isNotEmpty &&
+                        modify_realtions_list().isNotEmpty) {
+                      PersistentNavBarNavigator.pushNewScreen(
+                        context,
+                        screen: MedicalForm3(
+                          phone: widget.phone,
+                          gender: selectedValue == 'ذكر'
+                              ? 'male'
+                              : selectedValue == 'أنثى'
+                                  ? 'female'
+                                  : selectedValue!.toLowerCase(),
+                          relations: modify_realtions_list(),
+                          ages: modify_ages_list(),
+                          names: modify_names_list(),
+                          genders: modify_genders_list(),
+                        ),
+                        withNavBar: false,
+                        pageTransitionAnimation: PageTransitionAnimation.fade,
+                      );
+                    } else if (addcount == 0 &&
+                        selectedValue != null &&
+                        birthdayController.text.isNotEmpty) {
+                      PersistentNavBarNavigator.pushNewScreen(
+                        context,
+                        screen: MedicalForm3(
+                          phone: widget.phone,
+                          gender: selectedValue == 'ذكر'
+                              ? 'male'
+                              : selectedValue == 'أنثى'
+                                  ? 'female'
+                                  : selectedValue!.toLowerCase(),
+                          relations: modify_realtions_list(),
+                          ages: modify_ages_list(),
+                          names: modify_names_list(),
+                          genders: modify_genders_list(),
+                        ),
+                        withNavBar: false,
+                        pageTransitionAnimation: PageTransitionAnimation.fade,
+                      );
+                    } else {
+                      errorSnackBar(context,
+                          AppLocalizations.of(context)!.errorFillFields);
+                    }
                   },
                   title: AppLocalizations.of(context)!.next,
                 ),

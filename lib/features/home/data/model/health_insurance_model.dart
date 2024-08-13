@@ -2,7 +2,7 @@ class HealthInsuranceModel {
   String? uid;
   List<String>? name;
   List<int>? age;
-  late List<String?> relation;
+  late List<String>? relation;
   String? gender;
   int? healthLimit;
   String? phone;

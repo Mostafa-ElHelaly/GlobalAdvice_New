@@ -29,9 +29,11 @@ import 'package:globaladvice_new/features/home/presentation/manager/other_forms_
 import '../../features/home/domain/use_case/car_data_uc.dart';
 import '../../features/home/domain/use_case/car_policy_uc.dart';
 import '../../features/home/domain/use_case/health_data_uc.dart';
+import '../../features/home/domain/use_case/health_policy_uc.dart';
 import '../../features/home/domain/use_case/property_policy_uc.dart';
 import '../../features/home/presentation/manager/car_data_bloc/car_data_bloc.dart';
 import '../../features/home/presentation/manager/car_policy/car_policy_bloc.dart';
+import '../../features/home/presentation/manager/health_policy/health_policy_bloc.dart';
 import '../../features/home/presentation/manager/property_policy/property_policy_bloc.dart';
 
 final getIt = GetIt.instance;
@@ -72,6 +74,8 @@ class ServerLocator {
         () => PropertyPolicyBloc(propertypolicyblocUsecase: getIt()));
     getIt.registerLazySingleton(
         () => HealthDataBloc(HealthdataUseCase: getIt()));
+    getIt.registerLazySingleton(
+        () => HealthPolicyBloc(healthpolicyblocUsecase: getIt()));
 
     //use_case
     getIt.registerLazySingleton(() => RegisterUseCase(baseRepository: getIt()));
@@ -97,6 +101,8 @@ class ServerLocator {
         () => PropertyPolicyUsecase(baseRepository: getIt()));
     getIt.registerLazySingleton(
         () => FetchingHealthDataUsecase(baseRepository: getIt()));
+    getIt.registerLazySingleton(
+        () => HealthPolicyUsecase(baseRepository: getIt()));
 
     //Remote Date
     getIt.registerLazySingleton<BaseRemotelyDataSource>(

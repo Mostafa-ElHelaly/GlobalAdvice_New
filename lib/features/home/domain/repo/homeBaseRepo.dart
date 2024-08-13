@@ -10,6 +10,7 @@ import 'package:globaladvice_new/features/home/data/model/other_forms_model.dart
 import 'package:globaladvice_new/features/home/data/model/property_model.dart';
 
 import '../../data/model/car_dependinces_model.dart';
+import '../../data/model/health_policy_request_model.dart';
 import '../../data/model/property_dependinces_model.dart';
 import '../../data/model/property_policy_request_model.dart';
 
@@ -32,6 +33,8 @@ abstract class BaseHomeRepository {
       CarPolicyrequest otherFormsModel);
   Future<Either<Unit, Failure>> PropertyPolicyRequest(
       PropertyPolicyrequest otherFormsModel);
+  Future<Either<Unit, Failure>> HealthPolicyRequest(
+      HealthPolicyrequest otherFormsModel);
 
   Future<Either<List<CarData>, Failure>> Get_Car_Data();
 

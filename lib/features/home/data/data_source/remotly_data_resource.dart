@@ -5,6 +5,7 @@ import 'package:globaladvice_new/features/home/data/model/health_insurance_model
 
 import 'package:globaladvice_new/core/utils/api_helper.dart';
 import 'package:globaladvice_new/core/utils/constant_api.dart';
+import 'package:globaladvice_new/features/home/data/model/health_policy_request_model.dart';
 import 'package:globaladvice_new/features/home/data/model/property_model.dart';
 
 import 'package:globaladvice_new/features/home/data/model/life_insurance_model.dart';
@@ -26,6 +27,7 @@ abstract class BaseHomeRemotelyDataSource {
   Future<Unit> SendLifeInsuranceRequest(LifeInsuranceModel lifeInsuranceModel);
   Future<Unit> SendAnotherInsuranceRequest(OtherFormsModel otherFormsModel);
   Future<Unit> CarPolicyRequest(CarPolicyrequest carPolicyRequest);
+  Future<Unit> HealthPolicyRequest(HealthPolicyrequest carPolicyRequest);
   Future<Unit> PropertyPolicyRequest(
       PropertyPolicyrequest propertyPolicyRequest);
   Future<List<CarData>> Get_Car_Data();
@@ -389,6 +391,49 @@ class HomeRemotelyDataSource extends BaseHomeRemotelyDataSource {
       }
     } catch (e) {
       throw Exception('Error fetching Car Data: ${e.toString()}');
+    }
+  }
+
+  @override
+  Future<Unit> HealthPolicyRequest(HealthPolicyrequest carPolicyRequest) async {
+    final body = {
+      "UID": carPolicyRequest.uID,
+      "organization_id": carPolicyRequest.organizationId,
+      "plan_id": carPolicyRequest.planId,
+      "price[]": carPolicyRequest.price,
+      "relation[]": carPolicyRequest.relations,
+      "age[]": carPolicyRequest.age,
+      "name[]": carPolicyRequest.name,
+      "gender[]": carPolicyRequest.gender,
+    };
+    try {
+      final response = await Dio().post(
+        options: Options(
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+        ),
+        ConstantApi.healthpolicy,
+        data: body,
+      );
+      Map<String, dynamic> jsonData = response.data;
+      print(body['price[]']);
+      print(body['UID']);
+      print(body['relation[]']);
+      print(body['age[]']);
+      print(body['name[]']);
+      print(body['gender[]']);
+      print(body['plan_id']);
+      print(body['organization_id']);
+      if (jsonData['status'] == 200) {
+        print(jsonData);
+        return Future.value(unit);
+      } else {
+        throw Exception('Request failed because ${jsonData['data']}');
+      }
+    } on DioException catch (e) {
+      throw DioHelper.handleDioError(
+          dioError: e, endpointName: "HealthInsurance Request");
     }
   }
 }
