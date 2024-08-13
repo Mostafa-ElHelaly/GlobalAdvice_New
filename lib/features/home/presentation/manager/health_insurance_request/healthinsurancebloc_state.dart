@@ -24,7 +24,7 @@ final class HealthinsuranceRequestErrorState extends HealthinsuranceblocState {
 }
 
 final class HealthInsuranceSuccessState extends HealthinsuranceblocState {
-  final Unit healthInsuranceModel;
+  final Map<String, dynamic> healthInsuranceModel;
 
   const HealthInsuranceSuccessState({required this.healthInsuranceModel});
 }

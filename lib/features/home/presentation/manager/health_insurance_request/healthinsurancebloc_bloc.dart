@@ -2,8 +2,8 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:globaladvice_new/features/home/data/model/health_insurance_model.dart';
 import 'package:globaladvice_new/features/home/domain/use_case/healthInsuranceUsecase.dart';
-import 'package:globaladvice_new/features/home/presentation/manager/healthinsurancebloc/healthinsurancebloc_event.dart';
-import 'package:globaladvice_new/features/home/presentation/manager/healthinsurancebloc/healthinsurancebloc_state.dart';
+import 'package:globaladvice_new/features/home/presentation/manager/health_insurance_request/healthinsurancebloc_event.dart';
+import 'package:globaladvice_new/features/home/presentation/manager/health_insurance_request/healthinsurancebloc_state.dart';
 
 import '../../../../../core/utils/api_helper.dart';
 
@@ -16,13 +16,12 @@ class HealthinsuranceBloc
       emit(const HealthinsuranceRequestLoadingState());
       final result = await healthinsuranceblocUsecase.call(HealthInsuranceModel(
         uid: event.uid,
-        organizationId: event.organizationId,
-        planId: event.planId,
+        phone: event.phone,
         name: event.name,
         age: event.age,
         relation: event.relation,
-        price: event.price,
-        gende: event.gender,
+        gender: event.gender,
+        healthLimit: event.healthLimit,
       ));
       result.fold(
           (l) => emit(HealthInsuranceSuccessState(healthInsuranceModel: l)),

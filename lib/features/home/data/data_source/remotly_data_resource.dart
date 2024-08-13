@@ -1,12 +1,8 @@
-import 'dart:math';
-
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:globaladvice_new/features/home/data/model/car_policy_request_model.dart';
-import 'package:globaladvice_new/features/home/data/model/car_policy_request_model.dart';
 import 'package:globaladvice_new/features/home/data/model/health_insurance_model.dart';
 
-import 'package:globaladvice_new/core/error/failures_strings.dart';
 import 'package:globaladvice_new/core/utils/api_helper.dart';
 import 'package:globaladvice_new/core/utils/constant_api.dart';
 import 'package:globaladvice_new/features/home/data/model/property_model.dart';
@@ -17,10 +13,11 @@ import 'package:globaladvice_new/features/home/data/model/property_policy_reques
 
 import '../model/car_dependinces_model.dart';
 import '../model/car_insurance_request_model.dart';
+import '../model/health_dependinces_model.dart';
 import '../model/property_dependinces_model.dart';
 
 abstract class BaseHomeRemotelyDataSource {
-  Future<Unit> SendHealthInsuranceRequest(
+  Future<Map<String, dynamic>> SendHealthInsuranceRequest(
       HealthInsuranceModel healthInsuranceModel);
   Future<Map<String, dynamic>> SendCarInsuranceRequest(
       CarInusranceRequest carInusranceRequest);
@@ -33,22 +30,30 @@ abstract class BaseHomeRemotelyDataSource {
       PropertyPolicyrequest propertyPolicyRequest);
   Future<List<CarData>> Get_Car_Data();
   Future<List<PropertyDependincesData>> Get_Property_Data();
+  Future<List<HealthDependincesModel>> Get_Health_Data();
 }
 
 class HomeRemotelyDataSource extends BaseHomeRemotelyDataSource {
   @override
-  Future<Unit> SendHealthInsuranceRequest(
+  Future<Map<String, dynamic>> SendHealthInsuranceRequest(
       HealthInsuranceModel healthInsuranceModel) async {
     final body = {
       "UID": healthInsuranceModel.uid,
-      "organization_id": healthInsuranceModel.organizationId,
-      "plan_id": healthInsuranceModel.planId,
+      "phone": healthInsuranceModel.phone,
       "name[]": healthInsuranceModel.name,
       "age[]": healthInsuranceModel.age,
       "relation[]": healthInsuranceModel.relation,
-      "price[]": healthInsuranceModel.price,
-      "gender[]": healthInsuranceModel.gende,
+      "healthLimit": healthInsuranceModel.healthLimit,
+      "gender": healthInsuranceModel.gender,
+      "healthBenefits[]": 17
     };
+    print(body['phone']);
+    print(body['name[]']);
+    print(body['age[]']);
+    print(body['relation[]']);
+    print(body['healthLimit']);
+    print(body['gender']);
+    print(body['healthBenefits[]']);
     try {
       final response = await Dio().post(
         options: Options(
@@ -59,11 +64,13 @@ class HomeRemotelyDataSource extends BaseHomeRemotelyDataSource {
         ConstantApi.healthInsurance,
         data: body,
       );
-      if (response.statusCode == 200) {
-        print('reset password success');
-        return Future.value(unit);
+      Map<String, dynamic> jsonData = response.data;
+
+      if (jsonData['status'] == 200) {
+        print(jsonData);
+        return jsonData; // Return response data
       } else {
-        throw Exception(Strings.resetPasswordFailed);
+        throw Exception('Request failed because ${jsonData['error']}');
       }
     } on DioException catch (e) {
       throw DioHelper.handleDioError(
@@ -356,6 +363,32 @@ class HomeRemotelyDataSource extends BaseHomeRemotelyDataSource {
     } on DioException catch (e) {
       throw DioHelper.handleDioError(
           dioError: e, endpointName: "HealthInsurance Request");
+    }
+  }
+
+  @override
+  Future<List<HealthDependincesModel>> Get_Health_Data() async {
+    Dio dio = Dio();
+    dio.interceptors.add(LogInterceptor(responseBody: true));
+
+    try {
+      Response response = await dio.get(ConstantApi.healthdata);
+
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> jsonResponse = response.data;
+        final List<dynamic> countriesJson = jsonResponse['data']["plans_data"];
+
+        // Convert JSON list to List<CountriesModel>
+        List<HealthDependincesModel> health = countriesJson.map((json) {
+          return HealthDependincesModel.fromJson(json);
+        }).toList();
+
+        return health;
+      } else {
+        throw Exception('Getting Car Data Failed: ${response.statusCode}');
+      }
+    } catch (e) {
+      throw Exception('Error fetching Car Data: ${e.toString()}');
     }
   }
 }

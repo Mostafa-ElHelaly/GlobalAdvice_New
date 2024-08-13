@@ -12,7 +12,7 @@ class CustomTextField extends StatelessWidget {
   Widget? prefixicon;
   String? labeltext;
   FocusNode? focusNode;
-
+  Function(String)? onSubmitted;
   int? maxLength;
 
   CustomTextField(
@@ -25,11 +25,13 @@ class CustomTextField extends StatelessWidget {
       this.prefixicon,
       this.labeltext,
       this.maxLength,
-      this.focusNode});
+      this.focusNode,
+      this.onSubmitted});
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      onSubmitted: onSubmitted,
       maxLength: maxLength,
       focusNode: focusNode,
       controller: controller,

@@ -24,8 +24,8 @@ class MedicalFormMainPersonData extends StatefulWidget {
 }
 
 class _MedicalFormMainPersonDataState extends State<MedicalFormMainPersonData> {
-  TextEditingController fullNameController = TextEditingController();
-  TextEditingController phoneController = TextEditingController();
+  late TextEditingController fullNameController;
+  late TextEditingController phoneController;
 
   @override
   void initState() {
@@ -117,7 +117,10 @@ class _MedicalFormMainPersonDataState extends State<MedicalFormMainPersonData> {
                   onTap: () {
                     PersistentNavBarNavigator.pushNewScreen(
                       context,
-                      screen: const MedicalForm2(),
+                      screen: MedicalForm2(
+                        name: fullNameController.text,
+                        phone: phoneController.text,
+                      ),
                       withNavBar: false,
                       pageTransitionAnimation: PageTransitionAnimation.fade,
                     );
