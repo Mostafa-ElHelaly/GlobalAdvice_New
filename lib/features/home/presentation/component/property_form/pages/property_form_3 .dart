@@ -15,7 +15,6 @@ import 'package:globaladvice_new/core/resource_manger/asset_path.dart';
 import 'package:globaladvice_new/core/resource_manger/routs_manager.dart';
 import 'package:globaladvice_new/core/utils/config_size.dart';
 import 'package:globaladvice_new/core/widgets/main_button.dart';
-import 'package:globaladvice_new/features/home/presentation/component/life_form/widgets/Back_Button.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/property_data_bloc/property_data_bloc.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/property_data_bloc/property_data_event.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/property_data_bloc/property_data_state.dart';
@@ -25,7 +24,7 @@ import 'package:globaladvice_new/features/home/presentation/manager/property_ins
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'Prop_Prices_Page.dart';
+import 'package:globaladvice_new/features/home/presentation/component/property_form/pages/Prop_Prices_Page.dart';
 
 class PropertyForm3 extends StatefulWidget {
   const PropertyForm3(
