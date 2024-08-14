@@ -34,7 +34,7 @@ import '../../features/home/domain/use_case/property_policy_uc.dart';
 import '../../features/home/presentation/manager/car_data_bloc/car_data_bloc.dart';
 import '../../features/home/presentation/manager/car_policy/car_policy_bloc.dart';
 import '../../features/home/presentation/manager/health_policy/health_policy_bloc.dart';
-import '../../features/home/presentation/manager/property_policy/property_policy_bloc.dart';
+import 'package:globaladvice_new/features/home/presentation/manager/property_policy/property_policy_bloc.dart';
 
 final getIt = GetIt.instance;
 
