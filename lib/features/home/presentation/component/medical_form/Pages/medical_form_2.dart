@@ -126,7 +126,7 @@ class _MedicalForm2State extends State<MedicalForm2> {
   Widget build(BuildContext context) {
     List<String> siblingrelations = [
       AppLocalizations.of(context)!.spouse,
-      AppLocalizations.of(context)!.child,
+      AppLocalizations.of(context)!.children,
     ];
     List<String> genderstype = [
       AppLocalizations.of(context)!.male,
@@ -172,10 +172,9 @@ class _MedicalForm2State extends State<MedicalForm2> {
     }
 
     List<String> modify_genders_list() {
-      genders = genderselectedValues
-          .map((e) => return_gender(e.toString().toLowerCase()))
-          .toList();
-      genders!.insert(0, return_gender(selectedValue!.toLowerCase()));
+      genders =
+          genderselectedValues.map((e) => return_gender(e.toString())).toList();
+      genders!.insert(0, return_gender(selectedValue!));
       return genders!;
     }
 
