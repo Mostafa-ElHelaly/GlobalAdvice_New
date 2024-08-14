@@ -1,7 +1,5 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:globaladvice_new/core/resource_manger/asset_path.dart';
 import 'package:globaladvice_new/core/resource_manger/color_manager.dart';
 import 'package:globaladvice_new/core/resource_manger/locale_keys.g.dart';
@@ -10,18 +8,15 @@ import 'package:globaladvice_new/core/utils/translation_provider.dart';
 import 'package:globaladvice_new/core/widgets/Loading.dart';
 import 'package:globaladvice_new/core/widgets/custom_text_field.dart';
 import 'package:globaladvice_new/core/widgets/main_button.dart';
-import 'package:globaladvice_new/features/auth/presentation/component/create_account/create_account_screen.dart';
 import 'package:globaladvice_new/features/auth/presentation/component/forget_password/forget_password_screen.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../core/resource_manger/routs_manager.dart';
-import '../../../core/widgets/snack_bar.dart';
-import 'manager/login_bloc/login_bloc.dart';
-import 'manager/login_bloc/login_event.dart';
-import 'manager/login_bloc/login_state.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:globaladvice_new/core/resource_manger/routs_manager.dart';
+import 'package:globaladvice_new/core/widgets/snack_bar.dart';
+import 'package:globaladvice_new/features/auth/presentation/manager/login_bloc/login_bloc.dart';
+import 'package:globaladvice_new/features/auth/presentation/manager/login_bloc/login_event.dart';
+import 'package:globaladvice_new/features/auth/presentation/manager/login_bloc/login_state.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoginScreen extends StatefulWidget {

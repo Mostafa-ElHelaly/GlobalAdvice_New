@@ -9,9 +9,8 @@ import 'package:globaladvice_new/features/home/presentation/component/property_f
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../../../core/widgets/Custom_Drawer.dart';
-import '../medical_form/Pages/medical_form_1.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:globaladvice_new/core/widgets/Custom_Drawer.dart';
+import 'package:globaladvice_new/features/home/presentation/component/medical_form/Pages/medical_form_1.dart';
 
 class CardScreen extends StatefulWidget {
   const CardScreen({super.key});

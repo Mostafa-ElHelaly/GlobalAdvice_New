@@ -128,7 +128,7 @@ class _MedicalPricesState extends State<MedicalPrices> {
         child: Scaffold(
           body: SafeArea(
             child: SingleChildScrollView(
-              physics: ClampingScrollPhysics(),
+              physics: const ClampingScrollPhysics(),
               child: Column(
                 children: [
                   Row(
@@ -138,7 +138,7 @@ class _MedicalPricesState extends State<MedicalPrices> {
                         onPressed: () {
                           Navigator.of(context).pop();
                         },
-                        icon: Icon(Icons.arrow_back_ios_new_rounded),
+                        icon: const Icon(Icons.arrow_back_ios_new_rounded),
                       ),
                       Text(
                         AppLocalizations.of(context)!.listofhealthprice,
@@ -153,7 +153,7 @@ class _MedicalPricesState extends State<MedicalPrices> {
                   ),
                   widget.total_price.isNotEmpty
                       ? ListView.builder(
-                          physics: ClampingScrollPhysics(),
+                          physics: const ClampingScrollPhysics(),
                           itemCount: widget.data_length,
                           shrinkWrap: true,
                           itemBuilder: (context, index) {
@@ -207,7 +207,7 @@ class _MedicalPricesState extends State<MedicalPrices> {
                                           itemCount: get_names(index).length,
                                           shrinkWrap: true,
                                           physics:
-                                              NeverScrollableScrollPhysics(),
+                                              const NeverScrollableScrollPhysics(),
                                           itemBuilder: (context, index2) {
                                             return Column(
                                               crossAxisAlignment:
@@ -229,7 +229,7 @@ class _MedicalPricesState extends State<MedicalPrices> {
                                                         AppLocalizations.of(
                                                                 context)!
                                                             .egy_year,
-                                                    style: TextStyle(
+                                                    style: const TextStyle(
                                                       color: ColorManager
                                                           .kSecondryGreenLight,
                                                     ),
@@ -262,7 +262,7 @@ class _MedicalPricesState extends State<MedicalPrices> {
                                           style: label_style,
                                         ),
                                         ListTile(
-                                          leading: Icon(
+                                          leading: const Icon(
                                             Icons.safety_check_outlined,
                                             color: ColorManager.secondaryColor,
                                           ),
@@ -287,7 +287,7 @@ class _MedicalPricesState extends State<MedicalPrices> {
                                                   .length,
                                           shrinkWrap: true,
                                           physics:
-                                              NeverScrollableScrollPhysics(),
+                                              const NeverScrollableScrollPhysics(),
                                           itemBuilder: (context, index3) {
                                             return ListTile(
                                               contentPadding:
@@ -309,7 +309,7 @@ class _MedicalPricesState extends State<MedicalPrices> {
                                                   fontWeight: FontWeight.bold,
                                                 ),
                                               ),
-                                              leading: Icon(
+                                              leading: const Icon(
                                                 Icons
                                                     .health_and_safety_outlined,
                                                 color: ColorManager

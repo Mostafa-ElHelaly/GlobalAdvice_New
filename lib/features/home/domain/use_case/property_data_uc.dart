@@ -5,14 +5,14 @@ import 'package:globaladvice_new/features/home/domain/repo/homeBaseRepo.dart';
 import 'package:globaladvice_new/core/base_use_case/base_use_case.dart';
 import 'package:globaladvice_new/core/error/failure.dart';
 
-class PropertyDataUsecase
-    extends BaseUseCase<List<PropertyDependincesData>, Noparamiter> {
+class PropertyDataUseCase
+    extends BaseUseCase<List<PropertyDependincesDataModel>, Noparamiter> {
   BaseHomeRepository baseRepository;
 
-  PropertyDataUsecase({required this.baseRepository});
+  PropertyDataUseCase({required this.baseRepository});
 
   @override
-  Future<Either<List<PropertyDependincesData>, Failure>> call(
+  Future<Either<List<PropertyDependincesDataModel>, Failure>> call(
       Noparamiter parameter) async {
     final result = await baseRepository.Get_Property_Data();
     return result;

@@ -3,9 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:globaladvice_new/core/utils/api_helper.dart';
 import 'package:globaladvice_new/core/utils/constant_api.dart';
 import 'package:globaladvice_new/core/utils/methods.dart';
-import 'package:globaladvice_new/core/widgets/snack_bar.dart';
 import 'package:globaladvice_new/features/auth/data/model/login_model.dart';
-import 'package:globaladvice_new/core/error/failures_strings.dart';
 
 abstract class BaseRemotelyDataSource {
   Future<Map<String, dynamic>> loginWithEmailAndPassword(LoginModel authModel);

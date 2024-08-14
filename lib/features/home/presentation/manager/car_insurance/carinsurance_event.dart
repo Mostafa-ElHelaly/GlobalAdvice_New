@@ -1,6 +1,6 @@
 abstract class ResetEvent {}
 
-class CarinsuranceblocEvent extends ResetEvent {
+class CarInsuranceBlocEvent extends ResetEvent {
   String? uid;
   int? price;
   String? isLicensed;
@@ -8,7 +8,7 @@ class CarinsuranceblocEvent extends ResetEvent {
   int? motorDeductibles;
   int? motorManufactureYear;
   int? phone;
-  CarinsuranceblocEvent({
+  CarInsuranceBlocEvent({
     this.uid,
     this.price,
     this.isLicensed,

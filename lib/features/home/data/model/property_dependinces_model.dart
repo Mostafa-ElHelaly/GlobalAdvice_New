@@ -1,4 +1,4 @@
-class PropertyDependincesData {
+class PropertyDependincesDataModel {
   String? id;
   String? service;
   String? name;
@@ -11,7 +11,7 @@ class PropertyDependincesData {
   String? updatestamp;
   List<PlansDataValues>? plansDataValues;
 
-  PropertyDependincesData(
+  PropertyDependincesDataModel(
       {this.id,
       this.service,
       this.name,
@@ -24,7 +24,7 @@ class PropertyDependincesData {
       this.updatestamp,
       this.plansDataValues});
 
-  PropertyDependincesData.fromJson(Map<String, dynamic> json) {
+  PropertyDependincesDataModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     service = json['service'];
     name = json['name'];

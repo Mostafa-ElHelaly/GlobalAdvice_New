@@ -1,26 +1,26 @@
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 
-sealed class CarPolicyblocState extends Equatable {
-  const CarPolicyblocState();
+sealed class CarPolicyBlocState extends Equatable {
+  const CarPolicyBlocState();
 
   @override
   List<Object> get props => [];
 }
 
-final class CarPolicyblocInitial extends CarPolicyblocState {}
+final class CarPolicyBlocInitial extends CarPolicyBlocState {}
 
-final class CarPolicyRequestLoadingState extends CarPolicyblocState {
+final class CarPolicyRequestLoadingState extends CarPolicyBlocState {
   const CarPolicyRequestLoadingState();
 }
 
-final class CarPolicyRequestErrorState extends CarPolicyblocState {
+final class CarPolicyRequestErrorState extends CarPolicyBlocState {
   final String errorMessage;
 
   const CarPolicyRequestErrorState({required this.errorMessage});
 }
 
-final class CarPolicySuccessState extends CarPolicyblocState {
+final class CarPolicySuccessState extends CarPolicyBlocState {
   final Unit CarPolicyModel;
 
   const CarPolicySuccessState({required this.CarPolicyModel});

@@ -1,4 +1,4 @@
-class PropertyPolicyrequest {
+class PropertyPolicyRequestModel {
   String? uID;
   int? organizationId;
   int? planId;
@@ -8,7 +8,7 @@ class PropertyPolicyrequest {
   int? tenant_price;
   String? address;
 
-  PropertyPolicyrequest(
+  PropertyPolicyRequestModel(
       {this.uID,
       this.organizationId,
       this.planId,
@@ -18,7 +18,7 @@ class PropertyPolicyrequest {
       this.tenant_price,
       this.address});
 
-  PropertyPolicyrequest.fromJson(Map<String, dynamic> json) {
+  PropertyPolicyRequestModel.fromJson(Map<String, dynamic> json) {
     uID = json['UID'];
     organizationId = json['organization_id'];
     planId = json['plan_id'];
