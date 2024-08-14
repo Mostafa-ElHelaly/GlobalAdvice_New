@@ -15,4 +15,5 @@ class ConstantApi {
   static const String carpolicy = "${baseUrl}client/motor2/request";
   static const String propertypolicy = "${baseUrl}client/home/request";
   static const String healthdata = "${baseUrl}client/health/dependants";
+  static const String healthpolicy = "${baseUrl}client/health/request";
 }

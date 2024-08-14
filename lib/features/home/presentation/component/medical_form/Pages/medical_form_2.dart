@@ -1,16 +1,20 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:globaladvice_new/core/resource_manger/color_manager.dart';
 import 'package:globaladvice_new/features/home/presentation/component/medical_form/Widgets/Gender_Drop_Down_Widget.dart';
 import 'package:globaladvice_new/features/home/presentation/component/medical_form/Widgets/medical_appbar.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
-import 'package:globaladvice_new/core/resource_manger/asset_path.dart';
-import 'package:globaladvice_new/core/utils/config_size.dart';
-import 'package:globaladvice_new/core/widgets/custom_text_field.dart';
-import 'package:globaladvice_new/core/widgets/main_button.dart';
+import '../../../../../../core/resource_manger/asset_path.dart';
+import '../../../../../../core/resource_manger/locale_keys.g.dart';
+import '../../../../../../core/utils/config_size.dart';
+import '../../../../../../core/widgets/custom_text_field.dart';
+import '../../../../../../core/widgets/main_button.dart';
 
-import 'package:globaladvice_new/features/home/presentation/component/medical_form/Pages/medical_form_3.dart';
+import '../../../../../../core/widgets/snack_bar.dart';
+import '../../../home_screen.dart';
+import 'medical_form_3.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MedicalForm2 extends StatefulWidget {
@@ -30,12 +34,12 @@ class _MedicalForm2State extends State<MedicalForm2> {
   String? selectedValue;
 
   DateTime selectedDate = DateTime.now();
-  int addCount = 0;
+  int addcount = 0;
   List<TextEditingController> birthdayControllers = [];
-  List<TextEditingController> fullNameControllers = [];
-  List<String?> genderSelectedValues =
+  List<TextEditingController> fullnameControllers = [];
+  List<String?> genderselectedValues =
       []; // Initialize list for dropdown selected values
-  List<String?> relationSelectedValues =
+  List<String?> relationselectedValues =
       []; // Initialize list for dropdown selected values
 
   List<String>? genders = [];
@@ -55,21 +59,21 @@ class _MedicalForm2State extends State<MedicalForm2> {
 
     // genders.clear();
 
-    // Initialize controllers based on add count
+    // Initialize controllers based on addcount
     _initializeControllers();
   }
 
   void _initializeControllers() {
     birthdayControllers.clear();
-    fullNameControllers.clear();
-    genderSelectedValues.clear();
-    relationSelectedValues.clear();
+    fullnameControllers.clear();
+    genderselectedValues.clear();
+    relationselectedValues.clear();
 
-    for (int i = 0; i < addCount; i++) {
+    for (int i = 0; i < addcount; i++) {
       birthdayControllers.add(TextEditingController());
-      fullNameControllers.add(TextEditingController());
-      genderSelectedValues.add(null); // Initialize dropdown selected values
-      relationSelectedValues.add(null); // Initialize dropdown selected values
+      fullnameControllers.add(TextEditingController());
+      genderselectedValues.add(null); // Initialize dropdown selected values
+      relationselectedValues.add(null); // Initialize dropdown selected values
     }
   }
 
@@ -80,7 +84,7 @@ class _MedicalForm2State extends State<MedicalForm2> {
     for (var controller in birthdayControllers) {
       controller.dispose();
     }
-    for (var controller in fullNameControllers) {
+    for (var controller in fullnameControllers) {
       controller.dispose();
     }
     super.dispose();
@@ -122,9 +126,9 @@ class _MedicalForm2State extends State<MedicalForm2> {
   Widget build(BuildContext context) {
     List<String> siblingrelations = [
       AppLocalizations.of(context)!.spouse,
-      AppLocalizations.of(context)!.children,
+      AppLocalizations.of(context)!.child,
     ];
-    List<String> gendersType = [
+    List<String> genderstype = [
       AppLocalizations.of(context)!.male,
       AppLocalizations.of(context)!.female,
     ];
@@ -157,22 +161,35 @@ class _MedicalForm2State extends State<MedicalForm2> {
       }
     }
 
+    String return_relation(String relation) {
+      if (relation == 'زوج') {
+        return 'spouse';
+      } else if (relation == 'ابن') {
+        return 'children';
+      } else {
+        return relation;
+      }
+    }
+
     List<String> modify_genders_list() {
-      genders =
-          genderSelectedValues.map((e) => return_gender(e.toString())).toList();
-      genders!.insert(0, return_gender(selectedValue!));
+      genders = genderselectedValues
+          .map((e) => return_gender(e.toString().toLowerCase()))
+          .toList();
+      genders!.insert(0, return_gender(selectedValue!.toLowerCase()));
       return genders!;
     }
 
     List<String> modify_names_list() {
-      genders = fullNameControllers.map((e) => e.text.toString()).toList();
+      genders = fullnameControllers.map((e) => e.text.toString()).toList();
       genders!.insert(0, widget.name);
       return genders!;
     }
 
     List<String> modify_realtions_list() {
-      relations = genderSelectedValues.map((e) => e.toString()).toList();
-      relations!.insert(0, return_gender('self'));
+      relations = relationselectedValues
+          .map((e) => return_relation(e.toString().toLowerCase()))
+          .toList();
+      relations!.insert(0, 'self');
       return relations!;
     }
 
@@ -279,7 +296,7 @@ class _MedicalForm2State extends State<MedicalForm2> {
                                 color: Theme.of(context).hintColor,
                               ),
                             ),
-                            items: gendersType
+                            items: genderstype
                                 .map((String item) => DropdownMenuItem<String>(
                                       value: item,
                                       child: Text(
@@ -290,10 +307,10 @@ class _MedicalForm2State extends State<MedicalForm2> {
                                       ),
                                     ))
                                 .toList(),
-                            value: genderSelectedValues[index],
+                            value: genderselectedValues[index],
                             onChanged: (value) {
                               setState(() {
-                                genderSelectedValues[index] = value;
+                                genderselectedValues[index] = value;
                               });
                             },
                             buttonStyleData: ButtonStyleData(
@@ -338,10 +355,10 @@ class _MedicalForm2State extends State<MedicalForm2> {
                                       ),
                                     ))
                                 .toList(),
-                            value: relationSelectedValues[index],
+                            value: relationselectedValues[index],
                             onChanged: (value) {
                               setState(() {
-                                relationSelectedValues[index] = value;
+                                relationselectedValues[index] = value;
                               });
                             },
                             buttonStyleData: ButtonStyleData(
@@ -367,11 +384,11 @@ class _MedicalForm2State extends State<MedicalForm2> {
                       CustomTextField(
                         labeltext: AppLocalizations.of(context)!.fullName,
                         prefixicon: const Icon(Icons.person),
-                        controller: fullNameControllers[index],
+                        controller: fullnameControllers[index],
                         inputType: TextInputType.name,
                       ),
                       SizedBox(height: ConfigSize.defaultSize! * 2),
-                      index == addCount - 1
+                      index == addcount - 1
                           ? const SizedBox.shrink()
                           : const Divider(
                               thickness: 3, color: ColorManager.mainColor),
@@ -379,29 +396,29 @@ class _MedicalForm2State extends State<MedicalForm2> {
                     ],
                   );
                 },
-                itemCount: addCount,
+                itemCount: addcount,
                 shrinkWrap: true,
               ),
               MainButton(
                 onTap: () {
                   setState(() {
-                    addCount++;
+                    addcount++;
                     _initializeControllers(); // Initialize controllers and values when addcount changes
                   });
                 },
                 title: AppLocalizations.of(context)!.add,
               ),
               Visibility(
-                visible: addCount > 0,
+                visible: addcount > 0,
                 child: SizedBox(height: ConfigSize.defaultSize! * 2),
               ),
               Visibility(
-                visible: addCount > 0,
+                visible: addcount > 0,
                 child: MainButton(
                   onTap: () {
                     setState(() {
-                      if (addCount > 0) {
-                        addCount--;
+                      if (addcount > 0) {
+                        addcount--;
                         _initializeControllers(); // Initialize controllers and values when addcount changes
                       }
                     });
@@ -414,19 +431,56 @@ class _MedicalForm2State extends State<MedicalForm2> {
                     EdgeInsets.symmetric(vertical: ConfigSize.defaultSize! * 2),
                 child: MainButton(
                   onTap: () {
-                    PersistentNavBarNavigator.pushNewScreen(
-                      context,
-                      screen: MedicalForm3(
-                        phone: widget.phone,
-                        gender: selectedValue!,
-                        relations: modify_realtions_list(),
-                        ages: modify_ages_list(),
-                        names: modify_names_list(),
-                        genders: modify_genders_list(),
-                      ),
-                      withNavBar: false,
-                      pageTransitionAnimation: PageTransitionAnimation.fade,
-                    );
+                    print(addcount);
+                    print(selectedValue);
+                    print(birthdayController.text);
+                    if (addcount > 0 &&
+                        selectedValue != null &&
+                        modify_ages_list().isNotEmpty &&
+                        modify_names_list().isNotEmpty &&
+                        modify_genders_list().isNotEmpty &&
+                        modify_realtions_list().isNotEmpty) {
+                      PersistentNavBarNavigator.pushNewScreen(
+                        context,
+                        screen: MedicalForm3(
+                          phone: widget.phone,
+                          gender: selectedValue == 'ذكر'
+                              ? 'male'
+                              : selectedValue == 'أنثى'
+                                  ? 'female'
+                                  : selectedValue!.toLowerCase(),
+                          relations: modify_realtions_list(),
+                          ages: modify_ages_list(),
+                          names: modify_names_list(),
+                          genders: modify_genders_list(),
+                        ),
+                        withNavBar: false,
+                        pageTransitionAnimation: PageTransitionAnimation.fade,
+                      );
+                    } else if (addcount == 0 &&
+                        selectedValue != null &&
+                        birthdayController.text.isNotEmpty) {
+                      PersistentNavBarNavigator.pushNewScreen(
+                        context,
+                        screen: MedicalForm3(
+                          phone: widget.phone,
+                          gender: selectedValue == 'ذكر'
+                              ? 'male'
+                              : selectedValue == 'أنثى'
+                                  ? 'female'
+                                  : selectedValue!.toLowerCase(),
+                          relations: modify_realtions_list(),
+                          ages: modify_ages_list(),
+                          names: modify_names_list(),
+                          genders: modify_genders_list(),
+                        ),
+                        withNavBar: false,
+                        pageTransitionAnimation: PageTransitionAnimation.fade,
+                      );
+                    } else {
+                      errorSnackBar(context,
+                          AppLocalizations.of(context)!.errorFillFields);
+                    }
                   },
                   title: AppLocalizations.of(context)!.next,
                 ),

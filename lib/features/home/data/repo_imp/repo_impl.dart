@@ -5,6 +5,7 @@ import 'package:globaladvice_new/features/home/data/model/car_insurance_request_
 import 'package:globaladvice_new/features/home/data/model/car_policy_request_model.dart';
 import 'package:globaladvice_new/features/home/data/model/health_dependinces_model.dart';
 import 'package:globaladvice_new/features/home/data/model/health_insurance_model.dart';
+import 'package:globaladvice_new/features/home/data/model/health_policy_request_model.dart';
 import 'package:globaladvice_new/features/home/data/model/other_forms_model.dart';
 import 'package:globaladvice_new/features/home/data/model/property_dependinces_model.dart';
 import 'package:globaladvice_new/features/home/data/model/property_model.dart';
@@ -133,6 +134,18 @@ class HomeRepositoryImp extends BaseHomeRepository {
       Get_Health_Data() async {
     try {
       final result = await baseHomeRemotelyDataSource.Get_Health_Data();
+      return Left(result);
+    } on Exception catch (e) {
+      return right(DioHelper.buildFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<Unit, Failure>> HealthPolicyRequest(
+      HealthPolicyrequest otherFormsModel) async {
+    try {
+      final result =
+          await baseHomeRemotelyDataSource.HealthPolicyRequest(otherFormsModel);
       return Left(result);
     } on Exception catch (e) {
       return right(DioHelper.buildFailure(e));

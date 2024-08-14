@@ -8,14 +8,16 @@ import 'package:globaladvice_new/features/home/presentation/manager/health_insur
 import 'package:globaladvice_new/features/home/presentation/manager/health_insurance_request/healthinsurancebloc_event.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/health_insurance_request/healthinsurancebloc_state.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:globaladvice_new/core/resource_manger/asset_path.dart';
 import 'package:globaladvice_new/core/utils/config_size.dart';
 import 'package:globaladvice_new/core/widgets/main_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:globaladvice_new/core/resource_manger/color_manager.dart';
-import 'package:globaladvice_new/core/widgets/snack_bar.dart';
-import 'package:globaladvice_new/features/home/presentation/manager/health_data/health_data_event.dart';
-import 'package:globaladvice_new/features/home/presentation/component/medical_form/Pages/Mdeical_Prices.dart';
+
+import '../../../../../../core/resource_manger/color_manager.dart';
+import '../../../../../../core/widgets/snack_bar.dart';
+import '../../../manager/health_data/health_data_event.dart';
+import 'Mdeical_Prices.dart';
 
 class MedicalForm3 extends StatefulWidget {
   const MedicalForm3({
@@ -27,10 +29,9 @@ class MedicalForm3 extends StatefulWidget {
     required this.gender,
     this.genders,
   });
-
   final String phone;
   final String gender;
-  final List<String?> relations;
+  final List<String>? relations;
   final List<int>? ages;
   final List<String>? names;
   final List<String>? genders;
@@ -55,7 +56,7 @@ class _MedicalForm3State extends State<MedicalForm3> {
     print(widget.ages);
     print(widget.genders);
     _initSharedPreferences();
-    BlocProvider.of<HealthDataBloc>(context).add(GetAllHealthDataEvent());
+    BlocProvider.of<HealthDataBloc>(context).add(GetallHealthDataEvent());
     super.initState();
   }
 
@@ -63,11 +64,52 @@ class _MedicalForm3State extends State<MedicalForm3> {
   Widget build(BuildContext context) {
     var localetype = Localizations.localeOf(context).languageCode;
 
-    return BlocListener<HealthInsuranceBloc, HealthinsuranceblocState>(
+    return BlocListener<HealthinsuranceBloc, HealthinsuranceblocState>(
         listener: (context, state) {
           if (state is HealthInsuranceSuccessState) {
-            Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => const MedicalPrices()));
+            int data_length = state.healthInsuranceModel['data'].length;
+            int amounts_length = state.healthInsuranceModel['data']
+                .map((e) => e["persons"])
+                .length;
+            List<dynamic> org_id = state.healthInsuranceModel['data']
+                .map((e) => e['org_id'])
+                .toList();
+            List<dynamic> plan_id = state.healthInsuranceModel['data']
+                .map((e) => e['plan_id'])
+                .toList();
+            List<dynamic> total_price = state.healthInsuranceModel['data']
+                .map((e) => e['total'])
+                .toList();
+            List<dynamic> persons = state.healthInsuranceModel['data']
+                .map((e) => e["persons"])
+                .toList();
+            List<dynamic> health_limit = state.healthInsuranceModel['data']
+                .map((e) => e["healthLimit"])
+                .toList();
+            List<dynamic> health_penefits = state.healthInsuranceModel['data']
+                .map((e) => e["healthBenefits"])
+                .toList();
+            List<dynamic> plan_name = state.healthInsuranceModel['data']
+                .map((e) =>
+                    localetype == 'ar' ? e['plan_name_alt'] : e['plan_name'])
+                .toList();
+
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => MedicalPrices(
+                      amounts_length: amounts_length,
+                      ages: widget.ages,
+                      relations: widget.relations,
+                      names: widget.names,
+                      org_id: org_id,
+                      plan_id: plan_id,
+                      data_length: data_length,
+                      health_penefits: health_penefits,
+                      genders: widget.genders,
+                      health_limit: health_limit,
+                      persons: persons,
+                      total_price: total_price,
+                      plan_name: plan_name,
+                    )));
           } else if (state is HealthinsuranceRequestErrorState) {
             errorSnackBar(context, state.errorMessage);
           } else if (state is HealthinsuranceRequestLoadingState) {}
@@ -135,8 +177,8 @@ class _MedicalForm3State extends State<MedicalForm3> {
                                 ),
                               ),
                               items: dropdownItems,
-                              value: selectedValue,
-                              // Set this to the currently selected value
+                              value:
+                                  selectedValue, // Set this to the currently selected value
                               onChanged: (String? value) {
                                 setState(() {
                                   selectedValue = value;
@@ -177,16 +219,21 @@ class _MedicalForm3State extends State<MedicalForm3> {
                         vertical: ConfigSize.defaultSize! * 1),
                     child: MainButton(
                       onTap: () {
-                        BlocProvider.of<HealthInsuranceBloc>(context)
-                            .add(HealthInsuranceBlocEvent(
-                          uid: prefs.getString("user_uid"),
-                          name: widget.names,
-                          age: widget.ages,
-                          relation: widget.relations,
-                          gender: widget.gender,
-                          healthLimit: int.parse(selectedValue!),
-                          phone: widget.phone,
-                        ));
+                        if (selectedValue != null) {
+                          BlocProvider.of<HealthinsuranceBloc>(context)
+                              .add(HealthinsuranceblocEvent(
+                            uid: prefs.getString("user_uid"),
+                            name: widget.names,
+                            age: widget.ages,
+                            relation: widget.relations,
+                            gender: widget.gender,
+                            healthLimit: int.parse(selectedValue!),
+                            phone: widget.phone,
+                          ));
+                        } else {
+                          errorSnackBar(context,
+                              AppLocalizations.of(context)!.errorFillFields);
+                        }
                       },
                       title: AppLocalizations.of(context)!.submit,
                     ),

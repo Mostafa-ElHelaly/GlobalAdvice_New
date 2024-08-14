@@ -5,31 +5,33 @@ import 'package:globaladvice_new/features/home/data/model/health_insurance_model
 
 import 'package:globaladvice_new/core/utils/api_helper.dart';
 import 'package:globaladvice_new/core/utils/constant_api.dart';
+import 'package:globaladvice_new/features/home/data/model/health_policy_request_model.dart';
 import 'package:globaladvice_new/features/home/data/model/property_model.dart';
 
 import 'package:globaladvice_new/features/home/data/model/life_insurance_model.dart';
 import 'package:globaladvice_new/features/home/data/model/other_forms_model.dart';
 import 'package:globaladvice_new/features/home/data/model/property_policy_request_model.dart';
 
-import 'package:globaladvice_new/features/home/data/model/car_dependinces_model.dart';
-import 'package:globaladvice_new/features/home/data/model/car_insurance_request_model.dart';
-import 'package:globaladvice_new/features/home/data/model/health_dependinces_model.dart';
-import 'package:globaladvice_new/features/home/data/model/property_dependinces_model.dart';
+import '../model/car_dependinces_model.dart';
+import '../model/car_insurance_request_model.dart';
+import '../model/health_dependinces_model.dart';
+import '../model/property_dependinces_model.dart';
 
 abstract class BaseHomeRemotelyDataSource {
   Future<Map<String, dynamic>> SendHealthInsuranceRequest(
       HealthInsuranceModel healthInsuranceModel);
   Future<Map<String, dynamic>> SendCarInsuranceRequest(
-      CarInusranceRequestModel carInusranceRequest);
+      CarInusranceRequest carInusranceRequest);
   Future<Map<String, dynamic>> SendPropertyInsuranceRequest(
       PropertyModel propertyModel);
   Future<Unit> SendLifeInsuranceRequest(LifeInsuranceModel lifeInsuranceModel);
   Future<Unit> SendAnotherInsuranceRequest(OtherFormsModel otherFormsModel);
-  Future<Unit> CarPolicyRequest(CarPolicyrequestModel carPolicyRequest);
+  Future<Unit> CarPolicyRequest(CarPolicyrequest carPolicyRequest);
+  Future<Unit> HealthPolicyRequest(HealthPolicyrequest carPolicyRequest);
   Future<Unit> PropertyPolicyRequest(
-      PropertyPolicyRequestModel propertyPolicyRequest);
-  Future<List<CarDataModel>> Get_Car_Data();
-  Future<List<PropertyDependincesDataModel>> Get_Property_Data();
+      PropertyPolicyrequest propertyPolicyRequest);
+  Future<List<CarData>> Get_Car_Data();
+  Future<List<PropertyDependincesData>> Get_Property_Data();
   Future<List<HealthDependincesModel>> Get_Health_Data();
 }
 
@@ -80,7 +82,7 @@ class HomeRemotelyDataSource extends BaseHomeRemotelyDataSource {
 
   @override
   Future<Map<String, dynamic>> SendCarInsuranceRequest(
-      CarInusranceRequestModel carInusranceRequest) async {
+      CarInusranceRequest carInusranceRequest) async {
     final body = {
       'UID': carInusranceRequest.uid,
       'price': carInusranceRequest.price,
@@ -233,7 +235,7 @@ class HomeRemotelyDataSource extends BaseHomeRemotelyDataSource {
   }
 
   @override
-  Future<List<CarDataModel>> Get_Car_Data() async {
+  Future<List<CarData>> Get_Car_Data() async {
     Dio dio = Dio();
     dio.interceptors.add(LogInterceptor(responseBody: true));
 
@@ -245,8 +247,8 @@ class HomeRemotelyDataSource extends BaseHomeRemotelyDataSource {
         final List<dynamic> countriesJson = jsonResponse['data']["plans_data"];
 
         // Convert JSON list to List<CountriesModel>
-        List<CarDataModel> countries = countriesJson.map((json) {
-          return CarDataModel.fromJson(json);
+        List<CarData> countries = countriesJson.map((json) {
+          return CarData.fromJson(json);
         }).toList();
 
         return countries;
@@ -259,7 +261,7 @@ class HomeRemotelyDataSource extends BaseHomeRemotelyDataSource {
   }
 
   @override
-  Future<List<PropertyDependincesDataModel>> Get_Property_Data() async {
+  Future<List<PropertyDependincesData>> Get_Property_Data() async {
     Dio dio = Dio();
     dio.interceptors.add(LogInterceptor(responseBody: true));
 
@@ -271,8 +273,8 @@ class HomeRemotelyDataSource extends BaseHomeRemotelyDataSource {
         final List<dynamic> countriesJson = jsonResponse['data']["plans_data"];
 
         // Convert JSON list to List<CountriesModel>
-        List<PropertyDependincesDataModel> countries = countriesJson.map((json) {
-          return PropertyDependincesDataModel.fromJson(json);
+        List<PropertyDependincesData> countries = countriesJson.map((json) {
+          return PropertyDependincesData.fromJson(json);
         }).toList();
 
         return countries;
@@ -285,7 +287,7 @@ class HomeRemotelyDataSource extends BaseHomeRemotelyDataSource {
   }
 
   @override
-  Future<Unit> CarPolicyRequest(CarPolicyrequestModel carPolicyRequest) async {
+  Future<Unit> CarPolicyRequest(CarPolicyrequest carPolicyRequest) async {
     final body = {
       "UID": carPolicyRequest.uID,
       "organization_id": carPolicyRequest.organizationId,
@@ -322,7 +324,7 @@ class HomeRemotelyDataSource extends BaseHomeRemotelyDataSource {
 
   @override
   Future<Unit> PropertyPolicyRequest(
-      PropertyPolicyRequestModel propertyPolicyRequest) async {
+      PropertyPolicyrequest propertyPolicyRequest) async {
     final body = {
       "UID": propertyPolicyRequest.uID,
       "organization_id": propertyPolicyRequest.organizationId,
@@ -389,6 +391,49 @@ class HomeRemotelyDataSource extends BaseHomeRemotelyDataSource {
       }
     } catch (e) {
       throw Exception('Error fetching Car Data: ${e.toString()}');
+    }
+  }
+
+  @override
+  Future<Unit> HealthPolicyRequest(HealthPolicyrequest carPolicyRequest) async {
+    final body = {
+      "UID": carPolicyRequest.uID,
+      "organization_id": carPolicyRequest.organizationId,
+      "plan_id": carPolicyRequest.planId,
+      "price[]": carPolicyRequest.price,
+      "relation[]": carPolicyRequest.relations,
+      "age[]": carPolicyRequest.age,
+      "name[]": carPolicyRequest.name,
+      "gender[]": carPolicyRequest.gender,
+    };
+    try {
+      final response = await Dio().post(
+        options: Options(
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+        ),
+        ConstantApi.healthpolicy,
+        data: body,
+      );
+      Map<String, dynamic> jsonData = response.data;
+      print(body['price[]']);
+      print(body['UID']);
+      print(body['relation[]']);
+      print(body['age[]']);
+      print(body['name[]']);
+      print(body['gender[]']);
+      print(body['plan_id']);
+      print(body['organization_id']);
+      if (jsonData['status'] == 200) {
+        print(jsonData);
+        return Future.value(unit);
+      } else {
+        throw Exception('Request failed because ${jsonData['data']}');
+      }
+    } on DioException catch (e) {
+      throw DioHelper.handleDioError(
+          dioError: e, endpointName: "HealthInsurance Request");
     }
   }
 }

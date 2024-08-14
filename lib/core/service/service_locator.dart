@@ -29,9 +29,11 @@ import 'package:globaladvice_new/features/home/presentation/manager/other_forms_
 import '../../features/home/domain/use_case/car_data_uc.dart';
 import '../../features/home/domain/use_case/car_policy_uc.dart';
 import '../../features/home/domain/use_case/health_data_uc.dart';
+import '../../features/home/domain/use_case/health_policy_uc.dart';
 import '../../features/home/domain/use_case/property_policy_uc.dart';
 import '../../features/home/presentation/manager/car_data_bloc/car_data_bloc.dart';
 import '../../features/home/presentation/manager/car_policy/car_policy_bloc.dart';
+import '../../features/home/presentation/manager/health_policy/health_policy_bloc.dart';
 import '../../features/home/presentation/manager/property_policy/property_policy_bloc.dart';
 
 final getIt = GetIt.instance;
@@ -48,8 +50,8 @@ class ServerLocator {
     getIt.registerLazySingleton(() => ResetPasswordBloc(
           passwordUseCase: getIt(),
         ));
-    getIt.registerLazySingleton(() => HealthInsuranceBloc(
-          healthInsuranceBlocUseCase: getIt(),
+    getIt.registerLazySingleton(() => HealthinsuranceBloc(
+          healthinsuranceblocUsecase: getIt(),
         ));
     getIt.registerLazySingleton(
         () => CarinsuranceBloc(healthinsuranceblocUsecase: getIt()));
@@ -67,11 +69,13 @@ class ServerLocator {
     getIt.registerLazySingleton(
         () => OtherInsuranceBloc(healthinsuranceblocUsecase: getIt()));
     getIt.registerLazySingleton(
-        () => CarPolicyBloc(carPolicyBlocUseCase: getIt()));
+        () => CarPolicyBloc(carpolicyblocUsecase: getIt()));
     getIt.registerLazySingleton(
         () => PropertyPolicyBloc(propertypolicyblocUsecase: getIt()));
     getIt.registerLazySingleton(
-        () => HealthDataBloc(HealthDataUseCase: getIt()));
+        () => HealthDataBloc(HealthdataUseCase: getIt()));
+    getIt.registerLazySingleton(
+        () => HealthPolicyBloc(healthpolicyblocUsecase: getIt()));
 
     //use_case
     getIt.registerLazySingleton(() => RegisterUseCase(baseRepository: getIt()));
@@ -79,24 +83,26 @@ class ServerLocator {
     getIt.registerLazySingleton(
         () => ResetPasswordUseCase(baseRepository: getIt()));
     getIt.registerLazySingleton(
-        () => HealthInsuranceUseCase(baseRepository: getIt()));
+        () => HealthInsuranceUsecase(baseRepository: getIt()));
     getIt.registerLazySingleton(
-        () => CarInsuranceUseCase(baseRepository: getIt()));
+        () => CarInsuranceUsecase(baseRepository: getIt()));
     getIt.registerLazySingleton(
         () => LifeInsuranceUseCase(baseRepository: getIt()));
     getIt.registerLazySingleton(
         () => PropertyInsuranceUseCase(baseRepository: getIt()));
     getIt.registerLazySingleton(
-        () => OtherInsuranceUseCase(baseRepository: getIt()));
-    getIt.registerLazySingleton(() => CarDataUseCase(baseRepository: getIt()));
+        () => OtherInsuranceUsecase(baseRepository: getIt()));
+    getIt.registerLazySingleton(() => CarDataUsecase(baseRepository: getIt()));
     getIt.registerLazySingleton(
-        () => PropertyDataUseCase(baseRepository: getIt()));
+        () => PropertyDataUsecase(baseRepository: getIt()));
     getIt
-        .registerLazySingleton(() => CarPolicyUseCase(baseRepository: getIt()));
+        .registerLazySingleton(() => CarPolicyUsecase(baseRepository: getIt()));
     getIt.registerLazySingleton(
-        () => PropertyPolicyUseCase(baseRepository: getIt()));
+        () => PropertyPolicyUsecase(baseRepository: getIt()));
     getIt.registerLazySingleton(
-        () => FetchingHealthDataUseCase(baseRepository: getIt()));
+        () => FetchingHealthDataUsecase(baseRepository: getIt()));
+    getIt.registerLazySingleton(
+        () => HealthPolicyUsecase(baseRepository: getIt()));
 
     //Remote Date
     getIt.registerLazySingleton<BaseRemotelyDataSource>(
