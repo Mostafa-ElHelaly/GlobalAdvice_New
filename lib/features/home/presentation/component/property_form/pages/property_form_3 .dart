@@ -1,21 +1,16 @@
 import 'dart:math';
 
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:globaladvice_new/core/resource_manger/color_manager.dart';
-import 'package:globaladvice_new/core/resource_manger/locale_keys.g.dart';
 import 'package:globaladvice_new/core/utils/translation_provider.dart';
-import 'package:globaladvice_new/core/widgets/Loading.dart';
 import 'package:globaladvice_new/core/widgets/snack_bar.dart';
 import 'package:globaladvice_new/features/home/presentation/component/property_form/widgets/Prop_insurance_appbar.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:globaladvice_new/core/resource_manger/asset_path.dart';
-import 'package:globaladvice_new/core/resource_manger/routs_manager.dart';
 import 'package:globaladvice_new/core/utils/config_size.dart';
 import 'package:globaladvice_new/core/widgets/main_button.dart';
-import 'package:globaladvice_new/features/home/presentation/component/life_form/widgets/Back_Button.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/property_data_bloc/property_data_bloc.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/property_data_bloc/property_data_event.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/property_data_bloc/property_data_state.dart';
@@ -25,7 +20,7 @@ import 'package:globaladvice_new/features/home/presentation/manager/property_ins
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'Prop_Prices_Page.dart';
+import 'package:globaladvice_new/features/home/presentation/component/property_form/pages/Prop_Prices_Page.dart';
 
 class PropertyForm3 extends StatefulWidget {
   const PropertyForm3(

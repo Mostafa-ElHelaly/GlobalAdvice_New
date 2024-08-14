@@ -78,7 +78,7 @@ class MyApp extends StatelessWidget {
             create: (context) => getIt<ResetPasswordBloc>(),
           ),
           BlocProvider(
-            create: (context) => getIt<HealthinsuranceBloc>(),
+            create: (context) => getIt<HealthInsuranceBloc>(),
           ),
           BlocProvider(
             create: (context) => getIt<CarinsuranceBloc>(),

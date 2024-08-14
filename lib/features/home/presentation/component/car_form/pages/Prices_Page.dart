@@ -5,14 +5,12 @@ import 'package:globaladvice_new/core/resource_manger/color_manager.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:globaladvice_new/core/resource_manger/routs_manager.dart';
 import 'package:globaladvice_new/core/utils/config_size.dart';
-import 'package:globaladvice_new/core/widgets/Loading.dart';
 import 'package:globaladvice_new/core/widgets/main_button.dart';
 import 'package:globaladvice_new/core/widgets/snack_bar.dart';
 import 'package:globaladvice_new/features/home/presentation/component/life_form/widgets/Back_Button.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/car_policy/car_policy_bloc.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/car_policy/car_policy_event.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/car_policy/car_policy_state.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CarPrices extends StatefulWidget {
@@ -59,7 +57,7 @@ class _CarPricesState extends State<CarPrices> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<CarPolicyBloc, CarPolicyblocState>(
+    return BlocListener<CarPolicyBloc, CarPolicyBlocState>(
       listener: (context, state) {
         if (state is CarPolicySuccessState) {
           AwesomeDialog(
@@ -93,7 +91,7 @@ class _CarPricesState extends State<CarPrices> {
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
-                      icon: Icon(Icons.arrow_back_ios_new_rounded)),
+                      icon: const Icon(Icons.arrow_back_ios_new_rounded)),
                   Text(
                     AppLocalizations.of(context)!.listofmotorprice,
                     style: TextStyle(
@@ -150,7 +148,7 @@ class _CarPricesState extends State<CarPrices> {
                                                   BlocProvider.of<
                                                               CarPolicyBloc>(
                                                           context)
-                                                      .add(CarPolicyblocEvent(
+                                                      .add(CarPolicyBlocEvent(
                                                     isLicensed:
                                                         widget.isLicensed,
                                                     motorBrands:
@@ -182,7 +180,7 @@ class _CarPricesState extends State<CarPrices> {
                       },
                       itemCount: widget.PlanName.length,
                       shrinkWrap: true,
-                      physics: ClampingScrollPhysics(),
+                      physics: const ClampingScrollPhysics(),
                     )
                   : Center(
                       child: Text(

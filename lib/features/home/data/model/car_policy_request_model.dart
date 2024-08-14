@@ -1,4 +1,4 @@
-class CarPolicyrequest {
+class CarPolicyrequestModel {
   String? uID;
   int? organizationId;
   int? planId;
@@ -8,7 +8,7 @@ class CarPolicyrequest {
   int? motorDeductibles;
   int? motorManufactureYear;
 
-  CarPolicyrequest(
+  CarPolicyrequestModel(
       {this.uID,
       this.organizationId,
       this.planId,
@@ -18,7 +18,7 @@ class CarPolicyrequest {
       this.motorDeductibles,
       this.motorManufactureYear});
 
-  CarPolicyrequest.fromJson(Map<String, dynamic> json) {
+  CarPolicyrequestModel.fromJson(Map<String, dynamic> json) {
     uID = json['UID'];
     organizationId = json['organization_id'];
     planId = json['plan_id'];

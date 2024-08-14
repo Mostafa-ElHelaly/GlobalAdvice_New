@@ -5,11 +5,11 @@ import 'package:globaladvice_new/features/home/domain/repo/homeBaseRepo.dart';
 import 'package:globaladvice_new/core/base_use_case/base_use_case.dart';
 import 'package:globaladvice_new/core/error/failure.dart';
 
-class HealthInsuranceUsecase
+class HealthInsuranceUseCase
     extends BaseUseCase<Map<String, dynamic>, HealthInsuranceModel> {
   BaseHomeRepository baseRepository;
 
-  HealthInsuranceUsecase({required this.baseRepository});
+  HealthInsuranceUseCase({required this.baseRepository});
 
   @override
   Future<Either<Map<String, dynamic>, Failure>> call(

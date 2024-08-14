@@ -6,7 +6,7 @@ import 'package:globaladvice_new/features/home/presentation/manager/property_dat
 import 'package:globaladvice_new/core/utils/api_helper.dart';
 
 class PropertyDataBloc extends Bloc<PropertyDataEvent, PropertyDataState> {
-  PropertyDataUsecase propertyDataUseCase;
+  PropertyDataUseCase propertyDataUseCase;
 
   PropertyDataBloc({required this.propertyDataUseCase})
       : super(PropertyDataInitial()) {

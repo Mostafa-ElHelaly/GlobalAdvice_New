@@ -1,14 +1,10 @@
-import 'dart:ffi';
 
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:globaladvice_new/core/resource_manger/color_manager.dart';
 import 'package:globaladvice_new/core/utils/translation_provider.dart';
 import 'package:globaladvice_new/core/widgets/snack_bar.dart';
-import 'package:globaladvice_new/features/home/data/data_source/remotly_data_resource.dart';
-import 'package:globaladvice_new/features/home/data/model/car_insurance_request_model.dart';
 import 'package:globaladvice_new/features/home/presentation/component/car_form/pages/Prices_Page.dart';
 import 'package:globaladvice_new/features/home/presentation/component/car_form/widgets/car_insurance_appbar.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/car_data_bloc/car_data_bloc.dart';
@@ -16,17 +12,14 @@ import 'package:globaladvice_new/features/home/presentation/manager/car_insuranc
 import 'package:globaladvice_new/features/home/presentation/manager/car_insurance/carinsurance_state.dart';
 
 import 'package:globaladvice_new/core/resource_manger/asset_path.dart';
-import 'package:globaladvice_new/core/resource_manger/routs_manager.dart';
 import 'package:globaladvice_new/core/utils/config_size.dart';
 import 'package:globaladvice_new/core/widgets/main_button.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/car_data_bloc/car_data_event.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/car_data_bloc/car_data_state.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/car_insurance/carinsurance_event.dart';
-import 'package:globaladvice_new/features/home/presentation/component/life_form/widgets/Back_Button.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:uuid/uuid.dart';
 
 class CarForm3 extends StatefulWidget {
   const CarForm3(
@@ -68,7 +61,7 @@ class _CarForm3State extends State<CarForm3> {
     var localetype = Localizations.localeOf(context).languageCode;
     return Consumer<TranslationProvider>(
       builder: (context, getuid, child) {
-        return BlocListener<CarinsuranceBloc, CarinsuranceblocState>(
+        return BlocListener<CarinsuranceBloc, CarInsuranceBlocState>(
           listener: (context, state) {
             if (state is CarInsuranceSuccessState) {
               List<dynamic> total = state.CarInsuranceModel['data']
@@ -97,10 +90,10 @@ class _CarForm3State extends State<CarForm3> {
                         price: widget.price,
                       )));
             }
-            if (state is CarinsuranceRequestErrorState) {
+            if (state is CarInsuranceRequestErrorState) {
               errorSnackBar(context, state.errorMessage);
             }
-            if (state is CarinsuranceRequestLoadingState) {
+            if (state is CarInsuranceRequestLoadingState) {
               const Center(
                 child: CircularProgressIndicator(
                   color: ColorManager.mainColor,
@@ -423,7 +416,7 @@ class _CarForm3State extends State<CarForm3> {
                                     selectedValue4 != null &&
                                     selectedValue5 != null) {
                                   BlocProvider.of<CarinsuranceBloc>(context)
-                                      .add(CarinsuranceblocEvent(
+                                      .add(CarInsuranceBlocEvent(
                                           isLicensed: widget.is_licenced,
                                           motorBrands:
                                               int.parse(selectedValue3!),

@@ -34,7 +34,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
   Widget build(BuildContext context) {
     return BlocListener<ResetPasswordBloc, ResetPasswordState>(
         listener: (context, state) {
-          if (state is Resetpasswordsuccess) {
+          if (state is ResetPasswordSuccess) {
             EasyLoading.dismiss();
             AwesomeDialog(
               context: context,
@@ -68,9 +68,9 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                 );
               },
             );
-          } else if (state is Changingfailedstate) {
+          } else if (state is ChangingFailedState) {
             errorSnackBar(context, state.errorMessage);
-          } else if (state is Loadingchangingpasswordstate) {
+          } else if (state is LoadingChangingPasswordState) {
             showLoading(context);
           }
         },

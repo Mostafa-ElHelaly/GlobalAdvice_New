@@ -5,4 +5,4 @@ class HealthDataEvent extends Equatable {
   List<Object?> get props => throw UnimplementedError();
 }
 
-class GetallHealthDataEvent extends HealthDataEvent {}
+class GetAllHealthDataEvent extends HealthDataEvent {}

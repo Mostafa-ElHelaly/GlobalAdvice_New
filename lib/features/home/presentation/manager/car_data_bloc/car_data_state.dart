@@ -1,7 +1,5 @@
-import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
-
-import '../../../data/model/car_dependinces_model.dart';
+import 'package:globaladvice_new/features/home/data/model/car_dependinces_model.dart';
 
 abstract class CarDataState extends Equatable {
   const CarDataState();
@@ -23,6 +21,6 @@ final class CarDataErrorState extends CarDataState {
 }
 
 final class CarDataSuccessState extends CarDataState {
-  final List<CarData> CarDependinces;
+  final List<CarDataModel> CarDependinces;
   const CarDataSuccessState(this.CarDependinces);
 }
