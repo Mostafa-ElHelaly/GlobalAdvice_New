@@ -89,7 +89,7 @@ class _PropertyPricesState extends State<PropertyPrices> {
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
-                      icon: Icon(Icons.arrow_back_ios_new_rounded)),
+                      icon: const Icon(Icons.arrow_back_ios_new_rounded)),
                   Text(
                     AppLocalizations.of(context)!.listofpropertyprice,
                     style: TextStyle(
@@ -186,7 +186,7 @@ class _PropertyPricesState extends State<PropertyPrices> {
                       },
                       itemCount: widget.plan_name.length,
                       shrinkWrap: true,
-                      physics: ClampingScrollPhysics(),
+                      physics: const ClampingScrollPhysics(),
                     )
                   : Center(
                       child: Text(
