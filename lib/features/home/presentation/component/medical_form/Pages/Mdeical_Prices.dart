@@ -332,8 +332,7 @@ class _MedicalPricesState extends State<MedicalPrices> {
                                                   ConfigSize.defaultSize! * 15,
                                               child: MainButton(
                                                 onTap: () {
-                                                  prices.add(
-                                                      get_amount(index)[1]);
+                                                  ;
                                                   BlocProvider.of<
                                                               HealthPolicyBloc>(
                                                           context)
