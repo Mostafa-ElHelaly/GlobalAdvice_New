@@ -26,7 +26,6 @@ class Routes {
   static const String propertyForm2 = "/PropertyForm2";
   static const String propertyForm3 = "/PropertyForm3";
   static const String pricespage = "/PricesPage";
-
   static const String profile = "/Profile";
   static const String editProfile = "/EditProfile";
   static const String plans = "/Plans";
