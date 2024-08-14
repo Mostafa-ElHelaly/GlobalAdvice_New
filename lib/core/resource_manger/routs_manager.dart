@@ -40,7 +40,7 @@ class RouteGenerator {
         currentContext = Routes.login;
         return MaterialPageRoute(
             settings: settings, builder: (_) => const LoginScreen());
-//gfggfgffgfg
+//gfggfgff
       case Routes.homeScreen:
         currentContext = Routes.homeScreen;
         return MaterialPageRoute(
