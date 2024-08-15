@@ -240,7 +240,7 @@ class _MedicalPricesState extends State<MedicalPrices> {
                                                     size: ConfigSize
                                                             .defaultSize! *
                                                         3,
-                                                    widget.genders![index] ==
+                                                    widget.genders![index2] ==
                                                             'male'
                                                         ? Icons.person
                                                         : Icons
