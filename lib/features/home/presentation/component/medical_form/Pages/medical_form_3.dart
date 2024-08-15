@@ -94,6 +94,14 @@ class _MedicalForm3State extends State<MedicalForm3> {
                     localetype == 'ar' ? e['plan_name_alt'] : e['plan_name'])
                 .toList();
 
+            print(org_id);
+            print(plan_id);
+            print(total_price);
+            print(plan_name);
+            print(persons);
+            print(health_limit);
+            print(health_penefits);
+
             Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => MedicalPrices(
                       amounts_length: amounts_length,

@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -77,6 +76,10 @@ class _MedicalPricesState extends State<MedicalPrices> {
 
     List<dynamic> get_names(int index) {
       return widget.persons[index].map((e) => e['name']).toList();
+    }
+
+    List<dynamic> get_genders(int index) {
+      return widget.persons[index].map((e) => e['gender']).toList();
     }
 
     List<dynamic> get_amount(int index) {
@@ -240,7 +243,8 @@ class _MedicalPricesState extends State<MedicalPrices> {
                                                     size: ConfigSize
                                                             .defaultSize! *
                                                         3,
-                                                    widget.genders![index] ==
+                                                    get_genders(index)[
+                                                                index2] ==
                                                             'male'
                                                         ? Icons.person
                                                         : Icons
