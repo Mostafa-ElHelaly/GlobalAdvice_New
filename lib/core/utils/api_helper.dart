@@ -1,12 +1,12 @@
 import 'dart:developer';
-import 'package:globaladvice_new/core/error/exception.dart';
-import 'package:globaladvice_new/core/error/failure.dart';
+import 'package:global_advice_new/core/error/exception.dart';
+import 'package:global_advice_new/core/error/failure.dart';
 
 import 'package:flutter/foundation.dart';
 import 'package:dio/dio.dart';
-import 'package:globaladvice_new/core/error/failures_strings.dart';
-import 'package:globaladvice_new/core/resource_manger/locale_keys.g.dart';
-import 'package:globaladvice_new/core/utils/methods.dart';
+import 'package:global_advice_new/core/error/failures_strings.dart';
+import 'package:global_advice_new/core/resource_manger/locale_keys.g.dart';
+import 'package:global_advice_new/core/utils/methods.dart';
 
 class DioHelper {
   Future<Map<String, String>> header() async {

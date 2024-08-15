@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:globaladvice_new/features/auth/domain/use_case/reset_password_us.dart';
-import 'package:globaladvice_new/features/auth/presentation/manager/reset_password_bloc/bloc/reset_password_event.dart';
-import 'package:globaladvice_new/features/auth/presentation/manager/reset_password_bloc/bloc/reset_password_state.dart';
-import 'package:globaladvice_new/core/utils/api_helper.dart';
+import 'package:global_advice_new/features/auth/domain/use_case/reset_password_us.dart';
+import 'package:global_advice_new/features/auth/presentation/manager/reset_password_bloc/bloc/reset_password_event.dart';
+import 'package:global_advice_new/features/auth/presentation/manager/reset_password_bloc/bloc/reset_password_state.dart';
+import 'package:global_advice_new/core/utils/api_helper.dart';
 
 class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
   ResetPasswordUseCase passwordUseCase;

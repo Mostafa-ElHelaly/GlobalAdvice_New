@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:globaladvice_new/core/resource_manger/color_manager.dart';
-import 'package:globaladvice_new/core/resource_manger/locale_keys.g.dart';
-import 'package:globaladvice_new/core/resource_manger/routs_manager.dart';
-import 'package:globaladvice_new/core/utils/config_size.dart';
-import 'package:globaladvice_new/core/utils/methods.dart';
-import 'package:globaladvice_new/core/utils/translation_provider.dart';
-import 'package:globaladvice_new/main.dart';
+import 'package:global_advice_new/core/resource_manger/color_manager.dart';
+import 'package:global_advice_new/core/resource_manger/routs_manager.dart';
+import 'package:global_advice_new/core/utils/config_size.dart';
+import 'package:global_advice_new/core/utils/translation_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:share/share.dart';
 
-import '../resource_manger/asset_path.dart';
+import 'package:global_advice_new/core/resource_manger/asset_path.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CustomDrawer extends StatefulWidget {

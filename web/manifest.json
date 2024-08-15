@@ -1,6 +1,6 @@
 {
-    "name": "globaladvice_new",
-    "short_name": "globaladvice_new",
+    "name": "global_advice_new",
+    "short_name": "global_advice_new",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

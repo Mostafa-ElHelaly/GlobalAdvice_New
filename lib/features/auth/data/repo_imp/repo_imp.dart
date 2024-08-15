@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
-import 'package:globaladvice_new/core/error/failure.dart';
-import 'package:globaladvice_new/core/utils/api_helper.dart';
-import 'package:globaladvice_new/features/auth/domain/repo/base_repo.dart';
-import 'package:globaladvice_new/features/auth/data/data_source/remotly_data_source.dart';
-import 'package:globaladvice_new/features/auth/data/model/login_model.dart';
+import 'package:global_advice_new/core/error/failure.dart';
+import 'package:global_advice_new/core/utils/api_helper.dart';
+import 'package:global_advice_new/features/auth/domain/repo/base_repo.dart';
+import 'package:global_advice_new/features/auth/data/data_source/remotly_data_source.dart';
+import 'package:global_advice_new/features/auth/data/model/login_model.dart';
 
 class RepositoryImp extends BaseRepository {
   final BaseRemotelyDataSource baseRemotelyDataSource;

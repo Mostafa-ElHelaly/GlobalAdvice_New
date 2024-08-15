@@ -1,13 +1,13 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:globaladvice_new/core/resource_manger/color_manager.dart';
-import 'package:globaladvice_new/core/resource_manger/locale_keys.g.dart';
-import 'package:globaladvice_new/core/utils/config_size.dart';
-import 'package:globaladvice_new/features/auth/presentation/login_screen.dart';
+import 'package:global_advice_new/core/resource_manger/color_manager.dart';
+import 'package:global_advice_new/core/resource_manger/locale_keys.g.dart';
+import 'package:global_advice_new/core/utils/config_size.dart';
+import 'package:global_advice_new/features/auth/presentation/login_screen.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'component/edit_my_profile/edit_my_profile_screen.dart';
+import 'package:global_advice_new/features/profile/presentation/component/edit_my_profile/edit_my_profile_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});

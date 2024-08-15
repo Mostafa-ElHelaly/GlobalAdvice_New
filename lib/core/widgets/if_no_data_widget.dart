@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../../../../core/utils/config_size.dart';
+import '../utils/config_size.dart';
 
 class IfNoDataWidget extends StatelessWidget {
   const IfNoDataWidget({super.key});

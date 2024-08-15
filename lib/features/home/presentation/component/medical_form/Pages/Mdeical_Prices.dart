@@ -2,20 +2,19 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:globaladvice_new/core/resource_manger/routs_manager.dart';
-import 'package:globaladvice_new/core/widgets/snack_bar.dart';
-import 'package:globaladvice_new/core/widgets/vertical_space.dart';
-import 'package:globaladvice_new/features/home/presentation/component/medical_form/Widgets/if_no_data_widget.dart';
+import 'package:global_advice_new/core/resource_manger/routs_manager.dart';
+import 'package:global_advice_new/core/widgets/snack_bar.dart';
+import 'package:global_advice_new/core/widgets/Upper_Part_Title.dart';
+import 'package:global_advice_new/core/widgets/if_no_data_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../../../../../core/resource_manger/color_manager.dart';
-import '../../../../../../core/utils/config_size.dart';
-import '../../../../../../core/widgets/main_button.dart';
-import '../../../manager/health_policy/health_policy_bloc.dart';
-import '../../../manager/health_policy/health_policy_event.dart';
-import '../../../manager/health_policy/health_policy_state.dart';
-import '../../life_form/widgets/Back_Button.dart';
-import '../Widgets/Health_Benifits_widget.dart';
-import '../Widgets/Prices_Names_and_amounts.dart';
+import 'package:global_advice_new/core/resource_manger/color_manager.dart';
+import 'package:global_advice_new/core/utils/config_size.dart';
+import 'package:global_advice_new/core/widgets/main_button.dart';
+import 'package:global_advice_new/features/home/presentation/manager/health_policy/health_policy_bloc.dart';
+import 'package:global_advice_new/features/home/presentation/manager/health_policy/health_policy_event.dart';
+import 'package:global_advice_new/features/home/presentation/manager/health_policy/health_policy_state.dart';
+import 'package:global_advice_new/features/home/presentation/component/life_form/widgets/Back_Button.dart';
+import 'package:global_advice_new/features/home/presentation/component/medical_form/Widgets/Uper_Part_of_Medical_Card.dart';
 
 class MedicalPrices extends StatefulWidget {
   const MedicalPrices({
@@ -53,11 +52,6 @@ class MedicalPrices extends StatefulWidget {
 }
 
 class _MedicalPricesState extends State<MedicalPrices> {
-  TextStyle label_style = TextStyle(
-    fontSize: ConfigSize.defaultSize! * 2,
-    fontWeight: FontWeight.bold,
-    color: ColorManager.gray,
-  );
   @override
   void initState() {
     print(widget.genders);
@@ -133,26 +127,8 @@ class _MedicalPricesState extends State<MedicalPrices> {
               physics: ClampingScrollPhysics(),
               child: Column(
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      IconButton(
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        icon: Icon(Icons.arrow_back_ios_new_rounded),
-                      ),
-                      Text(
-                        AppLocalizations.of(context)!.listofhealthprice,
-                        style: TextStyle(
-                          fontSize: localetype == 'ar'
-                              ? ConfigSize.defaultSize! * 3
-                              : ConfigSize.defaultSize! * 2.25,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
+                  UpperPageTitle(
+                      title: AppLocalizations.of(context)!.listofhealthprice),
                   widget.total_price.isNotEmpty
                       ? ListView.builder(
                           physics: ClampingScrollPhysics(),
@@ -177,64 +153,20 @@ class _MedicalPricesState extends State<MedicalPrices> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text(
-                                          widget.plan_name[index].toString(),
-                                          style: TextStyle(
-                                            color: ColorManager.mainColor,
-                                            fontSize:
-                                                ConfigSize.defaultSize! * 3,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        ),
-                                        VerticalSpace(),
-                                        Text(
-                                          widget.total_price[index].toString() +
-                                              ' ' +
-                                              AppLocalizations.of(context)!
-                                                  .egy_year,
-                                          style: TextStyle(
-                                            color: ColorManager
-                                                .kSecondryGreenLight,
-                                            fontSize:
-                                                ConfigSize.defaultSize! * 2,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        ),
-                                        VerticalSpace(),
-                                        PricesNamesAndAmounts(
-                                          get_amount: get_amount(index),
-                                          get_names: get_names(index),
-                                          genders: widget.genders,
-                                        ),
-                                        VerticalSpace(),
-                                        Text(
-                                          AppLocalizations.of(context)!
-                                              .annuallimit,
-                                          style: label_style,
-                                        ),
-                                        ListTile(
-                                          leading: Icon(
-                                            Icons.safety_check_outlined,
-                                            color: ColorManager.secondaryColor,
-                                          ),
-                                          title: Text(
-                                            get_health_limits(index).join(', '),
-                                          ),
-                                        ),
-                                        VerticalSpace(),
-                                        Text(
-                                          AppLocalizations.of(context)!
-                                              .healthbenefits,
-                                          style: label_style,
-                                        ),
-                                        VerticalSpace(),
-                                        HealthBenifitsWidget(
-                                          get_health_benefits_desc:
-                                              get_health_benefits_desc(index),
-                                          get_health_benefits_names:
-                                              get_health_benefits_names(index),
-                                        ),
-                                        VerticalSpace(),
+                                        UpperPartOfMedicalCard(
+                                            plan_name: widget.plan_name,
+                                            total_price: widget.total_price,
+                                            genders: widget.genders!,
+                                            get_amount: get_amount(index),
+                                            get_names: get_names(index),
+                                            get_health_limits:
+                                                get_health_limits(index),
+                                            get_health_benefits_names:
+                                                get_health_benefits_names(
+                                                    index),
+                                            get_health_benefits_desc:
+                                                get_health_benefits_desc(index),
+                                            index: index),
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.end,

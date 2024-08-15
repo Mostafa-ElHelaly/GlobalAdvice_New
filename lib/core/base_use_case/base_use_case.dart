@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
-import 'package:globaladvice_new/core/error/failure.dart';
+import 'package:global_advice_new/core/error/failure.dart';
 
 abstract class BaseUseCase<T, Parameter> {
   Future<Either<T, Failure>> call(Parameter parameter);

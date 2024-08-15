@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:globaladvice_new/core/utils/api_helper.dart';
-import 'package:globaladvice_new/core/utils/constant_api.dart';
-import 'package:globaladvice_new/core/utils/methods.dart';
-import 'package:globaladvice_new/features/auth/data/model/login_model.dart';
+import 'package:global_advice_new/core/utils/api_helper.dart';
+import 'package:global_advice_new/core/utils/constant_api.dart';
+import 'package:global_advice_new/core/utils/methods.dart';
+import 'package:global_advice_new/features/auth/data/model/login_model.dart';
 
 abstract class BaseRemotelyDataSource {
   Future<Map<String, dynamic>> loginWithEmailAndPassword(LoginModel authModel);

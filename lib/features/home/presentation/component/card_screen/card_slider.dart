@@ -1,11 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:globaladvice_new/core/resource_manger/color_manager.dart';
-import 'package:globaladvice_new/core/resource_manger/locale_keys.g.dart';
-import 'package:globaladvice_new/core/utils/config_size.dart';
+import 'package:global_advice_new/core/resource_manger/color_manager.dart';
+import 'package:global_advice_new/core/resource_manger/locale_keys.g.dart';
+import 'package:global_advice_new/core/utils/config_size.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
-import 'package:globaladvice_new/features/home/presentation/component/card_screen/card_screen.dart';
+import 'package:global_advice_new/features/home/presentation/component/card_screen/card_screen.dart';
 
 class CardSliderScreen extends StatelessWidget {
   final String text1;

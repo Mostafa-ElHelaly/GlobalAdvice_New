@@ -2,20 +2,20 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:globaladvice_new/core/resource_manger/routs_manager.dart';
-import 'package:globaladvice_new/core/service/navigation_service.dart';
-import 'package:globaladvice_new/core/service/service_locator.dart';
-import 'package:globaladvice_new/core/utils/config_size.dart';
-import 'package:globaladvice_new/core/utils/font_loader.dart';
-import 'package:globaladvice_new/features/auth/presentation/login_screen.dart';
-import 'package:globaladvice_new/features/home/presentation/home_screen.dart';
-import 'package:globaladvice_new/features/home/presentation/manager/car_insurance/carinsurance_bloc.dart';
-import 'package:globaladvice_new/features/home/presentation/manager/car_policy/car_policy_bloc.dart';
-import 'package:globaladvice_new/features/home/presentation/manager/health_insurance_request/healthinsurancebloc_bloc.dart';
-import 'package:globaladvice_new/features/home/presentation/manager/life_insurance/life_insurance_bloc.dart';
-import 'package:globaladvice_new/features/home/presentation/manager/other_forms_bloc/other_forms_bloc.dart';
-import 'package:globaladvice_new/features/home/presentation/manager/property_data_bloc/property_data_bloc.dart';
-import 'package:globaladvice_new/features/home/presentation/manager/property_insurance.dart/property_insurance_bloc.dart';
+import 'package:global_advice_new/core/resource_manger/routs_manager.dart';
+import 'package:global_advice_new/core/service/navigation_service.dart';
+import 'package:global_advice_new/core/service/service_locator.dart';
+import 'package:global_advice_new/core/utils/config_size.dart';
+import 'package:global_advice_new/core/utils/font_loader.dart';
+import 'package:global_advice_new/features/auth/presentation/login_screen.dart';
+import 'package:global_advice_new/features/home/presentation/home_screen.dart';
+import 'package:global_advice_new/features/home/presentation/manager/car_insurance/carinsurance_bloc.dart';
+import 'package:global_advice_new/features/home/presentation/manager/car_policy/car_policy_bloc.dart';
+import 'package:global_advice_new/features/home/presentation/manager/health_insurance_request/healthinsurancebloc_bloc.dart';
+import 'package:global_advice_new/features/home/presentation/manager/life_insurance/life_insurance_bloc.dart';
+import 'package:global_advice_new/features/home/presentation/manager/other_forms_bloc/other_forms_bloc.dart';
+import 'package:global_advice_new/features/home/presentation/manager/property_data_bloc/property_data_bloc.dart';
+import 'package:global_advice_new/features/home/presentation/manager/property_insurance.dart/property_insurance_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -61,9 +61,11 @@ class MyApp extends StatelessWidget {
       required this.isArabic,
       required this.isLogin,
       required this.uid_success});
+
   final bool isArabic;
   final bool isLogin;
   final String? uid_success;
+
   @override
   Widget build(BuildContext context) {
     ConfigSize().init(context);
@@ -127,7 +129,8 @@ class MyApp extends StatelessWidget {
             return MaterialApp(
               title: 'Be sure!',
               debugShowCheckedModeBanner: false,
-              locale: translate.locale, // Set initial locale
+              locale: translate.locale,
+              // Set initial locale
               supportedLocales: [
                 const Locale('en', ''),
                 const Locale('ar', ''),

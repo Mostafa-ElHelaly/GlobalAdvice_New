@@ -1,37 +1,47 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:globaladvice_new/features/home/data/model/car_policy_request_model.dart';
-import 'package:globaladvice_new/features/home/data/model/health_insurance_model.dart';
+import 'package:global_advice_new/features/home/data/model/car_policy_request_model.dart';
+import 'package:global_advice_new/features/home/data/model/health_insurance_model.dart';
 
-import 'package:globaladvice_new/core/utils/api_helper.dart';
-import 'package:globaladvice_new/core/utils/constant_api.dart';
-import 'package:globaladvice_new/features/home/data/model/health_policy_request_model.dart';
-import 'package:globaladvice_new/features/home/data/model/property_model.dart';
+import 'package:global_advice_new/core/utils/api_helper.dart';
+import 'package:global_advice_new/core/utils/constant_api.dart';
+import 'package:global_advice_new/features/home/data/model/health_policy_request_model.dart';
+import 'package:global_advice_new/features/home/data/model/property_model.dart';
 
-import 'package:globaladvice_new/features/home/data/model/life_insurance_model.dart';
-import 'package:globaladvice_new/features/home/data/model/other_forms_model.dart';
-import 'package:globaladvice_new/features/home/data/model/property_policy_request_model.dart';
+import 'package:global_advice_new/features/home/data/model/life_insurance_model.dart';
+import 'package:global_advice_new/features/home/data/model/other_forms_model.dart';
+import 'package:global_advice_new/features/home/data/model/property_policy_request_model.dart';
 
-import '../model/car_dependinces_model.dart';
-import '../model/car_insurance_request_model.dart';
-import '../model/health_dependinces_model.dart';
-import '../model/property_dependinces_model.dart';
+import 'package:global_advice_new/features/home/data/model/car_dependinces_model.dart';
+import 'package:global_advice_new/features/home/data/model/car_insurance_request_model.dart';
+import 'package:global_advice_new/features/home/data/model/health_dependinces_model.dart';
+import 'package:global_advice_new/features/home/data/model/property_dependinces_model.dart';
 
 abstract class BaseHomeRemotelyDataSource {
   Future<Map<String, dynamic>> SendHealthInsuranceRequest(
       HealthInsuranceModel healthInsuranceModel);
+
   Future<Map<String, dynamic>> SendCarInsuranceRequest(
       CarInusranceRequest carInusranceRequest);
+
   Future<Map<String, dynamic>> SendPropertyInsuranceRequest(
       PropertyModel propertyModel);
+
   Future<Unit> SendLifeInsuranceRequest(LifeInsuranceModel lifeInsuranceModel);
+
   Future<Unit> SendAnotherInsuranceRequest(OtherFormsModel otherFormsModel);
+
   Future<Unit> CarPolicyRequest(CarPolicyrequest carPolicyRequest);
+
   Future<Unit> HealthPolicyRequest(HealthPolicyrequest carPolicyRequest);
+
   Future<Unit> PropertyPolicyRequest(
       PropertyPolicyRequestModel propertyPolicyRequest);
+
   Future<List<CarData>> Get_Car_Data();
+
   Future<List<PropertyDependincesData>> Get_Property_Data();
+
   Future<List<HealthDependincesModel>> Get_Health_Data();
 }
 

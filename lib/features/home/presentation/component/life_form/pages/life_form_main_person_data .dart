@@ -1,22 +1,22 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:globaladvice_new/core/resource_manger/asset_path.dart';
-import 'package:globaladvice_new/core/utils/config_size.dart';
-import 'package:globaladvice_new/core/widgets/Loading.dart';
-import 'package:globaladvice_new/core/widgets/custom_text_field.dart';
-import 'package:globaladvice_new/features/home/presentation/component/life_form/widgets/Back_Button.dart';
-import 'package:globaladvice_new/features/home/presentation/manager/life_insurance/life_insurance_event.dart';
+import 'package:global_advice_new/core/resource_manger/asset_path.dart';
+import 'package:global_advice_new/core/utils/config_size.dart';
+import 'package:global_advice_new/core/widgets/Loading.dart';
+import 'package:global_advice_new/core/widgets/custom_text_field.dart';
+import 'package:global_advice_new/features/home/presentation/component/life_form/widgets/Back_Button.dart';
+import 'package:global_advice_new/features/home/presentation/manager/life_insurance/life_insurance_event.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'package:globaladvice_new/core/resource_manger/routs_manager.dart';
-import 'package:globaladvice_new/core/widgets/Custom_Drawer.dart';
-import 'package:globaladvice_new/core/widgets/main_button.dart';
-import 'package:globaladvice_new/core/widgets/snack_bar.dart';
-import 'package:globaladvice_new/features/home/presentation/manager/life_insurance/life_insurance_bloc.dart';
-import 'package:globaladvice_new/features/home/presentation/manager/life_insurance/life_insurance_state.dart';
+import 'package:global_advice_new/core/resource_manger/routs_manager.dart';
+import 'package:global_advice_new/core/widgets/Custom_Drawer.dart';
+import 'package:global_advice_new/core/widgets/main_button.dart';
+import 'package:global_advice_new/core/widgets/snack_bar.dart';
+import 'package:global_advice_new/features/home/presentation/manager/life_insurance/life_insurance_bloc.dart';
+import 'package:global_advice_new/features/home/presentation/manager/life_insurance/life_insurance_state.dart';
 
-import 'package:globaladvice_new/core/resource_manger/locale_keys.g.dart';
+import 'package:global_advice_new/core/resource_manger/locale_keys.g.dart';
 
 class LifeFormMainPersonData extends StatefulWidget {
   const LifeFormMainPersonData({super.key});

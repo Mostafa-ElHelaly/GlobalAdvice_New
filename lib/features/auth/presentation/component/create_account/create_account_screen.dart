@@ -1,18 +1,18 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:globaladvice_new/core/resource_manger/asset_path.dart';
-import 'package:globaladvice_new/core/resource_manger/color_manager.dart';
-import 'package:globaladvice_new/core/resource_manger/locale_keys.g.dart';
-import 'package:globaladvice_new/core/utils/config_size.dart';
-import 'package:globaladvice_new/core/widgets/Loading.dart';
-import 'package:globaladvice_new/core/widgets/custom_text_field.dart';
-import 'package:globaladvice_new/core/widgets/main_button.dart';
-import 'package:globaladvice_new/core/resource_manger/routs_manager.dart';
-import 'package:globaladvice_new/core/widgets/snack_bar.dart';
-import 'package:globaladvice_new/features/auth/presentation/manager/register_bloc/register_bloc.dart';
-import 'package:globaladvice_new/features/auth/presentation/manager/register_bloc/register_event.dart';
-import 'package:globaladvice_new/features/auth/presentation/manager/register_bloc/register_state.dart';
+import 'package:global_advice_new/core/resource_manger/asset_path.dart';
+import 'package:global_advice_new/core/resource_manger/color_manager.dart';
+import 'package:global_advice_new/core/resource_manger/locale_keys.g.dart';
+import 'package:global_advice_new/core/utils/config_size.dart';
+import 'package:global_advice_new/core/widgets/Loading.dart';
+import 'package:global_advice_new/core/widgets/custom_text_field.dart';
+import 'package:global_advice_new/core/widgets/main_button.dart';
+import 'package:global_advice_new/core/resource_manger/routs_manager.dart';
+import 'package:global_advice_new/core/widgets/snack_bar.dart';
+import 'package:global_advice_new/features/auth/presentation/manager/register_bloc/register_bloc.dart';
+import 'package:global_advice_new/features/auth/presentation/manager/register_bloc/register_event.dart';
+import 'package:global_advice_new/features/auth/presentation/manager/register_bloc/register_state.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CreateAccount extends StatefulWidget {

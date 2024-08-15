@@ -3,18 +3,18 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:globaladvice_new/core/resource_manger/color_manager.dart';
-import 'package:globaladvice_new/core/resource_manger/locale_keys.g.dart';
-import 'package:globaladvice_new/core/utils/config_size.dart';
-import 'package:globaladvice_new/core/widgets/Loading.dart';
-import 'package:globaladvice_new/core/widgets/custom_text_field.dart';
-import 'package:globaladvice_new/core/widgets/main_button.dart';
-import 'package:globaladvice_new/features/auth/presentation/login_screen.dart';
-import 'package:globaladvice_new/features/auth/presentation/manager/reset_password_bloc/bloc/reset_password_bloc.dart';
+import 'package:global_advice_new/core/resource_manger/color_manager.dart';
+import 'package:global_advice_new/core/resource_manger/locale_keys.g.dart';
+import 'package:global_advice_new/core/utils/config_size.dart';
+import 'package:global_advice_new/core/widgets/Loading.dart';
+import 'package:global_advice_new/core/widgets/custom_text_field.dart';
+import 'package:global_advice_new/core/widgets/main_button.dart';
+import 'package:global_advice_new/features/auth/presentation/login_screen.dart';
+import 'package:global_advice_new/features/auth/presentation/manager/reset_password_bloc/bloc/reset_password_bloc.dart';
 
-import '../../../../../core/widgets/snack_bar.dart';
-import '../../manager/reset_password_bloc/bloc/reset_password_event.dart';
-import '../../manager/reset_password_bloc/bloc/reset_password_state.dart';
+import 'package:global_advice_new/core/widgets/snack_bar.dart';
+import 'package:global_advice_new/features/auth/presentation/manager/reset_password_bloc/bloc/reset_password_event.dart';
+import 'package:global_advice_new/features/auth/presentation/manager/reset_password_bloc/bloc/reset_password_state.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ForgetPasswordScreen extends StatefulWidget {

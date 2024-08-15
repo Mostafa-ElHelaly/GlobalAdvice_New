@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:globaladvice_new/features/auth/presentation/component/create_account/create_account_screen.dart';
-import 'package:globaladvice_new/features/auth/presentation/login_screen.dart';
-import 'package:globaladvice_new/features/home/presentation/component/car_form/pages/Prices_Page.dart';
-import 'package:globaladvice_new/features/home/presentation/component/card_screen/card_screen.dart';
-import 'package:globaladvice_new/features/home/presentation/component/property_form/pages/property_form_2%20.dart';
-import 'package:globaladvice_new/features/home/presentation/component/property_form/pages/property_form_3%20.dart';
-import 'package:globaladvice_new/features/profile/presentation/component/edit_my_profile/edit_my_profile_screen.dart';
-import 'package:globaladvice_new/features/profile/presentation/profile_screen.dart';
+import 'package:global_advice_new/features/auth/presentation/component/create_account/create_account_screen.dart';
+import 'package:global_advice_new/features/auth/presentation/login_screen.dart';
+import 'package:global_advice_new/features/home/presentation/component/card_screen/card_screen.dart';
+import 'package:global_advice_new/features/profile/presentation/component/edit_my_profile/edit_my_profile_screen.dart';
+import 'package:global_advice_new/features/profile/presentation/profile_screen.dart';
 
-import 'package:globaladvice_new/features/home/presentation/home_screen.dart';
+import 'package:global_advice_new/features/home/presentation/home_screen.dart';
 
 class Routes {
   static const String login = "/LoginScreen";

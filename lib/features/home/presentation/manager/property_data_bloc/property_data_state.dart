@@ -1,6 +1,5 @@
-import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
-import 'package:globaladvice_new/features/home/data/model/property_dependinces_model.dart';
+import 'package:global_advice_new/features/home/data/model/property_dependinces_model.dart';
 
 abstract class PropertyDataState extends Equatable {
   const PropertyDataState();

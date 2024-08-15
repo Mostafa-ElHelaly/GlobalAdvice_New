@@ -1,16 +1,17 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:globaladvice_new/core/resource_manger/color_manager.dart';
+import 'package:global_advice_new/core/resource_manger/color_manager.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:globaladvice_new/core/resource_manger/routs_manager.dart';
-import 'package:globaladvice_new/core/utils/config_size.dart';
-import 'package:globaladvice_new/core/widgets/main_button.dart';
-import 'package:globaladvice_new/core/widgets/snack_bar.dart';
-import 'package:globaladvice_new/features/home/presentation/component/life_form/widgets/Back_Button.dart';
-import 'package:globaladvice_new/features/home/presentation/manager/car_policy/car_policy_bloc.dart';
-import 'package:globaladvice_new/features/home/presentation/manager/car_policy/car_policy_event.dart';
-import 'package:globaladvice_new/features/home/presentation/manager/car_policy/car_policy_state.dart';
+import 'package:global_advice_new/core/resource_manger/routs_manager.dart';
+import 'package:global_advice_new/core/utils/config_size.dart';
+import 'package:global_advice_new/core/widgets/main_button.dart';
+import 'package:global_advice_new/core/widgets/snack_bar.dart';
+import 'package:global_advice_new/features/home/presentation/component/life_form/widgets/Back_Button.dart';
+import 'package:global_advice_new/core/widgets/Upper_Part_Title.dart';
+import 'package:global_advice_new/features/home/presentation/manager/car_policy/car_policy_bloc.dart';
+import 'package:global_advice_new/features/home/presentation/manager/car_policy/car_policy_event.dart';
+import 'package:global_advice_new/features/home/presentation/manager/car_policy/car_policy_state.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CarPrices extends StatefulWidget {
@@ -84,22 +85,8 @@ class _CarPricesState extends State<CarPrices> {
             child: SingleChildScrollView(
           child: Column(
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  IconButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      icon: const Icon(Icons.arrow_back_ios_new_rounded)),
-                  Text(
-                    AppLocalizations.of(context)!.listofmotorprice,
-                    style: TextStyle(
-                        fontSize: ConfigSize.defaultSize! * 3,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
+              UpperPageTitle(
+                  title: AppLocalizations.of(context)!.listofmotorprice),
               widget.total.isNotEmpty || widget.total != null
                   ? ListView.builder(
                       itemBuilder: (context, index) {

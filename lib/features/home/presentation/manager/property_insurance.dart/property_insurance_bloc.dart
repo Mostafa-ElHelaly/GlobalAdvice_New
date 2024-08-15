@@ -1,11 +1,10 @@
 import 'package:bloc/bloc.dart';
-import 'package:globaladvice_new/features/home/data/model/property_model.dart';
-import 'package:globaladvice_new/features/home/domain/use_case/property_inusrance_uc.dart';
-import 'package:globaladvice_new/features/home/presentation/manager/property_insurance.dart/property_insurance_event.dart';
+import 'package:global_advice_new/features/home/data/model/property_model.dart';
+import 'package:global_advice_new/features/home/domain/use_case/property_inusrance_uc.dart';
+import 'package:global_advice_new/features/home/presentation/manager/property_insurance.dart/property_insurance_event.dart';
 
-import 'package:globaladvice_new/core/utils/api_helper.dart';
-import 'package:globaladvice_new/features/home/domain/use_case/property_inusrance_uc.dart';
-import 'package:globaladvice_new/features/home/presentation/manager/property_insurance.dart/property_insurance_state.dart';
+import 'package:global_advice_new/core/utils/api_helper.dart';
+import 'package:global_advice_new/features/home/presentation/manager/property_insurance.dart/property_insurance_state.dart';
 
 class PropertyInsuranceBloc
     extends Bloc<PropertyInsuranceBlocEvent, PropertyInsuranceBlocState> {

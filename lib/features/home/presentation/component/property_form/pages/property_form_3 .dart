@@ -2,25 +2,25 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:globaladvice_new/core/resource_manger/color_manager.dart';
-import 'package:globaladvice_new/core/utils/translation_provider.dart';
-import 'package:globaladvice_new/core/widgets/snack_bar.dart';
-import 'package:globaladvice_new/features/home/presentation/component/property_form/widgets/Prop_insurance_appbar.dart';
+import 'package:global_advice_new/core/resource_manger/color_manager.dart';
+import 'package:global_advice_new/core/utils/translation_provider.dart';
+import 'package:global_advice_new/core/widgets/snack_bar.dart';
+import 'package:global_advice_new/features/home/presentation/component/property_form/widgets/Prop_insurance_appbar.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'package:globaladvice_new/core/resource_manger/asset_path.dart';
-import 'package:globaladvice_new/core/utils/config_size.dart';
-import 'package:globaladvice_new/core/widgets/main_button.dart';
-import 'package:globaladvice_new/features/home/presentation/manager/property_data_bloc/property_data_bloc.dart';
-import 'package:globaladvice_new/features/home/presentation/manager/property_data_bloc/property_data_event.dart';
-import 'package:globaladvice_new/features/home/presentation/manager/property_data_bloc/property_data_state.dart';
-import 'package:globaladvice_new/features/home/presentation/manager/property_insurance.dart/property_insurance_bloc.dart';
-import 'package:globaladvice_new/features/home/presentation/manager/property_insurance.dart/property_insurance_event.dart';
-import 'package:globaladvice_new/features/home/presentation/manager/property_insurance.dart/property_insurance_state.dart';
+import 'package:global_advice_new/core/resource_manger/asset_path.dart';
+import 'package:global_advice_new/core/utils/config_size.dart';
+import 'package:global_advice_new/core/widgets/main_button.dart';
+import 'package:global_advice_new/features/home/presentation/manager/property_data_bloc/property_data_bloc.dart';
+import 'package:global_advice_new/features/home/presentation/manager/property_data_bloc/property_data_event.dart';
+import 'package:global_advice_new/features/home/presentation/manager/property_data_bloc/property_data_state.dart';
+import 'package:global_advice_new/features/home/presentation/manager/property_insurance.dart/property_insurance_bloc.dart';
+import 'package:global_advice_new/features/home/presentation/manager/property_insurance.dart/property_insurance_event.dart';
+import 'package:global_advice_new/features/home/presentation/manager/property_insurance.dart/property_insurance_state.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:globaladvice_new/features/home/presentation/component/property_form/pages/Prop_Prices_Page.dart';
+import 'package:global_advice_new/features/home/presentation/component/property_form/pages/Prop_Prices_Page.dart';
 
 class PropertyForm3 extends StatefulWidget {
   const PropertyForm3(

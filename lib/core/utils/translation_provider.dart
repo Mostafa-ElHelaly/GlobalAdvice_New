@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:globaladvice_new/features/home/data/data_source/remotly_data_resource.dart';
-import 'package:globaladvice_new/features/home/presentation/home_screen.dart';
+import 'package:global_advice_new/features/home/presentation/home_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:dio/dio.dart';
 
-import '../../features/auth/data/data_source/remotly_data_source.dart';
-import '../../features/auth/data/model/login_model.dart';
-import '../../features/auth/presentation/login_screen.dart';
-import '../../features/home/data/model/car_insurance_request_model.dart';
+import 'package:global_advice_new/features/auth/presentation/login_screen.dart';
 
 class TranslationProvider with ChangeNotifier {
   TranslationProvider(bool isArabic) {
@@ -17,18 +12,7 @@ class TranslationProvider with ChangeNotifier {
     } else {
       _locale = Locale('en', '');
     }
-    // if (isLogin) {
-    //   is_Login = true;
-    // } else {
-    //   is_Login = false;
-    // }
-    // if (is_Login == true) {
-    //   if (_response != null && _response!.data != null) {
-    //     _response!.data!.uID = uid_success;
-    //   }
-    // } else {
-    //   uid_success = 'none';
-    // }
+
   }
 
   Locale _locale = Locale('en', '');
@@ -75,19 +59,4 @@ class TranslationProvider with ChangeNotifier {
     prefs.setString('user_uid', uid);
   }
 
-  // void get_uid(String email, String password) async {
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-
-  //   try {
-  //     final authModel = LoginModel(email: email, password: password);
-  //     final response =
-  //         await AuthRemotelyDateSource().loginWithEmailAndPassword(authModel);
-
-  //     _response = ApiResponse.fromJson(response);
-  //     prefs.setString("user_uid", _response!.data!.uID!);
-  //   } catch (e) {
-  //     print(e);
-  //   }
-  //   notifyListeners();
-  // }
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:globaladvice_new/core/utils/config_size.dart';
+import 'package:global_advice_new/core/utils/config_size.dart';
 
 void errorSnackBar(BuildContext context, String message) {
   final snackBar = SnackBar(

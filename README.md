@@ -1,4 +1,4 @@
-# globaladvice_new
+# global_advice_new
 
 A new Flutter project.
 

@@ -1,19 +1,16 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:globaladvice_new/core/resource_manger/asset_path.dart';
-import 'package:globaladvice_new/core/resource_manger/color_manager.dart';
-import 'package:globaladvice_new/core/resource_manger/locale_keys.g.dart';
-import 'package:globaladvice_new/core/utils/config_size.dart';
-import 'package:globaladvice_new/core/widgets/Custom_Drawer.dart';
-import 'package:globaladvice_new/features/home/presentation/component/card_screen/card_screen.dart';
+import 'package:global_advice_new/core/resource_manger/asset_path.dart';
+import 'package:global_advice_new/core/resource_manger/color_manager.dart';
+import 'package:global_advice_new/core/utils/config_size.dart';
+import 'package:global_advice_new/core/widgets/Custom_Drawer.dart';
+import 'package:global_advice_new/features/home/presentation/component/card_screen/card_screen.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
-import 'component/car_form/pages/car_form_1.dart';
-import 'component/life_form/pages/life_form_main_person_data .dart';
-import 'component/medical_form/Pages/medical_form_1.dart';
-import 'component/property_form/pages/property_form_1 .dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:global_advice_new/features/home/presentation/component/car_form/pages/car_form_1.dart';
+import 'package:global_advice_new/features/home/presentation/component/life_form/pages/life_form_main_person_data%20.dart';
+import 'package:global_advice_new/features/home/presentation/component/medical_form/Pages/medical_form_1.dart';
+import 'package:global_advice_new/features/home/presentation/component/property_form/pages/property_form_1%20.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomeScreen extends StatefulWidget {

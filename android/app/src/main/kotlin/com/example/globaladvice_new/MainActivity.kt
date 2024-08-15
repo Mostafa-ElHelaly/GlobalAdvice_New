@@ -1,4 +1,4 @@
-package com.example.globaladvice_new
+package com.example.global_advice_new
 
 import io.flutter.embedding.android.FlutterActivity
 

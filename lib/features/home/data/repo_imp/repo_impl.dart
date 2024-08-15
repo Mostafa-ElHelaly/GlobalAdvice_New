@@ -1,21 +1,19 @@
 import 'package:dartz/dartz.dart';
-import 'package:globaladvice_new/features/home/data/data_source/remotly_data_resource.dart';
-import 'package:globaladvice_new/features/home/data/model/car_dependinces_model.dart';
-import 'package:globaladvice_new/features/home/data/model/car_insurance_request_model.dart';
-import 'package:globaladvice_new/features/home/data/model/car_policy_request_model.dart';
-import 'package:globaladvice_new/features/home/data/model/health_dependinces_model.dart';
-import 'package:globaladvice_new/features/home/data/model/health_insurance_model.dart';
-import 'package:globaladvice_new/features/home/data/model/health_policy_request_model.dart';
-import 'package:globaladvice_new/features/home/data/model/other_forms_model.dart';
-import 'package:globaladvice_new/features/home/data/model/property_dependinces_model.dart';
-import 'package:globaladvice_new/features/home/data/model/property_model.dart';
-import 'package:globaladvice_new/features/home/data/model/property_policy_request_model.dart';
-import 'package:globaladvice_new/features/home/domain/repo/homeBaseRepo.dart';
-import 'package:globaladvice_new/features/home/presentation/manager/property_data_bloc/property_data_bloc.dart';
-
-import 'package:globaladvice_new/core/error/failure.dart';
-import 'package:globaladvice_new/core/utils/api_helper.dart';
-import 'package:globaladvice_new/features/home/data/model/life_insurance_model.dart';
+import 'package:global_advice_new/features/home/data/data_source/remotly_data_resource.dart';
+import 'package:global_advice_new/features/home/data/model/car_dependinces_model.dart';
+import 'package:global_advice_new/features/home/data/model/car_insurance_request_model.dart';
+import 'package:global_advice_new/features/home/data/model/car_policy_request_model.dart';
+import 'package:global_advice_new/features/home/data/model/health_dependinces_model.dart';
+import 'package:global_advice_new/features/home/data/model/health_insurance_model.dart';
+import 'package:global_advice_new/features/home/data/model/health_policy_request_model.dart';
+import 'package:global_advice_new/features/home/data/model/other_forms_model.dart';
+import 'package:global_advice_new/features/home/data/model/property_dependinces_model.dart';
+import 'package:global_advice_new/features/home/data/model/property_model.dart';
+import 'package:global_advice_new/features/home/data/model/property_policy_request_model.dart';
+import 'package:global_advice_new/features/home/domain/repo/homeBaseRepo.dart';
+import 'package:global_advice_new/core/error/failure.dart';
+import 'package:global_advice_new/core/utils/api_helper.dart';
+import 'package:global_advice_new/features/home/data/model/life_insurance_model.dart';
 
 class HomeRepositoryImp extends BaseHomeRepository {
   final BaseHomeRemotelyDataSource baseHomeRemotelyDataSource;

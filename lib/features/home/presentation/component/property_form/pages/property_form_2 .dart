@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:globaladvice_new/core/widgets/snack_bar.dart';
-import 'package:globaladvice_new/features/home/presentation/component/car_form/widgets/Motor_Dropdown_Widget.dart';
-import 'package:globaladvice_new/features/home/presentation/component/property_form/pages/property_form_3%20.dart';
-import 'package:globaladvice_new/features/home/presentation/component/property_form/widgets/Prop_insurance_appbar.dart';
+import 'package:global_advice_new/core/widgets/snack_bar.dart';
+import 'package:global_advice_new/features/home/presentation/component/car_form/widgets/Motor_Dropdown_Widget.dart';
+import 'package:global_advice_new/features/home/presentation/component/property_form/pages/property_form_3%20.dart';
+import 'package:global_advice_new/features/home/presentation/component/property_form/widgets/Prop_insurance_appbar.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'package:globaladvice_new/core/resource_manger/asset_path.dart';
-import 'package:globaladvice_new/core/utils/config_size.dart';
-import 'package:globaladvice_new/core/widgets/custom_text_field.dart';
-import 'package:globaladvice_new/core/widgets/main_button.dart';
+import 'package:global_advice_new/core/resource_manger/asset_path.dart';
+import 'package:global_advice_new/core/utils/config_size.dart';
+import 'package:global_advice_new/core/widgets/custom_text_field.dart';
+import 'package:global_advice_new/core/widgets/main_button.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 class PropertyForm2 extends StatefulWidget {

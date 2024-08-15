@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:globaladvice_new/core/utils/config_size.dart';
+import 'package:global_advice_new/core/utils/config_size.dart';
 
-import '../resource_manger/color_manager.dart';
+import 'package:global_advice_new/core/resource_manger/color_manager.dart';
 
 class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
