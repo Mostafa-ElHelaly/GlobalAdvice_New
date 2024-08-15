@@ -2,7 +2,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:globaladvice_new/core/resource_manger/color_manager.dart';
-import 'package:globaladvice_new/features/home/presentation/component/medical_form/Widgets/Gender_Drop_Down_Widget.dart';
+import 'package:globaladvice_new/core/widgets/Custom_Drop_Down.dart';
 import 'package:globaladvice_new/features/home/presentation/component/medical_form/Widgets/medical_appbar.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
@@ -242,17 +242,15 @@ class _MedicalForm2State extends State<MedicalForm2> {
               SizedBox(
                 height: ConfigSize.defaultSize! * 2,
               ),
-              Center(
-                child: DropDown(
-                  onchanged: (String? value) {
-                    setState(() {
-                      selectedValue = value;
-                    });
-                    print(selectedValue);
-                    print(genders);
-                  },
-                  selectedValue: selectedValue,
-                ),
+              CustomDropDown(
+                myvalue: selectedValue,
+                DefaultList: genderstype,
+                onchanged: (value) {
+                  setState(() {
+                    selectedValue = value;
+                  });
+                },
+                labeltext: AppLocalizations.of(context)!.gender,
               ),
               SizedBox(height: ConfigSize.defaultSize! * 2),
               Text(
@@ -285,100 +283,26 @@ class _MedicalForm2State extends State<MedicalForm2> {
                       SizedBox(
                         height: ConfigSize.defaultSize! * 2,
                       ),
-                      Center(
-                        child: DropdownButtonHideUnderline(
-                          child: DropdownButton2<String>(
-                            isExpanded: true,
-                            hint: Text(
-                              AppLocalizations.of(context)!.gender,
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: Theme.of(context).hintColor,
-                              ),
-                            ),
-                            items: genderstype
-                                .map((String item) => DropdownMenuItem<String>(
-                                      value: item,
-                                      child: Text(
-                                        item,
-                                        style: const TextStyle(
-                                          fontSize: 14,
-                                        ),
-                                      ),
-                                    ))
-                                .toList(),
-                            value: genderselectedValues[index],
-                            onChanged: (value) {
-                              setState(() {
-                                genderselectedValues[index] = value;
-                              });
-                            },
-                            buttonStyleData: ButtonStyleData(
-                              decoration: BoxDecoration(
-                                borderRadius:
-                                    const BorderRadius.all(Radius.circular(12)),
-                                color: Colors.white,
-                                border: Border.all(
-                                    color: Colors.grey.shade300, width: 1),
-                              ),
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: ConfigSize.defaultSize! * 1.6),
-                              height: ConfigSize.defaultSize! * 5.5,
-                              width: ConfigSize.screenWidth,
-                            ),
-                            menuItemStyleData: const MenuItemStyleData(
-                              height: 40,
-                            ),
-                          ),
-                        ),
+                      CustomDropDown(
+                        myvalue: genderselectedValues[index],
+                        DefaultList: genderstype,
+                        onchanged: (value) {
+                          setState(() {
+                            genderselectedValues[index] = value;
+                          });
+                        },
+                        labeltext: AppLocalizations.of(context)!.gender,
                       ),
                       SizedBox(height: ConfigSize.defaultSize! * 2),
-                      Center(
-                        child: DropdownButtonHideUnderline(
-                          child: DropdownButton2<String>(
-                            isExpanded: true,
-                            hint: Text(
-                              AppLocalizations.of(context)!.realtion,
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: Theme.of(context).hintColor,
-                              ),
-                            ),
-                            items: siblingrelations
-                                .map((String item) => DropdownMenuItem<String>(
-                                      value: item,
-                                      child: Text(
-                                        item,
-                                        style: const TextStyle(
-                                          fontSize: 14,
-                                        ),
-                                      ),
-                                    ))
-                                .toList(),
-                            value: relationselectedValues[index],
-                            onChanged: (value) {
-                              setState(() {
-                                relationselectedValues[index] = value;
-                              });
-                            },
-                            buttonStyleData: ButtonStyleData(
-                              decoration: BoxDecoration(
-                                borderRadius:
-                                    const BorderRadius.all(Radius.circular(12)),
-                                color: Colors.white,
-                                border: Border.all(
-                                    color: Colors.grey.shade300, width: 1),
-                              ),
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: ConfigSize.defaultSize! * 1.6),
-                              height: ConfigSize.defaultSize! * 5.5,
-                              width: ConfigSize.screenWidth,
-                            ),
-                            menuItemStyleData: const MenuItemStyleData(
-                              height: 40,
-                            ),
-                          ),
-                        ),
+                      CustomDropDown(
+                        myvalue: relationselectedValues[index],
+                        DefaultList: siblingrelations,
+                        onchanged: (value) {
+                          setState(() {
+                            relationselectedValues[index] = value;
+                          });
+                        },
+                        labeltext: AppLocalizations.of(context)!.realtion,
                       ),
                       SizedBox(height: ConfigSize.defaultSize! * 2),
                       CustomTextField(

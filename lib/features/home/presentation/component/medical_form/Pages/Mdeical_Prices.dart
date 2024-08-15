@@ -1,18 +1,21 @@
-import 'dart:ui';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:globaladvice_new/core/resource_manger/routs_manager.dart';
+import 'package:globaladvice_new/core/widgets/snack_bar.dart';
+import 'package:globaladvice_new/core/widgets/vertical_space.dart';
+import 'package:globaladvice_new/features/home/presentation/component/medical_form/Widgets/if_no_data_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../../../core/resource_manger/color_manager.dart';
 import '../../../../../../core/utils/config_size.dart';
 import '../../../../../../core/widgets/main_button.dart';
-import '../../../../../../core/widgets/snack_bar.dart';
 import '../../../manager/health_policy/health_policy_bloc.dart';
 import '../../../manager/health_policy/health_policy_event.dart';
 import '../../../manager/health_policy/health_policy_state.dart';
 import '../../life_form/widgets/Back_Button.dart';
+import '../Widgets/Health_Benifits_widget.dart';
+import '../Widgets/Prices_Names_and_amounts.dart';
 
 class MedicalPrices extends StatefulWidget {
   const MedicalPrices({
@@ -74,7 +77,6 @@ class _MedicalPricesState extends State<MedicalPrices> {
   Widget build(BuildContext context) {
     var localetype = Localizations.localeOf(context).languageCode;
     List<dynamic> prices = [];
-
     List<dynamic> get_names(int index) {
       return widget.persons[index].map((e) => e['name']).toList();
     }
@@ -128,7 +130,7 @@ class _MedicalPricesState extends State<MedicalPrices> {
         child: Scaffold(
           body: SafeArea(
             child: SingleChildScrollView(
-              physics: const ClampingScrollPhysics(),
+              physics: ClampingScrollPhysics(),
               child: Column(
                 children: [
                   Row(
@@ -138,7 +140,7 @@ class _MedicalPricesState extends State<MedicalPrices> {
                         onPressed: () {
                           Navigator.of(context).pop();
                         },
-                        icon: const Icon(Icons.arrow_back_ios_new_rounded),
+                        icon: Icon(Icons.arrow_back_ios_new_rounded),
                       ),
                       Text(
                         AppLocalizations.of(context)!.listofhealthprice,
@@ -153,7 +155,7 @@ class _MedicalPricesState extends State<MedicalPrices> {
                   ),
                   widget.total_price.isNotEmpty
                       ? ListView.builder(
-                          physics: const ClampingScrollPhysics(),
+                          physics: ClampingScrollPhysics(),
                           itemCount: widget.data_length,
                           shrinkWrap: true,
                           itemBuilder: (context, index) {
@@ -184,9 +186,7 @@ class _MedicalPricesState extends State<MedicalPrices> {
                                             fontWeight: FontWeight.w500,
                                           ),
                                         ),
-                                        SizedBox(
-                                          height: ConfigSize.defaultSize! * 1,
-                                        ),
+                                        VerticalSpace(),
                                         Text(
                                           widget.total_price[index].toString() +
                                               ' ' +
@@ -200,69 +200,20 @@ class _MedicalPricesState extends State<MedicalPrices> {
                                             fontWeight: FontWeight.w500,
                                           ),
                                         ),
-                                        SizedBox(
-                                          height: ConfigSize.defaultSize! * 1,
+                                        VerticalSpace(),
+                                        PricesNamesAndAmounts(
+                                          get_amount: get_amount(index),
+                                          get_names: get_names(index),
+                                          genders: widget.genders,
                                         ),
-                                        ListView.builder(
-                                          itemCount: get_names(index).length,
-                                          shrinkWrap: true,
-                                          physics:
-                                              const NeverScrollableScrollPhysics(),
-                                          itemBuilder: (context, index2) {
-                                            return Column(
-                                              crossAxisAlignment:
-                                                  localetype == 'ar'
-                                                      ? CrossAxisAlignment.start
-                                                      : CrossAxisAlignment.end,
-                                              children: [
-                                                ListTile(
-                                                  contentPadding:
-                                                      EdgeInsets.symmetric(
-                                                    vertical: ConfigSize
-                                                            .defaultSize! *
-                                                        1,
-                                                  ),
-                                                  subtitle: Text(
-                                                    get_amount(index)[index2]
-                                                            .toString() +
-                                                        ' ' +
-                                                        AppLocalizations.of(
-                                                                context)!
-                                                            .egy_year,
-                                                    style: const TextStyle(
-                                                      color: ColorManager
-                                                          .kSecondryGreenLight,
-                                                    ),
-                                                  ),
-                                                  title: Text(
-                                                      get_names(index)[index2]),
-                                                  leading: Icon(
-                                                    size: ConfigSize
-                                                            .defaultSize! *
-                                                        3,
-                                                    widget.genders![index2] ==
-                                                            'male'
-                                                        ? Icons.person
-                                                        : Icons
-                                                            .person_3_outlined,
-                                                    color: ColorManager
-                                                        .kSecondryGreenLight,
-                                                  ),
-                                                ),
-                                              ],
-                                            );
-                                          },
-                                        ),
-                                        SizedBox(
-                                          height: ConfigSize.defaultSize! * 1,
-                                        ),
+                                        VerticalSpace(),
                                         Text(
                                           AppLocalizations.of(context)!
                                               .annuallimit,
                                           style: label_style,
                                         ),
                                         ListTile(
-                                          leading: const Icon(
+                                          leading: Icon(
                                             Icons.safety_check_outlined,
                                             color: ColorManager.secondaryColor,
                                           ),
@@ -270,57 +221,20 @@ class _MedicalPricesState extends State<MedicalPrices> {
                                             get_health_limits(index).join(', '),
                                           ),
                                         ),
-                                        SizedBox(
-                                          height: ConfigSize.defaultSize! * 1,
-                                        ),
+                                        VerticalSpace(),
                                         Text(
                                           AppLocalizations.of(context)!
                                               .healthbenefits,
                                           style: label_style,
                                         ),
-                                        SizedBox(
-                                          height: ConfigSize.defaultSize! * 1,
+                                        VerticalSpace(),
+                                        HealthBenifitsWidget(
+                                          get_health_benefits_desc:
+                                              get_health_benefits_desc(index),
+                                          get_health_benefits_names:
+                                              get_health_benefits_names(index),
                                         ),
-                                        ListView.builder(
-                                          itemCount:
-                                              get_health_benefits_names(index)
-                                                  .length,
-                                          shrinkWrap: true,
-                                          physics:
-                                              const NeverScrollableScrollPhysics(),
-                                          itemBuilder: (context, index3) {
-                                            return ListTile(
-                                              contentPadding:
-                                                  EdgeInsets.symmetric(
-                                                vertical:
-                                                    ConfigSize.defaultSize! * 1,
-                                              ),
-                                              subtitle: Text(
-                                                get_health_benefits_desc(
-                                                    index)[index3],
-                                              ),
-                                              title: Text(
-                                                get_health_benefits_names(
-                                                    index)[index3],
-                                                style: TextStyle(
-                                                  fontSize:
-                                                      ConfigSize.defaultSize! *
-                                                          1.5,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                              leading: const Icon(
-                                                Icons
-                                                    .health_and_safety_outlined,
-                                                color: ColorManager
-                                                    .kSecondryGreenLight,
-                                              ),
-                                            );
-                                          },
-                                        ),
-                                        SizedBox(
-                                          height: ConfigSize.defaultSize! * 1,
-                                        ),
+                                        VerticalSpace(),
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.end,
@@ -367,15 +281,7 @@ class _MedicalPricesState extends State<MedicalPrices> {
                             );
                           },
                         )
-                      : Center(
-                          child: Text(
-                            AppLocalizations.of(context)!.noOffersAvailable,
-                            style: TextStyle(
-                              fontSize: ConfigSize.defaultSize! * 2.5,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
+                      : IfNoDataWidget()
                 ],
               ),
             ),

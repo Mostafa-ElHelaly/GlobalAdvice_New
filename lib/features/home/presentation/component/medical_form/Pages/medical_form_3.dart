@@ -1,6 +1,7 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:globaladvice_new/core/widgets/Custom_Drop_Down.dart';
 import 'package:globaladvice_new/features/home/presentation/component/medical_form/Widgets/medical_appbar.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/health_data/health_data_bloc.dart';
 import 'package:globaladvice_new/features/home/presentation/manager/health_data/health_data_state.dart';
@@ -15,7 +16,9 @@ import 'package:globaladvice_new/core/widgets/main_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../../../core/resource_manger/color_manager.dart';
+import '../Widgets/Annual_Drop_Down.dart';
 import '../../../../../../core/widgets/snack_bar.dart';
+import '../../../../data/model/health_dependinces_model.dart';
 import '../../../manager/health_data/health_data_event.dart';
 import 'Mdeical_Prices.dart';
 
@@ -140,68 +143,20 @@ class _MedicalForm3State extends State<MedicalForm3> {
                   ),
                   BlocBuilder<HealthDataBloc, HealthDataState>(
                     builder: (context, state) {
+                      final List<HealthDependincesModel> somestatevalue;
+
                       if (state is HealthDataSuccessState) {
                         // Create a list of dropdown items
-                        List<DropdownMenuItem<String>> dropdownItems =
-                            state.HealthDependinces.where(
-                                    (element) => element.id == 'healthLimit')
-                                .expand((car) {
-                          // Extract `id` and `name` to be used as values and labels
-                          return car.plansDataValues!.map((e) {
-                            return DropdownMenuItem<String>(
-                              value:
-                                  e.id.toString(), // Ensure value is not null
-                              child: Text(
-                                localetype == 'en'
-                                    ? e.name?.toUpperCase() ?? 'Unknown'
-                                    : e.nameAlt?.toUpperCase() ?? 'Unknown',
-                                style: TextStyle(
-                                  fontSize: ConfigSize.defaultSize! * 1.6,
-                                  fontWeight: FontWeight.bold,
-                                  color: ColorManager.mainColor,
-                                ),
-                              ),
-                            );
-                          }).toList();
-                        }).toList();
-
-                        return Center(
-                          child: DropdownButtonHideUnderline(
-                            child: DropdownButton2<String>(
-                              isExpanded: true,
-                              hint: Text(
-                                AppLocalizations.of(context)!.annuallimit,
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: Theme.of(context).hintColor,
-                                ),
-                              ),
-                              items: dropdownItems,
-                              value:
-                                  selectedValue, // Set this to the currently selected value
-                              onChanged: (String? value) {
-                                setState(() {
-                                  selectedValue = value;
-                                });
-                              },
-                              buttonStyleData: ButtonStyleData(
-                                decoration: BoxDecoration(
-                                  borderRadius: const BorderRadius.all(
-                                      Radius.circular(12)),
-                                  color: Colors.white,
-                                  border: Border.all(
-                                      color: Colors.grey.shade300, width: 1),
-                                ),
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: ConfigSize.defaultSize! * 1.6),
-                                height: ConfigSize.defaultSize! * 5.5,
-                                width: ConfigSize.screenWidth,
-                              ),
-                              menuItemStyleData: const MenuItemStyleData(
-                                height: 40,
-                              ),
-                            ),
-                          ),
+                        return AnnualLimitDropDown(
+                          myvalue: selectedValue,
+                          onchanged: (String? value) {
+                            setState(() {
+                              selectedValue = value;
+                            });
+                          },
+                          labeltext: AppLocalizations.of(context)!.annuallimit,
+                          map_value: 'healthLimit',
+                          mylist: state.HealthDependinces,
                         );
                       } else if (state is HealthDataErrorState) {
                         return Text(state.errorMessage);
