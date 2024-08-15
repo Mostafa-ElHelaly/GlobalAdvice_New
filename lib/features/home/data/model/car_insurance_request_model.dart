@@ -1,4 +1,4 @@
-class CarInusranceRequestModel {
+class CarInusranceRequest {
   String? uid;
   int? price;
   String? isLicensed;
@@ -8,7 +8,7 @@ class CarInusranceRequestModel {
   int? phone;
 
   // Constructor
-  CarInusranceRequestModel({
+  CarInusranceRequest({
     required this.uid,
     required this.price,
     required this.isLicensed,
@@ -19,7 +19,7 @@ class CarInusranceRequestModel {
   });
 
   // Factory method to create an instance from JSON
-  CarInusranceRequestModel.fromJson(Map<String, dynamic> json) {
+  CarInusranceRequest.fromJson(Map<String, dynamic> json) {
     uid = json['UID'];
     price = json['price'];
     isLicensed = json['is_licensed']; // Convert 1 to true

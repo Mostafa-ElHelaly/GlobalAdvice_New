@@ -29,7 +29,7 @@ abstract class BaseHomeRemotelyDataSource {
   Future<Unit> CarPolicyRequest(CarPolicyrequest carPolicyRequest);
   Future<Unit> HealthPolicyRequest(HealthPolicyrequest carPolicyRequest);
   Future<Unit> PropertyPolicyRequest(
-      PropertyPolicyrequest propertyPolicyRequest);
+      PropertyPolicyRequestModel propertyPolicyRequest);
   Future<List<CarData>> Get_Car_Data();
   Future<List<PropertyDependincesData>> Get_Property_Data();
   Future<List<HealthDependincesModel>> Get_Health_Data();
@@ -324,7 +324,7 @@ class HomeRemotelyDataSource extends BaseHomeRemotelyDataSource {
 
   @override
   Future<Unit> PropertyPolicyRequest(
-      PropertyPolicyrequest propertyPolicyRequest) async {
+      PropertyPolicyRequestModel propertyPolicyRequest) async {
     final body = {
       "UID": propertyPolicyRequest.uID,
       "organization_id": propertyPolicyRequest.organizationId,

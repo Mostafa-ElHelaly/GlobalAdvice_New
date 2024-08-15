@@ -22,6 +22,6 @@ final class PropertyDataErrorState extends PropertyDataState {
 }
 
 final class PropertyDataSuccessState extends PropertyDataState {
-  final List<PropertyDependincesDataModel> PropertyDependinces;
+  final List<PropertyDependincesData> PropertyDependinces;
   const PropertyDataSuccessState(this.PropertyDependinces);
 }

@@ -21,6 +21,6 @@ final class CarDataErrorState extends CarDataState {
 }
 
 final class CarDataSuccessState extends CarDataState {
-  final List<CarDataModel> CarDependinces;
+  final List<CarData> CarDependinces;
   const CarDataSuccessState(this.CarDependinces);
 }

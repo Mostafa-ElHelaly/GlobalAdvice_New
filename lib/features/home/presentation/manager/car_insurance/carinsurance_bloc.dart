@@ -13,7 +13,7 @@ class CarinsuranceBloc
       : super(CarInsuranceBlocInitial()) {
     on<CarInsuranceBlocEvent>((event, emit) async {
       emit(const CarInsuranceRequestLoadingState());
-      final result = await healthinsuranceblocUsecase.call(CarInusranceRequestModel(
+      final result = await healthinsuranceblocUsecase.call(CarInusranceRequest(
         uid: event.uid,
         isLicensed: event.isLicensed,
         motorBrands: event.motorBrands,

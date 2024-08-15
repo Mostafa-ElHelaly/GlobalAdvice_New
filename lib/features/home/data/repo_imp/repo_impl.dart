@@ -37,7 +37,7 @@ class HomeRepositoryImp extends BaseHomeRepository {
 
   @override
   Future<Either<Map<String, dynamic>, Failure>> SendCarInsuranceRequest(
-      CarInusranceRequestModel carInusranceRequest) async {
+      CarInusranceRequest carInusranceRequest) async {
     try {
       final result = await baseHomeRemotelyDataSource.SendCarInsuranceRequest(
           carInusranceRequest);
@@ -86,7 +86,7 @@ class HomeRepositoryImp extends BaseHomeRepository {
   }
 
   @override
-  Future<Either<List<CarDataModel>, Failure>> Get_Car_Data() async {
+  Future<Either<List<CarData>, Failure>> Get_Car_Data() async {
     try {
       final result = await baseHomeRemotelyDataSource.Get_Car_Data();
       return Left(result);
@@ -96,7 +96,7 @@ class HomeRepositoryImp extends BaseHomeRepository {
   }
 
   @override
-  Future<Either<List<PropertyDependincesDataModel>, Failure>>
+  Future<Either<List<PropertyDependincesData>, Failure>>
       Get_Property_Data() async {
     try {
       final result = await baseHomeRemotelyDataSource.Get_Property_Data();
@@ -108,7 +108,7 @@ class HomeRepositoryImp extends BaseHomeRepository {
 
   @override
   Future<Either<Unit, Failure>> CarPolicyRequest(
-      CarPolicyrequestModel otherFormsModel) async {
+      CarPolicyrequest otherFormsModel) async {
     try {
       final result =
           await baseHomeRemotelyDataSource.CarPolicyRequest(otherFormsModel);

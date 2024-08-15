@@ -41,6 +41,7 @@ void main() async {
   final isArabic = prefs.getBool("is_arabic") ?? false;
   final uid_success = prefs.getString("user_uid");
   final isLogin = uid_success == null;
+  //get storage
 
   print(isLogin);
   print(uid_success);
@@ -78,7 +79,7 @@ class MyApp extends StatelessWidget {
             create: (context) => getIt<ResetPasswordBloc>(),
           ),
           BlocProvider(
-            create: (context) => getIt<HealthInsuranceBloc>(),
+            create: (context) => getIt<HealthinsuranceBloc>(),
           ),
           BlocProvider(
             create: (context) => getIt<CarinsuranceBloc>(),

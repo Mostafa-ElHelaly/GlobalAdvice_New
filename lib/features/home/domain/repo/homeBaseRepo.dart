@@ -32,7 +32,7 @@ abstract class BaseHomeRepository {
   Future<Either<Unit, Failure>> CarPolicyRequest(
       CarPolicyrequest otherFormsModel);
   Future<Either<Unit, Failure>> PropertyPolicyRequest(
-      PropertyPolicyrequest otherFormsModel);
+      PropertyPolicyRequestModel otherFormsModel);
   Future<Either<Unit, Failure>> HealthPolicyRequest(
       HealthPolicyrequest otherFormsModel);
 

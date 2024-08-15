@@ -1,4 +1,4 @@
-class CarDataModel {
+class CarData {
   String? id;
   String? service;
   String? name;
@@ -11,7 +11,7 @@ class CarDataModel {
   String? updatestamp;
   List<PlansDataValues>? plansDataValues;
 
-  CarDataModel(
+  CarData(
       {this.id,
       this.service,
       this.name,
@@ -24,7 +24,7 @@ class CarDataModel {
       this.updatestamp,
       this.plansDataValues});
 
-  CarDataModel.fromJson(Map<String, dynamic> json) {
+  CarData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     service = json['service'];
     name = json['name'];

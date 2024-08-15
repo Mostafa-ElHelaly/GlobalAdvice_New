@@ -12,7 +12,7 @@ class CarPolicyBloc extends Bloc<CarPolicyBlocEvent, CarPolicyBlocState> {
       : super(CarPolicyBlocInitial()) {
     on<CarPolicyBlocEvent>((event, emit) async {
       emit(const CarPolicyRequestLoadingState());
-      final result = await carPolicyBlocUseCase.call(CarPolicyrequestModel(
+      final result = await carPolicyBlocUseCase.call(CarPolicyrequest(
         isLicensed: event.isLicensed,
         motorBrands: event.motorBrands,
         motorDeductibles: event.motorDeductibles,

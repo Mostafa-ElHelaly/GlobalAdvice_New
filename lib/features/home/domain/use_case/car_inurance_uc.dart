@@ -6,14 +6,14 @@ import 'package:globaladvice_new/core/base_use_case/base_use_case.dart';
 import 'package:globaladvice_new/core/error/failure.dart';
 
 class CarInsuranceUseCase
-    extends BaseUseCase<Map<String, dynamic>, CarInusranceRequestModel> {
+    extends BaseUseCase<Map<String, dynamic>, CarInusranceRequest> {
   BaseHomeRepository baseRepository;
 
   CarInsuranceUseCase({required this.baseRepository});
 
   @override
   Future<Either<Map<String, dynamic>, Failure>> call(
-      CarInusranceRequestModel CarInsuranceModel) async {
+      CarInusranceRequest CarInsuranceModel) async {
     final result =
         await baseRepository.SendCarInsuranceRequest(CarInsuranceModel);
     return result;
