@@ -66,6 +66,9 @@ class MyApp extends StatelessWidget {
   final bool isLogin;
   final String? uid_success;
 
+//befor run use
+//flutter pub run change_app_package_name:main com.exabytellc.globaladvice_gaib_com
+
   @override
   Widget build(BuildContext context) {
     ConfigSize().init(context);

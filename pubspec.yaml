@@ -29,7 +29,7 @@ dependencies:
   dropdown_button2: ^2.3.9
   table_calendar: ^3.1.1
   givestarreviews: ^1.0.2
-  carousel_slider: ^4.2.1
+  carousel_slider: ^5.0.0
   loading_animation_widget: ^1.2.0+4
   flutter_easyloading: ^3.0.5
   awesome_dialog: ^3.2.1
